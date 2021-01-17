@@ -17,7 +17,10 @@ const PropertiesPage: FunctionComponent<PropertiesProps> = ({ cookies }) => (
       <Wrap>
         {properties.map((property) => (
           <WrapItem key={property.id}>
-            <NextChakraLink href={`/properties/${property.id}`}>
+            <NextChakraLink
+              href="/properties/[id]"
+              as={`/properties/${property.id}`}
+            >
               <PropertySummary property={property} />
             </NextChakraLink>
           </WrapItem>
