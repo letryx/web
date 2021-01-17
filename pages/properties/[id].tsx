@@ -13,7 +13,7 @@ import { FunctionComponent } from 'react';
 import { Layout } from '../../components/Layout';
 import { properties } from '../../utils/sample-data';
 import { Property } from '../../interfaces/Property';
-import { RootProvider } from '../../providers/RootProvider';
+import { RootProvider } from '../../components/RootProvider';
 
 const PropertyPage: FunctionComponent<{ item: Property }> = ({ item }) => (
   <RootProvider>

@@ -1,5 +1,6 @@
 import { Box, Code, Text, Link, VStack, Grid } from '@chakra-ui/react';
-import { RootProvider } from '../providers/RootProvider';
+import { FunctionComponent } from 'react';
+import { RootProvider } from '../components/RootProvider';
 import { Layout } from '../components/Layout';
 import { Logo } from '../components/Logo';
 import { NextChakraLink } from '../components/NextChakraLink';
@@ -8,7 +9,7 @@ interface IndexProps {
   cookies?: string;
 }
 
-const IndexPage = ({ cookies }: IndexProps): JSX.Element => (
+const IndexPage: FunctionComponent<IndexProps> = ({ cookies }) => (
   <RootProvider cookies={cookies}>
     <Layout title="Next.js + TypeScript example">
       <Box textAlign="center" fontSize="xl">
@@ -43,4 +44,4 @@ const IndexPage = ({ cookies }: IndexProps): JSX.Element => (
 );
 
 export default IndexPage;
-export { getServerSideProps } from '../providers/RootProvider';
+export { getServerSideProps } from '../components/RootProvider';

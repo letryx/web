@@ -1,5 +1,6 @@
 import type { NextComponentType, NextPageContext } from 'next';
 import type { NextRouter } from 'next/router';
+import { FunctionComponent } from 'react';
 
 export interface AppRenderProps {
   pageProps: Record<string, unknown>;
@@ -12,9 +13,8 @@ export interface AppRenderProps {
   router: NextRouter;
 }
 
-export default function App({
-  Component,
-  pageProps,
-}: AppRenderProps): JSX.Element {
-  return <Component {...pageProps} />;
-}
+const App: FunctionComponent<AppRenderProps> = ({ Component, pageProps }) => (
+  <Component {...pageProps} />
+);
+
+export default App;

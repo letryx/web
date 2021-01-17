@@ -44,7 +44,7 @@ const additionalValues = [
   },
 ];
 
-const generateProperty = () => {
+const generateProperty = (): Property => {
   const overrides = faker.helpers.randomize(additionalValues);
   return {
     id: faker.random.uuid(),
