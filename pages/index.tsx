@@ -1,15 +1,13 @@
 import { Box, Code, Text, Link, VStack, Grid } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
-import { Layout } from '../components/Layout';
-import { Logo } from '../components/Logo';
-import { NextChakraLink } from '../components/NextChakraLink';
+import { Layout } from '../components/layout';
+import { NextChakraLink } from '../components/next-chakra-link';
 
 const IndexPage: FunctionComponent = () => (
-  <Layout title="Next.js + TypeScript example">
+  <Layout title="Letryx">
     <Box textAlign="center" fontSize="xl">
       <Grid minH="100vh" p={3}>
         <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
           <Text>
             Edit <Code fontSize="xl">pages/index.tsx</Code> and save to reload.
             <br />

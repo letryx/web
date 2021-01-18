@@ -10,9 +10,9 @@ import {
 } from '@chakra-ui/react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { FunctionComponent } from 'react';
-import { Layout } from '../../components/Layout';
+import { Layout } from '../../components/layout';
 import { properties } from '../../utils/sample-data';
-import { Property } from '../../interfaces/Property';
+import { Property } from '../../interfaces/properties';
 
 const PropertyPage: FunctionComponent<{ item: Property }> = ({ item }) => (
   <Layout title={`Next.js + TypeScript | Viewing ${item.title}`}>

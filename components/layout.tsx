@@ -1,9 +1,9 @@
 import { FunctionComponent, ReactNode } from 'react';
 import Head from 'next/head';
 import { Container, Flex, Heading, HStack } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
-import { NextChakraLink } from './NextChakraLink';
+import { ColorModeSwitcher } from './color-mode-switcher';
+import { NextChakraLink } from './next-chakra-link';
+import { Footer } from './footer';
 
 type Props = {
   children?: ReactNode;
@@ -32,11 +32,7 @@ export const Layout: FunctionComponent<Props> = ({
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <Logo h="1.5rem" pointerEvents="none" mr={4} />
-                  <Heading size="lg">Chakra ts</Heading>
-                </NextChakraLink>
-                <NextChakraLink href="/properties" fontWeight="bold">
-                  View Properties
+                  <Heading size="lg">Letryx</Heading>
                 </NextChakraLink>
               </HStack>
             </nav>
@@ -45,6 +41,7 @@ export const Layout: FunctionComponent<Props> = ({
         </Flex>
       </header>
       {children}
+      <Footer />
     </Container>
   </div>
 );

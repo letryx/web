@@ -1,9 +1,8 @@
 import { Heading, Wrap, WrapItem } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
-import { Layout } from '../../components/Layout';
+import { Layout } from '../../components/layout';
 import { properties } from '../../utils/sample-data';
-import { PropertySummary } from '../../components/PropertySummary';
-import { NextChakraLink } from '../../components/NextChakraLink';
+import { NextChakraLink } from '../../components/next-chakra-link';
 
 const PropertiesPage: FunctionComponent = () => (
   <Layout title="Next.js + TypeScript example | View properties">
@@ -14,9 +13,7 @@ const PropertiesPage: FunctionComponent = () => (
           <NextChakraLink
             href="/properties/[id]"
             as={`/properties/${property.id}`}
-          >
-            <PropertySummary property={property} />
-          </NextChakraLink>
+          ></NextChakraLink>
         </WrapItem>
       ))}
     </Wrap>
