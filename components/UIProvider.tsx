@@ -11,7 +11,7 @@ interface ChakraProps {
   children: ReactNode;
 }
 
-export function RootProvider({ children, cookies }: ChakraProps): JSX.Element {
+export function UIProvider({ children, cookies }: ChakraProps): JSX.Element {
   return (
     <ChakraProvider
       colorModeManager={

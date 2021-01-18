@@ -1,7 +1,7 @@
 import type { NextComponentType, NextPageContext } from 'next';
 import type { NextRouter } from 'next/router';
 import { FunctionComponent } from 'react';
-import { RootProvider } from '../components/RootProvider';
+import { UIProvider } from '../components/UIProvider';
 
 export interface AppRenderProps {
   pageProps: Record<string, unknown>;
@@ -20,11 +20,11 @@ const App: FunctionComponent<AppRenderProps> = ({
   pageProps,
   cookies,
 }) => (
-  <RootProvider cookies={cookies}>
+  <UIProvider cookies={cookies}>
     <Component {...pageProps} />
-  </RootProvider>
+  </UIProvider>
 );
 
 export default App;
 
-export { getServerSideProps } from '../components/RootProvider';
+export { getServerSideProps } from '../components/UIProvider';
