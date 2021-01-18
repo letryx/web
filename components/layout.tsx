@@ -21,26 +21,33 @@ export const Layout: FunctionComponent<Props> = ({
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Container maxWidth="1200px">
-      <header>
-        <Flex py={4} justifyContent="space-between" alignItems="center" mb={8}>
-          <Flex justifyContent="space-between" alignItems="center">
-            <nav>
-              <HStack spacing={12}>
-                <NextChakraLink
-                  href="/"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Heading size="lg">Letryx</Heading>
-                </NextChakraLink>
-              </HStack>
-            </nav>
+      <Container maxWidth="1200px" minHeight="75vh">
+        <header>
+          <Flex
+            py={4}
+            justifyContent="space-between"
+            alignItems="center"
+            mb={8}
+          >
+            <Flex justifyContent="space-between" alignItems="center">
+              <nav>
+                <HStack spacing={12}>
+                  <NextChakraLink
+                    href="/"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Heading size="lg">Letryx</Heading>
+                  </NextChakraLink>
+                </HStack>
+              </nav>
+            </Flex>
+            <ColorModeSwitcher justifySelf="flex-end" />
           </Flex>
-          <ColorModeSwitcher justifySelf="flex-end" />
-        </Flex>
-      </header>
-      {children}
+        </header>
+        {children}
+      </Container>
       <Footer />
     </Container>
   </div>

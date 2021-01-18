@@ -1,13 +1,5 @@
 import { FunctionComponent } from 'react';
-import {
-  Box,
-  Text,
-  Stack,
-  Link,
-  Icon,
-  StackDivider,
-  SimpleGrid,
-} from '@chakra-ui/react';
+import { Box, Text, Stack, Link, Icon, SimpleGrid } from '@chakra-ui/react';
 import { IoLogoTwitter, IoLogoLinkedin } from 'react-icons/io';
 import { MdEmail } from 'react-icons/md';
 import { DiGithubBadge } from 'react-icons/di';
