@@ -21,12 +21,12 @@ import { ColorModeSwitcher } from './color-mode-switcher';
 import { NextChakraLink } from './next-chakra-link';
 import { Footer } from './footer';
 
-type Props = {
+type LayoutProps = {
   children?: ReactNode;
   title?: string;
 };
 
-export const Layout: FunctionComponent<Props> = ({
+export const Layout: FunctionComponent<LayoutProps> = ({
   children,
   title = 'Letryx',
 }) => (
@@ -66,7 +66,13 @@ export const Layout: FunctionComponent<Props> = ({
                 >
                   <HStack mx={-1} spacing={1}>
                     <Avatar name={name.findName()} fontWeight="700" size="sm" />
-                    <TriangleDownIcon mr={-2} w={4} h={4} color="gray.400" />
+                    <TriangleDownIcon
+                      ml={3}
+                      mr={-1}
+                      w={3}
+                      h3={4}
+                      color="gray.400"
+                    />
                   </HStack>
                 </MenuButton>
                 <MenuList>

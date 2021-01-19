@@ -22,7 +22,7 @@ export const NextChakraLink: FunctionComponent<NextChakraLinkProps> = ({
   ...chakraProps
 }) => (
   <NextLink
-    passHref={true}
+    passHref
     href={href}
     as={as}
     replace={replace}

@@ -4,28 +4,26 @@ import {
   localStorageManager,
 } from '@chakra-ui/react';
 import { GetServerSidePropsContext } from 'next';
-import { ReactNode } from 'react';
+import { ReactNode, FunctionComponent } from 'react';
 
 interface ChakraProps {
   cookies?: string;
   children: ReactNode;
 }
 
-export function UIProvider({ children, cookies }: ChakraProps): JSX.Element {
-  return (
-    <ChakraProvider
-      colorModeManager={
-        cookies ? cookieStorageManager(cookies) : localStorageManager
-      }
-    >
-      {children}
-    </ChakraProvider>
-  );
-}
+const UIProvider: FunctionComponent<ChakraProps> = ({ children, cookies }) => (
+  <ChakraProvider
+    colorModeManager={
+      cookies ? cookieStorageManager(cookies) : localStorageManager
+    }
+  >
+    {children}
+  </ChakraProvider>
+);
 
-export type ServerSideProps<T> = { props: T } | Promise<{ props: T }>;
+type ServerSideProps<T> = { props: T } | Promise<{ props: T }>;
 
-export function getServerSideProps({
+function getServerSideProps({
   req,
 }: GetServerSidePropsContext): ServerSideProps<{ cookies?: string }> {
   return {
@@ -34,3 +32,5 @@ export function getServerSideProps({
     },
   };
 }
+
+export { UIProvider, getServerSideProps };

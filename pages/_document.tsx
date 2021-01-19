@@ -13,7 +13,6 @@ export default class Document extends NextDocument {
     return NextDocument.getInitialProps(ctx);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render(): JSX.Element {
     return (
       <Html>

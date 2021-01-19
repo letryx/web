@@ -23,6 +23,8 @@ module.exports = {
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': [0],
     indent: ['error', 2],
     quotes: ['error', 'single', { avoidEscape: true }],
     'react/self-closing-comp': [
@@ -36,6 +38,7 @@ module.exports = {
     '@typescript-eslint/no-unused-expressions': 0,
     'import/extensions': 0,
     'import/prefer-default-export': 'off',
+    'react/jsx-one-expression-per-line': 'off',
     'eslint-comments/disable-enable-pair': 0,
     'import/no-extraneous-dependencies': [
       'error',
