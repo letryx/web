@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { TriangleDownIcon, SettingsIcon } from '@chakra-ui/icons';
 import { CgLogOut } from 'react-icons/cg';
+import { name } from 'faker/locale/en_US';
 import { ColorModeSwitcher } from './color-mode-switcher';
 import { NextChakraLink } from './next-chakra-link';
 import { Footer } from './footer';
@@ -27,7 +28,7 @@ type Props = {
 
 export const Layout: FunctionComponent<Props> = ({
   children,
-  title = 'This is the default title',
+  title = 'Letryx',
 }) => (
   <div>
     <Head>
@@ -64,7 +65,7 @@ export const Layout: FunctionComponent<Props> = ({
                   pl={2}
                 >
                   <HStack mx={-1} spacing={1}>
-                    <Avatar size="sm" />
+                    <Avatar name={name.findName()} fontWeight="700" size="sm" />
                     <TriangleDownIcon mr={-2} w={4} h={4} color="gray.400" />
                   </HStack>
                 </MenuButton>
