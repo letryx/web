@@ -7,7 +7,7 @@ module.exports = {
   ignorePatterns: ['.eslintrc.cjs'],
   plugins: ['@typescript-eslint', 'eslint-comments', 'promise'],
   extends: [
-    'airbnb-typescript/base',
+    'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:promise/recommended',
     'plugin:eslint-comments/recommended',
@@ -22,8 +22,16 @@ module.exports = {
     extraFileExtensions: ['.cjs'],
   },
   rules: {
+    'react/react-in-jsx-scope': 'off',
     indent: ['error', 2],
     quotes: ['error', 'single', { avoidEscape: true }],
+    'react/self-closing-comp': [
+      'error',
+      {
+        component: true,
+        html: true,
+      },
+    ],
     'no-unused-expressions': 0,
     '@typescript-eslint/no-unused-expressions': 0,
     'import/extensions': 0,
