@@ -40,7 +40,7 @@ const FooterLink: React.FC<FooterLinkProps> = ({ icon, href, label }) => (
 );
 
 const Footer: FunctionComponent = () => (
-  <Box as="footer" pt={20} pb={4} pl={4}>
+  <Box as="footer" pt={20} pb={4} pl={0} px={[0, '10vw', '20vw']}>
     <SimpleGrid columns={3} spacingX={3}>
       <Text>© {new Date().getFullYear()} Letryx</Text>
       <Stack direction="column" spacing={2}>

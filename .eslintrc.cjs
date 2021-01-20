@@ -9,8 +9,6 @@ module.exports = {
   extends: [
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
-    'plugin:promise/recommended',
-    'plugin:eslint-comments/recommended',
     'prettier',
     'prettier/@typescript-eslint',
   ],
