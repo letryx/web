@@ -16,8 +16,8 @@ import { MdWork } from 'react-icons/md';
 import { AtSignIcon, InfoIcon } from '@chakra-ui/icons';
 import { FunctionComponent } from 'react';
 
-const mailchimpUrl =
-  '//letryx.us7.list-manage.com/subscribe/post-json?u=bd1800853f530244c7f62d1ab&id=201d6086a7&c=?';
+// const mailchimpUrl =
+//   '//letryx.us7.list-manage.com/subscribe/post-json?u=bd1800853f530244c7f62d1ab&id=201d6086a7&c=?';
 
 interface TextInputProps {
   type: string;
