@@ -16,10 +16,10 @@ import {
   AlertIcon,
   AlertDescription,
 } from '@chakra-ui/react';
-import { MdWork } from 'react-icons/md';
+import { MdWork, MdPerson } from 'react-icons/md';
 import jsonp from 'jsonp';
 import { stringify } from 'query-string';
-import { AtSignIcon, InfoIcon } from '@chakra-ui/icons';
+import { AtSignIcon } from '@chakra-ui/icons';
 import {
   Dispatch,
   FormEventHandler,
@@ -108,7 +108,7 @@ const SubscribeForm: FunctionComponent = () => {
               setValue={setFname}
               placeholder="First name"
             >
-              <InfoIcon />
+              <MdPerson size={20} />
             </TextInput>
             <TextInput
               type="name"
@@ -117,7 +117,7 @@ const SubscribeForm: FunctionComponent = () => {
               setValue={setLname}
               placeholder="Last name"
             >
-              <InfoIcon />
+              <MdPerson size={20} />
             </TextInput>
           </HStack>
           <TextInput
