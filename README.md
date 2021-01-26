@@ -1,4 +1,8 @@
-# template frontend app
+# marketing frontend
+
+### notes
+
+we may want to fold this back into the main web app
 
 ### libraries
 
