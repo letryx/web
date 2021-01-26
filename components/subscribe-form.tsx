@@ -49,15 +49,15 @@ const TextInput: FunctionComponent<
 );
 
 const SubscribeForm: FunctionComponent = () => {
-  const [fname, setFname] = useState<string>('');
-  const [lname, setLname] = useState<string>('');
-  const [company, setCompany] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [isPosting, setIsPosting] = useState<boolean>(false);
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
+  const [company, setCompany] = useState('');
+  const [email, setEmail] = useState('');
+  const [isPosting, setIsPosting] = useState(false);
   const [status, setStatus] = useState<'unsubmitted' | 'error' | 'success'>(
     'unsubmitted'
   );
-  const [statusMessage, setStatusMessage] = useState<string>('');
+  const [statusMessage, setStatusMessage] = useState('');
 
   const onSubmit: FormEventHandler = async (event) => {
     event.preventDefault();
