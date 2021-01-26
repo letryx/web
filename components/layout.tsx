@@ -20,7 +20,7 @@ export const Layout: FunctionComponent<LayoutProps> = ({
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Container maxWidth="1200px">
-      <Container px={0} maxWidth="1200px" minHeight="65vh">
+      <Container px={0} maxWidth="1200px" minHeight="100vh">
         <TopBar />
         {children}
       </Container>

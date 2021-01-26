@@ -1,22 +1,21 @@
 import { FunctionComponent } from 'react';
 import {
-  Avatar,
+  // Avatar,
   Flex,
-  Heading,
   HStack,
-  Menu,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  Icon,
-  MenuButton,
-  Button,
+  // Menu,
+  // MenuList,
+  // MenuItem,
+  // MenuDivider,
+  // Icon,
+  // MenuButton,
+  // Button,
 } from '@chakra-ui/react';
-import { TriangleDownIcon, SettingsIcon } from '@chakra-ui/icons';
-import { CgLogOut } from 'react-icons/cg';
-import { name } from 'faker/locale/en_US';
+// import { TriangleDownIcon, SettingsIcon } from '@chakra-ui/icons';
+// import { CgLogOut } from 'react-icons/cg';
+// import { name } from 'faker/locale/en_US';
 import { ColorModeSwitcher } from './color-mode-switcher';
-import { NextChakraLink } from './next-chakra-link';
+// import { NextChakraLink } from './next-chakra-link';
 
 const TopBar: FunctionComponent = () => (
   <header>
@@ -27,18 +26,18 @@ const TopBar: FunctionComponent = () => (
         justifySelf="flex-start"
       >
         <nav>
-          <HStack spacing={12}>
+          {/* <HStack spacing={12}>
             <NextChakraLink href="/" display="flex">
               <Heading size="lg" mt={-0.5}>
                 Letryx
               </Heading>
             </NextChakraLink>
-          </HStack>
+          </HStack> */}
         </nav>
       </Flex>
       <HStack justifySelf="flex-end" spacing={1}>
         <ColorModeSwitcher />
-        <Menu>
+        {/* <Menu>
           <MenuButton
             as={Button}
             backgroundColor="rgba(0,0,0,0)"
@@ -57,7 +56,7 @@ const TopBar: FunctionComponent = () => (
               Log Out
             </MenuItem>
           </MenuList>
-        </Menu>
+        </Menu> */}
       </HStack>
     </Flex>
   </header>
