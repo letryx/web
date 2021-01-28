@@ -4,7 +4,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  ignorePatterns: ['.eslintrc.cjs', 'next.config.js'],
+  ignorePatterns: ['.eslintrc.cjs', 'next.config.js', 'jest.config.js'],
   plugins: ['@typescript-eslint', 'eslint-comments', 'promise'],
   extends: [
     'airbnb-typescript',

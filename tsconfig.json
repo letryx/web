@@ -24,10 +24,11 @@
   },
   "exclude": [
     "node_modules",
-    "next.config.js"
+    "next.config.js",
+    "jest.config.js"
   ],
   "include": [
     "**/*.ts",
-    "**/*.tsx",
+    "**/*.tsx"
   ]
 }
