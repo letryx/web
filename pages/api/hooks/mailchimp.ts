@@ -20,6 +20,10 @@ export default async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  if (req.method === 'GET') {
+    res.status(200).end();
+    return;
+  }
   if (req.method !== 'POST') throw new Error('only accepts POST');
 
   const { IP_STACK_KEY, DISCORD_SIGNUPS_HOOK } = process.env;
