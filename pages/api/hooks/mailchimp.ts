@@ -2,20 +2,6 @@
 /* eslint-disable no-console */
 import { NextApiRequest, NextApiResponse } from 'next';
 
-interface ISubscribeEvent {
-  type: 'subscribe' | 'unsubscribe';
-  data: {
-    ip_signup?: string;
-    ip_opt?: string;
-    merges: {
-      EMAIL: string;
-      LNAME: string;
-      FNAME: string;
-      COMPANY: string;
-    };
-  };
-}
-
 export default async (
   req: NextApiRequest,
   res: NextApiResponse
@@ -26,18 +12,18 @@ export default async (
   }
   if (req.method !== 'POST') throw new Error('only accepts POST');
 
-  console.log(req.body);
-
   const { IP_STACK_KEY, DISCORD_SIGNUPS_HOOK } = process.env;
-  const hookData: ISubscribeEvent = req.body;
-  const { type, data } = hookData;
-  const { merges, ip_signup, ip_opt } = data;
-  const { EMAIL, FNAME, LNAME, COMPANY } = merges;
+  const hookData = req.body;
+  const { type } = hookData;
 
-  let geoStr;
+  const ip = hookData['data[ip_signup]'] || hookData['data[ip_opt]'];
+  const email = hookData['data[merges][EMAIL]'];
+  const fname = hookData['data[merges][FNAME]'];
+  const lname = hookData['data[merges][LNAME]'];
+  const company = hookData['data[merges][COMPANY]'];
 
   // geo data
-  const ip = ip_signup || ip_opt;
+  let geoStr;
   if (!IP_STACK_KEY) throw new Error('set IP_STACK_KEY');
   if (ip && IP_STACK_KEY) {
     const geoUrl = `http://api.ipstack.com/${ip}?access_key=${IP_STACK_KEY}`;
@@ -48,7 +34,7 @@ export default async (
     }`;
   }
 
-  const message = `${type}d: [${COMPANY}] ${FNAME} ${LNAME} <${EMAIL}> ${geoStr}`;
+  const message = `${type}d: [${company}] ${fname} ${lname} <${email}> ${geoStr}`;
   console.log(message);
 
   if (!DISCORD_SIGNUPS_HOOK) throw new Error('set DISCORD_SIGNUPS_HOOK');
