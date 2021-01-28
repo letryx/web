@@ -15,3 +15,4 @@ we may want to fold this back into the main web app
 
 - `yarn install`
 - `yarn dev`
+
