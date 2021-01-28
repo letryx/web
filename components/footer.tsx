@@ -1,11 +1,11 @@
-import { FunctionComponent } from 'react';
+import { FC, ElementType } from 'react';
 import { Box, Text, Stack, Link, Icon, SimpleGrid } from '@chakra-ui/react';
 // import { IoLogoTwitter, IoLogoLinkedin } from 'react-icons/io';
 import { MdEmail } from 'react-icons/md';
 import { DiGithubBadge } from 'react-icons/di';
 
 type FooterLinkProps = {
-  icon: React.ElementType;
+  icon: ElementType;
   href: string;
   label: string;
 };
@@ -33,13 +33,13 @@ const links = [
   },
 ];
 
-const FooterLink: React.FC<FooterLinkProps> = ({ icon, href, label }) => (
+const FooterLink: FC<FooterLinkProps> = ({ icon, href, label }) => (
   <Link display="inline-block" href={href} aria-label={label} isExternal>
     <Icon as={icon} fontSize="xl" /> {label}
   </Link>
 );
 
-const Footer: FunctionComponent = () => (
+const Footer: FC = () => (
   <Box as="footer" pt={20} pb={4} pl={0}>
     <SimpleGrid columns={3} spacingX={3}>
       <Text>© {new Date().getFullYear()} Letryx</Text>

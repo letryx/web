@@ -23,7 +23,7 @@ import { AtSignIcon } from '@chakra-ui/icons';
 import {
   Dispatch,
   FormEventHandler,
-  FunctionComponent,
+  FC,
   SetStateAction,
   useState,
 } from 'react';
@@ -31,7 +31,7 @@ import {
 const mailchimpUrl =
   '//letryx.us7.list-manage.com/subscribe/post-json?u=bd1800853f530244c7f62d1ab&id=201d6086a7&';
 
-const TextInput: FunctionComponent<
+const TextInput: FC<
   InputProps & { setValue: Dispatch<SetStateAction<string>> }
 > = ({ placeholder, children, setValue, ...props }) => (
   <FormControl isRequired>
@@ -48,7 +48,7 @@ const TextInput: FunctionComponent<
   </FormControl>
 );
 
-const SubscribeForm: FunctionComponent = () => {
+const SubscribeForm: FC = () => {
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
   const [company, setCompany] = useState('');
@@ -149,9 +149,7 @@ const SubscribeForm: FunctionComponent = () => {
             Sign up for product updates
           </Button>
           <FormControl hidden={status !== 'unsubmitted'}>
-            <FormHelperText mt={-1}>
-              We will never share your email.
-            </FormHelperText>
+            <FormHelperText>We will never share your email.</FormHelperText>
           </FormControl>
           <Alert
             status={status === 'success' ? 'success' : 'error'}

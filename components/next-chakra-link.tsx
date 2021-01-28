@@ -1,4 +1,4 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import NextLink from 'next/link';
 import { LinkProps as NextLinkProps } from 'next/dist/client/link';
 import {
@@ -11,7 +11,7 @@ export type NextChakraLinkProps = PropsWithChildren<
 >;
 
 //  Has to be a new component because both chakra and next share the `as` keyword
-export const NextChakraLink: FunctionComponent<NextChakraLinkProps> = ({
+export const NextChakraLink: FC<NextChakraLinkProps> = ({
   href,
   as,
   replace,

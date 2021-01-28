@@ -1,23 +1,65 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import {
-  // Avatar,
+  Avatar,
   Flex,
   HStack,
-  // Menu,
-  // MenuList,
-  // MenuItem,
-  // MenuDivider,
-  // Icon,
-  // MenuButton,
-  // Button,
+  Menu,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  Icon,
+  MenuButton,
+  Button,
+  Heading,
 } from '@chakra-ui/react';
-// import { TriangleDownIcon, SettingsIcon } from '@chakra-ui/icons';
-// import { CgLogOut } from 'react-icons/cg';
-// import { name } from 'faker/locale/en_US';
-import { ColorModeSwitcher } from './color-mode-switcher';
-// import { NextChakraLink } from './next-chakra-link';
+import { useAppContext } from 'components/app-provider';
+import { TriangleDownIcon, SettingsIcon } from '@chakra-ui/icons';
+import { CgLogOut } from 'react-icons/cg';
+import { ColorModeSwitcher } from 'components/color-mode-switcher';
+import { NextChakraLink } from 'components/next-chakra-link';
 
-const TopBar: FunctionComponent = () => (
+const Nav: FC = () => (
+  <nav>
+    <HStack spacing={12}>
+      <NextChakraLink href="/" display="flex">
+        <Heading size="lg" mt={-0.5}>
+          Letryx
+        </Heading>
+      </NextChakraLink>
+    </HStack>
+  </nav>
+);
+
+const UserDropdown: FC = () => {
+  const { currentUser } = useAppContext();
+
+  return currentUser ? (
+    <Menu>
+      <MenuButton
+        as={Button}
+        backgroundColor="rgba(0,0,0,0)"
+        rounded="full"
+        pl={2}
+      >
+        <HStack mx={-1} spacing={1}>
+          <Avatar name={currentUser.name} fontWeight="700" size="sm" />
+          <TriangleDownIcon ml={3} mr={-1} w={3} h3={4} color="gray.400" />
+        </HStack>
+      </MenuButton>
+      <MenuList>
+        <MenuItem icon={<Icon as={SettingsIcon} />}>Settings</MenuItem>
+        <MenuDivider />
+        <MenuItem icon={<Icon w={4} h={4} as={CgLogOut} />}>Log Out</MenuItem>
+      </MenuList>
+    </Menu>
+  ) : (
+    <div />
+  );
+};
+
+const TopBar: FC<{ hideNav?: boolean; user?: string }> = ({
+  hideNav = false,
+}) => (
   <header>
     <Flex py={4} justifyContent="space-between" alignItems="right" mb={8}>
       <Flex
@@ -25,38 +67,11 @@ const TopBar: FunctionComponent = () => (
         alignItems="center"
         justifySelf="flex-start"
       >
-        <nav>
-          {/* <HStack spacing={12}>
-            <NextChakraLink href="/" display="flex">
-              <Heading size="lg" mt={-0.5}>
-                Letryx
-              </Heading>
-            </NextChakraLink>
-          </HStack> */}
-        </nav>
+        {hideNav || <Nav />}
       </Flex>
       <HStack justifySelf="flex-end" spacing={1}>
         <ColorModeSwitcher />
-        {/* <Menu>
-          <MenuButton
-            as={Button}
-            backgroundColor="rgba(0,0,0,0)"
-            rounded="full"
-            pl={2}
-          >
-            <HStack mx={-1} spacing={1}>
-              <Avatar name={name.findName()} fontWeight="700" size="sm" />
-              <TriangleDownIcon ml={3} mr={-1} w={3} h3={4} color="gray.400" />
-            </HStack>
-          </MenuButton>
-          <MenuList>
-            <MenuItem icon={<Icon as={SettingsIcon} />}>Settings</MenuItem>
-            <MenuDivider />
-            <MenuItem icon={<Icon w={4} h={4} as={CgLogOut} />}>
-              Log Out
-            </MenuItem>
-          </MenuList>
-        </Menu> */}
+        {hideNav || <UserDropdown />}
       </HStack>
     </Flex>
   </header>
