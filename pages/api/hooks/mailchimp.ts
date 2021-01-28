@@ -26,13 +26,13 @@ export default async (
   }
   if (req.method !== 'POST') throw new Error('only accepts POST');
 
+  console.log(req.body);
+
   const { IP_STACK_KEY, DISCORD_SIGNUPS_HOOK } = process.env;
   const hookData: ISubscribeEvent = req.body;
   const { type, data } = hookData;
   const { merges, ip_signup, ip_opt } = data;
   const { EMAIL, FNAME, LNAME, COMPANY } = merges;
-
-  console.log(EMAIL, FNAME, LNAME, COMPANY);
 
   let geoStr;
 
