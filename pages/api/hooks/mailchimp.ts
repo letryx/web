@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-console */
-import { request } from 'http';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 interface ISubscribeEvent {
