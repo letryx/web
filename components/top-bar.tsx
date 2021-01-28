@@ -1,22 +1,22 @@
-import { FC } from 'react';
+import { SettingsIcon, TriangleDownIcon } from '@chakra-ui/icons';
 import {
   Avatar,
-  Flex,
-  HStack,
-  Menu,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  Icon,
-  MenuButton,
   Button,
+  Flex,
   Heading,
+  HStack,
+  Icon,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
 } from '@chakra-ui/react';
 import { useAppContext } from 'components/app-provider';
-import { TriangleDownIcon, SettingsIcon } from '@chakra-ui/icons';
-import { CgLogOut } from 'react-icons/cg';
 import { ColorModeSwitcher } from 'components/color-mode-switcher';
 import { NextChakraLink } from 'components/next-chakra-link';
+import { FC } from 'react';
+import { CgLogOut } from 'react-icons/cg';
 
 const Nav: FC = () => (
   <nav>

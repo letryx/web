@@ -1,5 +1,5 @@
-import { FC, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { FC, useEffect } from 'react';
 
 interface RedirectProps {
   to: string;

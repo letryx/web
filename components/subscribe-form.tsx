@@ -1,32 +1,32 @@
+import { AtSignIcon } from '@chakra-ui/icons';
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  Box,
   Button,
   Container,
   FormControl,
   FormHelperText,
   HStack,
-  Text,
   Input,
   InputGroup,
   InputLeftElement,
-  Stack,
-  useColorModeValue,
-  Box,
   InputProps,
-  Alert,
-  AlertIcon,
-  AlertDescription,
+  Stack,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
-import { MdWork, MdPerson } from 'react-icons/md';
 import jsonp from 'jsonp';
 import { stringify } from 'query-string';
-import { AtSignIcon } from '@chakra-ui/icons';
 import {
   Dispatch,
-  FormEventHandler,
   FC,
+  FormEventHandler,
   SetStateAction,
   useState,
 } from 'react';
+import { MdPerson, MdWork } from 'react-icons/md';
 
 const mailchimpUrl =
   '//letryx.us7.list-manage.com/subscribe/post-json?u=bd1800853f530244c7f62d1ab&id=201d6086a7&';
