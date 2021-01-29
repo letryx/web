@@ -61,7 +61,7 @@ const TopBar: FC<{ hideNav?: boolean; user?: string }> = ({
   hideNav = false,
 }) => (
   <header>
-    <Flex py={4} justifyContent="space-between" alignItems="right" mb={8}>
+    <Flex py={4} justifyContent="space-between" alignItems="right">
       <Flex
         justifyContent="space-between"
         alignItems="center"

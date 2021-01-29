@@ -1,10 +1,14 @@
 import {
   Stack,
-  Box,
-  UnorderedList,
   OrderedList,
   ListItem,
   Text,
+  Tab,
+  Tabs,
+  TabList,
+  Badge,
+  TabPanels,
+  TabPanel,
 } from '@chakra-ui/react';
 import { FC } from 'react';
 import { Layout } from 'components/layout';
@@ -42,34 +46,51 @@ const Mockup: FC<{ clause: IClause }> = ({ clause }) => {
   const { name, slug, header, children, examples } = clause;
 
   return (
-    <Layout title="Letryx">
-      <Box fontSize="md">
-        <Stack>
-          <NextChakraLink fontSize="xl" href={`/mockups/${slug}`}>
-            {name} Benchmark
-          </NextChakraLink>
-          <Text>
-            {header.map((props) => (
-              <Statement {...props} />
-            ))}
-          </Text>
-          <OrderedList spacing={4}>
-            {children.map(({ statements }) => (
-              <ListItem ml={4}>
-                {statements.map((props) => (
+    <Layout
+      title="Permitted Encumbrances"
+      breadcrumbs={[{ title: 'Clauses', href: '/mockups' }]}
+    >
+      <Stack fontSize="md">
+        <NextChakraLink pb={0} fontSize="xl" href={`/mockups/${slug}`}>
+          {name}
+        </NextChakraLink>
+        <Tabs>
+          <TabList>
+            <Tab>Benchmark</Tab>
+            <Tab>
+              Examples{' '}
+              <Badge ml={2} mt={0}>
+                {examples.length}
+              </Badge>
+            </Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <Text pb={2}>
+                {header.map((props) => (
                   <Statement {...props} />
                 ))}
-              </ListItem>
-            ))}
-          </OrderedList>
-
-          <UnorderedList pt={4} title="Examples">
-            {examples.map((def: string) => (
-              <ListItem>{def}</ListItem>
-            ))}
-          </UnorderedList>
-        </Stack>
-      </Box>
+              </Text>
+              <OrderedList spacing={4}>
+                {children.map(({ statements }) => (
+                  <ListItem ml={4}>
+                    {statements.map((props) => (
+                      <Statement {...props} />
+                    ))}
+                  </ListItem>
+                ))}
+              </OrderedList>
+            </TabPanel>
+            <TabPanel>
+              <OrderedList pt={4} title="Examples">
+                {examples.map((def: string) => (
+                  <ListItem>{def}</ListItem>
+                ))}
+              </OrderedList>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Stack>
     </Layout>
   );
 };
