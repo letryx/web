@@ -29,13 +29,13 @@ interface IRawFragment {
   c: string;
 }
 
-type ISellerBuyer = -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4;
+type IFreq = 0 | 1 | 2 | 3 | 4;
 
 interface ILinkedFragment {
   t: 'l';
   c: string; // content
   l: string; // text link name
-  sb: ISellerBuyer; // seller vs buyer
+  freq: IFreq; // seller vs buyer
 }
 
 export type IStatement = IRawFragment | ILinkedFragment;
@@ -64,7 +64,7 @@ export const clauseComparison: IClause = {
       t: 'l',
       c: '(to the extent same do not constitute Contractual Defects):',
       l: 'contractual defects',
-      sb: -3,
+      freq: 3,
     },
   ],
   children: [
