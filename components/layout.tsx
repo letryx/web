@@ -1,14 +1,10 @@
 import { FC, ReactNode } from 'react';
 import Head from 'next/head';
-import {
-  Container,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-} from '@chakra-ui/react';
+import { Container, Breadcrumb, BreadcrumbItem } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Footer } from 'components/footer';
 import { TopBar } from 'components/top-bar';
+import { NextBreadcrumbLink } from 'components/next-chakra-link';
 
 interface IBreadcrumb {
   title: string;
@@ -44,7 +40,9 @@ export const Layout: FC<LayoutProps> = ({
         >
           {breadcrumbs.map(({ title: crumbTitle, href }) => (
             <BreadcrumbItem>
-              <BreadcrumbLink href={href}>{crumbTitle}</BreadcrumbLink>
+              <NextBreadcrumbLink pb={0} href={href}>
+                {crumbTitle}
+              </NextBreadcrumbLink>
             </BreadcrumbItem>
           ))}
         </Breadcrumb>
