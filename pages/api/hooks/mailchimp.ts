@@ -16,6 +16,8 @@ export default async (
   const hookData = req.body;
   const { type } = hookData;
 
+  console.log(hookData);
+
   const ip = hookData['data[ip_signup]'] || hookData['data[ip_opt]'];
   const email = hookData['data[merges][EMAIL]'];
   const fname = hookData['data[merges][FNAME]'];
