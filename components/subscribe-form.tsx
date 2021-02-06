@@ -141,7 +141,7 @@ const SubscribeForm: FC = () => {
           <Button
             type="submit"
             boxShadow={isPosting ? 'lg' : 'sm'}
-            fontWeight={600}
+            fontWeight="600"
             disabled={isPosting}
             _hover={{ boxShadow: 'md' }}
             _active={{ boxShadow: 'lg' }}
