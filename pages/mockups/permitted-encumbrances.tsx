@@ -68,14 +68,14 @@ const Mockup: FC<{ clause: IClause }> = ({ clause }) => {
             <TabPanel>
               <Text pb={2}>
                 {header.map((props) => (
-                  <Statement {...props} />
+                  <Statement key={props.c} {...props} />
                 ))}
               </Text>
               <OrderedList spacing={4}>
                 {children.map(({ statements }) => (
-                  <ListItem ml={4}>
+                  <ListItem key={statements[0].c} ml={4}>
                     {statements.map((props) => (
-                      <Statement {...props} />
+                      <Statement key={props.c} {...props} />
                     ))}
                   </ListItem>
                 ))}
@@ -84,7 +84,7 @@ const Mockup: FC<{ clause: IClause }> = ({ clause }) => {
             <TabPanel>
               <OrderedList pt={4} title="Examples">
                 {examples.map((def: string) => (
-                  <ListItem>{def}</ListItem>
+                  <ListItem key={def}>{def}</ListItem>
                 ))}
               </OrderedList>
             </TabPanel>

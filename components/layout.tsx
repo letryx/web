@@ -39,7 +39,7 @@ export const Layout: FC<LayoutProps> = ({
           separator={<ChevronRightIcon color="gray.500" />}
         >
           {breadcrumbs.map(({ title: crumbTitle, href }) => (
-            <BreadcrumbItem>
+            <BreadcrumbItem key={title}>
               <NextBreadcrumbLink pb={0} href={href}>
                 {crumbTitle}
               </NextBreadcrumbLink>
