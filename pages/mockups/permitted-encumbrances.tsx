@@ -68,7 +68,7 @@ const Deal: FC = () => (
 
 const Statement: FC<IStatement> = (s) => (
   <Text as="span" color={s.t === 'r' ? undefined : 'royalblue'}>
-    <Tooltip label={s.t == 'f' ? s.r : undefined}>{`${s.c} `}</Tooltip>
+    <Tooltip label={s.t === 'f' ? s.r : undefined}>{`${s.c} `}</Tooltip>
   </Text>
 );
 
