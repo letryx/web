@@ -95,12 +95,14 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
           spacing="0"
         >
           <Text pb={2}>
-            {header.map((sm) => (
-              <Statement key={sm.c} {...sm} />
+            {header.map((sm, i) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Statement key={`section-${i}`} {...sm} />
             ))}
           </Text>
-          {children.map(({ statements, clauseName }) => (
-            <Text key={statements[0].c} pb={4}>
+          {children.map(({ statements, clauseName }, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Text key={`clause-${i}`} pb={4}>
               <Text
                 as="span"
                 display="inline-block"
@@ -118,8 +120,9 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
                 </Text>
                 )
               </Text>
-              {statements.map((sm) => (
-                <Statement key={sm.c} {...sm} />
+              {statements.map((sm, j) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <Statement key={`sm-${i}-${j}`} {...sm} />
               ))}
             </Text>
           ))}
