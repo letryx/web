@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async () => ({
 });
 
 const Deal: FC = () => (
-  <Flex flexWrap="wrap" py={2}>
+  <Flex flexWrap="wrap" py={2} maxWidth="750px">
     <Stack my={2} flexGrow={2}>
       <Heading fontSize={['xl', 'xl', '2xl']} maxW="90vw" isTruncated>
         <Badge
@@ -86,7 +86,7 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
         <Deal />
         <Stack
           fontFamily="contract"
-          maxWidth="800px"
+          maxWidth="750px"
           fontSize={['1em', '1.1 em']}
           textAlign="justify"
           spacing="0"
