@@ -85,9 +85,9 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
       <Stack fontSize="md">
         <Deal />
         <Stack
-          fontFamily="serif"
+          fontFamily="Century, serif"
           maxWidth="800px"
-          fontSize={['1em', '1.1em']}
+          fontSize={['1em', '1.1 em']}
           textAlign="justify"
         >
           <Text pb={2}>
