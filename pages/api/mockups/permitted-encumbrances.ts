@@ -65,7 +65,7 @@ export const clauseComparison: ISection = {
   header: [
     {
       t: 'r',
-      c: '"Permitted Encumbrances" means any or all of the following: ',
+      c: '"Permitted Encumbrances" means any or all of the following:',
     },
   ],
   children: [
@@ -132,7 +132,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c: 'Subject to compliance with ',
+          c: 'Subject to compliance with',
         },
         {
           t: 'f',
@@ -221,7 +221,7 @@ export const clauseComparison: ISection = {
         {
           t: 'r',
           c:
-            'Calls on Hydrocarbon production under existing any Contracts identified in ',
+            'Calls on Hydrocarbon production under existing any Contracts identified in',
         },
         {
           t: 'f',
@@ -255,7 +255,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c: 'Any matters shown on ',
+          c: 'Any matters shown on',
         },
         {
           t: 'f',
@@ -273,7 +273,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c: 'Any matters shown on ',
+          c: 'Any matters shown on',
         },
         {
           t: 'f',
@@ -282,7 +282,7 @@ export const clauseComparison: ISection = {
         },
         {
           t: 'r',
-          c: ' or ',
+          c: 'or',
         },
         {
           t: 'f',
@@ -316,7 +316,7 @@ export const clauseComparison: ISection = {
         {
           t: 'r',
           c:
-            '	Lack of rights, access or transportation as to any rights of way for gathering or transportation pipelines or facilities that do not constitute any of the Assets; ',
+            'Lack of rights, access or transportation as to any rights of way for gathering or transportation pipelines or facilities that do not constitute any of the Assets;',
         },
       ],
     },

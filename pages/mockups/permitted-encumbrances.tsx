@@ -9,6 +9,7 @@ import {
   StatNumber,
   Text,
   Tooltip,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
 import { GetStaticProps } from 'next';
@@ -25,7 +26,7 @@ export const getStaticProps: GetStaticProps = async () => ({
 });
 
 const Deal: FC = () => (
-  <Flex flexWrap="wrap" py={2} maxWidth="750px">
+  <Flex flexWrap="wrap" py={2} maxWidth="800px">
     <Stack my={2} flexGrow={2}>
       <Heading fontSize={['xl', 'xl', '2xl']} maxW="90vw" isTruncated>
         <Badge
@@ -86,8 +87,10 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
         <Deal />
         <Stack
           fontFamily="contract"
-          maxWidth="750px"
-          fontSize={['1em', '1.1 em']}
+          maxWidth="720px"
+          fontWeight="normal"
+          fontSize="0.9em"
+          pl={['2px', '10px', '50px']}
           textAlign="justify"
           spacing="0"
         >
@@ -100,10 +103,20 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
             <Text key={statements[0].c} pb={4}>
               <Text
                 as="span"
-                mx={['1em', '2em']}
+                display="inline-block"
+                textAlign="center"
+                width={['3em', '5em', '6em']}
+                color="gray.400"
                 style={{ letterSpacing: '3px' }}
               >
-                ({clauseName})
+                (
+                <Text
+                  as="span"
+                  color={useColorModeValue('gray.700', 'gray.100')}
+                >
+                  {clauseName}
+                </Text>
+                )
               </Text>
               {statements.map((sm) => (
                 <Statement key={sm.c} {...sm} />
