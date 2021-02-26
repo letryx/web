@@ -38,64 +38,135 @@ interface ILinkedFragment {
   freq: IFreq; // seller vs buyer
 }
 
-export type IStatement = IRawFragment | ILinkedFragment;
-export interface IStatementGroup {
+interface IRefFragment {
+  t: 'f';
+  c: string;
+  r: string;
+}
+
+export type IStatement = IRawFragment | ILinkedFragment | IRefFragment;
+export interface IClause {
+  clauseName: string;
   statements: IStatement[];
 }
 
-export interface IClause {
+export interface ISection {
+  sectionName: string;
   name: string;
   slug: string;
   header: IStatement[];
-  children: IStatementGroup[];
-  examples: string[];
+  children: IClause[];
 }
 
-export const clauseComparison: IClause = {
+export const clauseComparison: ISection = {
   name: 'Permitted Encumberances',
   slug: 'permitted-encumbrances',
+  sectionName: '3.3',
   header: [
     {
       t: 'r',
-      c:
-        'As used in this Agreement, the term “Permitted Encumbrances” means any or all of the following',
-    },
-    {
-      t: 'l',
-      c: '(to the extent same do not constitute Contractual Defects):',
-      l: 'contractual defects',
-      freq: 3,
+      c: '"Permitted Encumbrances" means any or all of the following: ',
     },
   ],
   children: [
     {
+      clauseName: 'a',
+      // Analysis: Similar subclause in 81% in the last 10 years in Texas law governed contracts over $10MM
       statements: [
         {
           t: 'r',
           c:
-            'Royalties, nonparticipating royalty interests, net profits interests and any overriding royalties, reversionary interests and other burdens to the extent that they do not, individually or in the aggregate, reduce Seller’s Net Revenue Interest below that shown in Exhibit A-1 or increase Seller’s working interest above that shown in Exhibit A-1 without a corresponding increase in the Net Revenue Interest',
+            'Royalties, nonparticipating royalty interests, net profits interests and any overriding royalties, reversionary interests and other burdens to the extent that they do not, individually or in the aggregate, reduce Seller’s Net Revenue Interest or Net Acres below that shown in',
+        },
+        {
+          t: 'f',
+          c: 'Schedule 2.3',
+          r: 'Allocated Value',
+        },
+        {
+          t: 'r',
+          c: 'or increase Seller’s Working Interest above that shown in',
+        },
+        {
+          t: 'f',
+          c: 'Schedule 2.3',
+          r: 'Allocated Value',
+        },
+        {
+          t: 'r',
+          c: 'without a corresponding increase in the Net Revenue Interest;',
         },
       ],
     },
     {
+      clauseName: 'b',
       statements: [
         {
           t: 'r',
           c:
-            'All leases, unit agreements, pooling agreements, pre-pooling agreements, operating agreements, production sales contracts, division orders and other contracts, agreements and instruments applicable to the Assets, to the extent that they do not, individually or in the aggregate: (i) reduce Seller’s Net Revenue Interest below that shown in Exhibit A-1 or increase Seller’s working interest above that shown in Exhibit A-1 without a corresponding increase in the Net Revenue Interest and (ii) materially interfere with the ownership and operation of the Assets as currently owned and operated;',
+            'All leases, unit agreements, pooling agreements, pre-pooling agreements, operating agreements, production sales contracts, division orders and other contracts, agreements and instruments applicable to the Assets, to the extent that they do not, individually or in the aggregate: (i) reduce Seller’s Net Revenue Interest or Net Acres below that shown in ',
+        },
+        {
+          t: 'f',
+          c: 'Schedule 2.3',
+          r: 'Allocated Value',
+        },
+        {
+          t: 'r',
+          c: ' or increase Seller’s Working Interest above that shown in ',
+        },
+        {
+          t: 'f',
+          c: 'Schedule 2.3',
+          r: 'Allocated Value',
+        },
+        {
+          t: 'r',
+          c:
+            ' without a corresponding increase in the Net Revenue Interest and (ii) materially interfere with the ownership and operation of the Assets as currently owned and operated;',
         },
       ],
     },
     {
+      clauseName: 'c',
+      statements: [
+        {
+          t: 'r',
+          c: 'Subject to compliance with ',
+        },
+        {
+          t: 'f',
+          c: 'Sections 3.5',
+          r: 'Consents to Assignment and Preferential Rights to Purchase',
+        },
+        {
+          t: 'r',
+          c: 'and',
+        },
+        {
+          t: 'f',
+          c: '7.7,',
+          r: 'Other Preferential Rights',
+        },
+        {
+          t: 'r',
+          c:
+            'third-party consents and preferential rights to purchase the Assets applicable to this or a future transaction involving the Assets;',
+        },
+      ],
+    },
+    {
+      clauseName: 'd',
       statements: [
         {
           t: 'r',
           c:
-            'Subject to compliance with Sections ‎3.5 and ‎7.7, Third Party consents and preferential rights to purchase the Assets applicable to this or a future transaction involving the Assets, including, Third Party consent requirements and similar restrictions with respect to which waivers or consents are obtained by Seller from the appropriate Persons prior to the Closing Date or the appropriate time period for asserting the right has expired or which need not be satisfied prior to a transfer;',
+            'Third-party consent requirements and similar restrictions with respect to which waivers or consents are obtained by Seller from the appropriate Persons prior to the Closing Date or the appropriate time period for asserting the right has expired or which need not be satisfied prior to a transfer;',
         },
       ],
     },
     {
+      clauseName: 'e',
       statements: [
         {
           t: 'r',
@@ -105,6 +176,7 @@ export const clauseComparison: IClause = {
       ],
     },
     {
+      clauseName: 'f',
       statements: [
         {
           t: 'r',
@@ -114,6 +186,7 @@ export const clauseComparison: IClause = {
       ],
     },
     {
+      clauseName: 'g',
       statements: [
         {
           t: 'r',
@@ -123,6 +196,7 @@ export const clauseComparison: IClause = {
       ],
     },
     {
+      clauseName: 'h',
       statements: [
         {
           t: 'r',
@@ -132,6 +206,7 @@ export const clauseComparison: IClause = {
       ],
     },
     {
+      clauseName: 'i',
       statements: [
         {
           t: 'r',
@@ -141,14 +216,22 @@ export const clauseComparison: IClause = {
       ],
     },
     {
+      clauseName: 'j',
       statements: [
         {
           t: 'r',
-          c: 'Calls on Hydrocarbon production under existing Contracts;',
+          c:
+            'Calls on Hydrocarbon production under existing any Contracts identified in ',
+        },
+        {
+          t: 'f',
+          c: 'Schedule 1.2(d);',
+          r: 'Contracts',
         },
       ],
     },
     {
+      clauseName: 'k',
       statements: [
         {
           t: 'r',
@@ -158,6 +241,7 @@ export const clauseComparison: IClause = {
       ],
     },
     {
+      clauseName: 'l',
       statements: [
         {
           t: 'r',
@@ -167,14 +251,48 @@ export const clauseComparison: IClause = {
       ],
     },
     {
+      clauseName: 'm',
       statements: [
         {
           t: 'r',
-          c: 'Any matters shown on [Litigation Exhibit]',
+          c: 'Any matters shown on ',
+        },
+        {
+          t: 'f',
+          c: 'Schedule 2.3',
+          r: 'Allocated Value',
+        },
+        {
+          t: 'r',
+          c: ';',
         },
       ],
     },
     {
+      clauseName: 'n',
+      statements: [
+        {
+          t: 'r',
+          c: 'Any matters shown on ',
+        },
+        {
+          t: 'f',
+          c: 'Schedule 5.7',
+          r: 'Litigation',
+        },
+        {
+          t: 'r',
+          c: ' or ',
+        },
+        {
+          t: 'f',
+          c: 'Schedule 3.3(n)',
+          r: 'Other Permitted Encumbrances',
+        },
+      ],
+    },
+    {
+      clauseName: 'o',
       statements: [
         {
           t: 'r',
@@ -183,33 +301,47 @@ export const clauseComparison: IClause = {
       ],
     },
     {
+      clauseName: 'p',
       statements: [
         {
           t: 'r',
           c:
-            'Lack of rights, access or transportation as to any rights of way for gathering or transportation pipelines or facilities that do not constitute any of the Assets;',
+            'In the case of any well on an undeveloped location or other operation that has not been commenced as of the Closing Date, any permits, easements, rights of way, unit designations or production or drilling units not yet obtained, formed or created;',
         },
       ],
     },
     {
+      clauseName: 'q',
       statements: [
         {
           t: 'r',
           c:
-            'Any liens, charges, encumbrances, defects or irregularities (i) which affect a Property from which Hydrocarbons have been and are being produced (or to which production of Hydrocarbons is allocable) for the last five (5) years and for which no claim related to title has been made in writing by any Person during such five (5) year period, (ii) which would be accepted by a reasonably prudent purchaser engaged in the business of owning and operating oil and gas properties or (iii) which do not, individually or in the aggregate, materially detract from the value of or materially interfere with the ownership and operation of the Assets subject thereto or affected thereby (as currently owned and operated), and do not reduce Seller’s Net Revenue Interest below that shown in Exhibit A-1, or increase Seller’s working interest above that shown in Exhibit A-1 without a corresponding increase in the Net Revenue Interest;',
+            '	Lack of rights, access or transportation as to any rights of way for gathering or transportation pipelines or facilities that do not constitute any of the Assets; ',
         },
       ],
     },
     {
+      clauseName: 'r',
       statements: [
         {
           t: 'r',
           c:
-            'Such Title Defects or other defects as Purchaser has waived in writing;',
+            'Any liens, charges, encumbrances, defects or irregularities (i) which affect a Property from which Hydrocarbons have been and are being produced (or to which production of Hydrocarbons is allocable) for the last ten (10) years and for which no claim related to title has been made in writing by any Person during such ten (10) year period, (ii) which would be accepted by a reasonably prudent purchaser engaged in the business of owning and operating oil and gas properties or (iii) which do not, individually or in the aggregate, materially detract from the value of or materially interfere with the ownership and operation of the Assets subject thereto or affected thereby (as currently owned and operated), and do not reduce Seller’s Net Revenue Interest or Net Acres below that shown',
         },
       ],
     },
     {
+      clauseName: 's',
+      statements: [
+        {
+          t: 'r',
+          c:
+            'Such Title Defects or other defects as Purchaser has waived in writing; and',
+        },
+      ],
+    },
+    {
+      clauseName: 't',
       statements: [
         {
           t: 'r',
@@ -218,5 +350,4 @@ export const clauseComparison: IClause = {
       ],
     },
   ],
-  examples,
 };

@@ -1,95 +1,111 @@
 import {
-  Stack,
-  OrderedList,
-  ListItem,
-  Text,
-  Tab,
-  Tabs,
-  TabList,
   Badge,
-  TabPanels,
-  TabPanel,
+  Flex,
+  Heading,
+  Stack,
+  Stat,
+  StatHelpText,
+  StatLabel,
+  StatNumber,
+  Text,
+  Tooltip,
 } from '@chakra-ui/react';
-import { FC } from 'react';
 import { Layout } from 'components/layout';
-import { NextChakraLink } from 'components/next-chakra-link';
 import { GetStaticProps } from 'next';
 import {
   clauseComparison,
-  IClause,
+  ISection,
   IStatement,
 } from 'pages/api/mockups/permitted-encumbrances';
-
-// export const icons = [
-//   MdSignalCellular0Bar,
-//   MdSignalCellular1Bar,
-//   MdSignalCellular2Bar,
-//   MdSignalCellular3Bar,
-//   MdSignalCellular4Bar,
-// ];
+import { FC } from 'react';
 
 export const getStaticProps: GetStaticProps = async () => ({
   props: { clause: clauseComparison },
   revalidate: 1, // in seconds
 });
 
-const Statement: FC<IStatement> = ({ t, c }) =>
-  t === 'r' ? (
-    <Text as="span">{`${c} `}</Text>
-  ) : (
-    <Text as="span" color="royalblue">
-      {`${c} `}
-    </Text>
-  );
+const Deal: FC = () => (
+  <Flex flexWrap="wrap" py={2}>
+    <Stack my={2} flexGrow={2}>
+      <Heading fontSize={['xl', 'xl', '2xl']} maxW="90vw" isTruncated>
+        <Badge
+          colorScheme="green"
+          w="3rem"
+          textAlign="center"
+          mr={2}
+          display={['block', 'inline']}
+        >
+          Seller
+        </Badge>
+        <Tooltip label="Jones Energy Holdings, LLC">
+          Jones Energy Holdings, LLC
+        </Tooltip>
+      </Heading>
+      <Heading fontSize={['xl', 'xl', '2xl']} maxW="90vw" isTruncated>
+        <Badge
+          colorScheme="blue"
+          w="3rem"
+          textAlign="center"
+          mr={2}
+          display={['block', 'inline']}
+        >
+          Buyer
+        </Badge>
+        <Tooltip label="Foundation Energy Fund VI-A, LP">
+          Foundation Energy Fund VI-A, LP
+        </Tooltip>
+      </Heading>
+    </Stack>
+    <Stat textAlign={['left', 'right']}>
+      <StatLabel>Purchase Price</StatLabel>
+      <StatNumber>$201,000,000</StatNumber>
+      <StatHelpText>
+        <Tooltip label="Execution Date">June 22, 2017</Tooltip>
+      </StatHelpText>
+    </Stat>
+  </Flex>
+);
 
-const Mockup: FC<{ clause: IClause }> = ({ clause }) => {
-  const { name, slug, header, children, examples } = clause;
+const Statement: FC<IStatement> = (s) => (
+  <Text as="span" color={s.t === 'r' ? undefined : 'royalblue'}>
+    <Tooltip label={s.t == 'f' ? s.r : undefined}>{`${s.c} `}</Tooltip>
+  </Text>
+);
+
+const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
+  const { header, children } = clause;
 
   return (
     <Layout
       title="Permitted Encumbrances"
-      breadcrumbs={[{ title: 'Clauses', href: '/mockups' }]}
+      breadcrumbs={[
+        { title: 'Purchase and Sale Agreements', href: '/mockups' },
+      ]}
     >
       <Stack fontSize="md">
-        <NextChakraLink pb={0} fontSize="xl" href={`/mockups/${slug}`}>
-          {name}
-        </NextChakraLink>
-        <Tabs>
-          <TabList>
-            <Tab>Benchmark</Tab>
-            <Tab>
-              Examples{' '}
-              <Badge ml={2} mt={0}>
-                {examples.length}
-              </Badge>
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <Text pb={2}>
-                {header.map((props) => (
-                  <Statement key={props.c} {...props} />
-                ))}
+        <Deal />
+        <Stack
+          fontFamily="serif"
+          maxWidth="800px"
+          fontSize={['1em', '1.1em']}
+          textAlign="justify"
+        >
+          <Text pb={2}>
+            {header.map((sm) => (
+              <Statement key={sm.c} {...sm} />
+            ))}
+          </Text>
+          {children.map(({ statements, clauseName }) => (
+            <Text key={statements[0].c} pb={4}>
+              <Text as="span" mx={['1em', '2em']}>
+                ({clauseName})
               </Text>
-              <OrderedList spacing={4}>
-                {children.map(({ statements }) => (
-                  <ListItem key={statements[0].c} ml={4}>
-                    {statements.map((props) => (
-                      <Statement key={props.c} {...props} />
-                    ))}
-                  </ListItem>
-                ))}
-              </OrderedList>
-            </TabPanel>
-            <TabPanel>
-              <OrderedList pt={4} title="Examples">
-                {examples.map((def: string) => (
-                  <ListItem key={def}>{def}</ListItem>
-                ))}
-              </OrderedList>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+              {statements.map((sm) => (
+                <Statement key={sm.c} {...sm} />
+              ))}
+            </Text>
+          ))}
+        </Stack>
       </Stack>
     </Layout>
   );
