@@ -1,8 +1,11 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { FC } from 'react';
+import myTheme from 'styles/theme';
+
+const theme = extendTheme(myTheme);
 
 const UIProvider: FC = ({ children }) => (
-  <ChakraProvider>{children}</ChakraProvider>
+  <ChakraProvider theme={theme}>{children}</ChakraProvider>
 );
 
 export { UIProvider };

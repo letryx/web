@@ -7,6 +7,8 @@ import NextDocument, {
   DocumentContext,
   DocumentInitialProps,
 } from 'next/document';
+import { Global } from '@emotion/react';
+import fonts from 'styles/font-face';
 
 export default class Document extends NextDocument {
   static getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
@@ -16,7 +18,9 @@ export default class Document extends NextDocument {
   render(): JSX.Element {
     return (
       <Html>
-        <Head />
+        <Head>
+          <Global styles={fonts} />
+        </Head>
         <body>
           <ColorModeScript />
           <Main />

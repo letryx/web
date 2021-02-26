@@ -85,10 +85,11 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
       <Stack fontSize="md">
         <Deal />
         <Stack
-          fontFamily="Century, serif"
+          fontFamily="contract"
           maxWidth="800px"
           fontSize={['1em', '1.1 em']}
           textAlign="justify"
+          spacing="0"
         >
           <Text pb={2}>
             {header.map((sm) => (
@@ -97,7 +98,11 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
           </Text>
           {children.map(({ statements, clauseName }) => (
             <Text key={statements[0].c} pb={4}>
-              <Text as="span" mx={['1em', '2em']}>
+              <Text
+                as="span"
+                mx={['1em', '2em']}
+                style={{ letterSpacing: '3px' }}
+              >
                 ({clauseName})
               </Text>
               {statements.map((sm) => (
