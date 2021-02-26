@@ -9,8 +9,7 @@ module.exports = {
   extends: [
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
   ],
   parserOptions: {
     ecmaVersion: 12,
