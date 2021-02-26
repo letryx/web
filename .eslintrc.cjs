@@ -5,7 +5,7 @@ module.exports = {
     es2021: true,
   },
   ignorePatterns: ['.eslintrc.cjs', 'next.config.js', 'jest.config.js'],
-  plugins: ['@typescript-eslint', 'eslint-comments', 'promise'],
+  plugins: ['@typescript-eslint', 'eslint-comments', 'promise', 'prettier'],
   extends: [
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
@@ -19,6 +19,7 @@ module.exports = {
     extraFileExtensions: ['.cjs'],
   },
   rules: {
+    'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': [0],
