@@ -89,7 +89,7 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
           fontFamily="contract"
           maxWidth="720px"
           fontWeight="normal"
-          fontSize="0.9em"
+          fontSize="1em"
           pl={['2px', '10px', '50px']}
           textAlign="justify"
           spacing="0"
