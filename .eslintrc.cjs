@@ -23,7 +23,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': [0],
-    indent: ['error', 2],
+    indent: [0],
     quotes: ['error', 'single', { avoidEscape: true }],
     'react/self-closing-comp': [
       'error',
