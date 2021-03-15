@@ -26,22 +26,20 @@ export const examples = [
 
 interface IRawFragment {
   t: 'r';
-  c: string;
+  c: string; // content
 }
-
-type IFreq = 0 | 1 | 2 | 3 | 4;
 
 interface ILinkedFragment {
   t: 'l';
   c: string; // content
-  l: string; // text link name
-  freq: IFreq; // seller vs buyer
+  r: string; // tooltip
+  f: number; // frequency
 }
 
 interface IRefFragment {
   t: 'f';
-  c: string;
-  r: string;
+  c: string; // content
+  r: string; // ref name
 }
 
 export type IStatement = IRawFragment | ILinkedFragment | IRefFragment;
@@ -71,7 +69,6 @@ export const clauseComparison: ISection = {
   children: [
     {
       clauseName: 'a',
-      // Analysis: Similar subclause in 81% in the last 10 years in Texas law governed contracts over $10MM
       statements: [
         {
           t: 'r',
@@ -121,9 +118,15 @@ export const clauseComparison: ISection = {
           r: 'Allocated Value',
         },
         {
+          t: 'l',
+          f: 0.22,
+          r: 'Appears in 22% of similar contracts',
+          c: ' without a corresponding increase in the Net Revenue Interest',
+        },
+        {
           t: 'r',
           c:
-            ' without a corresponding increase in the Net Revenue Interest and (ii) materially interfere with the ownership and operation of the Assets as currently owned and operated;',
+            'and (ii) materially interfere with the ownership and operation of the Assets as currently owned and operated;',
         },
       ],
     },

@@ -68,8 +68,25 @@ const Deal: FC = () => (
 );
 
 const Statement: FC<IStatement> = (s) => (
-  <Text as="span" color={s.t === 'r' ? undefined : 'royalblue'}>
-    <Tooltip label={s.t === 'f' ? s.r : undefined}>{`${s.c} `}</Tooltip>
+  <Text as="span" cursor="pointer">
+    <Tooltip label={s.t !== 'r' ? s.r : undefined}>
+      <Text
+        as="span"
+        color={s.t === 'f' ? 'royalblue' : undefined}
+        style={
+          s.t === 'l'
+            ? {
+                textDecorationLine: 'underline',
+                textDecorationStyle: 'solid',
+                textDecorationColor: s.f <= 0.3 ? 'red' : 'yellow',
+                textDecorationSkip: 'leading-spaces trailing-spaces',
+              }
+            : undefined
+        }
+      >
+        {s.c}
+      </Text>
+    </Tooltip>{' '}
   </Text>
 );
 
