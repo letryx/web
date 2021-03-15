@@ -1,18 +1,27 @@
 import { FC, ReactNode } from 'react';
 import Head from 'next/head';
-import { Container } from '@chakra-ui/react';
+import { Container, Breadcrumb, BreadcrumbItem } from '@chakra-ui/react';
+import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Footer } from 'components/footer';
 import { TopBar } from 'components/top-bar';
+import { NextBreadcrumbLink } from 'components/next-chakra-link';
+
+interface IBreadcrumb {
+  title: string;
+  href: string;
+}
 
 type LayoutProps = {
   children?: ReactNode;
   title?: string;
+  breadcrumbs?: IBreadcrumb[];
   hideNav?: boolean;
 };
 
 export const Layout: FC<LayoutProps> = ({
   children,
   title = 'Letryx',
+  breadcrumbs = [],
   hideNav = false,
 }) => (
   <div>
@@ -24,6 +33,19 @@ export const Layout: FC<LayoutProps> = ({
     <Container maxWidth="1200px">
       <Container px={0} maxWidth="1200px" minHeight="100vh">
         <TopBar hideNav={hideNav} />
+        <Breadcrumb
+          hidden={title === 'Letryx'}
+          spacing="8px"
+          separator={<ChevronRightIcon color="gray.500" />}
+        >
+          {breadcrumbs.map(({ title: crumbTitle, href }) => (
+            <BreadcrumbItem key={title}>
+              <NextBreadcrumbLink pb={0} href={href}>
+                {crumbTitle}
+              </NextBreadcrumbLink>
+            </BreadcrumbItem>
+          ))}
+        </Breadcrumb>
         {children}
       </Container>
       <Footer />

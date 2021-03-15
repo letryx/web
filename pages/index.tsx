@@ -5,7 +5,7 @@ import { SubscribeForm } from 'components/subscribe-form';
 
 const IndexPage: FC = () => (
   <Layout title="Letryx" hideNav>
-    <Box textAlign="center" fontSize="xl">
+    <Box textAlign="center" fontSize="xl" pt={8}>
       <SubscribeForm />
     </Box>
   </Layout>

@@ -5,12 +5,11 @@ module.exports = {
     es2021: true,
   },
   ignorePatterns: ['.eslintrc.cjs', 'next.config.js', 'jest.config.js'],
-  plugins: ['@typescript-eslint', 'eslint-comments', 'promise'],
+  plugins: ['@typescript-eslint', 'eslint-comments', 'promise', 'prettier'],
   extends: [
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
   ],
   parserOptions: {
     ecmaVersion: 12,
@@ -20,10 +19,11 @@ module.exports = {
     extraFileExtensions: ['.cjs'],
   },
   rules: {
+    'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': [0],
-    indent: ['error', 2],
+    indent: [0],
     quotes: ['error', 'single', { avoidEscape: true }],
     'react/self-closing-comp': [
       'error',
