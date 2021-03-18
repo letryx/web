@@ -68,7 +68,7 @@ const Deal: FC = () => (
 );
 
 const Statement: FC<IStatement> = (s) => (
-  <Text as="span" cursor="pointer">
+  <Text as="span" cursor={s.t !== 'r' ? 'pointer' : undefined}>
     <Tooltip label={s.t !== 'r' ? s.r : undefined}>
       <Text
         as="span"
