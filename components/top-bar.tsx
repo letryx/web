@@ -21,7 +21,11 @@ import { CgLogOut } from 'react-icons/cg';
 const Nav: FC = () => (
   <nav>
     <HStack spacing={12}>
-      <NextChakraLink href="/" display="flex">
+      <NextChakraLink
+        href="/"
+        display="flex"
+        _hover={{ textDecoration: 'none' }}
+      >
         <Heading size="lg" mt={-0.5}>
           Letryx
         </Heading>

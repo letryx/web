@@ -35,7 +35,8 @@ const links = [
 
 const FooterLink: FC<FooterLinkProps> = ({ icon, href, label }) => (
   <Link display="inline-block" href={href} aria-label={label} isExternal>
-    <Icon as={icon} fontSize="xl" /> {label}
+    <Icon as={icon} fontSize="xl" mr={1} />
+    {label}
   </Link>
 );
 
