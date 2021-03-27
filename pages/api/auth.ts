@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { User } from 'types/user';
 import { AuthResponse } from 'types/api';
 import { rand64, hashcode } from 'utils/random';
-import faker from 'faker/locale/en_US';
+import faker from 'faker';
 
 export default (
   req: NextApiRequest,
