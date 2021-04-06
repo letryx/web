@@ -1,3 +1,24 @@
+import fakerStatic from 'faker';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore (currently no .d.ts available yet)
+import Faker from 'faker/lib';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore (currently no .d.ts available yet)
+import faker_en from 'faker/lib/locales/en';
+
+/**
+ * returns a seeded faker instance
+ *   see: https://github.com/Marak/faker.js/issues/318#issuecomment-736330206
+ * @param seed can be a number or a string
+ * @returns seeded faker instance
+ */
+export function fakerFromSeed(seed: number | string): typeof fakerStatic {
+  const faker = new Faker({ locale: 'en' });
+  faker.seed(typeof seed === 'string' ? hashcode(seed) : seed);
+  faker.locales.en = faker_en;
+  return faker;
+}
+
 /* eslint-disable no-bitwise */
 export function hashcode(str: string): number {
   let hash = 0;
@@ -11,7 +32,12 @@ export function hashcode(str: string): number {
   return hash;
 }
 
-export function rand64(length: number): string {
+/**
+ * base62 without ambiguous characters
+ * @param length
+ * @returns random base57 string
+ */
+export function rand57(length: number): string {
   let result = '';
   const characters =
     'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
