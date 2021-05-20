@@ -72,8 +72,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Royalties, nonparticipating royalty interests, net profits interests and any overriding royalties, reversionary interests and other burdens to the extent that they do not, individually or in the aggregate, reduce Seller’s Net Revenue Interest or Net Acres below that shown in',
+          c: 'Royalties, nonparticipating royalty interests, net profits interests and any overriding royalties, reversionary interests and other burdens to the extent that they do not, individually or in the aggregate, reduce Seller’s Net Revenue Interest or Net Acres below that shown in',
         },
         {
           t: 'f',
@@ -100,8 +99,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'All leases, unit agreements, pooling agreements, pre-pooling agreements, operating agreements, production sales contracts, division orders and other contracts, agreements and instruments applicable to the Assets, to the extent that they do not, individually or in the aggregate: (i) reduce Seller’s Net Revenue Interest or Net Acres below that shown in ',
+          c: 'All leases, unit agreements, pooling agreements, pre-pooling agreements, operating agreements, production sales contracts, division orders and other contracts, agreements and instruments applicable to the Assets, to the extent that they do not, individually or in the aggregate: (i) reduce Seller’s Net Revenue Interest or Net Acres below that shown in ',
         },
         {
           t: 'f',
@@ -125,8 +123,7 @@ export const clauseComparison: ISection = {
         },
         {
           t: 'r',
-          c:
-            'and (ii) materially interfere with the ownership and operation of the Assets as currently owned and operated;',
+          c: 'and (ii) materially interfere with the ownership and operation of the Assets as currently owned and operated;',
         },
       ],
     },
@@ -153,8 +150,7 @@ export const clauseComparison: ISection = {
         },
         {
           t: 'r',
-          c:
-            'third-party consents and preferential rights to purchase the Assets applicable to this or a future transaction involving the Assets;',
+          c: 'third-party consents and preferential rights to purchase the Assets applicable to this or a future transaction involving the Assets;',
         },
       ],
     },
@@ -163,8 +159,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Third-party consent requirements and similar restrictions with respect to which waivers or consents are obtained by Seller from the appropriate Persons prior to the Closing Date or the appropriate time period for asserting the right has expired or which need not be satisfied prior to a transfer;',
+          c: 'Third-party consent requirements and similar restrictions with respect to which waivers or consents are obtained by Seller from the appropriate Persons prior to the Closing Date or the appropriate time period for asserting the right has expired or which need not be satisfied prior to a transfer;',
         },
       ],
     },
@@ -173,8 +168,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Liens for Taxes or assessments not yet delinquent or, if delinquent, being contested in good faith by appropriate actions;',
+          c: 'Liens for Taxes or assessments not yet delinquent or, if delinquent, being contested in good faith by appropriate actions;',
         },
       ],
     },
@@ -183,8 +177,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Materialman’s, mechanic’s, repairman’s, employee’s, contractor’s, operator’s and other similar liens or charges arising in the ordinary course of business for amounts not yet delinquent (including any amounts being withheld as provided by Law), or if delinquent, being contested in good faith by appropriate actions;',
+          c: 'Materialman’s, mechanic’s, repairman’s, employee’s, contractor’s, operator’s and other similar liens or charges arising in the ordinary course of business for amounts not yet delinquent (including any amounts being withheld as provided by Law), or if delinquent, being contested in good faith by appropriate actions;',
         },
       ],
     },
@@ -193,8 +186,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'All rights to consent, required notices to, filings with, or other actions by Governmental Bodies in connection with the sale or conveyance of the Assets if they are not required prior to the sale or conveyance or are of a type customarily obtained after Closing;',
+          c: 'All rights to consent, required notices to, filings with, or other actions by Governmental Bodies in connection with the sale or conveyance of the Assets if they are not required prior to the sale or conveyance or are of a type customarily obtained after Closing;',
         },
       ],
     },
@@ -203,8 +195,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Rights of reassignment arising upon final intention to abandon or release all or any part of the Assets;',
+          c: 'Rights of reassignment arising upon final intention to abandon or release all or any part of the Assets;',
         },
       ],
     },
@@ -213,8 +204,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Easements, rights-of-way, servitudes, permits, surface leases and other rights in respect of surface operations to the extent that they do not, individually or in the aggregate: materially interfere with the ownership and operation of the Assets as currently owned and operated as of the Effective Time;',
+          c: 'Easements, rights-of-way, servitudes, permits, surface leases and other rights in respect of surface operations to the extent that they do not, individually or in the aggregate: materially interfere with the ownership and operation of the Assets as currently owned and operated as of the Effective Time;',
         },
       ],
     },
@@ -223,8 +213,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Calls on Hydrocarbon production under existing any Contracts identified in',
+          c: 'Calls on Hydrocarbon production under existing any Contracts identified in',
         },
         {
           t: 'f',
@@ -238,8 +227,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'All rights reserved to or vested in any Governmental Body to control or regulate any of the Assets in any manner and all obligations and duties under all applicable Laws, rules and orders of any such Governmental Body or under any franchise, grant, license or permit issued by any such Governmental Body;',
+          c: 'All rights reserved to or vested in any Governmental Body to control or regulate any of the Assets in any manner and all obligations and duties under all applicable Laws, rules and orders of any such Governmental Body or under any franchise, grant, license or permit issued by any such Governmental Body;',
         },
       ],
     },
@@ -248,8 +236,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Any encumbrance on or affecting the Assets which is expressly assumed, bonded or paid by Purchaser at or prior to Closing or which is discharged by Seller at or prior to Closing;',
+          c: 'Any encumbrance on or affecting the Assets which is expressly assumed, bonded or paid by Purchaser at or prior to Closing or which is discharged by Seller at or prior to Closing;',
         },
       ],
     },
@@ -308,8 +295,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'In the case of any well on an undeveloped location or other operation that has not been commenced as of the Closing Date, any permits, easements, rights of way, unit designations or production or drilling units not yet obtained, formed or created;',
+          c: 'In the case of any well on an undeveloped location or other operation that has not been commenced as of the Closing Date, any permits, easements, rights of way, unit designations or production or drilling units not yet obtained, formed or created;',
         },
       ],
     },
@@ -318,8 +304,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Lack of rights, access or transportation as to any rights of way for gathering or transportation pipelines or facilities that do not constitute any of the Assets;',
+          c: 'Lack of rights, access or transportation as to any rights of way for gathering or transportation pipelines or facilities that do not constitute any of the Assets;',
         },
       ],
     },
@@ -328,8 +313,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Any liens, charges, encumbrances, defects or irregularities (i) which affect a Property from which Hydrocarbons have been and are being produced (or to which production of Hydrocarbons is allocable) for the last ten (10) years and for which no claim related to title has been made in writing by any Person during such ten (10) year period, (ii) which would be accepted by a reasonably prudent purchaser engaged in the business of owning and operating oil and gas properties or (iii) which do not, individually or in the aggregate, materially detract from the value of or materially interfere with the ownership and operation of the Assets subject thereto or affected thereby (as currently owned and operated), and do not reduce Seller’s Net Revenue Interest or Net Acres below that shown',
+          c: 'Any liens, charges, encumbrances, defects or irregularities (i) which affect a Property from which Hydrocarbons have been and are being produced (or to which production of Hydrocarbons is allocable) for the last ten (10) years and for which no claim related to title has been made in writing by any Person during such ten (10) year period, (ii) which would be accepted by a reasonably prudent purchaser engaged in the business of owning and operating oil and gas properties or (iii) which do not, individually or in the aggregate, materially detract from the value of or materially interfere with the ownership and operation of the Assets subject thereto or affected thereby (as currently owned and operated), and do not reduce Seller’s Net Revenue Interest or Net Acres below that shown',
         },
       ],
     },
@@ -338,8 +322,7 @@ export const clauseComparison: ISection = {
       statements: [
         {
           t: 'r',
-          c:
-            'Such Title Defects or other defects as Purchaser has waived in writing; and',
+          c: 'Such Title Defects or other defects as Purchaser has waived in writing; and',
         },
       ],
     },
