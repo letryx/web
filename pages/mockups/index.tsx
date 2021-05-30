@@ -4,12 +4,12 @@ import { Layout } from 'components/layout';
 import { NextChakraLink } from 'components/next-chakra-link';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 
-const MockupLink: FC<{ name: string; page: string }> = ({
+const MockupLink: FC<{ name: string; page: string; isExternal?: boolean }> = ({
   name,
   page,
   children,
+  isExternal = false,
 }) => {
-  const isExternal = page.substr(0, 4) === 'http';
   const LinkType = isExternal ? Link : NextChakraLink;
   return (
     <LinkType
@@ -41,8 +41,17 @@ const mockup: FC = () => (
           inclusions/exceptions and buyer vs seller friendliness.
         </MockupLink>
         <MockupLink
+          name="Permitted Encumbrances with filters"
+          page="/img/filtered-permitted-encumbrances.pdf"
+          isExternal
+        >
+          A qualitative analysis of a contract clause with regards to common
+          inclusions/exceptions and buyer vs seller friendliness with filters.
+        </MockupLink>
+        <MockupLink
           name="Indemnity Deductible"
           page="https://web-scatter-mockup.vercel.app"
+          isExternal
         >
           A quantitative analysis of indemnity terms from a corpus of similar
           contracts.
