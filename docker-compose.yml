@@ -1,4 +1,3 @@
-version: '3'
 services:
   nextjs:
     build: ./
@@ -6,3 +5,28 @@ services:
     build: ./nginx
     ports:
       - 8080:80
+  postgres:
+    image: postgres:12
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+  graphql-engine:
+    image: hasura/graphql-engine:v2.0.0-alpha.11
+    ports:
+      - '6060:8080'
+    depends_on:
+      - 'postgres'
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
+      # HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256", "jwk_url": "http://hasura-backend-plus:3000/auth/jwks"}'
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+
+volumes:
+  db_data:
+  minio_data:

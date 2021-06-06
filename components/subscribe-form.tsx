@@ -54,8 +54,9 @@ const SubscribeForm: FC = () => {
   const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
   const [isPosting, setIsPosting] = useState(false);
-  const [status, setStatus] =
-    useState<'unsubmitted' | 'error' | 'success'>('unsubmitted');
+  const [status, setStatus] = useState<'unsubmitted' | 'error' | 'success'>(
+    'unsubmitted'
+  );
   const [statusMessage, setStatusMessage] = useState('');
 
   const onSubmit: FormEventHandler = async (event) => {
