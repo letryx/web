@@ -7,18 +7,20 @@ services:
       - 8000:80
   postgres:
     image: postgres:12
-    restart: always
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
-    image: hasura/graphql-engine:v2.0.0-beta.1
+    # 2.0.0-beta.1.cli-migrations-v3
+    # 2.0.0-beta.1
+    image: ${HASURA_IMAGE}2.0.0-beta.1
+    volumes:
+      - ./hasura/metadata:/hasura-metadata
     ports:
       - '8080:8080'
     depends_on:
       - 'postgres'
-    restart: always
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
       HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
