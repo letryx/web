@@ -1,6 +1,14 @@
 services:
   nextjs:
     build: ./
+    user: root
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/app
+    ports:
+      - 3000:3000
+    command: yarn dev
   nginx:
     build: ./nginx
     ports:
