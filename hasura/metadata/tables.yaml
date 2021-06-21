@@ -1,12 +1,54 @@
 - table:
     schema: data
     name: sec_companies
+  array_relationships:
+  - name: sec_filings
+    using:
+      foreign_key_constraint_on:
+        column: cik
+        table:
+          schema: data
+          name: sec_filings
+- table:
+    schema: data
+    name: sec_contracts
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - accession_number
+      - sequence
+      - company_name
+      - company_cik
+      - company_geo
+      - filing_metadata
+      - description
+      - filing_type
+      - text
+      - contents
+      filter: {}
 - table:
     schema: data
     name: sec_filing_attachments
+  object_relationships:
+  - name: sec_filing
+    using:
+      foreign_key_constraint_on: accession_number
 - table:
     schema: data
     name: sec_filings
+  object_relationships:
+  - name: sec_company
+    using:
+      foreign_key_constraint_on: cik
+  array_relationships:
+  - name: sec_filing_attachments
+    using:
+      foreign_key_constraint_on:
+        column: accession_number
+        table:
+          schema: data
+          name: sec_filing_attachments
 - table:
     schema: public
     name: migrations
