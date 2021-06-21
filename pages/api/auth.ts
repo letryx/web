@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import { NextApiRequest, NextApiResponse } from 'next';
-import { User } from 'types/user';
 import { AuthResponse } from 'types/api';
-import { rand57, fakerFromSeed } from 'utils/random';
+import { User } from 'types/user';
+import { fakerFromSeed, rand57 } from 'utils/random';
 
 export default (
   req: NextApiRequest,

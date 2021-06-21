@@ -1,10 +1,10 @@
-import { FC, ReactNode } from 'react';
-import Head from 'next/head';
-import { Container, Breadcrumb, BreadcrumbItem } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
+import { Breadcrumb, BreadcrumbItem, Container } from '@chakra-ui/react';
 import { Footer } from 'components/footer';
-import { TopBar } from 'components/top-bar';
 import { NextBreadcrumbLink } from 'components/next-chakra-link';
+import { TopBar } from 'components/top-bar';
+import Head from 'next/head';
+import { FC, ReactNode } from 'react';
 
 interface IBreadcrumb {
   title: string;

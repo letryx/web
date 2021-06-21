@@ -1,13 +1,13 @@
 import { ColorModeScript } from '@chakra-ui/react';
+import { Global } from '@emotion/react';
 import NextDocument, {
-  Html,
-  Head,
-  Main,
-  NextScript,
   DocumentContext,
   DocumentInitialProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
 } from 'next/document';
-import { Global } from '@emotion/react';
 import fonts from 'styles/font-face';
 
 export default class Document extends NextDocument {

@@ -1,8 +1,8 @@
-import { FC, ElementType } from 'react';
-import { Box, Text, Stack, Link, Icon, SimpleGrid } from '@chakra-ui/react';
+import { Box, Icon, Link, SimpleGrid, Stack, Text } from '@chakra-ui/react';
+import { ElementType, FC } from 'react';
+import { DiGithubBadge } from 'react-icons/di';
 // import { IoLogoTwitter, IoLogoLinkedin } from 'react-icons/io';
 import { MdEmail } from 'react-icons/md';
-import { DiGithubBadge } from 'react-icons/di';
 
 type FooterLinkProps = {
   icon: ElementType;

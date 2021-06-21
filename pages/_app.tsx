@@ -1,7 +1,7 @@
+import { AppProvider } from 'components/app-provider';
+import { UIProvider } from 'components/ui-provider';
 import { AppProps } from 'next/app';
 import { FC } from 'react';
-import { UIProvider } from 'components/ui-provider';
-import { AppProvider } from 'components/app-provider';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => (
   <UIProvider>

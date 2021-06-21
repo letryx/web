@@ -1,8 +1,8 @@
-import { Container, Stack, Text, Link } from '@chakra-ui/react';
-import { FC } from 'react';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { Container, Link, Stack, Text } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
 import { NextChakraLink } from 'components/next-chakra-link';
-import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { FC } from 'react';
 
 const MockupLink: FC<{ name: string; page: string; isExternal?: boolean }> = ({
   name,
