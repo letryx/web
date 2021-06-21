@@ -1,8 +1,8 @@
+import { fetcher } from 'lib/fetcher';
+import { set } from 'lib/store';
 import { createContext, FC, useContext, useEffect, useState } from 'react';
 import { AuthResponse } from 'types/api';
 import { User } from 'types/user';
-import { fetcher } from 'utils/fetcher';
-import { set } from 'utils/store';
 
 interface AppContextProps {
   loggedIn: boolean;
