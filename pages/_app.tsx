@@ -4,8 +4,8 @@
 //   HttpLink,
 //   InMemoryCache,
 // } from '@apollo/client';
-import { AppProvider } from 'components/app-provider';
-import { UIProvider } from 'components/ui-provider';
+import { AppProvider } from 'lib/app-provider';
+import { UIProvider } from 'lib/ui-provider';
 import { AppProps } from 'next/app';
 import { FC } from 'react';
 

@@ -54,10 +54,7 @@ module.exports = {
       'error',
       { functions: false, classes: true, variables: true },
     ],
-    '@typescript-eslint/explicit-function-return-type': [
-      'error',
-      { allowExpressions: true, allowTypedFunctionExpressions: true },
-    ],
+    '@typescript-eslint/explicit-function-return-type': [0],
     '@typescript-eslint/no-use-before-define': [
       'error',
       {
