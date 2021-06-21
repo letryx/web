@@ -1,0 +1,14 @@
+query getSECContracts($limit: Int = 100, $offset: Int = 0) {
+  data_sec_contracts(limit: $limit, offset: $offset) {
+    accession_number
+    sequence
+    company_cik
+    company_name
+    company_geo
+    description
+    filing_metadata
+    filing_type
+    text
+    contents
+  }
+}

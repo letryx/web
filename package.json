@@ -12,6 +12,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "next build",
+    "codegen": "graphql-codegen --config codegen.yml",
     "dev": "next",
     "lint": "eslint components pages lib types styles test",
     "start": "next start",
@@ -29,6 +30,7 @@
     "@chakra-ui/theme-tools": "1.1.7",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@react-firebase/auth": "^0.2.10",
     "@types/faker": "^5.5.6",
     "@types/jsonp": "^0.2.0",
     "@types/node": "^15.12.4",
@@ -63,6 +65,15 @@
     "yarn": "^1.22.10"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.21.5",
+    "@graphql-codegen/fragment-matcher": "^2.0.1",
+    "@graphql-codegen/introspection": "^1.18.2",
+    "@graphql-codegen/typescript": "^1.22.3",
+    "@graphql-codegen/typescript-apollo-client-helpers": "^1.1.8",
+    "@graphql-codegen/typescript-document-nodes": "^1.17.14",
+    "@graphql-codegen/typescript-graphql-files-modules": "^1.18.1",
+    "@graphql-codegen/typescript-operations": "^1.18.2",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.7",
     "@types/jest": "^26.0.23",
     "babel-jest": "^27.0.2",
     "eslint-config-next": "^11.0.0",

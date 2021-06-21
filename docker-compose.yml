@@ -1,24 +1,33 @@
 services:
-  nextjs:
+  base: &web-base
     build: ./
     user: root
     environment:
       NODE_ENV: development
+      GRAPHQL_API_URL: http://graphql-engine:8080/v1/graphql
+      HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
     volumes:
       - .:/usr/app
+    command: echo ok
+
+  nextjs:
+    <<: *web-base
     ports:
       - 3000:3000
     command: yarn dev
+
   nginx:
     build: ./nginx
     ports:
       - 8000:80
+
   postgres:
     image: postgres:12
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
+
   graphql-engine:
     # v2.0.0-beta.2.cli-migrations-v3
     # v2.0.0-beta.2
