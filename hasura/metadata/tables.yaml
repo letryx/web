@@ -1,1 +1,12 @@
-[]
+- table:
+    schema: data
+    name: sec_companies
+- table:
+    schema: data
+    name: sec_filing_attachments
+- table:
+    schema: data
+    name: sec_filings
+- table:
+    schema: public
+    name: migrations

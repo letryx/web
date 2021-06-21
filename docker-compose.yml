@@ -20,9 +20,9 @@ services:
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
-    # v2.0.0-beta.1.cli-migrations-v3
-    # v2.0.0-beta.1
-    image: ${HASURA_IMAGE}:v2.0.0-beta.1
+    # v2.0.0-beta.2.cli-migrations-v3
+    # v2.0.0-beta.2
+    image: ${HASURA_IMAGE}:v2.0.0-beta.2
     volumes:
       - ./hasura/metadata:/hasura-metadata
     ports:
@@ -39,4 +39,3 @@ services:
 
 volumes:
   db_data:
-  minio_data:
