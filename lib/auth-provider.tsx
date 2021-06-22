@@ -13,6 +13,7 @@ export const AuthContext = createContext<AuthContextType>({
   loading: true,
 });
 
+// none of these keys are app secrets
 export const firebaseConfig = {
   apiKey: 'AIzaSyDSRS0egk3tFmCZxfvyqYfU1Hc80f9mBSI',
   authDomain: 'letryx-web.firebaseapp.com',

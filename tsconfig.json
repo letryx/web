@@ -25,7 +25,8 @@
   "exclude": [
     "node_modules",
     "next.config.js",
-    "jest.config.js"
+    "jest.config.js",
+    "firebase/functions"
   ],
   "include": [
     "**/*.ts",
