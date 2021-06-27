@@ -1,0 +1,5 @@
+#!/bin/sh
+npx hasura console \
+  --admin-secret="${HASURA_PRODUCTION_SECRET}" \
+  --endpoint="https://api.letryx.com" \
+  --no-browser
