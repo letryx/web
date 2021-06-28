@@ -1,2 +1,4 @@
 #!/bin/sh
-docker exec -i web_postgres_1 pg_restore -U postgres -v -d postgres < db-$(date +%Y-%m-%d).tar
+docker exec -i web_postgres_1 \
+  pg_restore -U postgres -v -d postgres --clean \
+  < db-$(date +%Y-%m-%d).tar

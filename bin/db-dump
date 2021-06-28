@@ -1,2 +1,4 @@
 #!/bin/bash
-docker exec web_postgres_1 pg_dump -U postgres -F t postgres | gzip >db-$(date +%Y-%m-%d).tar.gz
+docker exec web_postgres_1 \
+  pg_dump -U postgres -F t postgres \
+  | gzip >db-$(date +%Y-%m-%d).tar.gz
