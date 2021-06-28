@@ -4,20 +4,27 @@ services:
     user: root
     environment:
       NODE_ENV: development
-      GRAPHQL_API_URL: http://graphql-engine:8080/v1/graphql
+      GRAPHQL_API_URL: http://graphql-engine:6060/v1/graphql
       HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
     volumes:
       - .:/usr/app
+    networks:
+      - letryx-internal
     command: echo ok
 
   nextjs:
     <<: *web-base
     ports:
       - 3000:3000
+    networks:
+      - letryx-internal
     command: yarn dev
 
   nginx:
     build: ./nginx
+    networks:
+      - letryx-internal
+      - web
     ports:
       - 8000:80
 
@@ -25,6 +32,8 @@ services:
     image: postgres:12
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      - letryx-internal
     environment:
       POSTGRES_PASSWORD: postgrespassword
 
@@ -34,8 +43,11 @@ services:
     image: ${HASURA_IMAGE}:v2.0.0-beta.2
     volumes:
       - ./hasura/metadata:/hasura-metadata
+    networks:
+      - letryx-internal
+      - web
     ports:
-      - '8080:8080'
+      - '6060:8080'
     depends_on:
       - 'postgres'
     environment:
@@ -50,8 +62,19 @@ services:
         }
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
-      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_DEV_MODE: 'false'
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.graphql-engine.rule=Host(`api.letryx.com`)
+      - traefik.http.routers.graphql-engine.entrypoints=websecure,web
+      - traefik.http.routers.graphql-engine.tls.certresolver=letsencrypt
+      - traefik.http.services.graphql-engine.loadbalancer.server.port=8080
+
+networks:
+  letryx-internal:
+  web:
+    external: true
 
 volumes:
   db_data:
