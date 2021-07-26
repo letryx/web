@@ -66,3 +66,19 @@
 - table:
     schema: public
     name: migrations
+- table:
+    schema: public
+    name: users
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - email
+      - family_name
+      - given_name
+      - name
+      - nickname
+      - photo_url
+      filter:
+        id:
+          _eq: X-Hasura-User-Id

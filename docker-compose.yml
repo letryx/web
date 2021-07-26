@@ -38,9 +38,8 @@ services:
       POSTGRES_PASSWORD: postgrespassword
 
   graphql-engine:
-    # v2.0.0-beta.2.cli-migrations-v3
-    # v2.0.0-beta.2
-    image: ${HASURA_IMAGE}:v2.0.0-beta.2
+    # v2.0.3.cli-migrations-v3
+    image: ${HASURA_IMAGE}:v2.0.3
     volumes:
       - ./hasura/metadata:/hasura-metadata
     networks:
@@ -53,13 +52,9 @@ services:
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
       HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
-      HASURA_GRAPHQL_JWT_SECRET: >-
-        {
-          "type": "RS256",
-          "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
-          "audience": "letryx-web",
-          "issuer": "https://securetoken.google.com/letryx-web"
-        }
+      # https://hasura.io/jwt-config/
+      # auth0 domain name: letryx.us.auth0.com
+      HASURA_GRAPHQL_JWT_SECRET: '$HASURA_GRAPHQL_JWT_SECRET'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
       HASURA_GRAPHQL_DEV_MODE: 'false'
