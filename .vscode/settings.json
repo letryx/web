@@ -12,6 +12,5 @@
     "db/": true,
     "coverage/": true,
     "node_modules/": true,
-    "firebase/functions/node_modules/": true,
   }
 }

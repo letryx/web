@@ -4,6 +4,7 @@
 //   HttpLink,
 //   InMemoryCache,
 // } from '@apollo/client';
+import { UserProvider } from '@auth0/nextjs-auth0';
 import { AppProvider } from 'lib/app-provider';
 import { UIProvider } from 'lib/ui-provider';
 import { AppProps } from 'next/app';
@@ -22,9 +23,11 @@ import { FC } from 'react';
 const App: FC<AppProps> = ({ Component, pageProps }) => (
   // <ApolloProvider client={client}>
   <UIProvider>
-    <AppProvider>
-      <Component {...pageProps} />
-    </AppProvider>
+    <UserProvider>
+      <AppProvider>
+        <Component {...pageProps} />
+      </AppProvider>
+    </UserProvider>
   </UIProvider>
   // </ApolloProvider>
 );
