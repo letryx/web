@@ -1,7 +1,6 @@
 services:
   base: &web-base
     build: ./
-    user: root
     environment:
       NODE_ENV: development
       GRAPHQL_API_URL: http://graphql-engine:6060/v1/graphql
