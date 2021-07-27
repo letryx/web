@@ -13,20 +13,6 @@
     schema: data
     name: sec_contracts
   select_permissions:
-  - role: anonymous
-    permission:
-      columns:
-      - accession_number
-      - sequence
-      - company_name
-      - company_cik
-      - company_geo
-      - filing_metadata
-      - description
-      - filing_type
-      - text
-      - contents
-      filter: {}
   - role: user
     permission:
       columns:
