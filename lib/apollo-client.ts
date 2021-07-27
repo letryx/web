@@ -24,7 +24,7 @@ const requestAccessToken = async () => {
     const json = await res.json();
     accessToken = json.accessToken;
   } else {
-    accessToken = 'public';
+    accessToken = null;
   }
 };
 
@@ -70,9 +70,11 @@ const link = from([
   setContext(async () => {
     await requestAccessToken();
     return {
-      headers: {
-        Authorization: accessToken ? `Bearer ${accessToken}` : '',
-      },
+      headers: accessToken
+        ? {
+            Authorization: `Bearer ${accessToken}`,
+          }
+        : {},
     };
   }),
 ]).split(
