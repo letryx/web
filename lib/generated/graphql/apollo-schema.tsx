@@ -449,8 +449,8 @@ export type Data_Sec_Filing_Attachments = {
   accession_number: Scalars['String'];
   contents: Scalars['String'];
   created_at?: Maybe<Scalars['timestamptz']>;
-  description: Scalars['String'];
-  filename: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
   filing_type: Scalars['String'];
   /** An object relationship */
   sec_filing: Data_Sec_Filings;
@@ -796,7 +796,8 @@ export type Data_Sec_Filings = {
   accession_number: Scalars['String'];
   cik: Scalars['String'];
   created_at?: Maybe<Scalars['timestamptz']>;
-  header: Scalars['String'];
+  filing_type: Scalars['String'];
+  header?: Maybe<Scalars['String']>;
   /** An object relationship */
   sec_company: Data_Sec_Companies;
   /** An array relationship */
@@ -870,6 +871,7 @@ export type Data_Sec_Filings_Bool_Exp = {
   accession_number?: Maybe<String_Comparison_Exp>;
   cik?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  filing_type?: Maybe<String_Comparison_Exp>;
   header?: Maybe<String_Comparison_Exp>;
   sec_company?: Maybe<Data_Sec_Companies_Bool_Exp>;
   sec_filing_attachments?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
@@ -887,6 +889,7 @@ export type Data_Sec_Filings_Insert_Input = {
   accession_number?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  filing_type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
   sec_company?: Maybe<Data_Sec_Companies_Obj_Rel_Insert_Input>;
   sec_filing_attachments?: Maybe<Data_Sec_Filing_Attachments_Arr_Rel_Insert_Input>;
@@ -899,6 +902,7 @@ export type Data_Sec_Filings_Max_Fields = {
   accession_number?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  filing_type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
@@ -908,6 +912,7 @@ export type Data_Sec_Filings_Max_Order_By = {
   accession_number?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
   header?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
@@ -918,6 +923,7 @@ export type Data_Sec_Filings_Min_Fields = {
   accession_number?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  filing_type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
@@ -927,6 +933,7 @@ export type Data_Sec_Filings_Min_Order_By = {
   accession_number?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
   header?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
@@ -959,6 +966,7 @@ export type Data_Sec_Filings_Order_By = {
   accession_number?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
   header?: Maybe<Order_By>;
   sec_company?: Maybe<Data_Sec_Companies_Order_By>;
   sec_filing_attachments_aggregate?: Maybe<Data_Sec_Filing_Attachments_Aggregate_Order_By>;
@@ -979,6 +987,8 @@ export enum Data_Sec_Filings_Select_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
+  FilingType = 'filing_type',
+  /** column name */
   Header = 'header',
   /** column name */
   UpdatedAt = 'updated_at'
@@ -989,6 +999,7 @@ export type Data_Sec_Filings_Set_Input = {
   accession_number?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  filing_type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
@@ -1001,6 +1012,8 @@ export enum Data_Sec_Filings_Update_Column {
   Cik = 'cik',
   /** column name */
   CreatedAt = 'created_at',
+  /** column name */
+  FilingType = 'filing_type',
   /** column name */
   Header = 'header',
   /** column name */
@@ -1224,6 +1237,10 @@ export type Mutation_Root = {
   delete_migrations?: Maybe<Migrations_Mutation_Response>;
   /** delete single row from the table: "migrations" */
   delete_migrations_by_pk?: Maybe<Migrations>;
+  /** delete data from the table: "users" */
+  delete_users?: Maybe<Users_Mutation_Response>;
+  /** delete single row from the table: "users" */
+  delete_users_by_pk?: Maybe<Users>;
   /** insert data into the table: "data.sec_companies" */
   insert_data_sec_companies?: Maybe<Data_Sec_Companies_Mutation_Response>;
   /** insert a single row into the table: "data.sec_companies" */
@@ -1240,6 +1257,10 @@ export type Mutation_Root = {
   insert_migrations?: Maybe<Migrations_Mutation_Response>;
   /** insert a single row into the table: "migrations" */
   insert_migrations_one?: Maybe<Migrations>;
+  /** insert data into the table: "users" */
+  insert_users?: Maybe<Users_Mutation_Response>;
+  /** insert a single row into the table: "users" */
+  insert_users_one?: Maybe<Users>;
   /** update data of the table: "data.sec_companies" */
   update_data_sec_companies?: Maybe<Data_Sec_Companies_Mutation_Response>;
   /** update single row of the table: "data.sec_companies" */
@@ -1256,6 +1277,10 @@ export type Mutation_Root = {
   update_migrations?: Maybe<Migrations_Mutation_Response>;
   /** update single row of the table: "migrations" */
   update_migrations_by_pk?: Maybe<Migrations>;
+  /** update data of the table: "users" */
+  update_users?: Maybe<Users_Mutation_Response>;
+  /** update single row of the table: "users" */
+  update_users_by_pk?: Maybe<Users>;
 };
 
 
@@ -1305,6 +1330,18 @@ export type Mutation_RootDelete_MigrationsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Migrations_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_UsersArgs = {
+  where: Users_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Users_By_PkArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -1361,6 +1398,20 @@ export type Mutation_RootInsert_MigrationsArgs = {
 export type Mutation_RootInsert_Migrations_OneArgs = {
   object: Migrations_Insert_Input;
   on_conflict?: Maybe<Migrations_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_UsersArgs = {
+  objects: Array<Users_Insert_Input>;
+  on_conflict?: Maybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Users_OneArgs = {
+  object: Users_Insert_Input;
+  on_conflict?: Maybe<Users_On_Conflict>;
 };
 
 
@@ -1423,6 +1474,20 @@ export type Mutation_RootUpdate_Migrations_By_PkArgs = {
   pk_columns: Migrations_Pk_Columns_Input;
 };
 
+
+/** mutation root */
+export type Mutation_RootUpdate_UsersArgs = {
+  _set?: Maybe<Users_Set_Input>;
+  where: Users_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Users_By_PkArgs = {
+  _set?: Maybe<Users_Set_Input>;
+  pk_columns: Users_Pk_Columns_Input;
+};
+
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls last */
@@ -1469,6 +1534,12 @@ export type Query_Root = {
   migrations_aggregate: Migrations_Aggregate;
   /** fetch data from the table: "migrations" using primary key columns */
   migrations_by_pk?: Maybe<Migrations>;
+  /** fetch data from the table: "users" */
+  users: Array<Users>;
+  /** fetch aggregated fields from the table: "users" */
+  users_aggregate: Users_Aggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>;
 };
 
 
@@ -1582,6 +1653,29 @@ export type Query_RootMigrations_By_PkArgs = {
   id: Scalars['Int'];
 };
 
+
+export type Query_RootUsersArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+
+export type Query_RootUsers_AggregateArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+
+export type Query_RootUsers_By_PkArgs = {
+  id: Scalars['String'];
+};
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "data.sec_companies" */
@@ -1612,6 +1706,12 @@ export type Subscription_Root = {
   migrations_aggregate: Migrations_Aggregate;
   /** fetch data from the table: "migrations" using primary key columns */
   migrations_by_pk?: Maybe<Migrations>;
+  /** fetch data from the table: "users" */
+  users: Array<Users>;
+  /** fetch aggregated fields from the table: "users" */
+  users_aggregate: Users_Aggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>;
 };
 
 
@@ -1726,6 +1826,29 @@ export type Subscription_RootMigrations_By_PkArgs = {
 };
 
 
+export type Subscription_RootUsersArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+
+export type Subscription_RootUsers_AggregateArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+
+export type Subscription_RootUsers_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
 export type Timestamp_Comparison_Exp = {
   _eq?: Maybe<Scalars['timestamp']>;
@@ -1752,6 +1875,198 @@ export type Timestamptz_Comparison_Exp = {
   _neq?: Maybe<Scalars['timestamptz']>;
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
 };
+
+/** columns and relationships of "users" */
+export type Users = {
+  __typename?: 'users';
+  created_at: Scalars['timestamptz'];
+  email: Scalars['String'];
+  family_name?: Maybe<Scalars['String']>;
+  given_name?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name: Scalars['String'];
+  nickname?: Maybe<Scalars['String']>;
+  photo_url?: Maybe<Scalars['String']>;
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "users" */
+export type Users_Aggregate = {
+  __typename?: 'users_aggregate';
+  aggregate?: Maybe<Users_Aggregate_Fields>;
+  nodes: Array<Users>;
+};
+
+/** aggregate fields of "users" */
+export type Users_Aggregate_Fields = {
+  __typename?: 'users_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Users_Max_Fields>;
+  min?: Maybe<Users_Min_Fields>;
+};
+
+
+/** aggregate fields of "users" */
+export type Users_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Users_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
+export type Users_Bool_Exp = {
+  _and?: Maybe<Array<Users_Bool_Exp>>;
+  _not?: Maybe<Users_Bool_Exp>;
+  _or?: Maybe<Array<Users_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  email?: Maybe<String_Comparison_Exp>;
+  family_name?: Maybe<String_Comparison_Exp>;
+  given_name?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<String_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  nickname?: Maybe<String_Comparison_Exp>;
+  photo_url?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "users" */
+export enum Users_Constraint {
+  /** unique or primary key constraint */
+  UsersEmailKey = 'users_email_key',
+  /** unique or primary key constraint */
+  UsersPkey = 'users_pkey'
+}
+
+/** input type for inserting data into table "users" */
+export type Users_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  family_name?: Maybe<Scalars['String']>;
+  given_name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  nickname?: Maybe<Scalars['String']>;
+  photo_url?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Users_Max_Fields = {
+  __typename?: 'users_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  family_name?: Maybe<Scalars['String']>;
+  given_name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  nickname?: Maybe<Scalars['String']>;
+  photo_url?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Users_Min_Fields = {
+  __typename?: 'users_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  family_name?: Maybe<Scalars['String']>;
+  given_name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  nickname?: Maybe<Scalars['String']>;
+  photo_url?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "users" */
+export type Users_Mutation_Response = {
+  __typename?: 'users_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Users>;
+};
+
+/** on conflict condition type for table "users" */
+export type Users_On_Conflict = {
+  constraint: Users_Constraint;
+  update_columns?: Array<Users_Update_Column>;
+  where?: Maybe<Users_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "users". */
+export type Users_Order_By = {
+  created_at?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  family_name?: Maybe<Order_By>;
+  given_name?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  nickname?: Maybe<Order_By>;
+  photo_url?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: users */
+export type Users_Pk_Columns_Input = {
+  id: Scalars['String'];
+};
+
+/** select columns of table "users" */
+export enum Users_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  FamilyName = 'family_name',
+  /** column name */
+  GivenName = 'given_name',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Nickname = 'nickname',
+  /** column name */
+  PhotoUrl = 'photo_url',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "users" */
+export type Users_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  family_name?: Maybe<Scalars['String']>;
+  given_name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  nickname?: Maybe<Scalars['String']>;
+  photo_url?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "users" */
+export enum Users_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  FamilyName = 'family_name',
+  /** column name */
+  GivenName = 'given_name',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Nickname = 'nickname',
+  /** column name */
+  PhotoUrl = 'photo_url',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
 
 export type GetSecContractsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
