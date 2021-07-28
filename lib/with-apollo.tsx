@@ -1,5 +1,5 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client/react';
 import { NextPage, NextPageContext } from 'next';
 import App, { AppContext } from 'next/app';
 import { ReactNode } from 'react';
@@ -156,7 +156,9 @@ export const withApollo =
             try {
               // Import `@apollo/react-ssr` dynamically.
               // We don't want to have this in our client bundle.
-              const { getDataFromTree } = await import('@apollo/react-ssr');
+              const { getDataFromTree } = await import(
+                '@apollo/client/react/ssr'
+              );
 
               // Since AppComponents and PageComponents have different context types
               // we need to modify their props a little.

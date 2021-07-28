@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client/react';
 import { useUser } from '@auth0/nextjs-auth0';
 import { Box } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
