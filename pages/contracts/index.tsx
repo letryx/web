@@ -5,6 +5,7 @@ import { Box } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
 import { NextChakraLink } from 'components/next-chakra-link';
 import { withApollo } from 'lib/with-apollo';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 const GET_CONTRACTS = gql`
@@ -25,6 +26,8 @@ const GET_CONTRACTS = gql`
 const ContractsPage: FC = () => {
   const { user, error: userError, isLoading } = useUser();
   const { loading, error: dataError, data } = useQuery(GET_CONTRACTS);
+  const router = useRouter();
+
   let userContents = <div />;
   let dataContents = <div />;
 
@@ -49,7 +52,9 @@ const ContractsPage: FC = () => {
     );
   } else {
     userContents = (
-      <NextChakraLink href="/api/auth/login">Login</NextChakraLink>
+      <NextChakraLink href={`/api/auth/login?returnTo=${router.pathname}`}>
+        Login
+      </NextChakraLink>
     );
   }
 
