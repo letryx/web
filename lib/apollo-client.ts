@@ -16,16 +16,14 @@ import ws from 'ws';
 
 let accessToken: string | null = null;
 
-if (!process.env.GRAPHQL_API_URL || !process.env.GRAPHQL_API_SSR_URL) {
-  throw new Error('GRAPHQL_API_URL and GRAPHQL_API_SSR_URL must be set!');
+// this is replaced by the client url via next.config.js
+if (!process.env.GRAPHQL_API_SSR_URL) {
+  throw new Error('GRAPHQL_API_SSR_URL must be set!');
 }
 
-const gqlHttpUri =
-  typeof window === 'undefined'
-    ? process.env.GRAPHQL_API_SSR_URL
-    : process.env.GRAPHQL_API_URL;
+const HTTP_URL = process.env.GRAPHQL_API_SSR_URL;
 
-const gqlWsUri = gqlHttpUri.replace(/^http/i, 'ws');
+const WS_URL = HTTP_URL.replace(/^http/i, 'ws');
 
 const requestAccessToken = async () => {
   if (accessToken) return;
@@ -52,14 +50,14 @@ export const resetTokenLink = onError(({ networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: gqlHttpUri,
+  uri: HTTP_URL,
   credentials: 'include',
   fetch,
 });
 
 const wsLink = new WebSocketLink(
   new SubscriptionClient(
-    gqlWsUri,
+    WS_URL,
     {
       lazy: true,
       reconnect: true,
