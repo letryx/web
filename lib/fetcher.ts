@@ -1,4 +1,4 @@
-import { get } from 'utils/store';
+import { get } from 'lib/store';
 
 interface APIResponse<T> {
   data: T;

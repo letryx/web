@@ -1,8 +1,75 @@
-version: '3'
 services:
-  nextjs:
+  base: &web-base
     build: ./
+    environment:
+      NODE_ENV: development
+      GRAPHQL_API_URL: '$GRAPHQL_API_URL'
+      GRAPHQL_API_SSR_URL: '$GRAPHQL_API_SSR_URL'
+      HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
+    volumes:
+      - .:/usr/app
+    networks:
+      - letryx-internal
+    command: echo ok
+
+  nextjs:
+    <<: *web-base
+    ports:
+      - 3000:3000
+    networks:
+      - letryx-internal
+    command: yarn dev
+
   nginx:
     build: ./nginx
+    networks:
+      - letryx-internal
+      - web
     ports:
-      - 8080:80
+      - 8000:80
+
+  postgres:
+    image: postgres:12
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - letryx-internal
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+
+  graphql-engine:
+    # v2.0.3.cli-migrations-v3
+    image: ${HASURA_IMAGE}:v2.0.3
+    volumes:
+      - ./hasura/metadata:/hasura-metadata
+    networks:
+      - letryx-internal
+      - web
+    ports:
+      - '6060:8080'
+    depends_on:
+      - 'postgres'
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
+      # https://hasura.io/jwt-config/
+      # auth0 domain name: letryx.us.auth0.com
+      HASURA_GRAPHQL_JWT_SECRET: '$HASURA_GRAPHQL_JWT_SECRET'
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
+      HASURA_GRAPHQL_DEV_MODE: 'false'
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.graphql-engine.rule=Host(`api.letryx.com`)
+      - traefik.http.routers.graphql-engine.entrypoints=websecure,web
+      - traefik.http.routers.graphql-engine.tls.certresolver=letsencrypt
+      - traefik.http.services.graphql-engine.loadbalancer.server.port=8080
+
+networks:
+  letryx-internal:
+  web:
+    external: true
+
+volumes:
+  db_data:

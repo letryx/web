@@ -33,3 +33,6 @@ yarn-error.log*
 .now
 
 /data
+/db
+
+firebase-debug.log

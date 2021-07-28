@@ -1,0 +1,17 @@
+overwrite: true
+schema:
+  - '${GRAPHQL_API_URL}':
+      headers:
+        content-type: 'application/json'
+        x-hasura-admin-secret: '${HASURA_GRAPHQL_ADMIN_SECRET}'
+documents: 'lib/data/graphql/*.graphql'
+generates:
+  lib/generated/graphql/apollo-helpers.ts:
+    plugins:
+      - typescript-apollo-client-helpers
+  lib/generated/graphql/apollo-schema.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+      - 'fragment-matcher'

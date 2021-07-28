@@ -1,6 +1,13 @@
+// @ts-check
+
+/**
+ * @type {import('next/dist/next-server/server/config').NextConfig}
+ **/
 module.exports = {
   poweredByHeader: false,
-  future: {
-    webpack5: true,
+  productionBrowserSourceMaps: true,
+  env: {
+    // avoid leaking ssr url to client
+    GRAPHQL_API_SSR_URL: process.env.GRAPHQL_API_URL,
   },
 };

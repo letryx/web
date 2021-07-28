@@ -4,12 +4,18 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  ignorePatterns: ['.eslintrc.cjs', 'next.config.js', 'jest.config.js'],
+  ignorePatterns: [
+    '.eslintrc.cjs',
+    'next.config.js',
+    'jest.config.js',
+    'lib/generated/**/*',
+  ],
   plugins: ['@typescript-eslint', 'eslint-comments', 'promise', 'prettier'],
   extends: [
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'plugin:@next/next/recommended',
   ],
   parserOptions: {
     ecmaVersion: 12,
@@ -48,10 +54,7 @@ module.exports = {
       'error',
       { functions: false, classes: true, variables: true },
     ],
-    '@typescript-eslint/explicit-function-return-type': [
-      'error',
-      { allowExpressions: true, allowTypedFunctionExpressions: true },
-    ],
+    '@typescript-eslint/explicit-function-return-type': [0],
     '@typescript-eslint/no-use-before-define': [
       'error',
       {

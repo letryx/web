@@ -1,4 +1,4 @@
-import { hashcode, fakerFromSeed } from '../utils/random';
+import { fakerFromSeed, hashcode } from '../lib/random';
 
 test('random.hashcode', async () => {
   expect(hashcode('')).toEqual(0);
