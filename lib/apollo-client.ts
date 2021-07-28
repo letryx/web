@@ -16,6 +16,17 @@ import ws from 'ws';
 
 let accessToken: string | null = null;
 
+if (!process.env.GRAPHQL_API_URL || !process.env.GRAPHQL_API_SSR_URL) {
+  throw new Error('GRAPHQL_API_URL and GRAPHQL_API_SSR_URL must be set!');
+}
+
+const gqlHttpUri =
+  typeof window === 'undefined'
+    ? process.env.GRAPHQL_API_SSR_URL
+    : process.env.GRAPHQL_API_URL;
+
+const gqlWsUri = gqlHttpUri.replace(/^http/i, 'ws');
+
 const requestAccessToken = async () => {
   if (accessToken) return;
 
@@ -41,14 +52,14 @@ export const resetTokenLink = onError(({ networkError }) => {
 });
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:6060/v1/graphql',
+  uri: gqlHttpUri,
   credentials: 'include',
   fetch,
 });
 
 const wsLink = new WebSocketLink(
   new SubscriptionClient(
-    process.env.HASURA_WS_ENDPOINT || '',
+    gqlWsUri,
     {
       lazy: true,
       reconnect: true,

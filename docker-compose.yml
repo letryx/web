@@ -3,7 +3,8 @@ services:
     build: ./
     environment:
       NODE_ENV: development
-      GRAPHQL_API_URL: http://graphql-engine:6060/v1/graphql
+      GRAPHQL_API_URL: '$GRAPHQL_API_URL'
+      GRAPHQL_API_SSR_URL: '$GRAPHQL_API_SSR_URL'
       HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
     volumes:
       - .:/usr/app

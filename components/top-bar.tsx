@@ -1,22 +1,8 @@
-import { SettingsIcon, TriangleDownIcon } from '@chakra-ui/icons';
-import {
-  Avatar,
-  Button,
-  Flex,
-  Heading,
-  HStack,
-  Icon,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-} from '@chakra-ui/react';
+import { Flex, Heading, HStack } from '@chakra-ui/react';
 import { ColorModeSwitcher } from 'components/color-mode-switcher';
 import { NextChakraLink } from 'components/next-chakra-link';
-import { useAppContext } from 'lib/app-provider';
+import { UserDropdown } from 'components/user-dropdown';
 import { FC } from 'react';
-import { CgLogOut } from 'react-icons/cg';
 
 const Nav: FC = () => (
   <nav>
@@ -33,33 +19,6 @@ const Nav: FC = () => (
     </HStack>
   </nav>
 );
-
-const UserDropdown: FC = () => {
-  const { currentUser } = useAppContext();
-
-  return currentUser ? (
-    <Menu>
-      <MenuButton
-        as={Button}
-        backgroundColor="rgba(0,0,0,0)"
-        rounded="full"
-        pl={2}
-      >
-        <HStack mx={-1} spacing={1}>
-          <Avatar name={currentUser.name} fontWeight="700" size="sm" />
-          <TriangleDownIcon ml={3} mr={-1} w={3} h3={4} color="gray.400" />
-        </HStack>
-      </MenuButton>
-      <MenuList>
-        <MenuItem icon={<Icon as={SettingsIcon} />}>Settings</MenuItem>
-        <MenuDivider />
-        <MenuItem icon={<Icon w={4} h={4} as={CgLogOut} />}>Log Out</MenuItem>
-      </MenuList>
-    </Menu>
-  ) : (
-    <div />
-  );
-};
 
 const TopBar: FC<{ hideNav?: boolean; user?: string }> = ({
   hideNav = false,
