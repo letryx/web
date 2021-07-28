@@ -12,6 +12,9 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    env:
+      GRAPHQL_API_URL: https://api.letryx.com/v1/graphql
+      GRAPHQL_API_SSR_URL: https://api.letryx.com/v1/graphql
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
