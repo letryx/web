@@ -50,7 +50,7 @@ export const LinkGrid: FC<SimpleGridProps> = (props) => (
     <Box minW="130px">
       <FooterHeading mb="4">Legal</FooterHeading>
       <Stack>
-        <NextChakraLink href="#">Privacy</NextChakraLink>
+        <NextChakraLink href="/docs/privacy-policy">Privacy</NextChakraLink>
       </Stack>
     </Box>
   </SimpleGrid>
