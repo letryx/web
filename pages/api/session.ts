@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
+import { auth0 } from 'lib/auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { auth0 } from '../../lib/auth0';
 
 export default async function session(
   req: NextApiRequest,
