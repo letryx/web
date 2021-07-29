@@ -1,10 +1,19 @@
-import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+import { gql } from '@apollo/client';
+import { QueryHookOptions, useQuery } from '@apollo/react-hooks';
+import type { NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { NextPage } from 'next';
+import { NextRouter, useRouter } from 'next/router';
+import type React from 'react';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -15,7 +24,6 @@ export type Scalars = {
   timestamp: any;
   timestamptz: any;
 };
-
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
@@ -79,7 +87,6 @@ export type Data_Sec_Companies = {
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
-
 /** columns and relationships of "data.sec_companies" */
 export type Data_Sec_CompaniesSec_FilingsArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
@@ -88,7 +95,6 @@ export type Data_Sec_CompaniesSec_FilingsArgs = {
   order_by?: Maybe<Array<Data_Sec_Filings_Order_By>>;
   where?: Maybe<Data_Sec_Filings_Bool_Exp>;
 };
-
 
 /** columns and relationships of "data.sec_companies" */
 export type Data_Sec_CompaniesSec_Filings_AggregateArgs = {
@@ -114,7 +120,6 @@ export type Data_Sec_Companies_Aggregate_Fields = {
   min?: Maybe<Data_Sec_Companies_Min_Fields>;
 };
 
-
 /** aggregate fields of "data.sec_companies" */
 export type Data_Sec_Companies_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
@@ -139,7 +144,7 @@ export type Data_Sec_Companies_Bool_Exp = {
 /** unique or primary key constraints on table "data.sec_companies" */
 export enum Data_Sec_Companies_Constraint {
   /** unique or primary key constraint */
-  SecCompaniesPkey = 'sec_companies_pkey'
+  SecCompaniesPkey = 'sec_companies_pkey',
 }
 
 /** input type for inserting data into table "data.sec_companies" */
@@ -233,7 +238,7 @@ export enum Data_Sec_Companies_Select_Column {
   /** column name */
   SicName = 'sic_name',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 /** input type for updating data in table "data.sec_companies" */
@@ -262,7 +267,7 @@ export enum Data_Sec_Companies_Update_Column {
   /** column name */
   SicName = 'sic_name',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 /** columns and relationships of "data.sec_contracts" */
@@ -302,7 +307,6 @@ export type Data_Sec_Contracts_Aggregate_Fields = {
   var_samp?: Maybe<Data_Sec_Contracts_Var_Samp_Fields>;
   variance?: Maybe<Data_Sec_Contracts_Variance_Fields>;
 };
-
 
 /** aggregate fields of "data.sec_contracts" */
 export type Data_Sec_Contracts_Aggregate_FieldsCountArgs = {
@@ -398,7 +402,7 @@ export enum Data_Sec_Contracts_Select_Column {
   /** column name */
   Sequence = 'sequence',
   /** column name */
-  Text = 'text'
+  Text = 'text',
 }
 
 /** aggregate stddev on columns */
@@ -482,7 +486,6 @@ export type Data_Sec_Filing_Attachments_Aggregate_Fields = {
   variance?: Maybe<Data_Sec_Filing_Attachments_Variance_Fields>;
 };
 
-
 /** aggregate fields of "data.sec_filing_attachments" */
 export type Data_Sec_Filing_Attachments_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
@@ -544,7 +547,7 @@ export enum Data_Sec_Filing_Attachments_Constraint {
   /** unique or primary key constraint */
   SecFilingAttachmentAccessionNumberSequenceKey = 'sec_filing_attachment_accession_number_sequence_key',
   /** unique or primary key constraint */
-  SecFilingAttachmentPkey = 'sec_filing_attachment_pkey'
+  SecFilingAttachmentPkey = 'sec_filing_attachment_pkey',
 }
 
 /** input type for incrementing numeric columns in table "data.sec_filing_attachments" */
@@ -675,7 +678,7 @@ export enum Data_Sec_Filing_Attachments_Select_Column {
   /** column name */
   Text = 'text',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 /** input type for updating data in table "data.sec_filing_attachments" */
@@ -754,7 +757,7 @@ export enum Data_Sec_Filing_Attachments_Update_Column {
   /** column name */
   Text = 'text',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 /** aggregate var_pop on columns */
@@ -807,7 +810,6 @@ export type Data_Sec_Filings = {
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
-
 /** columns and relationships of "data.sec_filings" */
 export type Data_Sec_FilingsSec_Filing_AttachmentsArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
@@ -816,7 +818,6 @@ export type Data_Sec_FilingsSec_Filing_AttachmentsArgs = {
   order_by?: Maybe<Array<Data_Sec_Filing_Attachments_Order_By>>;
   where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
 };
-
 
 /** columns and relationships of "data.sec_filings" */
 export type Data_Sec_FilingsSec_Filing_Attachments_AggregateArgs = {
@@ -841,7 +842,6 @@ export type Data_Sec_Filings_Aggregate_Fields = {
   max?: Maybe<Data_Sec_Filings_Max_Fields>;
   min?: Maybe<Data_Sec_Filings_Min_Fields>;
 };
-
 
 /** aggregate fields of "data.sec_filings" */
 export type Data_Sec_Filings_Aggregate_FieldsCountArgs = {
@@ -881,7 +881,7 @@ export type Data_Sec_Filings_Bool_Exp = {
 /** unique or primary key constraints on table "data.sec_filings" */
 export enum Data_Sec_Filings_Constraint {
   /** unique or primary key constraint */
-  SecFilingPkey = 'sec_filing_pkey'
+  SecFilingPkey = 'sec_filing_pkey',
 }
 
 /** input type for inserting data into table "data.sec_filings" */
@@ -991,7 +991,7 @@ export enum Data_Sec_Filings_Select_Column {
   /** column name */
   Header = 'header',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 /** input type for updating data in table "data.sec_filings" */
@@ -1017,7 +1017,7 @@ export enum Data_Sec_Filings_Update_Column {
   /** column name */
   Header = 'header',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 /** columns and relationships of "migrations" */
@@ -1052,7 +1052,6 @@ export type Migrations_Aggregate_Fields = {
   variance?: Maybe<Migrations_Variance_Fields>;
 };
 
-
 /** aggregate fields of "migrations" */
 export type Migrations_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Migrations_Select_Column>>;
@@ -1081,7 +1080,7 @@ export enum Migrations_Constraint {
   /** unique or primary key constraint */
   MigrationsNameKey = 'migrations_name_key',
   /** unique or primary key constraint */
-  MigrationsPkey = 'migrations_pkey'
+  MigrationsPkey = 'migrations_pkey',
 }
 
 /** input type for incrementing numeric columns in table "migrations" */
@@ -1153,7 +1152,7 @@ export enum Migrations_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** input type for updating data in table "migrations" */
@@ -1197,7 +1196,7 @@ export enum Migrations_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name'
+  Name = 'name',
 }
 
 /** aggregate var_pop on columns */
@@ -1283,24 +1282,20 @@ export type Mutation_Root = {
   update_users_by_pk?: Maybe<Users>;
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_Data_Sec_CompaniesArgs = {
   where: Data_Sec_Companies_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Data_Sec_Companies_By_PkArgs = {
   cik: Scalars['String'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_Data_Sec_Filing_AttachmentsArgs = {
   where: Data_Sec_Filing_Attachments_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Data_Sec_Filing_Attachments_By_PkArgs = {
@@ -1308,42 +1303,35 @@ export type Mutation_RootDelete_Data_Sec_Filing_Attachments_By_PkArgs = {
   sequence: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_Data_Sec_FilingsArgs = {
   where: Data_Sec_Filings_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Data_Sec_Filings_By_PkArgs = {
   accession_number: Scalars['String'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_MigrationsArgs = {
   where: Migrations_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Migrations_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_UsersArgs = {
   where: Users_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   id: Scalars['String'];
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_Data_Sec_CompaniesArgs = {
@@ -1351,13 +1339,11 @@ export type Mutation_RootInsert_Data_Sec_CompaniesArgs = {
   on_conflict?: Maybe<Data_Sec_Companies_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Data_Sec_Companies_OneArgs = {
   object: Data_Sec_Companies_Insert_Input;
   on_conflict?: Maybe<Data_Sec_Companies_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_Data_Sec_Filing_AttachmentsArgs = {
@@ -1365,13 +1351,11 @@ export type Mutation_RootInsert_Data_Sec_Filing_AttachmentsArgs = {
   on_conflict?: Maybe<Data_Sec_Filing_Attachments_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Data_Sec_Filing_Attachments_OneArgs = {
   object: Data_Sec_Filing_Attachments_Insert_Input;
   on_conflict?: Maybe<Data_Sec_Filing_Attachments_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_Data_Sec_FilingsArgs = {
@@ -1379,13 +1363,11 @@ export type Mutation_RootInsert_Data_Sec_FilingsArgs = {
   on_conflict?: Maybe<Data_Sec_Filings_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Data_Sec_Filings_OneArgs = {
   object: Data_Sec_Filings_Insert_Input;
   on_conflict?: Maybe<Data_Sec_Filings_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_MigrationsArgs = {
@@ -1393,13 +1375,11 @@ export type Mutation_RootInsert_MigrationsArgs = {
   on_conflict?: Maybe<Migrations_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Migrations_OneArgs = {
   object: Migrations_Insert_Input;
   on_conflict?: Maybe<Migrations_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_UsersArgs = {
@@ -1407,13 +1387,11 @@ export type Mutation_RootInsert_UsersArgs = {
   on_conflict?: Maybe<Users_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: Maybe<Users_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_Data_Sec_CompaniesArgs = {
@@ -1421,13 +1399,11 @@ export type Mutation_RootUpdate_Data_Sec_CompaniesArgs = {
   where: Data_Sec_Companies_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Data_Sec_Companies_By_PkArgs = {
   _set?: Maybe<Data_Sec_Companies_Set_Input>;
   pk_columns: Data_Sec_Companies_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_Data_Sec_Filing_AttachmentsArgs = {
@@ -1436,7 +1412,6 @@ export type Mutation_RootUpdate_Data_Sec_Filing_AttachmentsArgs = {
   where: Data_Sec_Filing_Attachments_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Data_Sec_Filing_Attachments_By_PkArgs = {
   _inc?: Maybe<Data_Sec_Filing_Attachments_Inc_Input>;
@@ -1444,20 +1419,17 @@ export type Mutation_RootUpdate_Data_Sec_Filing_Attachments_By_PkArgs = {
   pk_columns: Data_Sec_Filing_Attachments_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Data_Sec_FilingsArgs = {
   _set?: Maybe<Data_Sec_Filings_Set_Input>;
   where: Data_Sec_Filings_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Data_Sec_Filings_By_PkArgs = {
   _set?: Maybe<Data_Sec_Filings_Set_Input>;
   pk_columns: Data_Sec_Filings_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_MigrationsArgs = {
@@ -1466,7 +1438,6 @@ export type Mutation_RootUpdate_MigrationsArgs = {
   where: Migrations_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Migrations_By_PkArgs = {
   _inc?: Maybe<Migrations_Inc_Input>;
@@ -1474,13 +1445,11 @@ export type Mutation_RootUpdate_Migrations_By_PkArgs = {
   pk_columns: Migrations_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_UsersArgs = {
   _set?: Maybe<Users_Set_Input>;
   where: Users_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_Users_By_PkArgs = {
@@ -1501,7 +1470,7 @@ export enum Order_By {
   /** in descending order, nulls first */
   DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last'
+  DescNullsLast = 'desc_nulls_last',
 }
 
 export type Query_Root = {
@@ -1542,7 +1511,6 @@ export type Query_Root = {
   users_by_pk?: Maybe<Users>;
 };
 
-
 export type Query_RootData_Sec_CompaniesArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1550,7 +1518,6 @@ export type Query_RootData_Sec_CompaniesArgs = {
   order_by?: Maybe<Array<Data_Sec_Companies_Order_By>>;
   where?: Maybe<Data_Sec_Companies_Bool_Exp>;
 };
-
 
 export type Query_RootData_Sec_Companies_AggregateArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
@@ -1560,11 +1527,9 @@ export type Query_RootData_Sec_Companies_AggregateArgs = {
   where?: Maybe<Data_Sec_Companies_Bool_Exp>;
 };
 
-
 export type Query_RootData_Sec_Companies_By_PkArgs = {
   cik: Scalars['String'];
 };
-
 
 export type Query_RootData_Sec_ContractsArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Contracts_Select_Column>>;
@@ -1574,7 +1539,6 @@ export type Query_RootData_Sec_ContractsArgs = {
   where?: Maybe<Data_Sec_Contracts_Bool_Exp>;
 };
 
-
 export type Query_RootData_Sec_Contracts_AggregateArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Contracts_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1582,7 +1546,6 @@ export type Query_RootData_Sec_Contracts_AggregateArgs = {
   order_by?: Maybe<Array<Data_Sec_Contracts_Order_By>>;
   where?: Maybe<Data_Sec_Contracts_Bool_Exp>;
 };
-
 
 export type Query_RootData_Sec_Filing_AttachmentsArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
@@ -1592,7 +1555,6 @@ export type Query_RootData_Sec_Filing_AttachmentsArgs = {
   where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
 };
 
-
 export type Query_RootData_Sec_Filing_Attachments_AggregateArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1601,12 +1563,10 @@ export type Query_RootData_Sec_Filing_Attachments_AggregateArgs = {
   where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
 };
 
-
 export type Query_RootData_Sec_Filing_Attachments_By_PkArgs = {
   accession_number: Scalars['String'];
   sequence: Scalars['Int'];
 };
-
 
 export type Query_RootData_Sec_FilingsArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
@@ -1616,7 +1576,6 @@ export type Query_RootData_Sec_FilingsArgs = {
   where?: Maybe<Data_Sec_Filings_Bool_Exp>;
 };
 
-
 export type Query_RootData_Sec_Filings_AggregateArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1625,11 +1584,9 @@ export type Query_RootData_Sec_Filings_AggregateArgs = {
   where?: Maybe<Data_Sec_Filings_Bool_Exp>;
 };
 
-
 export type Query_RootData_Sec_Filings_By_PkArgs = {
   accession_number: Scalars['String'];
 };
-
 
 export type Query_RootMigrationsArgs = {
   distinct_on?: Maybe<Array<Migrations_Select_Column>>;
@@ -1639,7 +1596,6 @@ export type Query_RootMigrationsArgs = {
   where?: Maybe<Migrations_Bool_Exp>;
 };
 
-
 export type Query_RootMigrations_AggregateArgs = {
   distinct_on?: Maybe<Array<Migrations_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1648,11 +1604,9 @@ export type Query_RootMigrations_AggregateArgs = {
   where?: Maybe<Migrations_Bool_Exp>;
 };
 
-
 export type Query_RootMigrations_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
@@ -1662,7 +1616,6 @@ export type Query_RootUsersArgs = {
   where?: Maybe<Users_Bool_Exp>;
 };
 
-
 export type Query_RootUsers_AggregateArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1670,7 +1623,6 @@ export type Query_RootUsers_AggregateArgs = {
   order_by?: Maybe<Array<Users_Order_By>>;
   where?: Maybe<Users_Bool_Exp>;
 };
-
 
 export type Query_RootUsers_By_PkArgs = {
   id: Scalars['String'];
@@ -1714,7 +1666,6 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
 };
 
-
 export type Subscription_RootData_Sec_CompaniesArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1722,7 +1673,6 @@ export type Subscription_RootData_Sec_CompaniesArgs = {
   order_by?: Maybe<Array<Data_Sec_Companies_Order_By>>;
   where?: Maybe<Data_Sec_Companies_Bool_Exp>;
 };
-
 
 export type Subscription_RootData_Sec_Companies_AggregateArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
@@ -1732,11 +1682,9 @@ export type Subscription_RootData_Sec_Companies_AggregateArgs = {
   where?: Maybe<Data_Sec_Companies_Bool_Exp>;
 };
 
-
 export type Subscription_RootData_Sec_Companies_By_PkArgs = {
   cik: Scalars['String'];
 };
-
 
 export type Subscription_RootData_Sec_ContractsArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Contracts_Select_Column>>;
@@ -1746,7 +1694,6 @@ export type Subscription_RootData_Sec_ContractsArgs = {
   where?: Maybe<Data_Sec_Contracts_Bool_Exp>;
 };
 
-
 export type Subscription_RootData_Sec_Contracts_AggregateArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Contracts_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1754,7 +1701,6 @@ export type Subscription_RootData_Sec_Contracts_AggregateArgs = {
   order_by?: Maybe<Array<Data_Sec_Contracts_Order_By>>;
   where?: Maybe<Data_Sec_Contracts_Bool_Exp>;
 };
-
 
 export type Subscription_RootData_Sec_Filing_AttachmentsArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
@@ -1764,7 +1710,6 @@ export type Subscription_RootData_Sec_Filing_AttachmentsArgs = {
   where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
 };
 
-
 export type Subscription_RootData_Sec_Filing_Attachments_AggregateArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1773,12 +1718,10 @@ export type Subscription_RootData_Sec_Filing_Attachments_AggregateArgs = {
   where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
 };
 
-
 export type Subscription_RootData_Sec_Filing_Attachments_By_PkArgs = {
   accession_number: Scalars['String'];
   sequence: Scalars['Int'];
 };
-
 
 export type Subscription_RootData_Sec_FilingsArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
@@ -1788,7 +1731,6 @@ export type Subscription_RootData_Sec_FilingsArgs = {
   where?: Maybe<Data_Sec_Filings_Bool_Exp>;
 };
 
-
 export type Subscription_RootData_Sec_Filings_AggregateArgs = {
   distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1797,11 +1739,9 @@ export type Subscription_RootData_Sec_Filings_AggregateArgs = {
   where?: Maybe<Data_Sec_Filings_Bool_Exp>;
 };
 
-
 export type Subscription_RootData_Sec_Filings_By_PkArgs = {
   accession_number: Scalars['String'];
 };
-
 
 export type Subscription_RootMigrationsArgs = {
   distinct_on?: Maybe<Array<Migrations_Select_Column>>;
@@ -1811,7 +1751,6 @@ export type Subscription_RootMigrationsArgs = {
   where?: Maybe<Migrations_Bool_Exp>;
 };
 
-
 export type Subscription_RootMigrations_AggregateArgs = {
   distinct_on?: Maybe<Array<Migrations_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1820,11 +1759,9 @@ export type Subscription_RootMigrations_AggregateArgs = {
   where?: Maybe<Migrations_Bool_Exp>;
 };
 
-
 export type Subscription_RootMigrations_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
@@ -1834,7 +1771,6 @@ export type Subscription_RootUsersArgs = {
   where?: Maybe<Users_Bool_Exp>;
 };
 
-
 export type Subscription_RootUsers_AggregateArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1843,11 +1779,9 @@ export type Subscription_RootUsers_AggregateArgs = {
   where?: Maybe<Users_Bool_Exp>;
 };
 
-
 export type Subscription_RootUsers_By_PkArgs = {
   id: Scalars['String'];
 };
-
 
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
 export type Timestamp_Comparison_Exp = {
@@ -1861,7 +1795,6 @@ export type Timestamp_Comparison_Exp = {
   _neq?: Maybe<Scalars['timestamp']>;
   _nin?: Maybe<Array<Scalars['timestamp']>>;
 };
-
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
@@ -1905,7 +1838,6 @@ export type Users_Aggregate_Fields = {
   min?: Maybe<Users_Min_Fields>;
 };
 
-
 /** aggregate fields of "users" */
 export type Users_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Users_Select_Column>>;
@@ -1933,7 +1865,7 @@ export enum Users_Constraint {
   /** unique or primary key constraint */
   UsersEmailKey = 'users_email_key',
   /** unique or primary key constraint */
-  UsersPkey = 'users_pkey'
+  UsersPkey = 'users_pkey',
 }
 
 /** input type for inserting data into table "users" */
@@ -2030,7 +1962,7 @@ export enum Users_Select_Column {
   /** column name */
   PhotoUrl = 'photo_url',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 /** input type for updating data in table "users" */
@@ -2065,7 +1997,7 @@ export enum Users_Update_Column {
   /** column name */
   PhotoUrl = 'photo_url',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 export type GetSecContractsQueryVariables = Exact<{
@@ -2073,32 +2005,55 @@ export type GetSecContractsQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>;
 }>;
 
+export type GetSecContractsQuery = { __typename?: 'query_root' } & {
+  data_sec_contracts: Array<
+    { __typename?: 'data_sec_contracts' } & Pick<
+      Data_Sec_Contracts,
+      | 'accession_number'
+      | 'sequence'
+      | 'company_cik'
+      | 'company_name'
+      | 'company_geo'
+      | 'description'
+      | 'filing_metadata'
+      | 'filing_type'
+      | 'text'
+      | 'contents'
+    >
+  >;
+};
 
-export type GetSecContractsQuery = (
-  { __typename?: 'query_root' }
-  & { data_sec_contracts: Array<(
-    { __typename?: 'data_sec_contracts' }
-    & Pick<Data_Sec_Contracts, 'accession_number' | 'sequence' | 'company_cik' | 'company_name' | 'company_geo' | 'description' | 'filing_metadata' | 'filing_type' | 'text' | 'contents'>
-  )> }
-);
+export type GetContractsQueryVariables = Exact<{ [key: string]: never }>;
 
+export type GetContractsQuery = { __typename?: 'query_root' } & {
+  data_sec_contracts: Array<
+    { __typename?: 'data_sec_contracts' } & Pick<
+      Data_Sec_Contracts,
+      | 'company_name'
+      | 'accession_number'
+      | 'sequence'
+      | 'description'
+      | 'filing_type'
+    >
+  >;
+};
 
 export const GetSecContractsDocument = gql`
-    query getSECContracts($limit: Int = 100, $offset: Int = 0) {
-  data_sec_contracts(limit: $limit, offset: $offset) {
-    accession_number
-    sequence
-    company_cik
-    company_name
-    company_geo
-    description
-    filing_metadata
-    filing_type
-    text
-    contents
+  query getSECContracts($limit: Int = 100, $offset: Int = 0) {
+    data_sec_contracts(limit: $limit, offset: $offset) {
+      accession_number
+      sequence
+      company_cik
+      company_name
+      company_geo
+      description
+      filing_metadata
+      filing_type
+      text
+      contents
+    }
   }
-}
-    `;
+`;
 
 /**
  * __useGetSecContractsQuery__
@@ -2117,25 +2072,222 @@ export const GetSecContractsDocument = gql`
  *   },
  * });
  */
-export function useGetSecContractsQuery(baseOptions?: Apollo.QueryHookOptions<GetSecContractsQuery, GetSecContractsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetSecContractsQuery, GetSecContractsQueryVariables>(GetSecContractsDocument, options);
-      }
-export function useGetSecContractsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSecContractsQuery, GetSecContractsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetSecContractsQuery, GetSecContractsQueryVariables>(GetSecContractsDocument, options);
-        }
-export type GetSecContractsQueryHookResult = ReturnType<typeof useGetSecContractsQuery>;
-export type GetSecContractsLazyQueryHookResult = ReturnType<typeof useGetSecContractsLazyQuery>;
-export type GetSecContractsQueryResult = Apollo.QueryResult<GetSecContractsQuery, GetSecContractsQueryVariables>;
+export function useGetSecContractsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetSecContractsQuery,
+    GetSecContractsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetSecContractsQuery, GetSecContractsQueryVariables>(
+    GetSecContractsDocument,
+    options
+  );
+}
+export function useGetSecContractsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetSecContractsQuery,
+    GetSecContractsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetSecContractsQuery,
+    GetSecContractsQueryVariables
+  >(GetSecContractsDocument, options);
+}
+export type GetSecContractsQueryHookResult = ReturnType<
+  typeof useGetSecContractsQuery
+>;
+export type GetSecContractsLazyQueryHookResult = ReturnType<
+  typeof useGetSecContractsLazyQuery
+>;
+export type GetSecContractsQueryResult = Apollo.QueryResult<
+  GetSecContractsQuery,
+  GetSecContractsQueryVariables
+>;
+export const GetContractsDocument = gql`
+  query GetContracts {
+    data_sec_contracts(
+      order_by: { accession_number: asc, sequence: asc }
+      limit: 3
+    ) {
+      company_name
+      accession_number
+      sequence
+      description
+      filing_type
+    }
+  }
+`;
 
-      export interface PossibleTypesResultData {
-        possibleTypes: {
-          [key: string]: string[]
-        }
-      }
-      const result: PossibleTypesResultData = {
-  "possibleTypes": {}
+/**
+ * __useGetContractsQuery__
+ *
+ * To run a query within a React component, call `useGetContractsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetContractsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetContractsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetContractsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetContractsQuery,
+    GetContractsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetContractsQuery, GetContractsQueryVariables>(
+    GetContractsDocument,
+    options
+  );
+}
+export function useGetContractsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetContractsQuery,
+    GetContractsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetContractsQuery, GetContractsQueryVariables>(
+    GetContractsDocument,
+    options
+  );
+}
+export type GetContractsQueryHookResult = ReturnType<
+  typeof useGetContractsQuery
+>;
+export type GetContractsLazyQueryHookResult = ReturnType<
+  typeof useGetContractsLazyQuery
+>;
+export type GetContractsQueryResult = Apollo.QueryResult<
+  GetContractsQuery,
+  GetContractsQueryVariables
+>;
+
+export interface PossibleTypesResultData {
+  possibleTypes: {
+    [key: string]: string[];
+  };
+}
+const result: PossibleTypesResultData = {
+  possibleTypes: {},
 };
-      export default result;
-    
+export default result;
+
+export const GetSecContractsDocument = gql`
+  query getSECContracts($limit: Int = 100, $offset: Int = 0) {
+    data_sec_contracts(limit: $limit, offset: $offset) {
+      accession_number
+      sequence
+      company_cik
+      company_name
+      company_geo
+      description
+      filing_metadata
+      filing_type
+      text
+      contents
+    }
+  }
+`;
+export async function getServerPageGetSecContracts(
+  options: Omit<Apollo.QueryOptions<GetSecContractsQueryVariables>, 'query'>,
+  apolloClient: Apollo.ApolloClient<NormalizedCacheObject>
+) {
+  const data = await apolloClient.query<GetSecContractsQuery>({
+    ...options,
+    query: GetSecContractsDocument,
+  });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export type PageGetSecContractsComp = React.FC<{
+  data?: GetSecContractsQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetSecContracts =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<GetSecContractsQuery, GetSecContractsQueryVariables>
+  ) =>
+  (WrappedComponent: PageGetSecContractsComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(GetSecContractsDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetSecContracts = {
+  getServerPage: getServerPageGetSecContracts,
+  withPage: withPageGetSecContracts,
+};
+export const GetContractsDocument = gql`
+  query GetContracts {
+    data_sec_contracts(
+      order_by: { accession_number: asc, sequence: asc }
+      limit: 3
+    ) {
+      company_name
+      accession_number
+      sequence
+      description
+      filing_type
+    }
+  }
+`;
+export async function getServerPageGetContracts(
+  options: Omit<Apollo.QueryOptions<GetContractsQueryVariables>, 'query'>,
+  apolloClient: Apollo.ApolloClient<NormalizedCacheObject>
+) {
+  const data = await apolloClient.query<GetContractsQuery>({
+    ...options,
+    query: GetContractsDocument,
+  });
+
+  const apolloState = apolloClient.cache.extract();
+
+  return {
+    props: {
+      apolloState: apolloState,
+      data: data?.data,
+      error: data?.error ?? data?.errors ?? null,
+    },
+  };
+}
+export type PageGetContractsComp = React.FC<{
+  data?: GetContractsQuery;
+  error?: Apollo.ApolloError;
+}>;
+export const withPageGetContracts =
+  (
+    optionsFunc?: (
+      router: NextRouter
+    ) => QueryHookOptions<GetContractsQuery, GetContractsQueryVariables>
+  ) =>
+  (WrappedComponent: PageGetContractsComp): NextPage =>
+  (props) => {
+    const router = useRouter();
+    const options = optionsFunc ? optionsFunc(router) : {};
+    const { data, error } = useQuery(GetContractsDocument, options);
+    return <WrappedComponent {...props} data={data} error={error} />;
+  };
+export const ssrGetContracts = {
+  getServerPage: getServerPageGetContracts,
+  withPage: withPageGetContracts,
+};

@@ -5,16 +5,20 @@ schema:
         content-type: 'application/json'
         x-hasura-admin-secret: '${HASURA_GRAPHQL_ADMIN_SECRET}'
 documents:
-  - '**/*.tsx?'
-  - '**/*.graphql'
-  - '!*.generated.graphql'
+  - '{components,pages}/**/*.{ts,tsx,graphql}'
+  - 'lib/!(generated)/**/*.{ts,tsx,graphql}'
 generates:
-  lib/generated/graphql/apollo-helpers.ts:
+  lib/generated/graphql/apollo-helpers.tsx:
     plugins:
       - typescript-apollo-client-helpers
+      - 'apollo-next-ssr'
   lib/generated/graphql/apollo-schema.tsx:
     plugins:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
       - 'fragment-matcher'
+      - 'apollo-next-ssr'
+hooks:
+  afterAllFileWrite:
+    - prettier --write
