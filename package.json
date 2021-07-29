@@ -43,7 +43,6 @@
     "faker": "^5.5.3",
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
-    "graphql-codegen-apollo-next-ssr": "^1.6.1",
     "graphql-tag": "^2.12.5",
     "isomorphic-unfetch": "^3.1.0",
     "jsonp": "^0.2.1",
@@ -89,6 +88,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "graphql-codegen-apollo-next-ssr": "^1.6.1",
     "jest": "^27.0.6",
     "prettier-plugin-organize-imports": "^2.3.3",
     "ts-jest": "^27.0.4"
