@@ -5,7 +5,9 @@ import myTheme from 'styles/theme';
 const theme = extendTheme(myTheme);
 
 const UIProvider: FC = ({ children }) => (
-  <ChakraProvider theme={theme}>{children}</ChakraProvider>
+  <ChakraProvider theme={theme} resetCSS>
+    {children}
+  </ChakraProvider>
 );
 
 export { UIProvider };

@@ -12,7 +12,6 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import fetch from 'isomorphic-unfetch';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
-import ws from 'ws';
 
 let accessToken: string | null = null;
 
@@ -24,6 +23,8 @@ if (!process.env.GRAPHQL_API_SSR_URL) {
 const HTTP_URL = process.env.GRAPHQL_API_SSR_URL;
 
 const WS_URL = HTTP_URL.replace(/^http/i, 'ws');
+
+const ssrMode = typeof window === 'undefined';
 
 const requestAccessToken = async () => {
   if (accessToken) return;
@@ -55,26 +56,7 @@ const httpLink = new HttpLink({
   fetch,
 });
 
-const wsLink = new WebSocketLink(
-  new SubscriptionClient(
-    WS_URL,
-    {
-      lazy: true,
-      reconnect: true,
-      // connectionParams: async () => {
-      //   await requestAccessToken();
-      //   return {
-      //     headers: {
-      //       authorization: accessToken ? `Bearer ${accessToken}` : '',
-      //     },
-      //   };
-      // },
-    },
-    ws
-  )
-);
-
-const link = from([
+let link = from([
   new RetryLink(),
   setContext(async () => {
     await requestAccessToken();
@@ -86,23 +68,39 @@ const link = from([
         : {},
     };
   }),
-]).split(
-  ({ query }) => {
-    const def = getMainDefinition(query);
-    return (
-      def.kind === 'OperationDefinition' &&
-      def.operation === 'subscription' &&
-      typeof window !== 'undefined'
-    );
-  },
-  wsLink,
-  httpLink
-);
+]);
+
+if (!ssrMode) {
+  link = link.split(
+    ({ query }) => {
+      const def = getMainDefinition(query);
+      return (
+        def.kind === 'OperationDefinition' &&
+        def.operation === 'subscription' &&
+        typeof window !== 'undefined'
+      );
+    },
+    new WebSocketLink(
+      new SubscriptionClient(WS_URL, {
+        lazy: true,
+        reconnect: true,
+        // connectionParams: async () => {
+        //   await requestAccessToken();
+        //   return {
+        //     headers: {
+        //       authorization: accessToken ? `Bearer ${accessToken}` : '',
+        //     },
+        //   };
+        // },
+      })
+    ),
+    httpLink
+  );
+}
 
 export function createApolloClient(
   initialState: NormalizedCacheObject
 ): ApolloClient<NormalizedCacheObject> {
-  const ssrMode = typeof window === 'undefined';
   return new ApolloClient<NormalizedCacheObject>({
     ssrMode,
     link,
