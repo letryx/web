@@ -27,6 +27,7 @@ export const SocialLinks: FC<
     {socialLinks.map(({ href, social }) => (
       <IconButton
         as="a"
+        key={`button-${social}-${href}`}
         href={href}
         target="_blank"
         aria-label={social}
