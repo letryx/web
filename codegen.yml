@@ -11,14 +11,27 @@ generates:
   lib/generated/graphql/apollo-helpers.tsx:
     plugins:
       - typescript-apollo-client-helpers
-      - 'apollo-next-ssr'
   lib/generated/graphql/apollo-schema.tsx:
     plugins:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
       - 'fragment-matcher'
+    config:
+      useExplicitTyping: true
+      apolloClientVersion: 3
+      reactApolloVersion: 3
+  lib/generated/graphql/page.tsx:
+    plugins:
       - 'apollo-next-ssr'
+    preset: import-types
+    presetConfig:
+      typesPath: ./apollo-schema
+    config:
+      useExplicitTyping: true
+      apolloClientVersion: 3
+      reactApolloVersion: 3
+      apolloImportFrom: '@apollo/client'
 hooks:
   afterAllFileWrite:
     - prettier --write
