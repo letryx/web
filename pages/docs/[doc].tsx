@@ -1,5 +1,3 @@
-// pages/index.js
-
 import {
   Container,
   HeadingProps,
@@ -84,12 +82,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-interface DocProps extends ParsedUrlQuery {
-  slug: string;
-}
-
 export const getStaticProps: GetStaticProps = async (context) => {
-  const { doc } = context.params as DocProps;
+  const { doc } = context.params as ParsedUrlQuery & { doc: string };
   const docPath = path.join(process.cwd(), 'docs', `${doc?.toString()}.mdx`);
   const content = await serialize(await fs.readFile(docPath, 'utf8'));
 
