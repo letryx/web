@@ -11,14 +11,14 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
-import { SocialLink } from 'components/social-link';
+import { SocialLinks } from 'components/social-links';
 import { FC, ReactElement } from 'react';
 
 interface ProfileProps {
   name: string;
   title: string;
   photo_url: string;
-  socialLinks?: ReactElement[];
+  socialLinks: ReactElement;
 }
 
 const Profile: FC<ProfileProps> = ({
@@ -80,9 +80,9 @@ const Profile: FC<ProfileProps> = ({
 const AboutPage: FC = () => {
   return (
     <Layout title="Letryx">
-      <Box p={4}>
-        <Stack spacing={4} as={Container} maxW="3xl" textAlign="center">
-          <Heading fontSize="4xl" pt={10}>
+      <Stack py={20} spacing={24} as={Container} maxW="3xl" textAlign="center">
+        <Box>
+          <Heading fontSize="4xl" pb={8}>
             About Letryx
           </Heading>
           <Text color={useColorModeValue('gray.700', 'gray.400')} fontSize="xl">
@@ -91,7 +91,9 @@ const AboutPage: FC = () => {
             precedent contracts and disclosures, and provides predictive
             analytics based on these trends.
           </Text>
-          <Heading fontSize="4xl" pt={10}>
+        </Box>
+        <Box>
+          <Heading fontSize="4xl" pb={8}>
             Meet the Team
           </Heading>
           <Center>
@@ -104,13 +106,16 @@ const AboutPage: FC = () => {
                 name="Vlad Kobzar"
                 title="CEO &amp; Chief Scientist"
                 photo_url="/img/vlad.jpeg"
-                socialLinks={[
-                  <SocialLink
-                    social="linkedin"
-                    label="LinkedIn"
-                    href="https://www.linkedin.com/in/vlad-kobzar-a4191338/"
-                  />,
-                ]}
+                socialLinks={
+                  <SocialLinks
+                    socialLinks={[
+                      {
+                        social: 'linkedin',
+                        href: 'https://www.linkedin.com/in/vlad-kobzar-a4191338/',
+                      },
+                    ]}
+                  />
+                }
               >
                 <List spacing={1}>
                   <ListItem>NSF postdoc, Columbia University</ListItem>
@@ -122,18 +127,20 @@ const AboutPage: FC = () => {
                 name="Clifton King"
                 title="CTO"
                 photo_url="/img/clifton.jpeg"
-                socialLinks={[
-                  <SocialLink
-                    social="linkedin"
-                    label="LinkedIn"
-                    href="https://www.linkedin.com/in/cliftonking"
-                  />,
-                  <SocialLink
-                    social="github"
-                    label="Github"
-                    href="https://github.com/clifton"
-                  />,
-                ]}
+                socialLinks={
+                  <SocialLinks
+                    socialLinks={[
+                      {
+                        social: 'linkedin',
+                        href: 'https://www.linkedin.com/in/cliftonking',
+                      },
+                      {
+                        social: 'github',
+                        href: 'https://github.com/clifton',
+                      },
+                    ]}
+                  />
+                }
               >
                 <List spacing={1}>
                   <ListItem>Investor, Sixty Capital</ListItem>
@@ -145,13 +152,16 @@ const AboutPage: FC = () => {
                 name="Luke Burns"
                 title="Co-founder"
                 photo_url="/img/luke.png"
-                socialLinks={[
-                  <SocialLink
-                    social="linkedin"
-                    label="LinkedIn"
-                    href="https://www.linkedin.com/in/llburns"
-                  />,
-                ]}
+                socialLinks={
+                  <SocialLinks
+                    socialLinks={[
+                      {
+                        social: 'linkedin',
+                        href: 'https://www.linkedin.com/in/llburns',
+                      },
+                    ]}
+                  />
+                }
               >
                 <List spacing={1}>
                   <ListItem>Special Counsel, Leading Law Firm</ListItem>
@@ -161,8 +171,8 @@ const AboutPage: FC = () => {
               </Profile>
             </Stack>
           </Center>
-        </Stack>
-      </Box>
+        </Box>
+      </Stack>
     </Layout>
   );
 };

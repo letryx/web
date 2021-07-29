@@ -1,5 +1,6 @@
-import { Flex, Heading, HStack } from '@chakra-ui/react';
+import { Flex, HStack } from '@chakra-ui/react';
 import { ColorModeSwitcher } from 'components/color-mode-switcher';
+import { Logo } from 'components/logo';
 import { NextChakraLink } from 'components/next-chakra-link';
 import { UserDropdown } from 'components/user-dropdown';
 import { FC } from 'react';
@@ -12,9 +13,7 @@ const Nav: FC = () => (
         display="flex"
         _hover={{ textDecoration: 'none' }}
       >
-        <Heading size="lg" mt={-0.5}>
-          Letryx
-        </Heading>
+        <Logo size="lg" mt={-0.5} />
       </NextChakraLink>
     </HStack>
   </nav>
