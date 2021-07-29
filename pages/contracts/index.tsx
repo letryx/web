@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 import { useQuery } from '@apollo/client/react';
-import { useUser } from '@auth0/nextjs-auth0';
+import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Box } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
 import { NextChakraLink } from 'components/next-chakra-link';
@@ -65,5 +65,7 @@ const ContractsPage: FC = () => {
     </Layout>
   );
 };
+
+export const getServerSideProps = withPageAuthRequired();
 
 export default withApollo()(ContractsPage);
