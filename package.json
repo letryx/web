@@ -12,7 +12,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "next build",
-    "codegen": "eval $(egrep '^GRAPHQL_API_URL=' .env | xargs) graphql-codegen --config codegen.yml",
+    "codegen": "eval $(egrep '^GRAPHQL_API_URL=' .env | xargs) graphql-codegen --config codegen.yml --target typescript --tagName gql",
     "console": "hasura console --no-browser",
     "dev": "next",
     "lint": "eslint components pages lib types styles test",

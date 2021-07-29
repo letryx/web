@@ -4,7 +4,10 @@ schema:
       headers:
         content-type: 'application/json'
         x-hasura-admin-secret: '${HASURA_GRAPHQL_ADMIN_SECRET}'
-documents: 'lib/data/graphql/*.graphql'
+documents:
+  - '**/*.tsx?'
+  - '**/*.graphql'
+  - '!*.generated.graphql'
 generates:
   lib/generated/graphql/apollo-helpers.ts:
     plugins:
