@@ -1231,10 +1231,10 @@ export type Mutation_Root = {
   delete_migrations?: Maybe<Migrations_Mutation_Response>;
   /** delete single row from the table: "migrations" */
   delete_migrations_by_pk?: Maybe<Migrations>;
-  /** delete data from the table: "users" */
-  delete_users?: Maybe<Users_Mutation_Response>;
-  /** delete single row from the table: "users" */
-  delete_users_by_pk?: Maybe<Users>;
+  /** delete data from the table: "user" */
+  delete_user?: Maybe<User_Mutation_Response>;
+  /** delete single row from the table: "user" */
+  delete_user_by_pk?: Maybe<User>;
   /** insert data into the table: "data.sec_companies" */
   insert_data_sec_companies?: Maybe<Data_Sec_Companies_Mutation_Response>;
   /** insert a single row into the table: "data.sec_companies" */
@@ -1251,10 +1251,10 @@ export type Mutation_Root = {
   insert_migrations?: Maybe<Migrations_Mutation_Response>;
   /** insert a single row into the table: "migrations" */
   insert_migrations_one?: Maybe<Migrations>;
-  /** insert data into the table: "users" */
-  insert_users?: Maybe<Users_Mutation_Response>;
-  /** insert a single row into the table: "users" */
-  insert_users_one?: Maybe<Users>;
+  /** insert data into the table: "user" */
+  insert_user?: Maybe<User_Mutation_Response>;
+  /** insert a single row into the table: "user" */
+  insert_user_one?: Maybe<User>;
   /** update data of the table: "data.sec_companies" */
   update_data_sec_companies?: Maybe<Data_Sec_Companies_Mutation_Response>;
   /** update single row of the table: "data.sec_companies" */
@@ -1271,10 +1271,10 @@ export type Mutation_Root = {
   update_migrations?: Maybe<Migrations_Mutation_Response>;
   /** update single row of the table: "migrations" */
   update_migrations_by_pk?: Maybe<Migrations>;
-  /** update data of the table: "users" */
-  update_users?: Maybe<Users_Mutation_Response>;
-  /** update single row of the table: "users" */
-  update_users_by_pk?: Maybe<Users>;
+  /** update data of the table: "user" */
+  update_user?: Maybe<User_Mutation_Response>;
+  /** update single row of the table: "user" */
+  update_user_by_pk?: Maybe<User>;
 };
 
 /** mutation root */
@@ -1319,12 +1319,12 @@ export type Mutation_RootDelete_Migrations_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootDelete_UsersArgs = {
-  where: Users_Bool_Exp;
+export type Mutation_RootDelete_UserArgs = {
+  where: User_Bool_Exp;
 };
 
 /** mutation root */
-export type Mutation_RootDelete_Users_By_PkArgs = {
+export type Mutation_RootDelete_User_By_PkArgs = {
   id: Scalars['String'];
 };
 
@@ -1377,15 +1377,15 @@ export type Mutation_RootInsert_Migrations_OneArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootInsert_UsersArgs = {
-  objects: Array<Users_Insert_Input>;
-  on_conflict?: Maybe<Users_On_Conflict>;
+export type Mutation_RootInsert_UserArgs = {
+  objects: Array<User_Insert_Input>;
+  on_conflict?: Maybe<User_On_Conflict>;
 };
 
 /** mutation root */
-export type Mutation_RootInsert_Users_OneArgs = {
-  object: Users_Insert_Input;
-  on_conflict?: Maybe<Users_On_Conflict>;
+export type Mutation_RootInsert_User_OneArgs = {
+  object: User_Insert_Input;
+  on_conflict?: Maybe<User_On_Conflict>;
 };
 
 /** mutation root */
@@ -1441,15 +1441,15 @@ export type Mutation_RootUpdate_Migrations_By_PkArgs = {
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_UsersArgs = {
-  _set?: Maybe<Users_Set_Input>;
-  where: Users_Bool_Exp;
+export type Mutation_RootUpdate_UserArgs = {
+  _set?: Maybe<User_Set_Input>;
+  where: User_Bool_Exp;
 };
 
 /** mutation root */
-export type Mutation_RootUpdate_Users_By_PkArgs = {
-  _set?: Maybe<Users_Set_Input>;
-  pk_columns: Users_Pk_Columns_Input;
+export type Mutation_RootUpdate_User_By_PkArgs = {
+  _set?: Maybe<User_Set_Input>;
+  pk_columns: User_Pk_Columns_Input;
 };
 
 /** column ordering options */
@@ -1498,12 +1498,12 @@ export type Query_Root = {
   migrations_aggregate: Migrations_Aggregate;
   /** fetch data from the table: "migrations" using primary key columns */
   migrations_by_pk?: Maybe<Migrations>;
-  /** fetch data from the table: "users" */
-  users: Array<Users>;
-  /** fetch aggregated fields from the table: "users" */
-  users_aggregate: Users_Aggregate;
-  /** fetch data from the table: "users" using primary key columns */
-  users_by_pk?: Maybe<Users>;
+  /** fetch data from the table: "user" */
+  user: Array<User>;
+  /** fetch aggregated fields from the table: "user" */
+  user_aggregate: User_Aggregate;
+  /** fetch data from the table: "user" using primary key columns */
+  user_by_pk?: Maybe<User>;
 };
 
 export type Query_RootData_Sec_CompaniesArgs = {
@@ -1603,23 +1603,23 @@ export type Query_RootMigrations_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type Query_RootUsersArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
+export type Query_RootUserArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
 };
 
-export type Query_RootUsers_AggregateArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
+export type Query_RootUser_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
 };
 
-export type Query_RootUsers_By_PkArgs = {
+export type Query_RootUser_By_PkArgs = {
   id: Scalars['String'];
 };
 
@@ -1653,12 +1653,12 @@ export type Subscription_Root = {
   migrations_aggregate: Migrations_Aggregate;
   /** fetch data from the table: "migrations" using primary key columns */
   migrations_by_pk?: Maybe<Migrations>;
-  /** fetch data from the table: "users" */
-  users: Array<Users>;
-  /** fetch aggregated fields from the table: "users" */
-  users_aggregate: Users_Aggregate;
-  /** fetch data from the table: "users" using primary key columns */
-  users_by_pk?: Maybe<Users>;
+  /** fetch data from the table: "user" */
+  user: Array<User>;
+  /** fetch aggregated fields from the table: "user" */
+  user_aggregate: User_Aggregate;
+  /** fetch data from the table: "user" using primary key columns */
+  user_by_pk?: Maybe<User>;
 };
 
 export type Subscription_RootData_Sec_CompaniesArgs = {
@@ -1758,23 +1758,23 @@ export type Subscription_RootMigrations_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type Subscription_RootUsersArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
+export type Subscription_RootUserArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
 };
 
-export type Subscription_RootUsers_AggregateArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
+export type Subscription_RootUser_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
+  order_by?: Maybe<Array<User_Order_By>>;
+  where?: Maybe<User_Bool_Exp>;
 };
 
-export type Subscription_RootUsers_By_PkArgs = {
+export type Subscription_RootUser_By_PkArgs = {
   id: Scalars['String'];
 };
 
@@ -1804,9 +1804,9 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
 };
 
-/** columns and relationships of "users" */
-export type Users = {
-  __typename?: 'users';
+/** columns and relationships of "user" */
+export type User = {
+  __typename?: 'user';
   created_at: Scalars['timestamptz'];
   email: Scalars['String'];
   family_name?: Maybe<Scalars['String']>;
@@ -1818,32 +1818,32 @@ export type Users = {
   updated_at: Scalars['timestamptz'];
 };
 
-/** aggregated selection of "users" */
-export type Users_Aggregate = {
-  __typename?: 'users_aggregate';
-  aggregate?: Maybe<Users_Aggregate_Fields>;
-  nodes: Array<Users>;
+/** aggregated selection of "user" */
+export type User_Aggregate = {
+  __typename?: 'user_aggregate';
+  aggregate?: Maybe<User_Aggregate_Fields>;
+  nodes: Array<User>;
 };
 
-/** aggregate fields of "users" */
-export type Users_Aggregate_Fields = {
-  __typename?: 'users_aggregate_fields';
+/** aggregate fields of "user" */
+export type User_Aggregate_Fields = {
+  __typename?: 'user_aggregate_fields';
   count: Scalars['Int'];
-  max?: Maybe<Users_Max_Fields>;
-  min?: Maybe<Users_Min_Fields>;
+  max?: Maybe<User_Max_Fields>;
+  min?: Maybe<User_Min_Fields>;
 };
 
-/** aggregate fields of "users" */
-export type Users_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Users_Select_Column>>;
+/** aggregate fields of "user" */
+export type User_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<User_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-/** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
-export type Users_Bool_Exp = {
-  _and?: Maybe<Array<Users_Bool_Exp>>;
-  _not?: Maybe<Users_Bool_Exp>;
-  _or?: Maybe<Array<Users_Bool_Exp>>;
+/** Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'. */
+export type User_Bool_Exp = {
+  _and?: Maybe<Array<User_Bool_Exp>>;
+  _not?: Maybe<User_Bool_Exp>;
+  _or?: Maybe<Array<User_Bool_Exp>>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   email?: Maybe<String_Comparison_Exp>;
   family_name?: Maybe<String_Comparison_Exp>;
@@ -1855,16 +1855,16 @@ export type Users_Bool_Exp = {
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "users" */
-export enum Users_Constraint {
+/** unique or primary key constraints on table "user" */
+export enum User_Constraint {
   /** unique or primary key constraint */
   UsersEmailKey = 'users_email_key',
   /** unique or primary key constraint */
   UsersPkey = 'users_pkey',
 }
 
-/** input type for inserting data into table "users" */
-export type Users_Insert_Input = {
+/** input type for inserting data into table "user" */
+export type User_Insert_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   family_name?: Maybe<Scalars['String']>;
@@ -1877,8 +1877,8 @@ export type Users_Insert_Input = {
 };
 
 /** aggregate max on columns */
-export type Users_Max_Fields = {
-  __typename?: 'users_max_fields';
+export type User_Max_Fields = {
+  __typename?: 'user_max_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   family_name?: Maybe<Scalars['String']>;
@@ -1891,8 +1891,8 @@ export type Users_Max_Fields = {
 };
 
 /** aggregate min on columns */
-export type Users_Min_Fields = {
-  __typename?: 'users_min_fields';
+export type User_Min_Fields = {
+  __typename?: 'user_min_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   family_name?: Maybe<Scalars['String']>;
@@ -1904,24 +1904,24 @@ export type Users_Min_Fields = {
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
-/** response of any mutation on the table "users" */
-export type Users_Mutation_Response = {
-  __typename?: 'users_mutation_response';
+/** response of any mutation on the table "user" */
+export type User_Mutation_Response = {
+  __typename?: 'user_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Users>;
+  returning: Array<User>;
 };
 
-/** on conflict condition type for table "users" */
-export type Users_On_Conflict = {
-  constraint: Users_Constraint;
-  update_columns?: Array<Users_Update_Column>;
-  where?: Maybe<Users_Bool_Exp>;
+/** on conflict condition type for table "user" */
+export type User_On_Conflict = {
+  constraint: User_Constraint;
+  update_columns?: Array<User_Update_Column>;
+  where?: Maybe<User_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "users". */
-export type Users_Order_By = {
+/** Ordering options when selecting data from "user". */
+export type User_Order_By = {
   created_at?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
   family_name?: Maybe<Order_By>;
@@ -1933,13 +1933,13 @@ export type Users_Order_By = {
   updated_at?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: users */
-export type Users_Pk_Columns_Input = {
+/** primary key columns input for table: user */
+export type User_Pk_Columns_Input = {
   id: Scalars['String'];
 };
 
-/** select columns of table "users" */
-export enum Users_Select_Column {
+/** select columns of table "user" */
+export enum User_Select_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -1960,8 +1960,8 @@ export enum Users_Select_Column {
   UpdatedAt = 'updated_at',
 }
 
-/** input type for updating data in table "users" */
-export type Users_Set_Input = {
+/** input type for updating data in table "user" */
+export type User_Set_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   family_name?: Maybe<Scalars['String']>;
@@ -1973,8 +1973,8 @@ export type Users_Set_Input = {
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
-/** update columns of table "users" */
-export enum Users_Update_Column {
+/** update columns of table "user" */
+export enum User_Update_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */

@@ -54,7 +54,7 @@
     name: migrations
 - table:
     schema: public
-    name: users
+    name: user
   select_permissions:
   - role: user
     permission:
