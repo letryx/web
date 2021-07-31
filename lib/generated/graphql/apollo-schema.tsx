@@ -2905,6 +2905,18 @@ export type User_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
+export type ContractListFragment = { __typename?: 'data_sec_contracts' } & Pick<
+  Data_Sec_Contracts,
+  | 'accession_number'
+  | 'sequence'
+  | 'company_cik'
+  | 'company_name'
+  | 'company_geo'
+  | 'description'
+  | 'filing_metadata'
+  | 'filing_type'
+>;
+
 export type GetSecContractsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -2912,19 +2924,7 @@ export type GetSecContractsQueryVariables = Exact<{
 
 export type GetSecContractsQuery = { __typename?: 'query_root' } & {
   data_sec_contracts: Array<
-    { __typename?: 'data_sec_contracts' } & Pick<
-      Data_Sec_Contracts,
-      | 'accession_number'
-      | 'sequence'
-      | 'company_cik'
-      | 'company_name'
-      | 'company_geo'
-      | 'description'
-      | 'filing_metadata'
-      | 'filing_type'
-      | 'text'
-      | 'contents'
-    >
+    { __typename?: 'data_sec_contracts' } & ContractListFragment
   >;
 };
 
@@ -2956,6 +2956,18 @@ export type GetContractsQuery = { __typename?: 'query_root' } & {
   >;
 };
 
+export const ContractListFragmentDoc = gql`
+  fragment ContractList on data_sec_contracts {
+    accession_number
+    sequence
+    company_cik
+    company_name
+    company_geo
+    description
+    filing_metadata
+    filing_type
+  }
+`;
 export const CurrentUserFragmentDoc = gql`
   fragment CurrentUser on user {
     id
@@ -2969,20 +2981,16 @@ export const CurrentUserFragmentDoc = gql`
   }
 `;
 export const GetSecContractsDocument = gql`
-  query getSECContracts($limit: Int = 100, $offset: Int = 0) {
-    data_sec_contracts(limit: $limit, offset: $offset) {
-      accession_number
-      sequence
-      company_cik
-      company_name
-      company_geo
-      description
-      filing_metadata
-      filing_type
-      text
-      contents
+  query GetSECContracts($limit: Int = 20, $offset: Int = 0) {
+    data_sec_contracts(
+      limit: $limit
+      offset: $offset
+      order_by: { accession_number: asc, sequence: asc }
+    ) {
+      ...ContractList
     }
   }
+  ${ContractListFragmentDoc}
 `;
 
 /**

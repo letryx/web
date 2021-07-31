@@ -8,6 +8,7 @@ module.exports = {
     '.eslintrc.cjs',
     'next.config.js',
     'jest.config.js',
+    'apollo.config.js',
     'lib/generated/**/*',
     'auth0/*',
   ],
