@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "private": "true",
   "bugs": {
-    "url": "https://github.com/letryx-software/web/issues"
+    "url": "https://github.com/letryx/web/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/letryx-software/web.git"
+    "url": "https://github.com/letryx/web.git"
   },
   "license": "UNLICENSED",
   "scripts": {

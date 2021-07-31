@@ -96,7 +96,7 @@ export const Footer: FC = () => (
             },
             {
               social: 'github',
-              href: 'https://github.com/letryx-software',
+              href: 'https://github.com/letryx',
             },
             {
               social: 'email',
