@@ -1,0 +1,16 @@
+fragment CurrentUser on user {
+  id
+  email
+  name
+  photo_url
+  default_org {
+    id
+    name
+  }
+}
+
+query GetCurrentUser($auth0_id: String!) {
+  user(where: { auth0_id: { _eq: $auth0_id } }, limit: 1) {
+    ...CurrentUser
+  }
+}

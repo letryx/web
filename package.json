@@ -13,6 +13,7 @@
   "scripts": {
     "build": "next build",
     "codegen": "eval $(egrep '^GRAPHQL_API_URL=' .env | xargs) graphql-codegen --config codegen.yml --target typescript --tagName gql",
+    "schema": "eval $(egrep '^HASURA_GRAPHQL_ADMIN_SECRET=' .env | xargs) gq http://localhost:6060/v1/graphql -H \\'X-Hasura-Admin-Secret: $HASURA_GRAPHQL_ADMIN_SECRET\\' --introspect > lib/generated/graphql/schema.graphql",
     "console": "hasura console --no-browser",
     "dev": "next",
     "lint": "eslint components pages lib types styles test",
@@ -49,6 +50,7 @@
     "jsonp": "^0.2.1",
     "next": "^11.0.1",
     "next-mdx-remote": "^3.0.4",
+    "next-with-apollo": "^5.2.1",
     "prettier": "^2.3.2",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
