@@ -1,0 +1,2 @@
+schema: 'lib/generated/graphql/schema.graphql'
+documents: '**/*.{ts, tsx, graphql}'

@@ -54,17 +54,64 @@
     name: migrations
 - table:
     schema: public
-    name: users
+    name: org
+  object_relationships:
+  - name: org_type
+    using:
+      foreign_key_constraint_on: type
+  array_relationships:
+  - name: users
+    using:
+      foreign_key_constraint_on:
+        column: default_org_id
+        table:
+          schema: public
+          name: user
   select_permissions:
   - role: user
     permission:
       columns:
+      - id
+      - name
+      - type
+      filter:
+        users:
+          auth0_id:
+            _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: org_type
+  is_enum: true
+  array_relationships:
+  - name: orgs
+    using:
+      foreign_key_constraint_on:
+        column: type
+        table:
+          schema: public
+          name: org
+- table:
+    schema: public
+    name: user
+  object_relationships:
+  - name: default_org
+    using:
+      foreign_key_constraint_on: default_org_id
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - auth0_id
+      - default_org_id
       - email
       - family_name
       - given_name
+      - id
       - name
       - nickname
       - photo_url
       filter:
-        id:
-          _eq: X-Hasura-User-Id
+        default_org:
+          users:
+            auth0_id:
+              _eq: X-Hasura-User-Id

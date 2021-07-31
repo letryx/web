@@ -9,6 +9,7 @@ module.exports = {
     'next.config.js',
     'jest.config.js',
     'lib/generated/**/*',
+    'auth0/*',
   ],
   plugins: ['@typescript-eslint', 'eslint-comments', 'promise', 'prettier'],
   extends: [

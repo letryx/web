@@ -1,0 +1,5 @@
+#!/bin/sh
+npx hasura migrate \
+  --admin-secret="${HASURA_PRODUCTION_SECRET}" \
+  --endpoint="https://api.letryx.com" \
+  $@

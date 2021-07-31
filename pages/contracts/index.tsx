@@ -4,7 +4,6 @@ import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Box } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
 import { NextChakraLink } from 'components/next-chakra-link';
-import { withApollo } from 'lib/with-apollo';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 
@@ -68,4 +67,4 @@ const ContractsPage: FC = () => {
 
 export const getServerSideProps = withPageAuthRequired();
 
-export default withApollo()(ContractsPage);
+export default ContractsPage;

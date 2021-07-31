@@ -1,19 +1,20 @@
-import { fetcher } from 'lib/fetcher';
-import { set } from 'lib/store';
-import { createContext, FC, useContext, useEffect, useState } from 'react';
-import { AuthResponse } from 'types/api';
-import { User } from 'types/user';
+import { useUser } from '@auth0/nextjs-auth0';
+import {
+  CurrentUserFragment,
+  useGetCurrentUserQuery,
+} from 'lib/generated/graphql/apollo-schema';
+import { createContext, FC, useContext } from 'react';
 
 interface AppContextProps {
-  loggedIn: boolean;
-  currentUser: User | undefined;
-  isAuthComplete: boolean;
+  isLoading: boolean;
+  isLoggedIn: boolean;
+  currentUser: CurrentUserFragment | undefined;
 }
 
 const AppContext = createContext<AppContextProps>({
   currentUser: undefined,
-  loggedIn: false,
-  isAuthComplete: false,
+  isLoggedIn: false,
+  isLoading: true,
 });
 
 export function useAppContext(): AppContextProps {
@@ -25,26 +26,35 @@ export function useAppContext(): AppContextProps {
 }
 
 const AppProvider: FC = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<User | undefined>();
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [isAuthComplete, setIsAuthComplete] = useState(false);
+  const { user, error: authError, isLoading: authLoading } = useUser();
+  const {
+    data: userData,
+    error: userError,
+    loading: userLoading,
+  } = useGetCurrentUserQuery({
+    skip: !user,
+    variables: { auth0_id: user?.sub || 'none' },
+  });
+  const currentUser = userData?.user?.[0];
+  const error = authError || userError;
+  const isLoading = authLoading || userLoading;
 
-  useEffect(() => {
-    const fetchData = async (): Promise<void> => {
-      const { data, res } = await fetcher<AuthResponse>('/api/auth');
-      const isSuccessful = res.status === 200;
-      setLoggedIn(isSuccessful);
-      setIsAuthComplete(true);
-      if (isSuccessful) {
-        setCurrentUser(data.currentUser);
-        set('api-token', data.token);
-      }
-    };
-    fetchData();
-  }, []);
+  if (error) {
+    // eslint-disable-next-line no-console
+    console.log(`Login error: ${error}`);
+    if (
+      typeof window !== 'undefined' &&
+      process.env.NODE_ENV === 'development'
+    ) {
+      // eslint-disable-next-line no-alert
+      alert(`Login error: ${error}`);
+    }
+  }
 
   return (
-    <AppContext.Provider value={{ currentUser, isAuthComplete, loggedIn }}>
+    <AppContext.Provider
+      value={{ isLoading, isLoggedIn: !!currentUser, currentUser }}
+    >
       {children}
     </AppContext.Provider>
   );
