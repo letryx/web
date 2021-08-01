@@ -11,8 +11,9 @@ module.exports = {
     },
     includes: [
       'lib/**/*.graphql',
-      'pages/**/*.{ts, tsx, graphql}',
-      'components/**/*.{ts, tsx, graphql}',
+      'lib/**/*.ts',
+      'pages/**/*.tsx',
+      'components/**/*.tsx',
     ],
     excludes: ['**/generated/**', '**/node_modules/**'],
   },
