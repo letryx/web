@@ -55,7 +55,7 @@ export const UserDropdown: FC = () => {
     </Menu>
   ) : (
     <NextChakraLink
-      href={`/api/auth/login?returnTo=${router.pathname}`}
+      href={`/api/auth/login?returnTo=${router.asPath}`}
       textDecoration="none"
       _hover={{ textDecoration: 'none' }}
     >
