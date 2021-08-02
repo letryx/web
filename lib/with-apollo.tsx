@@ -1,7 +1,7 @@
 // lib/withApollo.js
 import { ApolloProvider } from '@apollo/react-hooks';
+import { createApolloClient } from 'lib/apollo-client';
 import withApollo from 'next-with-apollo';
-import { createApolloClient } from './apollo-client';
 
 export default withApollo(
   ({ initialState }) => createApolloClient(initialState || {}),
