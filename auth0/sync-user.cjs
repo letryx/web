@@ -71,6 +71,7 @@ exports.onExecutePostLogin = async (event, api) => {
         email
         name
         default_org {
+          id
           name
         }
       }
@@ -109,7 +110,9 @@ exports.onExecutePostLogin = async (event, api) => {
     throw new Error(res.status);
   }
 
-  api.user.setAppMetadata('letryx', await res.json());
+  const letryx_user_data = (await res.json()).data.insert_user_one;
+
+  api.user.setAppMetadata('letryx', letryx_user_data);
 };
 
 /**
