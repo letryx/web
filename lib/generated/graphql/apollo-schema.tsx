@@ -2941,6 +2941,26 @@ export type GetCurrentUserQuery = { __typename?: 'query_root' } & {
   user: Array<{ __typename?: 'user' } & CurrentUserFragment>;
 };
 
+export type SyncUserMutationVariables = Exact<{
+  auth0_id: Scalars['String'];
+  email: Scalars['String'];
+  name: Scalars['String'];
+  nickname?: Maybe<Scalars['String']>;
+  given_name?: Maybe<Scalars['String']>;
+  family_name?: Maybe<Scalars['String']>;
+  photo_url?: Maybe<Scalars['String']>;
+  org: Org_Insert_Input;
+}>;
+
+export type SyncUserMutation = { __typename?: 'mutation_root' } & {
+  insert_user_one?: Maybe<
+    { __typename?: 'user' } & Pick<
+      User,
+      'id' | 'auth0_id' | 'email' | 'name'
+    > & { default_org: { __typename?: 'org' } & Pick<Org, 'id' | 'name'> }
+  >;
+};
+
 export type GetContractsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetContractsQuery = { __typename?: 'query_root' } & {
@@ -3102,6 +3122,105 @@ export type GetCurrentUserLazyQueryHookResult = ReturnType<
 export type GetCurrentUserQueryResult = Apollo.QueryResult<
   GetCurrentUserQuery,
   GetCurrentUserQueryVariables
+>;
+export const SyncUserDocument = gql`
+  mutation SyncUser(
+    $auth0_id: String!
+    $email: String!
+    $name: String!
+    $nickname: String
+    $given_name: String
+    $family_name: String
+    $photo_url: String
+    $org: org_insert_input!
+  ) {
+    insert_user_one(
+      object: {
+        auth0_id: $auth0_id
+        name: $name
+        nickname: $nickname
+        given_name: $given_name
+        family_name: $family_name
+        email: $email
+        photo_url: $photo_url
+        default_org: {
+          data: $org
+          on_conflict: {
+            constraint: org_auth0_id_key
+            update_columns: [auth0_connection_name]
+          }
+        }
+      }
+      on_conflict: {
+        constraint: user_auth0_id_key
+        update_columns: [
+          email
+          name
+          nickname
+          given_name
+          family_name
+          photo_url
+          default_org_id
+        ]
+      }
+    ) {
+      id
+      auth0_id
+      email
+      name
+      default_org {
+        id
+        name
+      }
+    }
+  }
+`;
+export type SyncUserMutationFn = Apollo.MutationFunction<
+  SyncUserMutation,
+  SyncUserMutationVariables
+>;
+
+/**
+ * __useSyncUserMutation__
+ *
+ * To run a mutation, you first call `useSyncUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSyncUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [syncUserMutation, { data, loading, error }] = useSyncUserMutation({
+ *   variables: {
+ *      auth0_id: // value for 'auth0_id'
+ *      email: // value for 'email'
+ *      name: // value for 'name'
+ *      nickname: // value for 'nickname'
+ *      given_name: // value for 'given_name'
+ *      family_name: // value for 'family_name'
+ *      photo_url: // value for 'photo_url'
+ *      org: // value for 'org'
+ *   },
+ * });
+ */
+export function useSyncUserMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    SyncUserMutation,
+    SyncUserMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<SyncUserMutation, SyncUserMutationVariables>(
+    SyncUserDocument,
+    options
+  );
+}
+export type SyncUserMutationHookResult = ReturnType<typeof useSyncUserMutation>;
+export type SyncUserMutationResult = Apollo.MutationResult<SyncUserMutation>;
+export type SyncUserMutationOptions = Apollo.BaseMutationOptions<
+  SyncUserMutation,
+  SyncUserMutationVariables
 >;
 export const GetContractsDocument = gql`
   query GetContracts {
