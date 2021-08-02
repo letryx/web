@@ -63,7 +63,7 @@ const Doc: FC<NextPageContext & { content: MDXRemoteSerializeResult }> = ({
 }) => {
   return (
     <Layout>
-      <Container maxWidth="800px">
+      <Container maxWidth="700px" textAlign="justify">
         <MDXRemote {...content} components={components} />
       </Container>
     </Layout>
