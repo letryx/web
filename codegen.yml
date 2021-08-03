@@ -26,21 +26,6 @@ generates:
       useExplicitTyping: true
       apolloClientVersion: 3
       reactApolloVersion: 3
-  # lib/generated/graphql/page.tsx:
-  #   plugins:
-  #     - 'apollo-next-ssr'
-  #   preset: import-types
-  #   presetConfig:
-  #     typesPath: ./apollo-schema
-  #   config:
-  #     scalars:
-  #       timestamp: Date
-  #       timestamptz: Date
-  #     strictScalars: true
-  #     useExplicitTyping: true
-  #     apolloClientVersion: 3
-  #     reactApolloVersion: 3
-  #     apolloImportFrom: '@apollo/client'
 hooks:
   afterAllFileWrite:
     - prettier --write

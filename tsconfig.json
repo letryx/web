@@ -30,6 +30,7 @@
   ],
   "include": [
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "bin/dump-to-typesense"
   ]
 }

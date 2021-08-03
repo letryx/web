@@ -2961,21 +2961,6 @@ export type SyncUserMutation = { __typename?: 'mutation_root' } & {
   >;
 };
 
-export type GetContractsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetContractsQuery = { __typename?: 'query_root' } & {
-  data_sec_contracts: Array<
-    { __typename?: 'data_sec_contracts' } & Pick<
-      Data_Sec_Contracts,
-      | 'company_name'
-      | 'accession_number'
-      | 'sequence'
-      | 'description'
-      | 'filing_type'
-    >
-  >;
-};
-
 export const ContractListFragmentDoc = gql`
   fragment ContractList on data_sec_contracts {
     accession_number
@@ -3221,70 +3206,6 @@ export type SyncUserMutationResult = Apollo.MutationResult<SyncUserMutation>;
 export type SyncUserMutationOptions = Apollo.BaseMutationOptions<
   SyncUserMutation,
   SyncUserMutationVariables
->;
-export const GetContractsDocument = gql`
-  query GetContracts {
-    data_sec_contracts(
-      order_by: { accession_number: asc, sequence: asc }
-      limit: 3
-    ) {
-      company_name
-      accession_number
-      sequence
-      description
-      filing_type
-    }
-  }
-`;
-
-/**
- * __useGetContractsQuery__
- *
- * To run a query within a React component, call `useGetContractsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetContractsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetContractsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetContractsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    GetContractsQuery,
-    GetContractsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetContractsQuery, GetContractsQueryVariables>(
-    GetContractsDocument,
-    options
-  );
-}
-export function useGetContractsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetContractsQuery,
-    GetContractsQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetContractsQuery, GetContractsQueryVariables>(
-    GetContractsDocument,
-    options
-  );
-}
-export type GetContractsQueryHookResult = ReturnType<
-  typeof useGetContractsQuery
->;
-export type GetContractsLazyQueryHookResult = ReturnType<
-  typeof useGetContractsLazyQuery
->;
-export type GetContractsQueryResult = Apollo.QueryResult<
-  GetContractsQuery,
-  GetContractsQueryVariables
 >;
 
 export type PossibleTypesResultData = {
