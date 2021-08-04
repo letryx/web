@@ -82,1093 +82,6 @@ input String_comparison_exp {
 }
 
 """
-columns and relationships of "data.sec_companies"
-"""
-type data_sec_companies {
-  cik: String!
-  created_at: timestamptz
-  geo: String
-  name: String!
-
-  """An array relationship"""
-  sec_filings(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filings_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filings_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filings_bool_exp
-  ): [data_sec_filings!]!
-
-  """An aggregate relationship"""
-  sec_filings_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filings_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filings_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filings_bool_exp
-  ): data_sec_filings_aggregate!
-  sic: String!
-  sic_name: String!
-  updated_at: timestamptz
-}
-
-"""
-aggregated selection of "data.sec_companies"
-"""
-type data_sec_companies_aggregate {
-  aggregate: data_sec_companies_aggregate_fields
-  nodes: [data_sec_companies!]!
-}
-
-"""
-aggregate fields of "data.sec_companies"
-"""
-type data_sec_companies_aggregate_fields {
-  count(columns: [data_sec_companies_select_column!], distinct: Boolean): Int!
-  max: data_sec_companies_max_fields
-  min: data_sec_companies_min_fields
-}
-
-"""
-Boolean expression to filter rows from the table "data.sec_companies". All fields are combined with a logical 'AND'.
-"""
-input data_sec_companies_bool_exp {
-  _and: [data_sec_companies_bool_exp!]
-  _not: data_sec_companies_bool_exp
-  _or: [data_sec_companies_bool_exp!]
-  cik: String_comparison_exp
-  created_at: timestamptz_comparison_exp
-  geo: String_comparison_exp
-  name: String_comparison_exp
-  sec_filings: data_sec_filings_bool_exp
-  sic: String_comparison_exp
-  sic_name: String_comparison_exp
-  updated_at: timestamptz_comparison_exp
-}
-
-"""
-unique or primary key constraints on table "data.sec_companies"
-"""
-enum data_sec_companies_constraint {
-  """unique or primary key constraint"""
-  sec_companies_pkey
-}
-
-"""
-input type for inserting data into table "data.sec_companies"
-"""
-input data_sec_companies_insert_input {
-  cik: String
-  created_at: timestamptz
-  geo: String
-  name: String
-  sec_filings: data_sec_filings_arr_rel_insert_input
-  sic: String
-  sic_name: String
-  updated_at: timestamptz
-}
-
-"""aggregate max on columns"""
-type data_sec_companies_max_fields {
-  cik: String
-  created_at: timestamptz
-  geo: String
-  name: String
-  sic: String
-  sic_name: String
-  updated_at: timestamptz
-}
-
-"""aggregate min on columns"""
-type data_sec_companies_min_fields {
-  cik: String
-  created_at: timestamptz
-  geo: String
-  name: String
-  sic: String
-  sic_name: String
-  updated_at: timestamptz
-}
-
-"""
-response of any mutation on the table "data.sec_companies"
-"""
-type data_sec_companies_mutation_response {
-  """number of rows affected by the mutation"""
-  affected_rows: Int!
-
-  """data from the rows affected by the mutation"""
-  returning: [data_sec_companies!]!
-}
-
-"""
-input type for inserting object relation for remote table "data.sec_companies"
-"""
-input data_sec_companies_obj_rel_insert_input {
-  data: data_sec_companies_insert_input!
-
-  """on conflict condition"""
-  on_conflict: data_sec_companies_on_conflict
-}
-
-"""
-on conflict condition type for table "data.sec_companies"
-"""
-input data_sec_companies_on_conflict {
-  constraint: data_sec_companies_constraint!
-  update_columns: [data_sec_companies_update_column!]! = []
-  where: data_sec_companies_bool_exp
-}
-
-"""Ordering options when selecting data from "data.sec_companies"."""
-input data_sec_companies_order_by {
-  cik: order_by
-  created_at: order_by
-  geo: order_by
-  name: order_by
-  sec_filings_aggregate: data_sec_filings_aggregate_order_by
-  sic: order_by
-  sic_name: order_by
-  updated_at: order_by
-}
-
-"""primary key columns input for table: data_sec_companies"""
-input data_sec_companies_pk_columns_input {
-  cik: String!
-}
-
-"""
-select columns of table "data.sec_companies"
-"""
-enum data_sec_companies_select_column {
-  """column name"""
-  cik
-
-  """column name"""
-  created_at
-
-  """column name"""
-  geo
-
-  """column name"""
-  name
-
-  """column name"""
-  sic
-
-  """column name"""
-  sic_name
-
-  """column name"""
-  updated_at
-}
-
-"""
-input type for updating data in table "data.sec_companies"
-"""
-input data_sec_companies_set_input {
-  cik: String
-  created_at: timestamptz
-  geo: String
-  name: String
-  sic: String
-  sic_name: String
-  updated_at: timestamptz
-}
-
-"""
-update columns of table "data.sec_companies"
-"""
-enum data_sec_companies_update_column {
-  """column name"""
-  cik
-
-  """column name"""
-  created_at
-
-  """column name"""
-  geo
-
-  """column name"""
-  name
-
-  """column name"""
-  sic
-
-  """column name"""
-  sic_name
-
-  """column name"""
-  updated_at
-}
-
-"""
-columns and relationships of "data.sec_contracts"
-"""
-type data_sec_contracts {
-  accession_number: String
-  company_cik: String
-  company_geo: String
-  company_name: String
-  contents: String
-  description: String
-  filing_metadata: String
-  filing_type: String
-  sequence: Int
-  text: String
-}
-
-"""
-aggregated selection of "data.sec_contracts"
-"""
-type data_sec_contracts_aggregate {
-  aggregate: data_sec_contracts_aggregate_fields
-  nodes: [data_sec_contracts!]!
-}
-
-"""
-aggregate fields of "data.sec_contracts"
-"""
-type data_sec_contracts_aggregate_fields {
-  avg: data_sec_contracts_avg_fields
-  count(columns: [data_sec_contracts_select_column!], distinct: Boolean): Int!
-  max: data_sec_contracts_max_fields
-  min: data_sec_contracts_min_fields
-  stddev: data_sec_contracts_stddev_fields
-  stddev_pop: data_sec_contracts_stddev_pop_fields
-  stddev_samp: data_sec_contracts_stddev_samp_fields
-  sum: data_sec_contracts_sum_fields
-  var_pop: data_sec_contracts_var_pop_fields
-  var_samp: data_sec_contracts_var_samp_fields
-  variance: data_sec_contracts_variance_fields
-}
-
-"""aggregate avg on columns"""
-type data_sec_contracts_avg_fields {
-  sequence: Float
-}
-
-"""
-Boolean expression to filter rows from the table "data.sec_contracts". All fields are combined with a logical 'AND'.
-"""
-input data_sec_contracts_bool_exp {
-  _and: [data_sec_contracts_bool_exp!]
-  _not: data_sec_contracts_bool_exp
-  _or: [data_sec_contracts_bool_exp!]
-  accession_number: String_comparison_exp
-  company_cik: String_comparison_exp
-  company_geo: String_comparison_exp
-  company_name: String_comparison_exp
-  contents: String_comparison_exp
-  description: String_comparison_exp
-  filing_metadata: String_comparison_exp
-  filing_type: String_comparison_exp
-  sequence: Int_comparison_exp
-  text: String_comparison_exp
-}
-
-"""aggregate max on columns"""
-type data_sec_contracts_max_fields {
-  accession_number: String
-  company_cik: String
-  company_geo: String
-  company_name: String
-  contents: String
-  description: String
-  filing_metadata: String
-  filing_type: String
-  sequence: Int
-  text: String
-}
-
-"""aggregate min on columns"""
-type data_sec_contracts_min_fields {
-  accession_number: String
-  company_cik: String
-  company_geo: String
-  company_name: String
-  contents: String
-  description: String
-  filing_metadata: String
-  filing_type: String
-  sequence: Int
-  text: String
-}
-
-"""Ordering options when selecting data from "data.sec_contracts"."""
-input data_sec_contracts_order_by {
-  accession_number: order_by
-  company_cik: order_by
-  company_geo: order_by
-  company_name: order_by
-  contents: order_by
-  description: order_by
-  filing_metadata: order_by
-  filing_type: order_by
-  sequence: order_by
-  text: order_by
-}
-
-"""
-select columns of table "data.sec_contracts"
-"""
-enum data_sec_contracts_select_column {
-  """column name"""
-  accession_number
-
-  """column name"""
-  company_cik
-
-  """column name"""
-  company_geo
-
-  """column name"""
-  company_name
-
-  """column name"""
-  contents
-
-  """column name"""
-  description
-
-  """column name"""
-  filing_metadata
-
-  """column name"""
-  filing_type
-
-  """column name"""
-  sequence
-
-  """column name"""
-  text
-}
-
-"""aggregate stddev on columns"""
-type data_sec_contracts_stddev_fields {
-  sequence: Float
-}
-
-"""aggregate stddev_pop on columns"""
-type data_sec_contracts_stddev_pop_fields {
-  sequence: Float
-}
-
-"""aggregate stddev_samp on columns"""
-type data_sec_contracts_stddev_samp_fields {
-  sequence: Float
-}
-
-"""aggregate sum on columns"""
-type data_sec_contracts_sum_fields {
-  sequence: Int
-}
-
-"""aggregate var_pop on columns"""
-type data_sec_contracts_var_pop_fields {
-  sequence: Float
-}
-
-"""aggregate var_samp on columns"""
-type data_sec_contracts_var_samp_fields {
-  sequence: Float
-}
-
-"""aggregate variance on columns"""
-type data_sec_contracts_variance_fields {
-  sequence: Float
-}
-
-"""
-columns and relationships of "data.sec_filing_attachments"
-"""
-type data_sec_filing_attachments {
-  accession_number: String!
-  contents: String!
-  created_at: timestamptz
-  description: String
-  filename: String
-  filing_type: String!
-
-  """An object relationship"""
-  sec_filing: data_sec_filings!
-  sequence: Int!
-  text: String
-  updated_at: timestamptz
-}
-
-"""
-aggregated selection of "data.sec_filing_attachments"
-"""
-type data_sec_filing_attachments_aggregate {
-  aggregate: data_sec_filing_attachments_aggregate_fields
-  nodes: [data_sec_filing_attachments!]!
-}
-
-"""
-aggregate fields of "data.sec_filing_attachments"
-"""
-type data_sec_filing_attachments_aggregate_fields {
-  avg: data_sec_filing_attachments_avg_fields
-  count(columns: [data_sec_filing_attachments_select_column!], distinct: Boolean): Int!
-  max: data_sec_filing_attachments_max_fields
-  min: data_sec_filing_attachments_min_fields
-  stddev: data_sec_filing_attachments_stddev_fields
-  stddev_pop: data_sec_filing_attachments_stddev_pop_fields
-  stddev_samp: data_sec_filing_attachments_stddev_samp_fields
-  sum: data_sec_filing_attachments_sum_fields
-  var_pop: data_sec_filing_attachments_var_pop_fields
-  var_samp: data_sec_filing_attachments_var_samp_fields
-  variance: data_sec_filing_attachments_variance_fields
-}
-
-"""
-order by aggregate values of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_aggregate_order_by {
-  avg: data_sec_filing_attachments_avg_order_by
-  count: order_by
-  max: data_sec_filing_attachments_max_order_by
-  min: data_sec_filing_attachments_min_order_by
-  stddev: data_sec_filing_attachments_stddev_order_by
-  stddev_pop: data_sec_filing_attachments_stddev_pop_order_by
-  stddev_samp: data_sec_filing_attachments_stddev_samp_order_by
-  sum: data_sec_filing_attachments_sum_order_by
-  var_pop: data_sec_filing_attachments_var_pop_order_by
-  var_samp: data_sec_filing_attachments_var_samp_order_by
-  variance: data_sec_filing_attachments_variance_order_by
-}
-
-"""
-input type for inserting array relation for remote table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_arr_rel_insert_input {
-  data: [data_sec_filing_attachments_insert_input!]!
-
-  """on conflict condition"""
-  on_conflict: data_sec_filing_attachments_on_conflict
-}
-
-"""aggregate avg on columns"""
-type data_sec_filing_attachments_avg_fields {
-  sequence: Float
-}
-
-"""
-order by avg() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_avg_order_by {
-  sequence: order_by
-}
-
-"""
-Boolean expression to filter rows from the table "data.sec_filing_attachments". All fields are combined with a logical 'AND'.
-"""
-input data_sec_filing_attachments_bool_exp {
-  _and: [data_sec_filing_attachments_bool_exp!]
-  _not: data_sec_filing_attachments_bool_exp
-  _or: [data_sec_filing_attachments_bool_exp!]
-  accession_number: String_comparison_exp
-  contents: String_comparison_exp
-  created_at: timestamptz_comparison_exp
-  description: String_comparison_exp
-  filename: String_comparison_exp
-  filing_type: String_comparison_exp
-  sec_filing: data_sec_filings_bool_exp
-  sequence: Int_comparison_exp
-  text: String_comparison_exp
-  updated_at: timestamptz_comparison_exp
-}
-
-"""
-unique or primary key constraints on table "data.sec_filing_attachments"
-"""
-enum data_sec_filing_attachments_constraint {
-  """unique or primary key constraint"""
-  sec_filing_attachment_accession_number_sequence_key
-
-  """unique or primary key constraint"""
-  sec_filing_attachment_pkey
-}
-
-"""
-input type for incrementing numeric columns in table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_inc_input {
-  sequence: Int
-}
-
-"""
-input type for inserting data into table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_insert_input {
-  accession_number: String
-  contents: String
-  created_at: timestamptz
-  description: String
-  filename: String
-  filing_type: String
-  sec_filing: data_sec_filings_obj_rel_insert_input
-  sequence: Int
-  text: String
-  updated_at: timestamptz
-}
-
-"""aggregate max on columns"""
-type data_sec_filing_attachments_max_fields {
-  accession_number: String
-  contents: String
-  created_at: timestamptz
-  description: String
-  filename: String
-  filing_type: String
-  sequence: Int
-  text: String
-  updated_at: timestamptz
-}
-
-"""
-order by max() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_max_order_by {
-  accession_number: order_by
-  contents: order_by
-  created_at: order_by
-  description: order_by
-  filename: order_by
-  filing_type: order_by
-  sequence: order_by
-  text: order_by
-  updated_at: order_by
-}
-
-"""aggregate min on columns"""
-type data_sec_filing_attachments_min_fields {
-  accession_number: String
-  contents: String
-  created_at: timestamptz
-  description: String
-  filename: String
-  filing_type: String
-  sequence: Int
-  text: String
-  updated_at: timestamptz
-}
-
-"""
-order by min() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_min_order_by {
-  accession_number: order_by
-  contents: order_by
-  created_at: order_by
-  description: order_by
-  filename: order_by
-  filing_type: order_by
-  sequence: order_by
-  text: order_by
-  updated_at: order_by
-}
-
-"""
-response of any mutation on the table "data.sec_filing_attachments"
-"""
-type data_sec_filing_attachments_mutation_response {
-  """number of rows affected by the mutation"""
-  affected_rows: Int!
-
-  """data from the rows affected by the mutation"""
-  returning: [data_sec_filing_attachments!]!
-}
-
-"""
-on conflict condition type for table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_on_conflict {
-  constraint: data_sec_filing_attachments_constraint!
-  update_columns: [data_sec_filing_attachments_update_column!]! = []
-  where: data_sec_filing_attachments_bool_exp
-}
-
-"""
-Ordering options when selecting data from "data.sec_filing_attachments".
-"""
-input data_sec_filing_attachments_order_by {
-  accession_number: order_by
-  contents: order_by
-  created_at: order_by
-  description: order_by
-  filename: order_by
-  filing_type: order_by
-  sec_filing: data_sec_filings_order_by
-  sequence: order_by
-  text: order_by
-  updated_at: order_by
-}
-
-"""primary key columns input for table: data_sec_filing_attachments"""
-input data_sec_filing_attachments_pk_columns_input {
-  accession_number: String!
-  sequence: Int!
-}
-
-"""
-select columns of table "data.sec_filing_attachments"
-"""
-enum data_sec_filing_attachments_select_column {
-  """column name"""
-  accession_number
-
-  """column name"""
-  contents
-
-  """column name"""
-  created_at
-
-  """column name"""
-  description
-
-  """column name"""
-  filename
-
-  """column name"""
-  filing_type
-
-  """column name"""
-  sequence
-
-  """column name"""
-  text
-
-  """column name"""
-  updated_at
-}
-
-"""
-input type for updating data in table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_set_input {
-  accession_number: String
-  contents: String
-  created_at: timestamptz
-  description: String
-  filename: String
-  filing_type: String
-  sequence: Int
-  text: String
-  updated_at: timestamptz
-}
-
-"""aggregate stddev on columns"""
-type data_sec_filing_attachments_stddev_fields {
-  sequence: Float
-}
-
-"""
-order by stddev() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_stddev_order_by {
-  sequence: order_by
-}
-
-"""aggregate stddev_pop on columns"""
-type data_sec_filing_attachments_stddev_pop_fields {
-  sequence: Float
-}
-
-"""
-order by stddev_pop() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_stddev_pop_order_by {
-  sequence: order_by
-}
-
-"""aggregate stddev_samp on columns"""
-type data_sec_filing_attachments_stddev_samp_fields {
-  sequence: Float
-}
-
-"""
-order by stddev_samp() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_stddev_samp_order_by {
-  sequence: order_by
-}
-
-"""aggregate sum on columns"""
-type data_sec_filing_attachments_sum_fields {
-  sequence: Int
-}
-
-"""
-order by sum() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_sum_order_by {
-  sequence: order_by
-}
-
-"""
-update columns of table "data.sec_filing_attachments"
-"""
-enum data_sec_filing_attachments_update_column {
-  """column name"""
-  accession_number
-
-  """column name"""
-  contents
-
-  """column name"""
-  created_at
-
-  """column name"""
-  description
-
-  """column name"""
-  filename
-
-  """column name"""
-  filing_type
-
-  """column name"""
-  sequence
-
-  """column name"""
-  text
-
-  """column name"""
-  updated_at
-}
-
-"""aggregate var_pop on columns"""
-type data_sec_filing_attachments_var_pop_fields {
-  sequence: Float
-}
-
-"""
-order by var_pop() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_var_pop_order_by {
-  sequence: order_by
-}
-
-"""aggregate var_samp on columns"""
-type data_sec_filing_attachments_var_samp_fields {
-  sequence: Float
-}
-
-"""
-order by var_samp() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_var_samp_order_by {
-  sequence: order_by
-}
-
-"""aggregate variance on columns"""
-type data_sec_filing_attachments_variance_fields {
-  sequence: Float
-}
-
-"""
-order by variance() on columns of table "data.sec_filing_attachments"
-"""
-input data_sec_filing_attachments_variance_order_by {
-  sequence: order_by
-}
-
-"""
-columns and relationships of "data.sec_filings"
-"""
-type data_sec_filings {
-  accession_number: String!
-  cik: String!
-  created_at: timestamptz
-  filing_type: String!
-  header: String
-
-  """An object relationship"""
-  sec_company: data_sec_companies!
-
-  """An array relationship"""
-  sec_filing_attachments(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filing_attachments_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filing_attachments_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filing_attachments_bool_exp
-  ): [data_sec_filing_attachments!]!
-
-  """An aggregate relationship"""
-  sec_filing_attachments_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filing_attachments_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filing_attachments_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filing_attachments_bool_exp
-  ): data_sec_filing_attachments_aggregate!
-  updated_at: timestamptz
-}
-
-"""
-aggregated selection of "data.sec_filings"
-"""
-type data_sec_filings_aggregate {
-  aggregate: data_sec_filings_aggregate_fields
-  nodes: [data_sec_filings!]!
-}
-
-"""
-aggregate fields of "data.sec_filings"
-"""
-type data_sec_filings_aggregate_fields {
-  count(columns: [data_sec_filings_select_column!], distinct: Boolean): Int!
-  max: data_sec_filings_max_fields
-  min: data_sec_filings_min_fields
-}
-
-"""
-order by aggregate values of table "data.sec_filings"
-"""
-input data_sec_filings_aggregate_order_by {
-  count: order_by
-  max: data_sec_filings_max_order_by
-  min: data_sec_filings_min_order_by
-}
-
-"""
-input type for inserting array relation for remote table "data.sec_filings"
-"""
-input data_sec_filings_arr_rel_insert_input {
-  data: [data_sec_filings_insert_input!]!
-
-  """on conflict condition"""
-  on_conflict: data_sec_filings_on_conflict
-}
-
-"""
-Boolean expression to filter rows from the table "data.sec_filings". All fields are combined with a logical 'AND'.
-"""
-input data_sec_filings_bool_exp {
-  _and: [data_sec_filings_bool_exp!]
-  _not: data_sec_filings_bool_exp
-  _or: [data_sec_filings_bool_exp!]
-  accession_number: String_comparison_exp
-  cik: String_comparison_exp
-  created_at: timestamptz_comparison_exp
-  filing_type: String_comparison_exp
-  header: String_comparison_exp
-  sec_company: data_sec_companies_bool_exp
-  sec_filing_attachments: data_sec_filing_attachments_bool_exp
-  updated_at: timestamptz_comparison_exp
-}
-
-"""
-unique or primary key constraints on table "data.sec_filings"
-"""
-enum data_sec_filings_constraint {
-  """unique or primary key constraint"""
-  sec_filing_pkey
-}
-
-"""
-input type for inserting data into table "data.sec_filings"
-"""
-input data_sec_filings_insert_input {
-  accession_number: String
-  cik: String
-  created_at: timestamptz
-  filing_type: String
-  header: String
-  sec_company: data_sec_companies_obj_rel_insert_input
-  sec_filing_attachments: data_sec_filing_attachments_arr_rel_insert_input
-  updated_at: timestamptz
-}
-
-"""aggregate max on columns"""
-type data_sec_filings_max_fields {
-  accession_number: String
-  cik: String
-  created_at: timestamptz
-  filing_type: String
-  header: String
-  updated_at: timestamptz
-}
-
-"""
-order by max() on columns of table "data.sec_filings"
-"""
-input data_sec_filings_max_order_by {
-  accession_number: order_by
-  cik: order_by
-  created_at: order_by
-  filing_type: order_by
-  header: order_by
-  updated_at: order_by
-}
-
-"""aggregate min on columns"""
-type data_sec_filings_min_fields {
-  accession_number: String
-  cik: String
-  created_at: timestamptz
-  filing_type: String
-  header: String
-  updated_at: timestamptz
-}
-
-"""
-order by min() on columns of table "data.sec_filings"
-"""
-input data_sec_filings_min_order_by {
-  accession_number: order_by
-  cik: order_by
-  created_at: order_by
-  filing_type: order_by
-  header: order_by
-  updated_at: order_by
-}
-
-"""
-response of any mutation on the table "data.sec_filings"
-"""
-type data_sec_filings_mutation_response {
-  """number of rows affected by the mutation"""
-  affected_rows: Int!
-
-  """data from the rows affected by the mutation"""
-  returning: [data_sec_filings!]!
-}
-
-"""
-input type for inserting object relation for remote table "data.sec_filings"
-"""
-input data_sec_filings_obj_rel_insert_input {
-  data: data_sec_filings_insert_input!
-
-  """on conflict condition"""
-  on_conflict: data_sec_filings_on_conflict
-}
-
-"""
-on conflict condition type for table "data.sec_filings"
-"""
-input data_sec_filings_on_conflict {
-  constraint: data_sec_filings_constraint!
-  update_columns: [data_sec_filings_update_column!]! = []
-  where: data_sec_filings_bool_exp
-}
-
-"""Ordering options when selecting data from "data.sec_filings"."""
-input data_sec_filings_order_by {
-  accession_number: order_by
-  cik: order_by
-  created_at: order_by
-  filing_type: order_by
-  header: order_by
-  sec_company: data_sec_companies_order_by
-  sec_filing_attachments_aggregate: data_sec_filing_attachments_aggregate_order_by
-  updated_at: order_by
-}
-
-"""primary key columns input for table: data_sec_filings"""
-input data_sec_filings_pk_columns_input {
-  accession_number: String!
-}
-
-"""
-select columns of table "data.sec_filings"
-"""
-enum data_sec_filings_select_column {
-  """column name"""
-  accession_number
-
-  """column name"""
-  cik
-
-  """column name"""
-  created_at
-
-  """column name"""
-  filing_type
-
-  """column name"""
-  header
-
-  """column name"""
-  updated_at
-}
-
-"""
-input type for updating data in table "data.sec_filings"
-"""
-input data_sec_filings_set_input {
-  accession_number: String
-  cik: String
-  created_at: timestamptz
-  filing_type: String
-  header: String
-  updated_at: timestamptz
-}
-
-"""
-update columns of table "data.sec_filings"
-"""
-enum data_sec_filings_update_column {
-  """column name"""
-  accession_number
-
-  """column name"""
-  cik
-
-  """column name"""
-  created_at
-
-  """column name"""
-  filing_type
-
-  """column name"""
-  header
-
-  """column name"""
-  updated_at
-}
-
-"""
 columns and relationships of "migrations"
 """
 type migrations {
@@ -1380,45 +293,6 @@ type migrations_variance_fields {
 """mutation root"""
 type mutation_root {
   """
-  delete data from the table: "data.sec_companies"
-  """
-  delete_data_sec_companies(
-    """filter the rows which have to be deleted"""
-    where: data_sec_companies_bool_exp!
-  ): data_sec_companies_mutation_response
-
-  """
-  delete single row from the table: "data.sec_companies"
-  """
-  delete_data_sec_companies_by_pk(cik: String!): data_sec_companies
-
-  """
-  delete data from the table: "data.sec_filing_attachments"
-  """
-  delete_data_sec_filing_attachments(
-    """filter the rows which have to be deleted"""
-    where: data_sec_filing_attachments_bool_exp!
-  ): data_sec_filing_attachments_mutation_response
-
-  """
-  delete single row from the table: "data.sec_filing_attachments"
-  """
-  delete_data_sec_filing_attachments_by_pk(accession_number: String!, sequence: Int!): data_sec_filing_attachments
-
-  """
-  delete data from the table: "data.sec_filings"
-  """
-  delete_data_sec_filings(
-    """filter the rows which have to be deleted"""
-    where: data_sec_filings_bool_exp!
-  ): data_sec_filings_mutation_response
-
-  """
-  delete single row from the table: "data.sec_filings"
-  """
-  delete_data_sec_filings_by_pk(accession_number: String!): data_sec_filings
-
-  """
   delete data from the table: "migrations"
   """
   delete_migrations(
@@ -1458,6 +332,45 @@ type mutation_root {
   delete_org_type_by_pk(value: String!): org_type
 
   """
+  delete data from the table: "sec_company"
+  """
+  delete_sec_company(
+    """filter the rows which have to be deleted"""
+    where: sec_company_bool_exp!
+  ): sec_company_mutation_response
+
+  """
+  delete single row from the table: "sec_company"
+  """
+  delete_sec_company_by_pk(cik: String!): sec_company
+
+  """
+  delete data from the table: "sec_filing"
+  """
+  delete_sec_filing(
+    """filter the rows which have to be deleted"""
+    where: sec_filing_bool_exp!
+  ): sec_filing_mutation_response
+
+  """
+  delete data from the table: "sec_filing_attachment"
+  """
+  delete_sec_filing_attachment(
+    """filter the rows which have to be deleted"""
+    where: sec_filing_attachment_bool_exp!
+  ): sec_filing_attachment_mutation_response
+
+  """
+  delete single row from the table: "sec_filing_attachment"
+  """
+  delete_sec_filing_attachment_by_pk(accession_number: String!, sequence: Int!): sec_filing_attachment
+
+  """
+  delete single row from the table: "sec_filing"
+  """
+  delete_sec_filing_by_pk(accession_number: String!): sec_filing
+
+  """
   delete data from the table: "user"
   """
   delete_user(
@@ -1469,72 +382,6 @@ type mutation_root {
   delete single row from the table: "user"
   """
   delete_user_by_pk(id: Int!): user
-
-  """
-  insert data into the table: "data.sec_companies"
-  """
-  insert_data_sec_companies(
-    """the rows to be inserted"""
-    objects: [data_sec_companies_insert_input!]!
-
-    """on conflict condition"""
-    on_conflict: data_sec_companies_on_conflict
-  ): data_sec_companies_mutation_response
-
-  """
-  insert a single row into the table: "data.sec_companies"
-  """
-  insert_data_sec_companies_one(
-    """the row to be inserted"""
-    object: data_sec_companies_insert_input!
-
-    """on conflict condition"""
-    on_conflict: data_sec_companies_on_conflict
-  ): data_sec_companies
-
-  """
-  insert data into the table: "data.sec_filing_attachments"
-  """
-  insert_data_sec_filing_attachments(
-    """the rows to be inserted"""
-    objects: [data_sec_filing_attachments_insert_input!]!
-
-    """on conflict condition"""
-    on_conflict: data_sec_filing_attachments_on_conflict
-  ): data_sec_filing_attachments_mutation_response
-
-  """
-  insert a single row into the table: "data.sec_filing_attachments"
-  """
-  insert_data_sec_filing_attachments_one(
-    """the row to be inserted"""
-    object: data_sec_filing_attachments_insert_input!
-
-    """on conflict condition"""
-    on_conflict: data_sec_filing_attachments_on_conflict
-  ): data_sec_filing_attachments
-
-  """
-  insert data into the table: "data.sec_filings"
-  """
-  insert_data_sec_filings(
-    """the rows to be inserted"""
-    objects: [data_sec_filings_insert_input!]!
-
-    """on conflict condition"""
-    on_conflict: data_sec_filings_on_conflict
-  ): data_sec_filings_mutation_response
-
-  """
-  insert a single row into the table: "data.sec_filings"
-  """
-  insert_data_sec_filings_one(
-    """the row to be inserted"""
-    object: data_sec_filings_insert_input!
-
-    """on conflict condition"""
-    on_conflict: data_sec_filings_on_conflict
-  ): data_sec_filings
 
   """
   insert data into the table: "migrations"
@@ -1603,6 +450,72 @@ type mutation_root {
   ): org_type
 
   """
+  insert data into the table: "sec_company"
+  """
+  insert_sec_company(
+    """the rows to be inserted"""
+    objects: [sec_company_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: sec_company_on_conflict
+  ): sec_company_mutation_response
+
+  """
+  insert a single row into the table: "sec_company"
+  """
+  insert_sec_company_one(
+    """the row to be inserted"""
+    object: sec_company_insert_input!
+
+    """on conflict condition"""
+    on_conflict: sec_company_on_conflict
+  ): sec_company
+
+  """
+  insert data into the table: "sec_filing"
+  """
+  insert_sec_filing(
+    """the rows to be inserted"""
+    objects: [sec_filing_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: sec_filing_on_conflict
+  ): sec_filing_mutation_response
+
+  """
+  insert data into the table: "sec_filing_attachment"
+  """
+  insert_sec_filing_attachment(
+    """the rows to be inserted"""
+    objects: [sec_filing_attachment_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: sec_filing_attachment_on_conflict
+  ): sec_filing_attachment_mutation_response
+
+  """
+  insert a single row into the table: "sec_filing_attachment"
+  """
+  insert_sec_filing_attachment_one(
+    """the row to be inserted"""
+    object: sec_filing_attachment_insert_input!
+
+    """on conflict condition"""
+    on_conflict: sec_filing_attachment_on_conflict
+  ): sec_filing_attachment
+
+  """
+  insert a single row into the table: "sec_filing"
+  """
+  insert_sec_filing_one(
+    """the row to be inserted"""
+    object: sec_filing_insert_input!
+
+    """on conflict condition"""
+    on_conflict: sec_filing_on_conflict
+  ): sec_filing
+
+  """
   insert data into the table: "user"
   """
   insert_user(
@@ -1623,72 +536,6 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: user_on_conflict
   ): user
-
-  """
-  update data of the table: "data.sec_companies"
-  """
-  update_data_sec_companies(
-    """sets the columns of the filtered rows to the given values"""
-    _set: data_sec_companies_set_input
-
-    """filter the rows which have to be updated"""
-    where: data_sec_companies_bool_exp!
-  ): data_sec_companies_mutation_response
-
-  """
-  update single row of the table: "data.sec_companies"
-  """
-  update_data_sec_companies_by_pk(
-    """sets the columns of the filtered rows to the given values"""
-    _set: data_sec_companies_set_input
-    pk_columns: data_sec_companies_pk_columns_input!
-  ): data_sec_companies
-
-  """
-  update data of the table: "data.sec_filing_attachments"
-  """
-  update_data_sec_filing_attachments(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: data_sec_filing_attachments_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: data_sec_filing_attachments_set_input
-
-    """filter the rows which have to be updated"""
-    where: data_sec_filing_attachments_bool_exp!
-  ): data_sec_filing_attachments_mutation_response
-
-  """
-  update single row of the table: "data.sec_filing_attachments"
-  """
-  update_data_sec_filing_attachments_by_pk(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: data_sec_filing_attachments_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: data_sec_filing_attachments_set_input
-    pk_columns: data_sec_filing_attachments_pk_columns_input!
-  ): data_sec_filing_attachments
-
-  """
-  update data of the table: "data.sec_filings"
-  """
-  update_data_sec_filings(
-    """sets the columns of the filtered rows to the given values"""
-    _set: data_sec_filings_set_input
-
-    """filter the rows which have to be updated"""
-    where: data_sec_filings_bool_exp!
-  ): data_sec_filings_mutation_response
-
-  """
-  update single row of the table: "data.sec_filings"
-  """
-  update_data_sec_filings_by_pk(
-    """sets the columns of the filtered rows to the given values"""
-    _set: data_sec_filings_set_input
-    pk_columns: data_sec_filings_pk_columns_input!
-  ): data_sec_filings
 
   """
   update data of the table: "migrations"
@@ -1761,6 +608,72 @@ type mutation_root {
     _set: org_type_set_input
     pk_columns: org_type_pk_columns_input!
   ): org_type
+
+  """
+  update data of the table: "sec_company"
+  """
+  update_sec_company(
+    """sets the columns of the filtered rows to the given values"""
+    _set: sec_company_set_input
+
+    """filter the rows which have to be updated"""
+    where: sec_company_bool_exp!
+  ): sec_company_mutation_response
+
+  """
+  update single row of the table: "sec_company"
+  """
+  update_sec_company_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: sec_company_set_input
+    pk_columns: sec_company_pk_columns_input!
+  ): sec_company
+
+  """
+  update data of the table: "sec_filing"
+  """
+  update_sec_filing(
+    """sets the columns of the filtered rows to the given values"""
+    _set: sec_filing_set_input
+
+    """filter the rows which have to be updated"""
+    where: sec_filing_bool_exp!
+  ): sec_filing_mutation_response
+
+  """
+  update data of the table: "sec_filing_attachment"
+  """
+  update_sec_filing_attachment(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: sec_filing_attachment_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: sec_filing_attachment_set_input
+
+    """filter the rows which have to be updated"""
+    where: sec_filing_attachment_bool_exp!
+  ): sec_filing_attachment_mutation_response
+
+  """
+  update single row of the table: "sec_filing_attachment"
+  """
+  update_sec_filing_attachment_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: sec_filing_attachment_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: sec_filing_attachment_set_input
+    pk_columns: sec_filing_attachment_pk_columns_input!
+  ): sec_filing_attachment
+
+  """
+  update single row of the table: "sec_filing"
+  """
+  update_sec_filing_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: sec_filing_set_input
+    pk_columns: sec_filing_pk_columns_input!
+  ): sec_filing
 
   """
   update data of the table: "user"
@@ -2416,181 +1329,6 @@ input org_variance_order_by {
 
 type query_root {
   """
-  fetch data from the table: "data.sec_companies"
-  """
-  data_sec_companies(
-    """distinct select on columns"""
-    distinct_on: [data_sec_companies_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_companies_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_companies_bool_exp
-  ): [data_sec_companies!]!
-
-  """
-  fetch aggregated fields from the table: "data.sec_companies"
-  """
-  data_sec_companies_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_companies_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_companies_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_companies_bool_exp
-  ): data_sec_companies_aggregate!
-
-  """
-  fetch data from the table: "data.sec_companies" using primary key columns
-  """
-  data_sec_companies_by_pk(cik: String!): data_sec_companies
-
-  """
-  fetch data from the table: "data.sec_contracts"
-  """
-  data_sec_contracts(
-    """distinct select on columns"""
-    distinct_on: [data_sec_contracts_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_contracts_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_contracts_bool_exp
-  ): [data_sec_contracts!]!
-
-  """
-  fetch aggregated fields from the table: "data.sec_contracts"
-  """
-  data_sec_contracts_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_contracts_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_contracts_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_contracts_bool_exp
-  ): data_sec_contracts_aggregate!
-
-  """
-  fetch data from the table: "data.sec_filing_attachments"
-  """
-  data_sec_filing_attachments(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filing_attachments_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filing_attachments_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filing_attachments_bool_exp
-  ): [data_sec_filing_attachments!]!
-
-  """
-  fetch aggregated fields from the table: "data.sec_filing_attachments"
-  """
-  data_sec_filing_attachments_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filing_attachments_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filing_attachments_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filing_attachments_bool_exp
-  ): data_sec_filing_attachments_aggregate!
-
-  """
-  fetch data from the table: "data.sec_filing_attachments" using primary key columns
-  """
-  data_sec_filing_attachments_by_pk(accession_number: String!, sequence: Int!): data_sec_filing_attachments
-
-  """
-  fetch data from the table: "data.sec_filings"
-  """
-  data_sec_filings(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filings_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filings_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filings_bool_exp
-  ): [data_sec_filings!]!
-
-  """
-  fetch aggregated fields from the table: "data.sec_filings"
-  """
-  data_sec_filings_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filings_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filings_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filings_bool_exp
-  ): data_sec_filings_aggregate!
-
-  """
-  fetch data from the table: "data.sec_filings" using primary key columns
-  """
-  data_sec_filings_by_pk(accession_number: String!): data_sec_filings
-
-  """
   fetch data from the table: "migrations"
   """
   migrations(
@@ -2718,6 +1456,221 @@ type query_root {
 
   """fetch data from the table: "org_type" using primary key columns"""
   org_type_by_pk(value: String!): org_type
+
+  """
+  fetch data from the table: "sec_company"
+  """
+  sec_company(
+    """distinct select on columns"""
+    distinct_on: [sec_company_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_company_order_by!]
+
+    """filter the rows returned"""
+    where: sec_company_bool_exp
+  ): [sec_company!]!
+
+  """
+  fetch aggregated fields from the table: "sec_company"
+  """
+  sec_company_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_company_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_company_order_by!]
+
+    """filter the rows returned"""
+    where: sec_company_bool_exp
+  ): sec_company_aggregate!
+
+  """fetch data from the table: "sec_company" using primary key columns"""
+  sec_company_by_pk(cik: String!): sec_company
+
+  """
+  fetch data from the table: "sec_contract"
+  """
+  sec_contract(
+    """distinct select on columns"""
+    distinct_on: [sec_contract_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_contract_order_by!]
+
+    """filter the rows returned"""
+    where: sec_contract_bool_exp
+  ): [sec_contract!]!
+
+  """
+  fetch aggregated fields from the table: "sec_contract"
+  """
+  sec_contract_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_contract_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_contract_order_by!]
+
+    """filter the rows returned"""
+    where: sec_contract_bool_exp
+  ): sec_contract_aggregate!
+
+  """
+  fetch data from the table: "sec_filing"
+  """
+  sec_filing(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_bool_exp
+  ): [sec_filing!]!
+
+  """An aggregate relationship"""
+  sec_filing_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_bool_exp
+  ): sec_filing_aggregate!
+
+  """An array relationship"""
+  sec_filing_attachment(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): [sec_filing_attachment!]!
+
+  """An aggregate relationship"""
+  sec_filing_attachment_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): sec_filing_attachment_aggregate!
+
+  """
+  fetch data from the table: "sec_filing_attachment" using primary key columns
+  """
+  sec_filing_attachment_by_pk(accession_number: String!, sequence: Int!): sec_filing_attachment
+
+  """fetch data from the table: "sec_filing" using primary key columns"""
+  sec_filing_by_pk(accession_number: String!): sec_filing
+
+  """
+  execute function "sec_search" which returns "sec_filing_attachment"
+  """
+  sec_search(
+    """
+    input parameters for function "sec_search"
+    """
+    args: sec_search_args!
+
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): [sec_filing_attachment!]!
+
+  """
+  execute function "sec_search" and query aggregates on result of table type "sec_filing_attachment"
+  """
+  sec_search_aggregate(
+    """
+    input parameters for function "sec_search"
+    """
+    args: sec_search_args!
+
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): sec_filing_attachment_aggregate!
 
   """
   fetch data from the table: "user"
@@ -2763,182 +1716,1109 @@ type query_root {
   user_by_pk(id: Int!): user
 }
 
+"""
+columns and relationships of "sec_company"
+"""
+type sec_company {
+  cik: String!
+  created_at: timestamptz
+  geo: String
+  name: String!
+
+  """
+  fetch data from the table: "sec_filing"
+  """
+  sec_filing(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_bool_exp
+  ): [sec_filing!]!
+
+  """An aggregate relationship"""
+  sec_filing_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_bool_exp
+  ): sec_filing_aggregate!
+  sic: String!
+  sic_name: String!
+  updated_at: timestamptz
+}
+
+"""
+aggregated selection of "sec_company"
+"""
+type sec_company_aggregate {
+  aggregate: sec_company_aggregate_fields
+  nodes: [sec_company!]!
+}
+
+"""
+aggregate fields of "sec_company"
+"""
+type sec_company_aggregate_fields {
+  count(columns: [sec_company_select_column!], distinct: Boolean): Int!
+  max: sec_company_max_fields
+  min: sec_company_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "sec_company". All fields are combined with a logical 'AND'.
+"""
+input sec_company_bool_exp {
+  _and: [sec_company_bool_exp!]
+  _not: sec_company_bool_exp
+  _or: [sec_company_bool_exp!]
+  cik: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  geo: String_comparison_exp
+  name: String_comparison_exp
+  sec_filing: sec_filing_bool_exp
+  sic: String_comparison_exp
+  sic_name: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "sec_company"
+"""
+enum sec_company_constraint {
+  """unique or primary key constraint"""
+  sec_companies_pkey
+}
+
+"""
+input type for inserting data into table "sec_company"
+"""
+input sec_company_insert_input {
+  cik: String
+  created_at: timestamptz
+  geo: String
+  name: String
+  sec_filing: sec_filing_arr_rel_insert_input
+  sic: String
+  sic_name: String
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type sec_company_max_fields {
+  cik: String
+  created_at: timestamptz
+  geo: String
+  name: String
+  sic: String
+  sic_name: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type sec_company_min_fields {
+  cik: String
+  created_at: timestamptz
+  geo: String
+  name: String
+  sic: String
+  sic_name: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "sec_company"
+"""
+type sec_company_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [sec_company!]!
+}
+
+"""
+input type for inserting object relation for remote table "sec_company"
+"""
+input sec_company_obj_rel_insert_input {
+  data: sec_company_insert_input!
+
+  """on conflict condition"""
+  on_conflict: sec_company_on_conflict
+}
+
+"""
+on conflict condition type for table "sec_company"
+"""
+input sec_company_on_conflict {
+  constraint: sec_company_constraint!
+  update_columns: [sec_company_update_column!]! = []
+  where: sec_company_bool_exp
+}
+
+"""Ordering options when selecting data from "sec_company"."""
+input sec_company_order_by {
+  cik: order_by
+  created_at: order_by
+  geo: order_by
+  name: order_by
+  sec_filing_aggregate: sec_filing_aggregate_order_by
+  sic: order_by
+  sic_name: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: sec_company"""
+input sec_company_pk_columns_input {
+  cik: String!
+}
+
+"""
+select columns of table "sec_company"
+"""
+enum sec_company_select_column {
+  """column name"""
+  cik
+
+  """column name"""
+  created_at
+
+  """column name"""
+  geo
+
+  """column name"""
+  name
+
+  """column name"""
+  sic
+
+  """column name"""
+  sic_name
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "sec_company"
+"""
+input sec_company_set_input {
+  cik: String
+  created_at: timestamptz
+  geo: String
+  name: String
+  sic: String
+  sic_name: String
+  updated_at: timestamptz
+}
+
+"""
+update columns of table "sec_company"
+"""
+enum sec_company_update_column {
+  """column name"""
+  cik
+
+  """column name"""
+  created_at
+
+  """column name"""
+  geo
+
+  """column name"""
+  name
+
+  """column name"""
+  sic
+
+  """column name"""
+  sic_name
+
+  """column name"""
+  updated_at
+}
+
+"""
+columns and relationships of "sec_contract"
+"""
+type sec_contract {
+  accession_number: String
+  company_cik: String
+  company_geo: String
+  company_name: String
+  contents: String
+  description: String
+  filing_metadata: String
+  filing_type: String
+  sequence: Int
+  text: String
+}
+
+"""
+aggregated selection of "sec_contract"
+"""
+type sec_contract_aggregate {
+  aggregate: sec_contract_aggregate_fields
+  nodes: [sec_contract!]!
+}
+
+"""
+aggregate fields of "sec_contract"
+"""
+type sec_contract_aggregate_fields {
+  avg: sec_contract_avg_fields
+  count(columns: [sec_contract_select_column!], distinct: Boolean): Int!
+  max: sec_contract_max_fields
+  min: sec_contract_min_fields
+  stddev: sec_contract_stddev_fields
+  stddev_pop: sec_contract_stddev_pop_fields
+  stddev_samp: sec_contract_stddev_samp_fields
+  sum: sec_contract_sum_fields
+  var_pop: sec_contract_var_pop_fields
+  var_samp: sec_contract_var_samp_fields
+  variance: sec_contract_variance_fields
+}
+
+"""aggregate avg on columns"""
+type sec_contract_avg_fields {
+  sequence: Float
+}
+
+"""
+Boolean expression to filter rows from the table "sec_contract". All fields are combined with a logical 'AND'.
+"""
+input sec_contract_bool_exp {
+  _and: [sec_contract_bool_exp!]
+  _not: sec_contract_bool_exp
+  _or: [sec_contract_bool_exp!]
+  accession_number: String_comparison_exp
+  company_cik: String_comparison_exp
+  company_geo: String_comparison_exp
+  company_name: String_comparison_exp
+  contents: String_comparison_exp
+  description: String_comparison_exp
+  filing_metadata: String_comparison_exp
+  filing_type: String_comparison_exp
+  sequence: Int_comparison_exp
+  text: String_comparison_exp
+}
+
+"""aggregate max on columns"""
+type sec_contract_max_fields {
+  accession_number: String
+  company_cik: String
+  company_geo: String
+  company_name: String
+  contents: String
+  description: String
+  filing_metadata: String
+  filing_type: String
+  sequence: Int
+  text: String
+}
+
+"""aggregate min on columns"""
+type sec_contract_min_fields {
+  accession_number: String
+  company_cik: String
+  company_geo: String
+  company_name: String
+  contents: String
+  description: String
+  filing_metadata: String
+  filing_type: String
+  sequence: Int
+  text: String
+}
+
+"""Ordering options when selecting data from "sec_contract"."""
+input sec_contract_order_by {
+  accession_number: order_by
+  company_cik: order_by
+  company_geo: order_by
+  company_name: order_by
+  contents: order_by
+  description: order_by
+  filing_metadata: order_by
+  filing_type: order_by
+  sequence: order_by
+  text: order_by
+}
+
+"""
+select columns of table "sec_contract"
+"""
+enum sec_contract_select_column {
+  """column name"""
+  accession_number
+
+  """column name"""
+  company_cik
+
+  """column name"""
+  company_geo
+
+  """column name"""
+  company_name
+
+  """column name"""
+  contents
+
+  """column name"""
+  description
+
+  """column name"""
+  filing_metadata
+
+  """column name"""
+  filing_type
+
+  """column name"""
+  sequence
+
+  """column name"""
+  text
+}
+
+"""aggregate stddev on columns"""
+type sec_contract_stddev_fields {
+  sequence: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type sec_contract_stddev_pop_fields {
+  sequence: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type sec_contract_stddev_samp_fields {
+  sequence: Float
+}
+
+"""aggregate sum on columns"""
+type sec_contract_sum_fields {
+  sequence: Int
+}
+
+"""aggregate var_pop on columns"""
+type sec_contract_var_pop_fields {
+  sequence: Float
+}
+
+"""aggregate var_samp on columns"""
+type sec_contract_var_samp_fields {
+  sequence: Float
+}
+
+"""aggregate variance on columns"""
+type sec_contract_variance_fields {
+  sequence: Float
+}
+
+"""
+columns and relationships of "sec_filing"
+"""
+type sec_filing {
+  accession_number: String!
+  cik: String!
+  created_at: timestamptz
+  filing_type: String!
+  header: String
+
+  """An object relationship"""
+  sec_company: sec_company!
+
+  """An array relationship"""
+  sec_filing_attachment(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): [sec_filing_attachment!]!
+
+  """An aggregate relationship"""
+  sec_filing_attachment_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): sec_filing_attachment_aggregate!
+  updated_at: timestamptz
+}
+
+"""
+aggregated selection of "sec_filing"
+"""
+type sec_filing_aggregate {
+  aggregate: sec_filing_aggregate_fields
+  nodes: [sec_filing!]!
+}
+
+"""
+aggregate fields of "sec_filing"
+"""
+type sec_filing_aggregate_fields {
+  count(columns: [sec_filing_select_column!], distinct: Boolean): Int!
+  max: sec_filing_max_fields
+  min: sec_filing_min_fields
+}
+
+"""
+order by aggregate values of table "sec_filing"
+"""
+input sec_filing_aggregate_order_by {
+  count: order_by
+  max: sec_filing_max_order_by
+  min: sec_filing_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "sec_filing"
+"""
+input sec_filing_arr_rel_insert_input {
+  data: [sec_filing_insert_input!]!
+
+  """on conflict condition"""
+  on_conflict: sec_filing_on_conflict
+}
+
+"""
+columns and relationships of "sec_filing_attachment"
+"""
+type sec_filing_attachment {
+  accession_number: String!
+  contents: String!
+  created_at: timestamptz
+  description: String
+  filename: String
+  filing_type: String!
+
+  """An object relationship"""
+  sec_filing: sec_filing!
+  sequence: Int!
+  text: String
+  tsv_search_text: tsvector
+  updated_at: timestamptz
+}
+
+"""
+aggregated selection of "sec_filing_attachment"
+"""
+type sec_filing_attachment_aggregate {
+  aggregate: sec_filing_attachment_aggregate_fields
+  nodes: [sec_filing_attachment!]!
+}
+
+"""
+aggregate fields of "sec_filing_attachment"
+"""
+type sec_filing_attachment_aggregate_fields {
+  avg: sec_filing_attachment_avg_fields
+  count(columns: [sec_filing_attachment_select_column!], distinct: Boolean): Int!
+  max: sec_filing_attachment_max_fields
+  min: sec_filing_attachment_min_fields
+  stddev: sec_filing_attachment_stddev_fields
+  stddev_pop: sec_filing_attachment_stddev_pop_fields
+  stddev_samp: sec_filing_attachment_stddev_samp_fields
+  sum: sec_filing_attachment_sum_fields
+  var_pop: sec_filing_attachment_var_pop_fields
+  var_samp: sec_filing_attachment_var_samp_fields
+  variance: sec_filing_attachment_variance_fields
+}
+
+"""
+order by aggregate values of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_aggregate_order_by {
+  avg: sec_filing_attachment_avg_order_by
+  count: order_by
+  max: sec_filing_attachment_max_order_by
+  min: sec_filing_attachment_min_order_by
+  stddev: sec_filing_attachment_stddev_order_by
+  stddev_pop: sec_filing_attachment_stddev_pop_order_by
+  stddev_samp: sec_filing_attachment_stddev_samp_order_by
+  sum: sec_filing_attachment_sum_order_by
+  var_pop: sec_filing_attachment_var_pop_order_by
+  var_samp: sec_filing_attachment_var_samp_order_by
+  variance: sec_filing_attachment_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "sec_filing_attachment"
+"""
+input sec_filing_attachment_arr_rel_insert_input {
+  data: [sec_filing_attachment_insert_input!]!
+
+  """on conflict condition"""
+  on_conflict: sec_filing_attachment_on_conflict
+}
+
+"""aggregate avg on columns"""
+type sec_filing_attachment_avg_fields {
+  sequence: Float
+}
+
+"""
+order by avg() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_avg_order_by {
+  sequence: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "sec_filing_attachment". All fields are combined with a logical 'AND'.
+"""
+input sec_filing_attachment_bool_exp {
+  _and: [sec_filing_attachment_bool_exp!]
+  _not: sec_filing_attachment_bool_exp
+  _or: [sec_filing_attachment_bool_exp!]
+  accession_number: String_comparison_exp
+  contents: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  description: String_comparison_exp
+  filename: String_comparison_exp
+  filing_type: String_comparison_exp
+  sec_filing: sec_filing_bool_exp
+  sequence: Int_comparison_exp
+  text: String_comparison_exp
+  tsv_search_text: tsvector_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "sec_filing_attachment"
+"""
+enum sec_filing_attachment_constraint {
+  """unique or primary key constraint"""
+  sec_filing_attachment_accession_number_sequence_key
+
+  """unique or primary key constraint"""
+  sec_filing_attachment_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "sec_filing_attachment"
+"""
+input sec_filing_attachment_inc_input {
+  sequence: Int
+}
+
+"""
+input type for inserting data into table "sec_filing_attachment"
+"""
+input sec_filing_attachment_insert_input {
+  accession_number: String
+  contents: String
+  created_at: timestamptz
+  description: String
+  filename: String
+  filing_type: String
+  sec_filing: sec_filing_obj_rel_insert_input
+  sequence: Int
+  text: String
+  tsv_search_text: tsvector
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type sec_filing_attachment_max_fields {
+  accession_number: String
+  contents: String
+  created_at: timestamptz
+  description: String
+  filename: String
+  filing_type: String
+  sequence: Int
+  text: String
+  updated_at: timestamptz
+}
+
+"""
+order by max() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_max_order_by {
+  accession_number: order_by
+  contents: order_by
+  created_at: order_by
+  description: order_by
+  filename: order_by
+  filing_type: order_by
+  sequence: order_by
+  text: order_by
+  updated_at: order_by
+}
+
+"""aggregate min on columns"""
+type sec_filing_attachment_min_fields {
+  accession_number: String
+  contents: String
+  created_at: timestamptz
+  description: String
+  filename: String
+  filing_type: String
+  sequence: Int
+  text: String
+  updated_at: timestamptz
+}
+
+"""
+order by min() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_min_order_by {
+  accession_number: order_by
+  contents: order_by
+  created_at: order_by
+  description: order_by
+  filename: order_by
+  filing_type: order_by
+  sequence: order_by
+  text: order_by
+  updated_at: order_by
+}
+
+"""
+response of any mutation on the table "sec_filing_attachment"
+"""
+type sec_filing_attachment_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [sec_filing_attachment!]!
+}
+
+"""
+on conflict condition type for table "sec_filing_attachment"
+"""
+input sec_filing_attachment_on_conflict {
+  constraint: sec_filing_attachment_constraint!
+  update_columns: [sec_filing_attachment_update_column!]! = []
+  where: sec_filing_attachment_bool_exp
+}
+
+"""Ordering options when selecting data from "sec_filing_attachment"."""
+input sec_filing_attachment_order_by {
+  accession_number: order_by
+  contents: order_by
+  created_at: order_by
+  description: order_by
+  filename: order_by
+  filing_type: order_by
+  sec_filing: sec_filing_order_by
+  sequence: order_by
+  text: order_by
+  tsv_search_text: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: sec_filing_attachment"""
+input sec_filing_attachment_pk_columns_input {
+  accession_number: String!
+  sequence: Int!
+}
+
+"""
+select columns of table "sec_filing_attachment"
+"""
+enum sec_filing_attachment_select_column {
+  """column name"""
+  accession_number
+
+  """column name"""
+  contents
+
+  """column name"""
+  created_at
+
+  """column name"""
+  description
+
+  """column name"""
+  filename
+
+  """column name"""
+  filing_type
+
+  """column name"""
+  sequence
+
+  """column name"""
+  text
+
+  """column name"""
+  tsv_search_text
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "sec_filing_attachment"
+"""
+input sec_filing_attachment_set_input {
+  accession_number: String
+  contents: String
+  created_at: timestamptz
+  description: String
+  filename: String
+  filing_type: String
+  sequence: Int
+  text: String
+  tsv_search_text: tsvector
+  updated_at: timestamptz
+}
+
+"""aggregate stddev on columns"""
+type sec_filing_attachment_stddev_fields {
+  sequence: Float
+}
+
+"""
+order by stddev() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_stddev_order_by {
+  sequence: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type sec_filing_attachment_stddev_pop_fields {
+  sequence: Float
+}
+
+"""
+order by stddev_pop() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_stddev_pop_order_by {
+  sequence: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type sec_filing_attachment_stddev_samp_fields {
+  sequence: Float
+}
+
+"""
+order by stddev_samp() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_stddev_samp_order_by {
+  sequence: order_by
+}
+
+"""aggregate sum on columns"""
+type sec_filing_attachment_sum_fields {
+  sequence: Int
+}
+
+"""
+order by sum() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_sum_order_by {
+  sequence: order_by
+}
+
+"""
+update columns of table "sec_filing_attachment"
+"""
+enum sec_filing_attachment_update_column {
+  """column name"""
+  accession_number
+
+  """column name"""
+  contents
+
+  """column name"""
+  created_at
+
+  """column name"""
+  description
+
+  """column name"""
+  filename
+
+  """column name"""
+  filing_type
+
+  """column name"""
+  sequence
+
+  """column name"""
+  text
+
+  """column name"""
+  tsv_search_text
+
+  """column name"""
+  updated_at
+}
+
+"""aggregate var_pop on columns"""
+type sec_filing_attachment_var_pop_fields {
+  sequence: Float
+}
+
+"""
+order by var_pop() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_var_pop_order_by {
+  sequence: order_by
+}
+
+"""aggregate var_samp on columns"""
+type sec_filing_attachment_var_samp_fields {
+  sequence: Float
+}
+
+"""
+order by var_samp() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_var_samp_order_by {
+  sequence: order_by
+}
+
+"""aggregate variance on columns"""
+type sec_filing_attachment_variance_fields {
+  sequence: Float
+}
+
+"""
+order by variance() on columns of table "sec_filing_attachment"
+"""
+input sec_filing_attachment_variance_order_by {
+  sequence: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "sec_filing". All fields are combined with a logical 'AND'.
+"""
+input sec_filing_bool_exp {
+  _and: [sec_filing_bool_exp!]
+  _not: sec_filing_bool_exp
+  _or: [sec_filing_bool_exp!]
+  accession_number: String_comparison_exp
+  cik: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  filing_type: String_comparison_exp
+  header: String_comparison_exp
+  sec_company: sec_company_bool_exp
+  sec_filing_attachment: sec_filing_attachment_bool_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "sec_filing"
+"""
+enum sec_filing_constraint {
+  """unique or primary key constraint"""
+  sec_filing_pkey
+}
+
+"""
+input type for inserting data into table "sec_filing"
+"""
+input sec_filing_insert_input {
+  accession_number: String
+  cik: String
+  created_at: timestamptz
+  filing_type: String
+  header: String
+  sec_company: sec_company_obj_rel_insert_input
+  sec_filing_attachment: sec_filing_attachment_arr_rel_insert_input
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type sec_filing_max_fields {
+  accession_number: String
+  cik: String
+  created_at: timestamptz
+  filing_type: String
+  header: String
+  updated_at: timestamptz
+}
+
+"""
+order by max() on columns of table "sec_filing"
+"""
+input sec_filing_max_order_by {
+  accession_number: order_by
+  cik: order_by
+  created_at: order_by
+  filing_type: order_by
+  header: order_by
+  updated_at: order_by
+}
+
+"""aggregate min on columns"""
+type sec_filing_min_fields {
+  accession_number: String
+  cik: String
+  created_at: timestamptz
+  filing_type: String
+  header: String
+  updated_at: timestamptz
+}
+
+"""
+order by min() on columns of table "sec_filing"
+"""
+input sec_filing_min_order_by {
+  accession_number: order_by
+  cik: order_by
+  created_at: order_by
+  filing_type: order_by
+  header: order_by
+  updated_at: order_by
+}
+
+"""
+response of any mutation on the table "sec_filing"
+"""
+type sec_filing_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [sec_filing!]!
+}
+
+"""
+input type for inserting object relation for remote table "sec_filing"
+"""
+input sec_filing_obj_rel_insert_input {
+  data: sec_filing_insert_input!
+
+  """on conflict condition"""
+  on_conflict: sec_filing_on_conflict
+}
+
+"""
+on conflict condition type for table "sec_filing"
+"""
+input sec_filing_on_conflict {
+  constraint: sec_filing_constraint!
+  update_columns: [sec_filing_update_column!]! = []
+  where: sec_filing_bool_exp
+}
+
+"""Ordering options when selecting data from "sec_filing"."""
+input sec_filing_order_by {
+  accession_number: order_by
+  cik: order_by
+  created_at: order_by
+  filing_type: order_by
+  header: order_by
+  sec_company: sec_company_order_by
+  sec_filing_attachment_aggregate: sec_filing_attachment_aggregate_order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: sec_filing"""
+input sec_filing_pk_columns_input {
+  accession_number: String!
+}
+
+"""
+select columns of table "sec_filing"
+"""
+enum sec_filing_select_column {
+  """column name"""
+  accession_number
+
+  """column name"""
+  cik
+
+  """column name"""
+  created_at
+
+  """column name"""
+  filing_type
+
+  """column name"""
+  header
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "sec_filing"
+"""
+input sec_filing_set_input {
+  accession_number: String
+  cik: String
+  created_at: timestamptz
+  filing_type: String
+  header: String
+  updated_at: timestamptz
+}
+
+"""
+update columns of table "sec_filing"
+"""
+enum sec_filing_update_column {
+  """column name"""
+  accession_number
+
+  """column name"""
+  cik
+
+  """column name"""
+  created_at
+
+  """column name"""
+  filing_type
+
+  """column name"""
+  header
+
+  """column name"""
+  updated_at
+}
+
+input sec_search_args {
+  search: String
+}
+
 type subscription_root {
-  """
-  fetch data from the table: "data.sec_companies"
-  """
-  data_sec_companies(
-    """distinct select on columns"""
-    distinct_on: [data_sec_companies_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_companies_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_companies_bool_exp
-  ): [data_sec_companies!]!
-
-  """
-  fetch aggregated fields from the table: "data.sec_companies"
-  """
-  data_sec_companies_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_companies_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_companies_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_companies_bool_exp
-  ): data_sec_companies_aggregate!
-
-  """
-  fetch data from the table: "data.sec_companies" using primary key columns
-  """
-  data_sec_companies_by_pk(cik: String!): data_sec_companies
-
-  """
-  fetch data from the table: "data.sec_contracts"
-  """
-  data_sec_contracts(
-    """distinct select on columns"""
-    distinct_on: [data_sec_contracts_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_contracts_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_contracts_bool_exp
-  ): [data_sec_contracts!]!
-
-  """
-  fetch aggregated fields from the table: "data.sec_contracts"
-  """
-  data_sec_contracts_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_contracts_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_contracts_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_contracts_bool_exp
-  ): data_sec_contracts_aggregate!
-
-  """
-  fetch data from the table: "data.sec_filing_attachments"
-  """
-  data_sec_filing_attachments(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filing_attachments_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filing_attachments_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filing_attachments_bool_exp
-  ): [data_sec_filing_attachments!]!
-
-  """
-  fetch aggregated fields from the table: "data.sec_filing_attachments"
-  """
-  data_sec_filing_attachments_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filing_attachments_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filing_attachments_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filing_attachments_bool_exp
-  ): data_sec_filing_attachments_aggregate!
-
-  """
-  fetch data from the table: "data.sec_filing_attachments" using primary key columns
-  """
-  data_sec_filing_attachments_by_pk(accession_number: String!, sequence: Int!): data_sec_filing_attachments
-
-  """
-  fetch data from the table: "data.sec_filings"
-  """
-  data_sec_filings(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filings_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filings_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filings_bool_exp
-  ): [data_sec_filings!]!
-
-  """
-  fetch aggregated fields from the table: "data.sec_filings"
-  """
-  data_sec_filings_aggregate(
-    """distinct select on columns"""
-    distinct_on: [data_sec_filings_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [data_sec_filings_order_by!]
-
-    """filter the rows returned"""
-    where: data_sec_filings_bool_exp
-  ): data_sec_filings_aggregate!
-
-  """
-  fetch data from the table: "data.sec_filings" using primary key columns
-  """
-  data_sec_filings_by_pk(accession_number: String!): data_sec_filings
-
   """
   fetch data from the table: "migrations"
   """
@@ -3067,6 +2947,221 @@ type subscription_root {
 
   """fetch data from the table: "org_type" using primary key columns"""
   org_type_by_pk(value: String!): org_type
+
+  """
+  fetch data from the table: "sec_company"
+  """
+  sec_company(
+    """distinct select on columns"""
+    distinct_on: [sec_company_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_company_order_by!]
+
+    """filter the rows returned"""
+    where: sec_company_bool_exp
+  ): [sec_company!]!
+
+  """
+  fetch aggregated fields from the table: "sec_company"
+  """
+  sec_company_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_company_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_company_order_by!]
+
+    """filter the rows returned"""
+    where: sec_company_bool_exp
+  ): sec_company_aggregate!
+
+  """fetch data from the table: "sec_company" using primary key columns"""
+  sec_company_by_pk(cik: String!): sec_company
+
+  """
+  fetch data from the table: "sec_contract"
+  """
+  sec_contract(
+    """distinct select on columns"""
+    distinct_on: [sec_contract_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_contract_order_by!]
+
+    """filter the rows returned"""
+    where: sec_contract_bool_exp
+  ): [sec_contract!]!
+
+  """
+  fetch aggregated fields from the table: "sec_contract"
+  """
+  sec_contract_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_contract_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_contract_order_by!]
+
+    """filter the rows returned"""
+    where: sec_contract_bool_exp
+  ): sec_contract_aggregate!
+
+  """
+  fetch data from the table: "sec_filing"
+  """
+  sec_filing(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_bool_exp
+  ): [sec_filing!]!
+
+  """An aggregate relationship"""
+  sec_filing_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_bool_exp
+  ): sec_filing_aggregate!
+
+  """An array relationship"""
+  sec_filing_attachment(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): [sec_filing_attachment!]!
+
+  """An aggregate relationship"""
+  sec_filing_attachment_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): sec_filing_attachment_aggregate!
+
+  """
+  fetch data from the table: "sec_filing_attachment" using primary key columns
+  """
+  sec_filing_attachment_by_pk(accession_number: String!, sequence: Int!): sec_filing_attachment
+
+  """fetch data from the table: "sec_filing" using primary key columns"""
+  sec_filing_by_pk(accession_number: String!): sec_filing
+
+  """
+  execute function "sec_search" which returns "sec_filing_attachment"
+  """
+  sec_search(
+    """
+    input parameters for function "sec_search"
+    """
+    args: sec_search_args!
+
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): [sec_filing_attachment!]!
+
+  """
+  execute function "sec_search" and query aggregates on result of table type "sec_filing_attachment"
+  """
+  sec_search_aggregate(
+    """
+    input parameters for function "sec_search"
+    """
+    args: sec_search_args!
+
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): sec_filing_attachment_aggregate!
 
   """
   fetch data from the table: "user"
@@ -3144,6 +3239,23 @@ input timestamptz_comparison_exp {
   _lte: timestamptz
   _neq: timestamptz
   _nin: [timestamptz!]
+}
+
+scalar tsvector
+
+"""
+Boolean expression to compare columns of type "tsvector". All fields are combined with logical 'AND'.
+"""
+input tsvector_comparison_exp {
+  _eq: tsvector
+  _gt: tsvector
+  _gte: tsvector
+  _in: [tsvector!]
+  _is_null: Boolean
+  _lt: tsvector
+  _lte: tsvector
+  _neq: tsvector
+  _nin: [tsvector!]
 }
 
 """

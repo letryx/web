@@ -1,1 +1,1 @@
-select 1;
+drop function data.sec_search;

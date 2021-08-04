@@ -23,7 +23,7 @@ const ContractsPage: FC = () => {
   const { data } = useGetSecContractsQuery({
     variables: { limit: 30, offset: 0 },
   });
-  const contracts = data?.data_sec_contracts || [];
+  const contracts = data?.sec_contract || [];
 
   return (
     <Layout title="Letryx">

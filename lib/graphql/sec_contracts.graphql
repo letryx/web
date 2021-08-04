@@ -1,4 +1,4 @@
-fragment ContractList on data_sec_contracts {
+fragment ContractList on sec_contract {
   accession_number
   sequence
   company_cik
@@ -10,7 +10,7 @@ fragment ContractList on data_sec_contracts {
 }
 
 query GetSECContracts($limit: Int = 20, $offset: Int = 0) {
-  data_sec_contracts(
+  sec_contract(
     limit: $limit
     offset: $offset
     order_by: { accession_number: asc, sequence: asc }

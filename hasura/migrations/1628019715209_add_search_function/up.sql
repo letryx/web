@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION sec_search(search text)
+CREATE OR REPLACE FUNCTION data.sec_search(search text)
 returns setof data.sec_filing_attachments AS $$
 SELECT
   attachment.*

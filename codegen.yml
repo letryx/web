@@ -21,6 +21,7 @@ generates:
       scalars:
         timestamp: Date
         timestamptz: Date
+        tsvector: String
       namingConvention: change-case-all#pascalCase
       strictScalars: true
       useExplicitTyping: true

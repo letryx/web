@@ -18,6 +18,7 @@ export type Scalars = {
   Float: number;
   timestamp: Date;
   timestamptz: Date;
+  tsvector: String;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -65,955 +66,6 @@ export type String_Comparison_Exp = {
   /** does the column match the given SQL regular expression */
   _similar?: Maybe<Scalars['String']>;
 };
-
-/** columns and relationships of "data.sec_companies" */
-export type Data_Sec_Companies = {
-  __typename?: 'data_sec_companies';
-  cik: Scalars['String'];
-  created_at?: Maybe<Scalars['timestamptz']>;
-  geo?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  /** An array relationship */
-  sec_filings: Array<Data_Sec_Filings>;
-  /** An aggregate relationship */
-  sec_filings_aggregate: Data_Sec_Filings_Aggregate;
-  sic: Scalars['String'];
-  sic_name: Scalars['String'];
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** columns and relationships of "data.sec_companies" */
-export type Data_Sec_CompaniesSec_FilingsArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filings_Order_By>>;
-  where?: Maybe<Data_Sec_Filings_Bool_Exp>;
-};
-
-/** columns and relationships of "data.sec_companies" */
-export type Data_Sec_CompaniesSec_Filings_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filings_Order_By>>;
-  where?: Maybe<Data_Sec_Filings_Bool_Exp>;
-};
-
-/** aggregated selection of "data.sec_companies" */
-export type Data_Sec_Companies_Aggregate = {
-  __typename?: 'data_sec_companies_aggregate';
-  aggregate?: Maybe<Data_Sec_Companies_Aggregate_Fields>;
-  nodes: Array<Data_Sec_Companies>;
-};
-
-/** aggregate fields of "data.sec_companies" */
-export type Data_Sec_Companies_Aggregate_Fields = {
-  __typename?: 'data_sec_companies_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Data_Sec_Companies_Max_Fields>;
-  min?: Maybe<Data_Sec_Companies_Min_Fields>;
-};
-
-/** aggregate fields of "data.sec_companies" */
-export type Data_Sec_Companies_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "data.sec_companies". All fields are combined with a logical 'AND'. */
-export type Data_Sec_Companies_Bool_Exp = {
-  _and?: Maybe<Array<Data_Sec_Companies_Bool_Exp>>;
-  _not?: Maybe<Data_Sec_Companies_Bool_Exp>;
-  _or?: Maybe<Array<Data_Sec_Companies_Bool_Exp>>;
-  cik?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  geo?: Maybe<String_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  sec_filings?: Maybe<Data_Sec_Filings_Bool_Exp>;
-  sic?: Maybe<String_Comparison_Exp>;
-  sic_name?: Maybe<String_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "data.sec_companies" */
-export enum Data_Sec_Companies_Constraint {
-  /** unique or primary key constraint */
-  SecCompaniesPkey = 'sec_companies_pkey',
-}
-
-/** input type for inserting data into table "data.sec_companies" */
-export type Data_Sec_Companies_Insert_Input = {
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  geo?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  sec_filings?: Maybe<Data_Sec_Filings_Arr_Rel_Insert_Input>;
-  sic?: Maybe<Scalars['String']>;
-  sic_name?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate max on columns */
-export type Data_Sec_Companies_Max_Fields = {
-  __typename?: 'data_sec_companies_max_fields';
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  geo?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  sic?: Maybe<Scalars['String']>;
-  sic_name?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate min on columns */
-export type Data_Sec_Companies_Min_Fields = {
-  __typename?: 'data_sec_companies_min_fields';
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  geo?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  sic?: Maybe<Scalars['String']>;
-  sic_name?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** response of any mutation on the table "data.sec_companies" */
-export type Data_Sec_Companies_Mutation_Response = {
-  __typename?: 'data_sec_companies_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Data_Sec_Companies>;
-};
-
-/** input type for inserting object relation for remote table "data.sec_companies" */
-export type Data_Sec_Companies_Obj_Rel_Insert_Input = {
-  data: Data_Sec_Companies_Insert_Input;
-  /** on conflict condition */
-  on_conflict?: Maybe<Data_Sec_Companies_On_Conflict>;
-};
-
-/** on conflict condition type for table "data.sec_companies" */
-export type Data_Sec_Companies_On_Conflict = {
-  constraint: Data_Sec_Companies_Constraint;
-  update_columns?: Array<Data_Sec_Companies_Update_Column>;
-  where?: Maybe<Data_Sec_Companies_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "data.sec_companies". */
-export type Data_Sec_Companies_Order_By = {
-  cik?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  geo?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  sec_filings_aggregate?: Maybe<Data_Sec_Filings_Aggregate_Order_By>;
-  sic?: Maybe<Order_By>;
-  sic_name?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: data_sec_companies */
-export type Data_Sec_Companies_Pk_Columns_Input = {
-  cik: Scalars['String'];
-};
-
-/** select columns of table "data.sec_companies" */
-export enum Data_Sec_Companies_Select_Column {
-  /** column name */
-  Cik = 'cik',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Geo = 'geo',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  Sic = 'sic',
-  /** column name */
-  SicName = 'sic_name',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
-
-/** input type for updating data in table "data.sec_companies" */
-export type Data_Sec_Companies_Set_Input = {
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  geo?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  sic?: Maybe<Scalars['String']>;
-  sic_name?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** update columns of table "data.sec_companies" */
-export enum Data_Sec_Companies_Update_Column {
-  /** column name */
-  Cik = 'cik',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Geo = 'geo',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  Sic = 'sic',
-  /** column name */
-  SicName = 'sic_name',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
-
-/** columns and relationships of "data.sec_contracts" */
-export type Data_Sec_Contracts = {
-  __typename?: 'data_sec_contracts';
-  accession_number?: Maybe<Scalars['String']>;
-  company_cik?: Maybe<Scalars['String']>;
-  company_geo?: Maybe<Scalars['String']>;
-  company_name?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  filing_metadata?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
-  sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-};
-
-/** aggregated selection of "data.sec_contracts" */
-export type Data_Sec_Contracts_Aggregate = {
-  __typename?: 'data_sec_contracts_aggregate';
-  aggregate?: Maybe<Data_Sec_Contracts_Aggregate_Fields>;
-  nodes: Array<Data_Sec_Contracts>;
-};
-
-/** aggregate fields of "data.sec_contracts" */
-export type Data_Sec_Contracts_Aggregate_Fields = {
-  __typename?: 'data_sec_contracts_aggregate_fields';
-  avg?: Maybe<Data_Sec_Contracts_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Data_Sec_Contracts_Max_Fields>;
-  min?: Maybe<Data_Sec_Contracts_Min_Fields>;
-  stddev?: Maybe<Data_Sec_Contracts_Stddev_Fields>;
-  stddev_pop?: Maybe<Data_Sec_Contracts_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Data_Sec_Contracts_Stddev_Samp_Fields>;
-  sum?: Maybe<Data_Sec_Contracts_Sum_Fields>;
-  var_pop?: Maybe<Data_Sec_Contracts_Var_Pop_Fields>;
-  var_samp?: Maybe<Data_Sec_Contracts_Var_Samp_Fields>;
-  variance?: Maybe<Data_Sec_Contracts_Variance_Fields>;
-};
-
-/** aggregate fields of "data.sec_contracts" */
-export type Data_Sec_Contracts_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Data_Sec_Contracts_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Data_Sec_Contracts_Avg_Fields = {
-  __typename?: 'data_sec_contracts_avg_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "data.sec_contracts". All fields are combined with a logical 'AND'. */
-export type Data_Sec_Contracts_Bool_Exp = {
-  _and?: Maybe<Array<Data_Sec_Contracts_Bool_Exp>>;
-  _not?: Maybe<Data_Sec_Contracts_Bool_Exp>;
-  _or?: Maybe<Array<Data_Sec_Contracts_Bool_Exp>>;
-  accession_number?: Maybe<String_Comparison_Exp>;
-  company_cik?: Maybe<String_Comparison_Exp>;
-  company_geo?: Maybe<String_Comparison_Exp>;
-  company_name?: Maybe<String_Comparison_Exp>;
-  contents?: Maybe<String_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  filing_metadata?: Maybe<String_Comparison_Exp>;
-  filing_type?: Maybe<String_Comparison_Exp>;
-  sequence?: Maybe<Int_Comparison_Exp>;
-  text?: Maybe<String_Comparison_Exp>;
-};
-
-/** aggregate max on columns */
-export type Data_Sec_Contracts_Max_Fields = {
-  __typename?: 'data_sec_contracts_max_fields';
-  accession_number?: Maybe<Scalars['String']>;
-  company_cik?: Maybe<Scalars['String']>;
-  company_geo?: Maybe<Scalars['String']>;
-  company_name?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  filing_metadata?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
-  sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Data_Sec_Contracts_Min_Fields = {
-  __typename?: 'data_sec_contracts_min_fields';
-  accession_number?: Maybe<Scalars['String']>;
-  company_cik?: Maybe<Scalars['String']>;
-  company_geo?: Maybe<Scalars['String']>;
-  company_name?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  filing_metadata?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
-  sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-};
-
-/** Ordering options when selecting data from "data.sec_contracts". */
-export type Data_Sec_Contracts_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  company_cik?: Maybe<Order_By>;
-  company_geo?: Maybe<Order_By>;
-  company_name?: Maybe<Order_By>;
-  contents?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  filing_metadata?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  sequence?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-};
-
-/** select columns of table "data.sec_contracts" */
-export enum Data_Sec_Contracts_Select_Column {
-  /** column name */
-  AccessionNumber = 'accession_number',
-  /** column name */
-  CompanyCik = 'company_cik',
-  /** column name */
-  CompanyGeo = 'company_geo',
-  /** column name */
-  CompanyName = 'company_name',
-  /** column name */
-  Contents = 'contents',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  FilingMetadata = 'filing_metadata',
-  /** column name */
-  FilingType = 'filing_type',
-  /** column name */
-  Sequence = 'sequence',
-  /** column name */
-  Text = 'text',
-}
-
-/** aggregate stddev on columns */
-export type Data_Sec_Contracts_Stddev_Fields = {
-  __typename?: 'data_sec_contracts_stddev_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Data_Sec_Contracts_Stddev_Pop_Fields = {
-  __typename?: 'data_sec_contracts_stddev_pop_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Data_Sec_Contracts_Stddev_Samp_Fields = {
-  __typename?: 'data_sec_contracts_stddev_samp_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Data_Sec_Contracts_Sum_Fields = {
-  __typename?: 'data_sec_contracts_sum_fields';
-  sequence?: Maybe<Scalars['Int']>;
-};
-
-/** aggregate var_pop on columns */
-export type Data_Sec_Contracts_Var_Pop_Fields = {
-  __typename?: 'data_sec_contracts_var_pop_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Data_Sec_Contracts_Var_Samp_Fields = {
-  __typename?: 'data_sec_contracts_var_samp_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Data_Sec_Contracts_Variance_Fields = {
-  __typename?: 'data_sec_contracts_variance_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** columns and relationships of "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments = {
-  __typename?: 'data_sec_filing_attachments';
-  accession_number: Scalars['String'];
-  contents: Scalars['String'];
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  filename?: Maybe<Scalars['String']>;
-  filing_type: Scalars['String'];
-  /** An object relationship */
-  sec_filing: Data_Sec_Filings;
-  sequence: Scalars['Int'];
-  text?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregated selection of "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Aggregate = {
-  __typename?: 'data_sec_filing_attachments_aggregate';
-  aggregate?: Maybe<Data_Sec_Filing_Attachments_Aggregate_Fields>;
-  nodes: Array<Data_Sec_Filing_Attachments>;
-};
-
-/** aggregate fields of "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Aggregate_Fields = {
-  __typename?: 'data_sec_filing_attachments_aggregate_fields';
-  avg?: Maybe<Data_Sec_Filing_Attachments_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Data_Sec_Filing_Attachments_Max_Fields>;
-  min?: Maybe<Data_Sec_Filing_Attachments_Min_Fields>;
-  stddev?: Maybe<Data_Sec_Filing_Attachments_Stddev_Fields>;
-  stddev_pop?: Maybe<Data_Sec_Filing_Attachments_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Data_Sec_Filing_Attachments_Stddev_Samp_Fields>;
-  sum?: Maybe<Data_Sec_Filing_Attachments_Sum_Fields>;
-  var_pop?: Maybe<Data_Sec_Filing_Attachments_Var_Pop_Fields>;
-  var_samp?: Maybe<Data_Sec_Filing_Attachments_Var_Samp_Fields>;
-  variance?: Maybe<Data_Sec_Filing_Attachments_Variance_Fields>;
-};
-
-/** aggregate fields of "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Aggregate_Order_By = {
-  avg?: Maybe<Data_Sec_Filing_Attachments_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Data_Sec_Filing_Attachments_Max_Order_By>;
-  min?: Maybe<Data_Sec_Filing_Attachments_Min_Order_By>;
-  stddev?: Maybe<Data_Sec_Filing_Attachments_Stddev_Order_By>;
-  stddev_pop?: Maybe<Data_Sec_Filing_Attachments_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Data_Sec_Filing_Attachments_Stddev_Samp_Order_By>;
-  sum?: Maybe<Data_Sec_Filing_Attachments_Sum_Order_By>;
-  var_pop?: Maybe<Data_Sec_Filing_Attachments_Var_Pop_Order_By>;
-  var_samp?: Maybe<Data_Sec_Filing_Attachments_Var_Samp_Order_By>;
-  variance?: Maybe<Data_Sec_Filing_Attachments_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Arr_Rel_Insert_Input = {
-  data: Array<Data_Sec_Filing_Attachments_Insert_Input>;
-  /** on conflict condition */
-  on_conflict?: Maybe<Data_Sec_Filing_Attachments_On_Conflict>;
-};
-
-/** aggregate avg on columns */
-export type Data_Sec_Filing_Attachments_Avg_Fields = {
-  __typename?: 'data_sec_filing_attachments_avg_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** order by avg() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Avg_Order_By = {
-  sequence?: Maybe<Order_By>;
-};
-
-/** Boolean expression to filter rows from the table "data.sec_filing_attachments". All fields are combined with a logical 'AND'. */
-export type Data_Sec_Filing_Attachments_Bool_Exp = {
-  _and?: Maybe<Array<Data_Sec_Filing_Attachments_Bool_Exp>>;
-  _not?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
-  _or?: Maybe<Array<Data_Sec_Filing_Attachments_Bool_Exp>>;
-  accession_number?: Maybe<String_Comparison_Exp>;
-  contents?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  filename?: Maybe<String_Comparison_Exp>;
-  filing_type?: Maybe<String_Comparison_Exp>;
-  sec_filing?: Maybe<Data_Sec_Filings_Bool_Exp>;
-  sequence?: Maybe<Int_Comparison_Exp>;
-  text?: Maybe<String_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "data.sec_filing_attachments" */
-export enum Data_Sec_Filing_Attachments_Constraint {
-  /** unique or primary key constraint */
-  SecFilingAttachmentAccessionNumberSequenceKey = 'sec_filing_attachment_accession_number_sequence_key',
-  /** unique or primary key constraint */
-  SecFilingAttachmentPkey = 'sec_filing_attachment_pkey',
-}
-
-/** input type for incrementing numeric columns in table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Inc_Input = {
-  sequence?: Maybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Insert_Input = {
-  accession_number?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  filename?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
-  sec_filing?: Maybe<Data_Sec_Filings_Obj_Rel_Insert_Input>;
-  sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate max on columns */
-export type Data_Sec_Filing_Attachments_Max_Fields = {
-  __typename?: 'data_sec_filing_attachments_max_fields';
-  accession_number?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  filename?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
-  sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** order by max() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Max_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  contents?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  filename?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  sequence?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Data_Sec_Filing_Attachments_Min_Fields = {
-  __typename?: 'data_sec_filing_attachments_min_fields';
-  accession_number?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  filename?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
-  sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** order by min() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Min_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  contents?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  filename?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  sequence?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-};
-
-/** response of any mutation on the table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Mutation_Response = {
-  __typename?: 'data_sec_filing_attachments_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Data_Sec_Filing_Attachments>;
-};
-
-/** on conflict condition type for table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_On_Conflict = {
-  constraint: Data_Sec_Filing_Attachments_Constraint;
-  update_columns?: Array<Data_Sec_Filing_Attachments_Update_Column>;
-  where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "data.sec_filing_attachments". */
-export type Data_Sec_Filing_Attachments_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  contents?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  filename?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  sec_filing?: Maybe<Data_Sec_Filings_Order_By>;
-  sequence?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: data_sec_filing_attachments */
-export type Data_Sec_Filing_Attachments_Pk_Columns_Input = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
-};
-
-/** select columns of table "data.sec_filing_attachments" */
-export enum Data_Sec_Filing_Attachments_Select_Column {
-  /** column name */
-  AccessionNumber = 'accession_number',
-  /** column name */
-  Contents = 'contents',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  Filename = 'filename',
-  /** column name */
-  FilingType = 'filing_type',
-  /** column name */
-  Sequence = 'sequence',
-  /** column name */
-  Text = 'text',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
-
-/** input type for updating data in table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Set_Input = {
-  accession_number?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  filename?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
-  sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate stddev on columns */
-export type Data_Sec_Filing_Attachments_Stddev_Fields = {
-  __typename?: 'data_sec_filing_attachments_stddev_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Stddev_Order_By = {
-  sequence?: Maybe<Order_By>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Data_Sec_Filing_Attachments_Stddev_Pop_Fields = {
-  __typename?: 'data_sec_filing_attachments_stddev_pop_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_pop() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Stddev_Pop_Order_By = {
-  sequence?: Maybe<Order_By>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Data_Sec_Filing_Attachments_Stddev_Samp_Fields = {
-  __typename?: 'data_sec_filing_attachments_stddev_samp_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** order by stddev_samp() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Stddev_Samp_Order_By = {
-  sequence?: Maybe<Order_By>;
-};
-
-/** aggregate sum on columns */
-export type Data_Sec_Filing_Attachments_Sum_Fields = {
-  __typename?: 'data_sec_filing_attachments_sum_fields';
-  sequence?: Maybe<Scalars['Int']>;
-};
-
-/** order by sum() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Sum_Order_By = {
-  sequence?: Maybe<Order_By>;
-};
-
-/** update columns of table "data.sec_filing_attachments" */
-export enum Data_Sec_Filing_Attachments_Update_Column {
-  /** column name */
-  AccessionNumber = 'accession_number',
-  /** column name */
-  Contents = 'contents',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  Filename = 'filename',
-  /** column name */
-  FilingType = 'filing_type',
-  /** column name */
-  Sequence = 'sequence',
-  /** column name */
-  Text = 'text',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
-
-/** aggregate var_pop on columns */
-export type Data_Sec_Filing_Attachments_Var_Pop_Fields = {
-  __typename?: 'data_sec_filing_attachments_var_pop_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_pop() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Var_Pop_Order_By = {
-  sequence?: Maybe<Order_By>;
-};
-
-/** aggregate var_samp on columns */
-export type Data_Sec_Filing_Attachments_Var_Samp_Fields = {
-  __typename?: 'data_sec_filing_attachments_var_samp_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** order by var_samp() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Var_Samp_Order_By = {
-  sequence?: Maybe<Order_By>;
-};
-
-/** aggregate variance on columns */
-export type Data_Sec_Filing_Attachments_Variance_Fields = {
-  __typename?: 'data_sec_filing_attachments_variance_fields';
-  sequence?: Maybe<Scalars['Float']>;
-};
-
-/** order by variance() on columns of table "data.sec_filing_attachments" */
-export type Data_Sec_Filing_Attachments_Variance_Order_By = {
-  sequence?: Maybe<Order_By>;
-};
-
-/** columns and relationships of "data.sec_filings" */
-export type Data_Sec_Filings = {
-  __typename?: 'data_sec_filings';
-  accession_number: Scalars['String'];
-  cik: Scalars['String'];
-  created_at?: Maybe<Scalars['timestamptz']>;
-  filing_type: Scalars['String'];
-  header?: Maybe<Scalars['String']>;
-  /** An object relationship */
-  sec_company: Data_Sec_Companies;
-  /** An array relationship */
-  sec_filing_attachments: Array<Data_Sec_Filing_Attachments>;
-  /** An aggregate relationship */
-  sec_filing_attachments_aggregate: Data_Sec_Filing_Attachments_Aggregate;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** columns and relationships of "data.sec_filings" */
-export type Data_Sec_FilingsSec_Filing_AttachmentsArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filing_Attachments_Order_By>>;
-  where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
-};
-
-/** columns and relationships of "data.sec_filings" */
-export type Data_Sec_FilingsSec_Filing_Attachments_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filing_Attachments_Order_By>>;
-  where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
-};
-
-/** aggregated selection of "data.sec_filings" */
-export type Data_Sec_Filings_Aggregate = {
-  __typename?: 'data_sec_filings_aggregate';
-  aggregate?: Maybe<Data_Sec_Filings_Aggregate_Fields>;
-  nodes: Array<Data_Sec_Filings>;
-};
-
-/** aggregate fields of "data.sec_filings" */
-export type Data_Sec_Filings_Aggregate_Fields = {
-  __typename?: 'data_sec_filings_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Data_Sec_Filings_Max_Fields>;
-  min?: Maybe<Data_Sec_Filings_Min_Fields>;
-};
-
-/** aggregate fields of "data.sec_filings" */
-export type Data_Sec_Filings_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "data.sec_filings" */
-export type Data_Sec_Filings_Aggregate_Order_By = {
-  count?: Maybe<Order_By>;
-  max?: Maybe<Data_Sec_Filings_Max_Order_By>;
-  min?: Maybe<Data_Sec_Filings_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "data.sec_filings" */
-export type Data_Sec_Filings_Arr_Rel_Insert_Input = {
-  data: Array<Data_Sec_Filings_Insert_Input>;
-  /** on conflict condition */
-  on_conflict?: Maybe<Data_Sec_Filings_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "data.sec_filings". All fields are combined with a logical 'AND'. */
-export type Data_Sec_Filings_Bool_Exp = {
-  _and?: Maybe<Array<Data_Sec_Filings_Bool_Exp>>;
-  _not?: Maybe<Data_Sec_Filings_Bool_Exp>;
-  _or?: Maybe<Array<Data_Sec_Filings_Bool_Exp>>;
-  accession_number?: Maybe<String_Comparison_Exp>;
-  cik?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  filing_type?: Maybe<String_Comparison_Exp>;
-  header?: Maybe<String_Comparison_Exp>;
-  sec_company?: Maybe<Data_Sec_Companies_Bool_Exp>;
-  sec_filing_attachments?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "data.sec_filings" */
-export enum Data_Sec_Filings_Constraint {
-  /** unique or primary key constraint */
-  SecFilingPkey = 'sec_filing_pkey',
-}
-
-/** input type for inserting data into table "data.sec_filings" */
-export type Data_Sec_Filings_Insert_Input = {
-  accession_number?: Maybe<Scalars['String']>;
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  filing_type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  sec_company?: Maybe<Data_Sec_Companies_Obj_Rel_Insert_Input>;
-  sec_filing_attachments?: Maybe<Data_Sec_Filing_Attachments_Arr_Rel_Insert_Input>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate max on columns */
-export type Data_Sec_Filings_Max_Fields = {
-  __typename?: 'data_sec_filings_max_fields';
-  accession_number?: Maybe<Scalars['String']>;
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  filing_type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** order by max() on columns of table "data.sec_filings" */
-export type Data_Sec_Filings_Max_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  cik?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  header?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Data_Sec_Filings_Min_Fields = {
-  __typename?: 'data_sec_filings_min_fields';
-  accession_number?: Maybe<Scalars['String']>;
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  filing_type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** order by min() on columns of table "data.sec_filings" */
-export type Data_Sec_Filings_Min_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  cik?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  header?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-};
-
-/** response of any mutation on the table "data.sec_filings" */
-export type Data_Sec_Filings_Mutation_Response = {
-  __typename?: 'data_sec_filings_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Data_Sec_Filings>;
-};
-
-/** input type for inserting object relation for remote table "data.sec_filings" */
-export type Data_Sec_Filings_Obj_Rel_Insert_Input = {
-  data: Data_Sec_Filings_Insert_Input;
-  /** on conflict condition */
-  on_conflict?: Maybe<Data_Sec_Filings_On_Conflict>;
-};
-
-/** on conflict condition type for table "data.sec_filings" */
-export type Data_Sec_Filings_On_Conflict = {
-  constraint: Data_Sec_Filings_Constraint;
-  update_columns?: Array<Data_Sec_Filings_Update_Column>;
-  where?: Maybe<Data_Sec_Filings_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "data.sec_filings". */
-export type Data_Sec_Filings_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  cik?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  header?: Maybe<Order_By>;
-  sec_company?: Maybe<Data_Sec_Companies_Order_By>;
-  sec_filing_attachments_aggregate?: Maybe<Data_Sec_Filing_Attachments_Aggregate_Order_By>;
-  updated_at?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: data_sec_filings */
-export type Data_Sec_Filings_Pk_Columns_Input = {
-  accession_number: Scalars['String'];
-};
-
-/** select columns of table "data.sec_filings" */
-export enum Data_Sec_Filings_Select_Column {
-  /** column name */
-  AccessionNumber = 'accession_number',
-  /** column name */
-  Cik = 'cik',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  FilingType = 'filing_type',
-  /** column name */
-  Header = 'header',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
-
-/** input type for updating data in table "data.sec_filings" */
-export type Data_Sec_Filings_Set_Input = {
-  accession_number?: Maybe<Scalars['String']>;
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  filing_type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** update columns of table "data.sec_filings" */
-export enum Data_Sec_Filings_Update_Column {
-  /** column name */
-  AccessionNumber = 'accession_number',
-  /** column name */
-  Cik = 'cik',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  FilingType = 'filing_type',
-  /** column name */
-  Header = 'header',
-  /** column name */
-  UpdatedAt = 'updated_at',
-}
 
 /** columns and relationships of "migrations" */
 export type Migrations = {
@@ -1215,18 +267,6 @@ export type Migrations_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
-  /** delete data from the table: "data.sec_companies" */
-  delete_data_sec_companies?: Maybe<Data_Sec_Companies_Mutation_Response>;
-  /** delete single row from the table: "data.sec_companies" */
-  delete_data_sec_companies_by_pk?: Maybe<Data_Sec_Companies>;
-  /** delete data from the table: "data.sec_filing_attachments" */
-  delete_data_sec_filing_attachments?: Maybe<Data_Sec_Filing_Attachments_Mutation_Response>;
-  /** delete single row from the table: "data.sec_filing_attachments" */
-  delete_data_sec_filing_attachments_by_pk?: Maybe<Data_Sec_Filing_Attachments>;
-  /** delete data from the table: "data.sec_filings" */
-  delete_data_sec_filings?: Maybe<Data_Sec_Filings_Mutation_Response>;
-  /** delete single row from the table: "data.sec_filings" */
-  delete_data_sec_filings_by_pk?: Maybe<Data_Sec_Filings>;
   /** delete data from the table: "migrations" */
   delete_migrations?: Maybe<Migrations_Mutation_Response>;
   /** delete single row from the table: "migrations" */
@@ -1239,22 +279,22 @@ export type Mutation_Root = {
   delete_org_type?: Maybe<Org_Type_Mutation_Response>;
   /** delete single row from the table: "org_type" */
   delete_org_type_by_pk?: Maybe<Org_Type>;
+  /** delete data from the table: "sec_company" */
+  delete_sec_company?: Maybe<Sec_Company_Mutation_Response>;
+  /** delete single row from the table: "sec_company" */
+  delete_sec_company_by_pk?: Maybe<Sec_Company>;
+  /** delete data from the table: "sec_filing" */
+  delete_sec_filing?: Maybe<Sec_Filing_Mutation_Response>;
+  /** delete data from the table: "sec_filing_attachment" */
+  delete_sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Mutation_Response>;
+  /** delete single row from the table: "sec_filing_attachment" */
+  delete_sec_filing_attachment_by_pk?: Maybe<Sec_Filing_Attachment>;
+  /** delete single row from the table: "sec_filing" */
+  delete_sec_filing_by_pk?: Maybe<Sec_Filing>;
   /** delete data from the table: "user" */
   delete_user?: Maybe<User_Mutation_Response>;
   /** delete single row from the table: "user" */
   delete_user_by_pk?: Maybe<User>;
-  /** insert data into the table: "data.sec_companies" */
-  insert_data_sec_companies?: Maybe<Data_Sec_Companies_Mutation_Response>;
-  /** insert a single row into the table: "data.sec_companies" */
-  insert_data_sec_companies_one?: Maybe<Data_Sec_Companies>;
-  /** insert data into the table: "data.sec_filing_attachments" */
-  insert_data_sec_filing_attachments?: Maybe<Data_Sec_Filing_Attachments_Mutation_Response>;
-  /** insert a single row into the table: "data.sec_filing_attachments" */
-  insert_data_sec_filing_attachments_one?: Maybe<Data_Sec_Filing_Attachments>;
-  /** insert data into the table: "data.sec_filings" */
-  insert_data_sec_filings?: Maybe<Data_Sec_Filings_Mutation_Response>;
-  /** insert a single row into the table: "data.sec_filings" */
-  insert_data_sec_filings_one?: Maybe<Data_Sec_Filings>;
   /** insert data into the table: "migrations" */
   insert_migrations?: Maybe<Migrations_Mutation_Response>;
   /** insert a single row into the table: "migrations" */
@@ -1267,22 +307,22 @@ export type Mutation_Root = {
   insert_org_type?: Maybe<Org_Type_Mutation_Response>;
   /** insert a single row into the table: "org_type" */
   insert_org_type_one?: Maybe<Org_Type>;
+  /** insert data into the table: "sec_company" */
+  insert_sec_company?: Maybe<Sec_Company_Mutation_Response>;
+  /** insert a single row into the table: "sec_company" */
+  insert_sec_company_one?: Maybe<Sec_Company>;
+  /** insert data into the table: "sec_filing" */
+  insert_sec_filing?: Maybe<Sec_Filing_Mutation_Response>;
+  /** insert data into the table: "sec_filing_attachment" */
+  insert_sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Mutation_Response>;
+  /** insert a single row into the table: "sec_filing_attachment" */
+  insert_sec_filing_attachment_one?: Maybe<Sec_Filing_Attachment>;
+  /** insert a single row into the table: "sec_filing" */
+  insert_sec_filing_one?: Maybe<Sec_Filing>;
   /** insert data into the table: "user" */
   insert_user?: Maybe<User_Mutation_Response>;
   /** insert a single row into the table: "user" */
   insert_user_one?: Maybe<User>;
-  /** update data of the table: "data.sec_companies" */
-  update_data_sec_companies?: Maybe<Data_Sec_Companies_Mutation_Response>;
-  /** update single row of the table: "data.sec_companies" */
-  update_data_sec_companies_by_pk?: Maybe<Data_Sec_Companies>;
-  /** update data of the table: "data.sec_filing_attachments" */
-  update_data_sec_filing_attachments?: Maybe<Data_Sec_Filing_Attachments_Mutation_Response>;
-  /** update single row of the table: "data.sec_filing_attachments" */
-  update_data_sec_filing_attachments_by_pk?: Maybe<Data_Sec_Filing_Attachments>;
-  /** update data of the table: "data.sec_filings" */
-  update_data_sec_filings?: Maybe<Data_Sec_Filings_Mutation_Response>;
-  /** update single row of the table: "data.sec_filings" */
-  update_data_sec_filings_by_pk?: Maybe<Data_Sec_Filings>;
   /** update data of the table: "migrations" */
   update_migrations?: Maybe<Migrations_Mutation_Response>;
   /** update single row of the table: "migrations" */
@@ -1295,41 +335,22 @@ export type Mutation_Root = {
   update_org_type?: Maybe<Org_Type_Mutation_Response>;
   /** update single row of the table: "org_type" */
   update_org_type_by_pk?: Maybe<Org_Type>;
+  /** update data of the table: "sec_company" */
+  update_sec_company?: Maybe<Sec_Company_Mutation_Response>;
+  /** update single row of the table: "sec_company" */
+  update_sec_company_by_pk?: Maybe<Sec_Company>;
+  /** update data of the table: "sec_filing" */
+  update_sec_filing?: Maybe<Sec_Filing_Mutation_Response>;
+  /** update data of the table: "sec_filing_attachment" */
+  update_sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Mutation_Response>;
+  /** update single row of the table: "sec_filing_attachment" */
+  update_sec_filing_attachment_by_pk?: Maybe<Sec_Filing_Attachment>;
+  /** update single row of the table: "sec_filing" */
+  update_sec_filing_by_pk?: Maybe<Sec_Filing>;
   /** update data of the table: "user" */
   update_user?: Maybe<User_Mutation_Response>;
   /** update single row of the table: "user" */
   update_user_by_pk?: Maybe<User>;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Data_Sec_CompaniesArgs = {
-  where: Data_Sec_Companies_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Data_Sec_Companies_By_PkArgs = {
-  cik: Scalars['String'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Data_Sec_Filing_AttachmentsArgs = {
-  where: Data_Sec_Filing_Attachments_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Data_Sec_Filing_Attachments_By_PkArgs = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Data_Sec_FilingsArgs = {
-  where: Data_Sec_Filings_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_Data_Sec_Filings_By_PkArgs = {
-  accession_number: Scalars['String'];
 };
 
 /** mutation root */
@@ -1363,6 +384,37 @@ export type Mutation_RootDelete_Org_Type_By_PkArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootDelete_Sec_CompanyArgs = {
+  where: Sec_Company_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Sec_Company_By_PkArgs = {
+  cik: Scalars['String'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Sec_FilingArgs = {
+  where: Sec_Filing_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Sec_Filing_AttachmentArgs = {
+  where: Sec_Filing_Attachment_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Sec_Filing_Attachment_By_PkArgs = {
+  accession_number: Scalars['String'];
+  sequence: Scalars['Int'];
+};
+
+/** mutation root */
+export type Mutation_RootDelete_Sec_Filing_By_PkArgs = {
+  accession_number: Scalars['String'];
+};
+
+/** mutation root */
 export type Mutation_RootDelete_UserArgs = {
   where: User_Bool_Exp;
 };
@@ -1370,42 +422,6 @@ export type Mutation_RootDelete_UserArgs = {
 /** mutation root */
 export type Mutation_RootDelete_User_By_PkArgs = {
   id: Scalars['Int'];
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Data_Sec_CompaniesArgs = {
-  objects: Array<Data_Sec_Companies_Insert_Input>;
-  on_conflict?: Maybe<Data_Sec_Companies_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Data_Sec_Companies_OneArgs = {
-  object: Data_Sec_Companies_Insert_Input;
-  on_conflict?: Maybe<Data_Sec_Companies_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Data_Sec_Filing_AttachmentsArgs = {
-  objects: Array<Data_Sec_Filing_Attachments_Insert_Input>;
-  on_conflict?: Maybe<Data_Sec_Filing_Attachments_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Data_Sec_Filing_Attachments_OneArgs = {
-  object: Data_Sec_Filing_Attachments_Insert_Input;
-  on_conflict?: Maybe<Data_Sec_Filing_Attachments_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Data_Sec_FilingsArgs = {
-  objects: Array<Data_Sec_Filings_Insert_Input>;
-  on_conflict?: Maybe<Data_Sec_Filings_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_Data_Sec_Filings_OneArgs = {
-  object: Data_Sec_Filings_Insert_Input;
-  on_conflict?: Maybe<Data_Sec_Filings_On_Conflict>;
 };
 
 /** mutation root */
@@ -1445,6 +461,42 @@ export type Mutation_RootInsert_Org_Type_OneArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsert_Sec_CompanyArgs = {
+  objects: Array<Sec_Company_Insert_Input>;
+  on_conflict?: Maybe<Sec_Company_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Sec_Company_OneArgs = {
+  object: Sec_Company_Insert_Input;
+  on_conflict?: Maybe<Sec_Company_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Sec_FilingArgs = {
+  objects: Array<Sec_Filing_Insert_Input>;
+  on_conflict?: Maybe<Sec_Filing_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Sec_Filing_AttachmentArgs = {
+  objects: Array<Sec_Filing_Attachment_Insert_Input>;
+  on_conflict?: Maybe<Sec_Filing_Attachment_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Sec_Filing_Attachment_OneArgs = {
+  object: Sec_Filing_Attachment_Insert_Input;
+  on_conflict?: Maybe<Sec_Filing_Attachment_On_Conflict>;
+};
+
+/** mutation root */
+export type Mutation_RootInsert_Sec_Filing_OneArgs = {
+  object: Sec_Filing_Insert_Input;
+  on_conflict?: Maybe<Sec_Filing_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_UserArgs = {
   objects: Array<User_Insert_Input>;
   on_conflict?: Maybe<User_On_Conflict>;
@@ -1454,44 +506,6 @@ export type Mutation_RootInsert_UserArgs = {
 export type Mutation_RootInsert_User_OneArgs = {
   object: User_Insert_Input;
   on_conflict?: Maybe<User_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Data_Sec_CompaniesArgs = {
-  _set?: Maybe<Data_Sec_Companies_Set_Input>;
-  where: Data_Sec_Companies_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Data_Sec_Companies_By_PkArgs = {
-  _set?: Maybe<Data_Sec_Companies_Set_Input>;
-  pk_columns: Data_Sec_Companies_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Data_Sec_Filing_AttachmentsArgs = {
-  _inc?: Maybe<Data_Sec_Filing_Attachments_Inc_Input>;
-  _set?: Maybe<Data_Sec_Filing_Attachments_Set_Input>;
-  where: Data_Sec_Filing_Attachments_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Data_Sec_Filing_Attachments_By_PkArgs = {
-  _inc?: Maybe<Data_Sec_Filing_Attachments_Inc_Input>;
-  _set?: Maybe<Data_Sec_Filing_Attachments_Set_Input>;
-  pk_columns: Data_Sec_Filing_Attachments_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Data_Sec_FilingsArgs = {
-  _set?: Maybe<Data_Sec_Filings_Set_Input>;
-  where: Data_Sec_Filings_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_Data_Sec_Filings_By_PkArgs = {
-  _set?: Maybe<Data_Sec_Filings_Set_Input>;
-  pk_columns: Data_Sec_Filings_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -1532,6 +546,44 @@ export type Mutation_RootUpdate_Org_TypeArgs = {
 export type Mutation_RootUpdate_Org_Type_By_PkArgs = {
   _set?: Maybe<Org_Type_Set_Input>;
   pk_columns: Org_Type_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Sec_CompanyArgs = {
+  _set?: Maybe<Sec_Company_Set_Input>;
+  where: Sec_Company_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Sec_Company_By_PkArgs = {
+  _set?: Maybe<Sec_Company_Set_Input>;
+  pk_columns: Sec_Company_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Sec_FilingArgs = {
+  _set?: Maybe<Sec_Filing_Set_Input>;
+  where: Sec_Filing_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Sec_Filing_AttachmentArgs = {
+  _inc?: Maybe<Sec_Filing_Attachment_Inc_Input>;
+  _set?: Maybe<Sec_Filing_Attachment_Set_Input>;
+  where: Sec_Filing_Attachment_Bool_Exp;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Sec_Filing_Attachment_By_PkArgs = {
+  _inc?: Maybe<Sec_Filing_Attachment_Inc_Input>;
+  _set?: Maybe<Sec_Filing_Attachment_Set_Input>;
+  pk_columns: Sec_Filing_Attachment_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdate_Sec_Filing_By_PkArgs = {
+  _set?: Maybe<Sec_Filing_Set_Input>;
+  pk_columns: Sec_Filing_Pk_Columns_Input;
 };
 
 /** mutation root */
@@ -2075,28 +1127,6 @@ export type Org_Variance_Order_By = {
 
 export type Query_Root = {
   __typename?: 'query_root';
-  /** fetch data from the table: "data.sec_companies" */
-  data_sec_companies: Array<Data_Sec_Companies>;
-  /** fetch aggregated fields from the table: "data.sec_companies" */
-  data_sec_companies_aggregate: Data_Sec_Companies_Aggregate;
-  /** fetch data from the table: "data.sec_companies" using primary key columns */
-  data_sec_companies_by_pk?: Maybe<Data_Sec_Companies>;
-  /** fetch data from the table: "data.sec_contracts" */
-  data_sec_contracts: Array<Data_Sec_Contracts>;
-  /** fetch aggregated fields from the table: "data.sec_contracts" */
-  data_sec_contracts_aggregate: Data_Sec_Contracts_Aggregate;
-  /** fetch data from the table: "data.sec_filing_attachments" */
-  data_sec_filing_attachments: Array<Data_Sec_Filing_Attachments>;
-  /** fetch aggregated fields from the table: "data.sec_filing_attachments" */
-  data_sec_filing_attachments_aggregate: Data_Sec_Filing_Attachments_Aggregate;
-  /** fetch data from the table: "data.sec_filing_attachments" using primary key columns */
-  data_sec_filing_attachments_by_pk?: Maybe<Data_Sec_Filing_Attachments>;
-  /** fetch data from the table: "data.sec_filings" */
-  data_sec_filings: Array<Data_Sec_Filings>;
-  /** fetch aggregated fields from the table: "data.sec_filings" */
-  data_sec_filings_aggregate: Data_Sec_Filings_Aggregate;
-  /** fetch data from the table: "data.sec_filings" using primary key columns */
-  data_sec_filings_by_pk?: Maybe<Data_Sec_Filings>;
   /** fetch data from the table: "migrations" */
   migrations: Array<Migrations>;
   /** fetch aggregated fields from the table: "migrations" */
@@ -2115,89 +1145,38 @@ export type Query_Root = {
   org_type_aggregate: Org_Type_Aggregate;
   /** fetch data from the table: "org_type" using primary key columns */
   org_type_by_pk?: Maybe<Org_Type>;
+  /** fetch data from the table: "sec_company" */
+  sec_company: Array<Sec_Company>;
+  /** fetch aggregated fields from the table: "sec_company" */
+  sec_company_aggregate: Sec_Company_Aggregate;
+  /** fetch data from the table: "sec_company" using primary key columns */
+  sec_company_by_pk?: Maybe<Sec_Company>;
+  /** fetch data from the table: "sec_contract" */
+  sec_contract: Array<Sec_Contract>;
+  /** fetch aggregated fields from the table: "sec_contract" */
+  sec_contract_aggregate: Sec_Contract_Aggregate;
+  /** fetch data from the table: "sec_filing" */
+  sec_filing: Array<Sec_Filing>;
+  /** An aggregate relationship */
+  sec_filing_aggregate: Sec_Filing_Aggregate;
+  /** An array relationship */
+  sec_filing_attachment: Array<Sec_Filing_Attachment>;
+  /** An aggregate relationship */
+  sec_filing_attachment_aggregate: Sec_Filing_Attachment_Aggregate;
+  /** fetch data from the table: "sec_filing_attachment" using primary key columns */
+  sec_filing_attachment_by_pk?: Maybe<Sec_Filing_Attachment>;
+  /** fetch data from the table: "sec_filing" using primary key columns */
+  sec_filing_by_pk?: Maybe<Sec_Filing>;
+  /** execute function "sec_search" which returns "sec_filing_attachment" */
+  sec_search: Array<Sec_Filing_Attachment>;
+  /** execute function "sec_search" and query aggregates on result of table type "sec_filing_attachment" */
+  sec_search_aggregate: Sec_Filing_Attachment_Aggregate;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
   user_aggregate: User_Aggregate;
   /** fetch data from the table: "user" using primary key columns */
   user_by_pk?: Maybe<User>;
-};
-
-export type Query_RootData_Sec_CompaniesArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Companies_Order_By>>;
-  where?: Maybe<Data_Sec_Companies_Bool_Exp>;
-};
-
-export type Query_RootData_Sec_Companies_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Companies_Order_By>>;
-  where?: Maybe<Data_Sec_Companies_Bool_Exp>;
-};
-
-export type Query_RootData_Sec_Companies_By_PkArgs = {
-  cik: Scalars['String'];
-};
-
-export type Query_RootData_Sec_ContractsArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Contracts_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Contracts_Order_By>>;
-  where?: Maybe<Data_Sec_Contracts_Bool_Exp>;
-};
-
-export type Query_RootData_Sec_Contracts_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Contracts_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Contracts_Order_By>>;
-  where?: Maybe<Data_Sec_Contracts_Bool_Exp>;
-};
-
-export type Query_RootData_Sec_Filing_AttachmentsArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filing_Attachments_Order_By>>;
-  where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
-};
-
-export type Query_RootData_Sec_Filing_Attachments_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filing_Attachments_Order_By>>;
-  where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
-};
-
-export type Query_RootData_Sec_Filing_Attachments_By_PkArgs = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
-};
-
-export type Query_RootData_Sec_FilingsArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filings_Order_By>>;
-  where?: Maybe<Data_Sec_Filings_Bool_Exp>;
-};
-
-export type Query_RootData_Sec_Filings_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filings_Order_By>>;
-  where?: Maybe<Data_Sec_Filings_Bool_Exp>;
-};
-
-export type Query_RootData_Sec_Filings_By_PkArgs = {
-  accession_number: Scalars['String'];
 };
 
 export type Query_RootMigrationsArgs = {
@@ -2260,6 +1239,101 @@ export type Query_RootOrg_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
+export type Query_RootSec_CompanyArgs = {
+  distinct_on?: Maybe<Array<Sec_Company_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Company_Order_By>>;
+  where?: Maybe<Sec_Company_Bool_Exp>;
+};
+
+export type Query_RootSec_Company_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Company_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Company_Order_By>>;
+  where?: Maybe<Sec_Company_Bool_Exp>;
+};
+
+export type Query_RootSec_Company_By_PkArgs = {
+  cik: Scalars['String'];
+};
+
+export type Query_RootSec_ContractArgs = {
+  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
+  where?: Maybe<Sec_Contract_Bool_Exp>;
+};
+
+export type Query_RootSec_Contract_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
+  where?: Maybe<Sec_Contract_Bool_Exp>;
+};
+
+export type Query_RootSec_FilingArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
+  where?: Maybe<Sec_Filing_Bool_Exp>;
+};
+
+export type Query_RootSec_Filing_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
+  where?: Maybe<Sec_Filing_Bool_Exp>;
+};
+
+export type Query_RootSec_Filing_AttachmentArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+export type Query_RootSec_Filing_Attachment_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+export type Query_RootSec_Filing_Attachment_By_PkArgs = {
+  accession_number: Scalars['String'];
+  sequence: Scalars['Int'];
+};
+
+export type Query_RootSec_Filing_By_PkArgs = {
+  accession_number: Scalars['String'];
+};
+
+export type Query_RootSec_SearchArgs = {
+  args: Sec_Search_Args;
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+export type Query_RootSec_Search_AggregateArgs = {
+  args: Sec_Search_Args;
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
 export type Query_RootUserArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2280,30 +1354,970 @@ export type Query_RootUser_By_PkArgs = {
   id: Scalars['Int'];
 };
 
+/** columns and relationships of "sec_company" */
+export type Sec_Company = {
+  __typename?: 'sec_company';
+  cik: Scalars['String'];
+  created_at?: Maybe<Scalars['timestamptz']>;
+  geo?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  /** fetch data from the table: "sec_filing" */
+  sec_filing: Array<Sec_Filing>;
+  /** An aggregate relationship */
+  sec_filing_aggregate: Sec_Filing_Aggregate;
+  sic: Scalars['String'];
+  sic_name: Scalars['String'];
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** columns and relationships of "sec_company" */
+export type Sec_CompanySec_FilingArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
+  where?: Maybe<Sec_Filing_Bool_Exp>;
+};
+
+/** columns and relationships of "sec_company" */
+export type Sec_CompanySec_Filing_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
+  where?: Maybe<Sec_Filing_Bool_Exp>;
+};
+
+/** aggregated selection of "sec_company" */
+export type Sec_Company_Aggregate = {
+  __typename?: 'sec_company_aggregate';
+  aggregate?: Maybe<Sec_Company_Aggregate_Fields>;
+  nodes: Array<Sec_Company>;
+};
+
+/** aggregate fields of "sec_company" */
+export type Sec_Company_Aggregate_Fields = {
+  __typename?: 'sec_company_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Sec_Company_Max_Fields>;
+  min?: Maybe<Sec_Company_Min_Fields>;
+};
+
+/** aggregate fields of "sec_company" */
+export type Sec_Company_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Sec_Company_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "sec_company". All fields are combined with a logical 'AND'. */
+export type Sec_Company_Bool_Exp = {
+  _and?: Maybe<Array<Sec_Company_Bool_Exp>>;
+  _not?: Maybe<Sec_Company_Bool_Exp>;
+  _or?: Maybe<Array<Sec_Company_Bool_Exp>>;
+  cik?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  geo?: Maybe<String_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  sec_filing?: Maybe<Sec_Filing_Bool_Exp>;
+  sic?: Maybe<String_Comparison_Exp>;
+  sic_name?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "sec_company" */
+export enum Sec_Company_Constraint {
+  /** unique or primary key constraint */
+  SecCompaniesPkey = 'sec_companies_pkey',
+}
+
+/** input type for inserting data into table "sec_company" */
+export type Sec_Company_Insert_Input = {
+  cik?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  geo?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  sec_filing?: Maybe<Sec_Filing_Arr_Rel_Insert_Input>;
+  sic?: Maybe<Scalars['String']>;
+  sic_name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Sec_Company_Max_Fields = {
+  __typename?: 'sec_company_max_fields';
+  cik?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  geo?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  sic?: Maybe<Scalars['String']>;
+  sic_name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Sec_Company_Min_Fields = {
+  __typename?: 'sec_company_min_fields';
+  cik?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  geo?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  sic?: Maybe<Scalars['String']>;
+  sic_name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "sec_company" */
+export type Sec_Company_Mutation_Response = {
+  __typename?: 'sec_company_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Sec_Company>;
+};
+
+/** input type for inserting object relation for remote table "sec_company" */
+export type Sec_Company_Obj_Rel_Insert_Input = {
+  data: Sec_Company_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Sec_Company_On_Conflict>;
+};
+
+/** on conflict condition type for table "sec_company" */
+export type Sec_Company_On_Conflict = {
+  constraint: Sec_Company_Constraint;
+  update_columns?: Array<Sec_Company_Update_Column>;
+  where?: Maybe<Sec_Company_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "sec_company". */
+export type Sec_Company_Order_By = {
+  cik?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  geo?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  sec_filing_aggregate?: Maybe<Sec_Filing_Aggregate_Order_By>;
+  sic?: Maybe<Order_By>;
+  sic_name?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: sec_company */
+export type Sec_Company_Pk_Columns_Input = {
+  cik: Scalars['String'];
+};
+
+/** select columns of table "sec_company" */
+export enum Sec_Company_Select_Column {
+  /** column name */
+  Cik = 'cik',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Geo = 'geo',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Sic = 'sic',
+  /** column name */
+  SicName = 'sic_name',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "sec_company" */
+export type Sec_Company_Set_Input = {
+  cik?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  geo?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  sic?: Maybe<Scalars['String']>;
+  sic_name?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "sec_company" */
+export enum Sec_Company_Update_Column {
+  /** column name */
+  Cik = 'cik',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Geo = 'geo',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Sic = 'sic',
+  /** column name */
+  SicName = 'sic_name',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** columns and relationships of "sec_contract" */
+export type Sec_Contract = {
+  __typename?: 'sec_contract';
+  accession_number?: Maybe<Scalars['String']>;
+  company_cik?: Maybe<Scalars['String']>;
+  company_geo?: Maybe<Scalars['String']>;
+  company_name?: Maybe<Scalars['String']>;
+  contents?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  filing_metadata?: Maybe<Scalars['String']>;
+  filing_type?: Maybe<Scalars['String']>;
+  sequence?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "sec_contract" */
+export type Sec_Contract_Aggregate = {
+  __typename?: 'sec_contract_aggregate';
+  aggregate?: Maybe<Sec_Contract_Aggregate_Fields>;
+  nodes: Array<Sec_Contract>;
+};
+
+/** aggregate fields of "sec_contract" */
+export type Sec_Contract_Aggregate_Fields = {
+  __typename?: 'sec_contract_aggregate_fields';
+  avg?: Maybe<Sec_Contract_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Sec_Contract_Max_Fields>;
+  min?: Maybe<Sec_Contract_Min_Fields>;
+  stddev?: Maybe<Sec_Contract_Stddev_Fields>;
+  stddev_pop?: Maybe<Sec_Contract_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Sec_Contract_Stddev_Samp_Fields>;
+  sum?: Maybe<Sec_Contract_Sum_Fields>;
+  var_pop?: Maybe<Sec_Contract_Var_Pop_Fields>;
+  var_samp?: Maybe<Sec_Contract_Var_Samp_Fields>;
+  variance?: Maybe<Sec_Contract_Variance_Fields>;
+};
+
+/** aggregate fields of "sec_contract" */
+export type Sec_Contract_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Sec_Contract_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Sec_Contract_Avg_Fields = {
+  __typename?: 'sec_contract_avg_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "sec_contract". All fields are combined with a logical 'AND'. */
+export type Sec_Contract_Bool_Exp = {
+  _and?: Maybe<Array<Sec_Contract_Bool_Exp>>;
+  _not?: Maybe<Sec_Contract_Bool_Exp>;
+  _or?: Maybe<Array<Sec_Contract_Bool_Exp>>;
+  accession_number?: Maybe<String_Comparison_Exp>;
+  company_cik?: Maybe<String_Comparison_Exp>;
+  company_geo?: Maybe<String_Comparison_Exp>;
+  company_name?: Maybe<String_Comparison_Exp>;
+  contents?: Maybe<String_Comparison_Exp>;
+  description?: Maybe<String_Comparison_Exp>;
+  filing_metadata?: Maybe<String_Comparison_Exp>;
+  filing_type?: Maybe<String_Comparison_Exp>;
+  sequence?: Maybe<Int_Comparison_Exp>;
+  text?: Maybe<String_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Sec_Contract_Max_Fields = {
+  __typename?: 'sec_contract_max_fields';
+  accession_number?: Maybe<Scalars['String']>;
+  company_cik?: Maybe<Scalars['String']>;
+  company_geo?: Maybe<Scalars['String']>;
+  company_name?: Maybe<Scalars['String']>;
+  contents?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  filing_metadata?: Maybe<Scalars['String']>;
+  filing_type?: Maybe<Scalars['String']>;
+  sequence?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Sec_Contract_Min_Fields = {
+  __typename?: 'sec_contract_min_fields';
+  accession_number?: Maybe<Scalars['String']>;
+  company_cik?: Maybe<Scalars['String']>;
+  company_geo?: Maybe<Scalars['String']>;
+  company_name?: Maybe<Scalars['String']>;
+  contents?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  filing_metadata?: Maybe<Scalars['String']>;
+  filing_type?: Maybe<Scalars['String']>;
+  sequence?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
+};
+
+/** Ordering options when selecting data from "sec_contract". */
+export type Sec_Contract_Order_By = {
+  accession_number?: Maybe<Order_By>;
+  company_cik?: Maybe<Order_By>;
+  company_geo?: Maybe<Order_By>;
+  company_name?: Maybe<Order_By>;
+  contents?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+  filing_metadata?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
+  sequence?: Maybe<Order_By>;
+  text?: Maybe<Order_By>;
+};
+
+/** select columns of table "sec_contract" */
+export enum Sec_Contract_Select_Column {
+  /** column name */
+  AccessionNumber = 'accession_number',
+  /** column name */
+  CompanyCik = 'company_cik',
+  /** column name */
+  CompanyGeo = 'company_geo',
+  /** column name */
+  CompanyName = 'company_name',
+  /** column name */
+  Contents = 'contents',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  FilingMetadata = 'filing_metadata',
+  /** column name */
+  FilingType = 'filing_type',
+  /** column name */
+  Sequence = 'sequence',
+  /** column name */
+  Text = 'text',
+}
+
+/** aggregate stddev on columns */
+export type Sec_Contract_Stddev_Fields = {
+  __typename?: 'sec_contract_stddev_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Sec_Contract_Stddev_Pop_Fields = {
+  __typename?: 'sec_contract_stddev_pop_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Sec_Contract_Stddev_Samp_Fields = {
+  __typename?: 'sec_contract_stddev_samp_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Sec_Contract_Sum_Fields = {
+  __typename?: 'sec_contract_sum_fields';
+  sequence?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate var_pop on columns */
+export type Sec_Contract_Var_Pop_Fields = {
+  __typename?: 'sec_contract_var_pop_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Sec_Contract_Var_Samp_Fields = {
+  __typename?: 'sec_contract_var_samp_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Sec_Contract_Variance_Fields = {
+  __typename?: 'sec_contract_variance_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** columns and relationships of "sec_filing" */
+export type Sec_Filing = {
+  __typename?: 'sec_filing';
+  accession_number: Scalars['String'];
+  cik: Scalars['String'];
+  created_at?: Maybe<Scalars['timestamptz']>;
+  filing_type: Scalars['String'];
+  header?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  sec_company: Sec_Company;
+  /** An array relationship */
+  sec_filing_attachment: Array<Sec_Filing_Attachment>;
+  /** An aggregate relationship */
+  sec_filing_attachment_aggregate: Sec_Filing_Attachment_Aggregate;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** columns and relationships of "sec_filing" */
+export type Sec_FilingSec_Filing_AttachmentArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+/** columns and relationships of "sec_filing" */
+export type Sec_FilingSec_Filing_Attachment_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+/** aggregated selection of "sec_filing" */
+export type Sec_Filing_Aggregate = {
+  __typename?: 'sec_filing_aggregate';
+  aggregate?: Maybe<Sec_Filing_Aggregate_Fields>;
+  nodes: Array<Sec_Filing>;
+};
+
+/** aggregate fields of "sec_filing" */
+export type Sec_Filing_Aggregate_Fields = {
+  __typename?: 'sec_filing_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Sec_Filing_Max_Fields>;
+  min?: Maybe<Sec_Filing_Min_Fields>;
+};
+
+/** aggregate fields of "sec_filing" */
+export type Sec_Filing_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Sec_Filing_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "sec_filing" */
+export type Sec_Filing_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Sec_Filing_Max_Order_By>;
+  min?: Maybe<Sec_Filing_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "sec_filing" */
+export type Sec_Filing_Arr_Rel_Insert_Input = {
+  data: Array<Sec_Filing_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: Maybe<Sec_Filing_On_Conflict>;
+};
+
+/** columns and relationships of "sec_filing_attachment" */
+export type Sec_Filing_Attachment = {
+  __typename?: 'sec_filing_attachment';
+  accession_number: Scalars['String'];
+  contents: Scalars['String'];
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  filing_type: Scalars['String'];
+  /** An object relationship */
+  sec_filing: Sec_Filing;
+  sequence: Scalars['Int'];
+  text?: Maybe<Scalars['String']>;
+  tsv_search_text?: Maybe<Scalars['tsvector']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregated selection of "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Aggregate = {
+  __typename?: 'sec_filing_attachment_aggregate';
+  aggregate?: Maybe<Sec_Filing_Attachment_Aggregate_Fields>;
+  nodes: Array<Sec_Filing_Attachment>;
+};
+
+/** aggregate fields of "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Aggregate_Fields = {
+  __typename?: 'sec_filing_attachment_aggregate_fields';
+  avg?: Maybe<Sec_Filing_Attachment_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Sec_Filing_Attachment_Max_Fields>;
+  min?: Maybe<Sec_Filing_Attachment_Min_Fields>;
+  stddev?: Maybe<Sec_Filing_Attachment_Stddev_Fields>;
+  stddev_pop?: Maybe<Sec_Filing_Attachment_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Sec_Filing_Attachment_Stddev_Samp_Fields>;
+  sum?: Maybe<Sec_Filing_Attachment_Sum_Fields>;
+  var_pop?: Maybe<Sec_Filing_Attachment_Var_Pop_Fields>;
+  var_samp?: Maybe<Sec_Filing_Attachment_Var_Samp_Fields>;
+  variance?: Maybe<Sec_Filing_Attachment_Variance_Fields>;
+};
+
+/** aggregate fields of "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Aggregate_Order_By = {
+  avg?: Maybe<Sec_Filing_Attachment_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Sec_Filing_Attachment_Max_Order_By>;
+  min?: Maybe<Sec_Filing_Attachment_Min_Order_By>;
+  stddev?: Maybe<Sec_Filing_Attachment_Stddev_Order_By>;
+  stddev_pop?: Maybe<Sec_Filing_Attachment_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Sec_Filing_Attachment_Stddev_Samp_Order_By>;
+  sum?: Maybe<Sec_Filing_Attachment_Sum_Order_By>;
+  var_pop?: Maybe<Sec_Filing_Attachment_Var_Pop_Order_By>;
+  var_samp?: Maybe<Sec_Filing_Attachment_Var_Samp_Order_By>;
+  variance?: Maybe<Sec_Filing_Attachment_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Arr_Rel_Insert_Input = {
+  data: Array<Sec_Filing_Attachment_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: Maybe<Sec_Filing_Attachment_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Sec_Filing_Attachment_Avg_Fields = {
+  __typename?: 'sec_filing_attachment_avg_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Avg_Order_By = {
+  sequence?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "sec_filing_attachment". All fields are combined with a logical 'AND'. */
+export type Sec_Filing_Attachment_Bool_Exp = {
+  _and?: Maybe<Array<Sec_Filing_Attachment_Bool_Exp>>;
+  _not?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  _or?: Maybe<Array<Sec_Filing_Attachment_Bool_Exp>>;
+  accession_number?: Maybe<String_Comparison_Exp>;
+  contents?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  description?: Maybe<String_Comparison_Exp>;
+  filename?: Maybe<String_Comparison_Exp>;
+  filing_type?: Maybe<String_Comparison_Exp>;
+  sec_filing?: Maybe<Sec_Filing_Bool_Exp>;
+  sequence?: Maybe<Int_Comparison_Exp>;
+  text?: Maybe<String_Comparison_Exp>;
+  tsv_search_text?: Maybe<Tsvector_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "sec_filing_attachment" */
+export enum Sec_Filing_Attachment_Constraint {
+  /** unique or primary key constraint */
+  SecFilingAttachmentAccessionNumberSequenceKey = 'sec_filing_attachment_accession_number_sequence_key',
+  /** unique or primary key constraint */
+  SecFilingAttachmentPkey = 'sec_filing_attachment_pkey',
+}
+
+/** input type for incrementing numeric columns in table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Inc_Input = {
+  sequence?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Insert_Input = {
+  accession_number?: Maybe<Scalars['String']>;
+  contents?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  filing_type?: Maybe<Scalars['String']>;
+  sec_filing?: Maybe<Sec_Filing_Obj_Rel_Insert_Input>;
+  sequence?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
+  tsv_search_text?: Maybe<Scalars['tsvector']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Sec_Filing_Attachment_Max_Fields = {
+  __typename?: 'sec_filing_attachment_max_fields';
+  accession_number?: Maybe<Scalars['String']>;
+  contents?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  filing_type?: Maybe<Scalars['String']>;
+  sequence?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Max_Order_By = {
+  accession_number?: Maybe<Order_By>;
+  contents?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+  filename?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
+  sequence?: Maybe<Order_By>;
+  text?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Sec_Filing_Attachment_Min_Fields = {
+  __typename?: 'sec_filing_attachment_min_fields';
+  accession_number?: Maybe<Scalars['String']>;
+  contents?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  filing_type?: Maybe<Scalars['String']>;
+  sequence?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Min_Order_By = {
+  accession_number?: Maybe<Order_By>;
+  contents?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+  filename?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
+  sequence?: Maybe<Order_By>;
+  text?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Mutation_Response = {
+  __typename?: 'sec_filing_attachment_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Sec_Filing_Attachment>;
+};
+
+/** on conflict condition type for table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_On_Conflict = {
+  constraint: Sec_Filing_Attachment_Constraint;
+  update_columns?: Array<Sec_Filing_Attachment_Update_Column>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "sec_filing_attachment". */
+export type Sec_Filing_Attachment_Order_By = {
+  accession_number?: Maybe<Order_By>;
+  contents?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+  filename?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
+  sec_filing?: Maybe<Sec_Filing_Order_By>;
+  sequence?: Maybe<Order_By>;
+  text?: Maybe<Order_By>;
+  tsv_search_text?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: sec_filing_attachment */
+export type Sec_Filing_Attachment_Pk_Columns_Input = {
+  accession_number: Scalars['String'];
+  sequence: Scalars['Int'];
+};
+
+/** select columns of table "sec_filing_attachment" */
+export enum Sec_Filing_Attachment_Select_Column {
+  /** column name */
+  AccessionNumber = 'accession_number',
+  /** column name */
+  Contents = 'contents',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Filename = 'filename',
+  /** column name */
+  FilingType = 'filing_type',
+  /** column name */
+  Sequence = 'sequence',
+  /** column name */
+  Text = 'text',
+  /** column name */
+  TsvSearchText = 'tsv_search_text',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Set_Input = {
+  accession_number?: Maybe<Scalars['String']>;
+  contents?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  filing_type?: Maybe<Scalars['String']>;
+  sequence?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
+  tsv_search_text?: Maybe<Scalars['tsvector']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Sec_Filing_Attachment_Stddev_Fields = {
+  __typename?: 'sec_filing_attachment_stddev_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Stddev_Order_By = {
+  sequence?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Sec_Filing_Attachment_Stddev_Pop_Fields = {
+  __typename?: 'sec_filing_attachment_stddev_pop_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Stddev_Pop_Order_By = {
+  sequence?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Sec_Filing_Attachment_Stddev_Samp_Fields = {
+  __typename?: 'sec_filing_attachment_stddev_samp_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Stddev_Samp_Order_By = {
+  sequence?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Sec_Filing_Attachment_Sum_Fields = {
+  __typename?: 'sec_filing_attachment_sum_fields';
+  sequence?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Sum_Order_By = {
+  sequence?: Maybe<Order_By>;
+};
+
+/** update columns of table "sec_filing_attachment" */
+export enum Sec_Filing_Attachment_Update_Column {
+  /** column name */
+  AccessionNumber = 'accession_number',
+  /** column name */
+  Contents = 'contents',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Filename = 'filename',
+  /** column name */
+  FilingType = 'filing_type',
+  /** column name */
+  Sequence = 'sequence',
+  /** column name */
+  Text = 'text',
+  /** column name */
+  TsvSearchText = 'tsv_search_text',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** aggregate var_pop on columns */
+export type Sec_Filing_Attachment_Var_Pop_Fields = {
+  __typename?: 'sec_filing_attachment_var_pop_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Var_Pop_Order_By = {
+  sequence?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Sec_Filing_Attachment_Var_Samp_Fields = {
+  __typename?: 'sec_filing_attachment_var_samp_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Var_Samp_Order_By = {
+  sequence?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Sec_Filing_Attachment_Variance_Fields = {
+  __typename?: 'sec_filing_attachment_variance_fields';
+  sequence?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "sec_filing_attachment" */
+export type Sec_Filing_Attachment_Variance_Order_By = {
+  sequence?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "sec_filing". All fields are combined with a logical 'AND'. */
+export type Sec_Filing_Bool_Exp = {
+  _and?: Maybe<Array<Sec_Filing_Bool_Exp>>;
+  _not?: Maybe<Sec_Filing_Bool_Exp>;
+  _or?: Maybe<Array<Sec_Filing_Bool_Exp>>;
+  accession_number?: Maybe<String_Comparison_Exp>;
+  cik?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  filing_type?: Maybe<String_Comparison_Exp>;
+  header?: Maybe<String_Comparison_Exp>;
+  sec_company?: Maybe<Sec_Company_Bool_Exp>;
+  sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "sec_filing" */
+export enum Sec_Filing_Constraint {
+  /** unique or primary key constraint */
+  SecFilingPkey = 'sec_filing_pkey',
+}
+
+/** input type for inserting data into table "sec_filing" */
+export type Sec_Filing_Insert_Input = {
+  accession_number?: Maybe<Scalars['String']>;
+  cik?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  filing_type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  sec_company?: Maybe<Sec_Company_Obj_Rel_Insert_Input>;
+  sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Arr_Rel_Insert_Input>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Sec_Filing_Max_Fields = {
+  __typename?: 'sec_filing_max_fields';
+  accession_number?: Maybe<Scalars['String']>;
+  cik?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  filing_type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "sec_filing" */
+export type Sec_Filing_Max_Order_By = {
+  accession_number?: Maybe<Order_By>;
+  cik?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
+  header?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Sec_Filing_Min_Fields = {
+  __typename?: 'sec_filing_min_fields';
+  accession_number?: Maybe<Scalars['String']>;
+  cik?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  filing_type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "sec_filing" */
+export type Sec_Filing_Min_Order_By = {
+  accession_number?: Maybe<Order_By>;
+  cik?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
+  header?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "sec_filing" */
+export type Sec_Filing_Mutation_Response = {
+  __typename?: 'sec_filing_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Sec_Filing>;
+};
+
+/** input type for inserting object relation for remote table "sec_filing" */
+export type Sec_Filing_Obj_Rel_Insert_Input = {
+  data: Sec_Filing_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Sec_Filing_On_Conflict>;
+};
+
+/** on conflict condition type for table "sec_filing" */
+export type Sec_Filing_On_Conflict = {
+  constraint: Sec_Filing_Constraint;
+  update_columns?: Array<Sec_Filing_Update_Column>;
+  where?: Maybe<Sec_Filing_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "sec_filing". */
+export type Sec_Filing_Order_By = {
+  accession_number?: Maybe<Order_By>;
+  cik?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  filing_type?: Maybe<Order_By>;
+  header?: Maybe<Order_By>;
+  sec_company?: Maybe<Sec_Company_Order_By>;
+  sec_filing_attachment_aggregate?: Maybe<Sec_Filing_Attachment_Aggregate_Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: sec_filing */
+export type Sec_Filing_Pk_Columns_Input = {
+  accession_number: Scalars['String'];
+};
+
+/** select columns of table "sec_filing" */
+export enum Sec_Filing_Select_Column {
+  /** column name */
+  AccessionNumber = 'accession_number',
+  /** column name */
+  Cik = 'cik',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  FilingType = 'filing_type',
+  /** column name */
+  Header = 'header',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "sec_filing" */
+export type Sec_Filing_Set_Input = {
+  accession_number?: Maybe<Scalars['String']>;
+  cik?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  filing_type?: Maybe<Scalars['String']>;
+  header?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** update columns of table "sec_filing" */
+export enum Sec_Filing_Update_Column {
+  /** column name */
+  AccessionNumber = 'accession_number',
+  /** column name */
+  Cik = 'cik',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  FilingType = 'filing_type',
+  /** column name */
+  Header = 'header',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+export type Sec_Search_Args = {
+  search?: Maybe<Scalars['String']>;
+};
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
-  /** fetch data from the table: "data.sec_companies" */
-  data_sec_companies: Array<Data_Sec_Companies>;
-  /** fetch aggregated fields from the table: "data.sec_companies" */
-  data_sec_companies_aggregate: Data_Sec_Companies_Aggregate;
-  /** fetch data from the table: "data.sec_companies" using primary key columns */
-  data_sec_companies_by_pk?: Maybe<Data_Sec_Companies>;
-  /** fetch data from the table: "data.sec_contracts" */
-  data_sec_contracts: Array<Data_Sec_Contracts>;
-  /** fetch aggregated fields from the table: "data.sec_contracts" */
-  data_sec_contracts_aggregate: Data_Sec_Contracts_Aggregate;
-  /** fetch data from the table: "data.sec_filing_attachments" */
-  data_sec_filing_attachments: Array<Data_Sec_Filing_Attachments>;
-  /** fetch aggregated fields from the table: "data.sec_filing_attachments" */
-  data_sec_filing_attachments_aggregate: Data_Sec_Filing_Attachments_Aggregate;
-  /** fetch data from the table: "data.sec_filing_attachments" using primary key columns */
-  data_sec_filing_attachments_by_pk?: Maybe<Data_Sec_Filing_Attachments>;
-  /** fetch data from the table: "data.sec_filings" */
-  data_sec_filings: Array<Data_Sec_Filings>;
-  /** fetch aggregated fields from the table: "data.sec_filings" */
-  data_sec_filings_aggregate: Data_Sec_Filings_Aggregate;
-  /** fetch data from the table: "data.sec_filings" using primary key columns */
-  data_sec_filings_by_pk?: Maybe<Data_Sec_Filings>;
   /** fetch data from the table: "migrations" */
   migrations: Array<Migrations>;
   /** fetch aggregated fields from the table: "migrations" */
@@ -2322,89 +2336,38 @@ export type Subscription_Root = {
   org_type_aggregate: Org_Type_Aggregate;
   /** fetch data from the table: "org_type" using primary key columns */
   org_type_by_pk?: Maybe<Org_Type>;
+  /** fetch data from the table: "sec_company" */
+  sec_company: Array<Sec_Company>;
+  /** fetch aggregated fields from the table: "sec_company" */
+  sec_company_aggregate: Sec_Company_Aggregate;
+  /** fetch data from the table: "sec_company" using primary key columns */
+  sec_company_by_pk?: Maybe<Sec_Company>;
+  /** fetch data from the table: "sec_contract" */
+  sec_contract: Array<Sec_Contract>;
+  /** fetch aggregated fields from the table: "sec_contract" */
+  sec_contract_aggregate: Sec_Contract_Aggregate;
+  /** fetch data from the table: "sec_filing" */
+  sec_filing: Array<Sec_Filing>;
+  /** An aggregate relationship */
+  sec_filing_aggregate: Sec_Filing_Aggregate;
+  /** An array relationship */
+  sec_filing_attachment: Array<Sec_Filing_Attachment>;
+  /** An aggregate relationship */
+  sec_filing_attachment_aggregate: Sec_Filing_Attachment_Aggregate;
+  /** fetch data from the table: "sec_filing_attachment" using primary key columns */
+  sec_filing_attachment_by_pk?: Maybe<Sec_Filing_Attachment>;
+  /** fetch data from the table: "sec_filing" using primary key columns */
+  sec_filing_by_pk?: Maybe<Sec_Filing>;
+  /** execute function "sec_search" which returns "sec_filing_attachment" */
+  sec_search: Array<Sec_Filing_Attachment>;
+  /** execute function "sec_search" and query aggregates on result of table type "sec_filing_attachment" */
+  sec_search_aggregate: Sec_Filing_Attachment_Aggregate;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
   user_aggregate: User_Aggregate;
   /** fetch data from the table: "user" using primary key columns */
   user_by_pk?: Maybe<User>;
-};
-
-export type Subscription_RootData_Sec_CompaniesArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Companies_Order_By>>;
-  where?: Maybe<Data_Sec_Companies_Bool_Exp>;
-};
-
-export type Subscription_RootData_Sec_Companies_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Companies_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Companies_Order_By>>;
-  where?: Maybe<Data_Sec_Companies_Bool_Exp>;
-};
-
-export type Subscription_RootData_Sec_Companies_By_PkArgs = {
-  cik: Scalars['String'];
-};
-
-export type Subscription_RootData_Sec_ContractsArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Contracts_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Contracts_Order_By>>;
-  where?: Maybe<Data_Sec_Contracts_Bool_Exp>;
-};
-
-export type Subscription_RootData_Sec_Contracts_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Contracts_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Contracts_Order_By>>;
-  where?: Maybe<Data_Sec_Contracts_Bool_Exp>;
-};
-
-export type Subscription_RootData_Sec_Filing_AttachmentsArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filing_Attachments_Order_By>>;
-  where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
-};
-
-export type Subscription_RootData_Sec_Filing_Attachments_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filing_Attachments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filing_Attachments_Order_By>>;
-  where?: Maybe<Data_Sec_Filing_Attachments_Bool_Exp>;
-};
-
-export type Subscription_RootData_Sec_Filing_Attachments_By_PkArgs = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
-};
-
-export type Subscription_RootData_Sec_FilingsArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filings_Order_By>>;
-  where?: Maybe<Data_Sec_Filings_Bool_Exp>;
-};
-
-export type Subscription_RootData_Sec_Filings_AggregateArgs = {
-  distinct_on?: Maybe<Array<Data_Sec_Filings_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Data_Sec_Filings_Order_By>>;
-  where?: Maybe<Data_Sec_Filings_Bool_Exp>;
-};
-
-export type Subscription_RootData_Sec_Filings_By_PkArgs = {
-  accession_number: Scalars['String'];
 };
 
 export type Subscription_RootMigrationsArgs = {
@@ -2467,6 +2430,101 @@ export type Subscription_RootOrg_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
+export type Subscription_RootSec_CompanyArgs = {
+  distinct_on?: Maybe<Array<Sec_Company_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Company_Order_By>>;
+  where?: Maybe<Sec_Company_Bool_Exp>;
+};
+
+export type Subscription_RootSec_Company_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Company_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Company_Order_By>>;
+  where?: Maybe<Sec_Company_Bool_Exp>;
+};
+
+export type Subscription_RootSec_Company_By_PkArgs = {
+  cik: Scalars['String'];
+};
+
+export type Subscription_RootSec_ContractArgs = {
+  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
+  where?: Maybe<Sec_Contract_Bool_Exp>;
+};
+
+export type Subscription_RootSec_Contract_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
+  where?: Maybe<Sec_Contract_Bool_Exp>;
+};
+
+export type Subscription_RootSec_FilingArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
+  where?: Maybe<Sec_Filing_Bool_Exp>;
+};
+
+export type Subscription_RootSec_Filing_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
+  where?: Maybe<Sec_Filing_Bool_Exp>;
+};
+
+export type Subscription_RootSec_Filing_AttachmentArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+export type Subscription_RootSec_Filing_Attachment_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+export type Subscription_RootSec_Filing_Attachment_By_PkArgs = {
+  accession_number: Scalars['String'];
+  sequence: Scalars['Int'];
+};
+
+export type Subscription_RootSec_Filing_By_PkArgs = {
+  accession_number: Scalars['String'];
+};
+
+export type Subscription_RootSec_SearchArgs = {
+  args: Sec_Search_Args;
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+export type Subscription_RootSec_Search_AggregateArgs = {
+  args: Sec_Search_Args;
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
 export type Subscription_RootUserArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2511,6 +2569,19 @@ export type Timestamptz_Comparison_Exp = {
   _lte?: Maybe<Scalars['timestamptz']>;
   _neq?: Maybe<Scalars['timestamptz']>;
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
+};
+
+/** Boolean expression to compare columns of type "tsvector". All fields are combined with logical 'AND'. */
+export type Tsvector_Comparison_Exp = {
+  _eq?: Maybe<Scalars['tsvector']>;
+  _gt?: Maybe<Scalars['tsvector']>;
+  _gte?: Maybe<Scalars['tsvector']>;
+  _in?: Maybe<Array<Scalars['tsvector']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['tsvector']>;
+  _lte?: Maybe<Scalars['tsvector']>;
+  _neq?: Maybe<Scalars['tsvector']>;
+  _nin?: Maybe<Array<Scalars['tsvector']>>;
 };
 
 /** columns and relationships of "user" */
@@ -2905,8 +2976,8 @@ export type User_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
-export type ContractListFragment = { __typename?: 'data_sec_contracts' } & Pick<
-  Data_Sec_Contracts,
+export type ContractListFragment = { __typename?: 'sec_contract' } & Pick<
+  Sec_Contract,
   | 'accession_number'
   | 'sequence'
   | 'company_cik'
@@ -2923,9 +2994,7 @@ export type GetSecContractsQueryVariables = Exact<{
 }>;
 
 export type GetSecContractsQuery = { __typename?: 'query_root' } & {
-  data_sec_contracts: Array<
-    { __typename?: 'data_sec_contracts' } & ContractListFragment
-  >;
+  sec_contract: Array<{ __typename?: 'sec_contract' } & ContractListFragment>;
 };
 
 export type CurrentUserFragment = { __typename?: 'user' } & Pick<
@@ -2962,7 +3031,7 @@ export type SyncUserMutation = { __typename?: 'mutation_root' } & {
 };
 
 export const ContractListFragmentDoc = gql`
-  fragment ContractList on data_sec_contracts {
+  fragment ContractList on sec_contract {
     accession_number
     sequence
     company_cik
@@ -2987,7 +3056,7 @@ export const CurrentUserFragmentDoc = gql`
 `;
 export const GetSecContractsDocument = gql`
   query GetSECContracts($limit: Int = 20, $offset: Int = 0) {
-    data_sec_contracts(
+    sec_contract(
       limit: $limit
       offset: $offset
       order_by: { accession_number: asc, sequence: asc }

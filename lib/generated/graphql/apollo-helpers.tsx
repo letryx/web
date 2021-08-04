@@ -4,521 +4,6 @@ import {
   TypePolicies,
   TypePolicy,
 } from '@apollo/client/cache';
-export type data_sec_companiesKeySpecifier = (
-  | 'cik'
-  | 'created_at'
-  | 'geo'
-  | 'name'
-  | 'sec_filings'
-  | 'sec_filings_aggregate'
-  | 'sic'
-  | 'sic_name'
-  | 'updated_at'
-  | data_sec_companiesKeySpecifier
-)[];
-export type data_sec_companiesFieldPolicy = {
-  cik?: FieldPolicy<any> | FieldReadFunction<any>;
-  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
-  geo?: FieldPolicy<any> | FieldReadFunction<any>;
-  name?: FieldPolicy<any> | FieldReadFunction<any>;
-  sec_filings?: FieldPolicy<any> | FieldReadFunction<any>;
-  sec_filings_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  sic?: FieldPolicy<any> | FieldReadFunction<any>;
-  sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_companies_aggregateKeySpecifier = (
-  | 'aggregate'
-  | 'nodes'
-  | data_sec_companies_aggregateKeySpecifier
-)[];
-export type data_sec_companies_aggregateFieldPolicy = {
-  aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  nodes?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_companies_aggregate_fieldsKeySpecifier = (
-  | 'count'
-  | 'max'
-  | 'min'
-  | data_sec_companies_aggregate_fieldsKeySpecifier
-)[];
-export type data_sec_companies_aggregate_fieldsFieldPolicy = {
-  count?: FieldPolicy<any> | FieldReadFunction<any>;
-  max?: FieldPolicy<any> | FieldReadFunction<any>;
-  min?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_companies_max_fieldsKeySpecifier = (
-  | 'cik'
-  | 'created_at'
-  | 'geo'
-  | 'name'
-  | 'sic'
-  | 'sic_name'
-  | 'updated_at'
-  | data_sec_companies_max_fieldsKeySpecifier
-)[];
-export type data_sec_companies_max_fieldsFieldPolicy = {
-  cik?: FieldPolicy<any> | FieldReadFunction<any>;
-  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
-  geo?: FieldPolicy<any> | FieldReadFunction<any>;
-  name?: FieldPolicy<any> | FieldReadFunction<any>;
-  sic?: FieldPolicy<any> | FieldReadFunction<any>;
-  sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_companies_min_fieldsKeySpecifier = (
-  | 'cik'
-  | 'created_at'
-  | 'geo'
-  | 'name'
-  | 'sic'
-  | 'sic_name'
-  | 'updated_at'
-  | data_sec_companies_min_fieldsKeySpecifier
-)[];
-export type data_sec_companies_min_fieldsFieldPolicy = {
-  cik?: FieldPolicy<any> | FieldReadFunction<any>;
-  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
-  geo?: FieldPolicy<any> | FieldReadFunction<any>;
-  name?: FieldPolicy<any> | FieldReadFunction<any>;
-  sic?: FieldPolicy<any> | FieldReadFunction<any>;
-  sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_companies_mutation_responseKeySpecifier = (
-  | 'affected_rows'
-  | 'returning'
-  | data_sec_companies_mutation_responseKeySpecifier
-)[];
-export type data_sec_companies_mutation_responseFieldPolicy = {
-  affected_rows?: FieldPolicy<any> | FieldReadFunction<any>;
-  returning?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contractsKeySpecifier = (
-  | 'accession_number'
-  | 'company_cik'
-  | 'company_geo'
-  | 'company_name'
-  | 'contents'
-  | 'description'
-  | 'filing_metadata'
-  | 'filing_type'
-  | 'sequence'
-  | 'text'
-  | data_sec_contractsKeySpecifier
-)[];
-export type data_sec_contractsFieldPolicy = {
-  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  contents?: FieldPolicy<any> | FieldReadFunction<any>;
-  description?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_metadata?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  text?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_aggregateKeySpecifier = (
-  | 'aggregate'
-  | 'nodes'
-  | data_sec_contracts_aggregateKeySpecifier
-)[];
-export type data_sec_contracts_aggregateFieldPolicy = {
-  aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  nodes?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_aggregate_fieldsKeySpecifier = (
-  | 'avg'
-  | 'count'
-  | 'max'
-  | 'min'
-  | 'stddev'
-  | 'stddev_pop'
-  | 'stddev_samp'
-  | 'sum'
-  | 'var_pop'
-  | 'var_samp'
-  | 'variance'
-  | data_sec_contracts_aggregate_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_aggregate_fieldsFieldPolicy = {
-  avg?: FieldPolicy<any> | FieldReadFunction<any>;
-  count?: FieldPolicy<any> | FieldReadFunction<any>;
-  max?: FieldPolicy<any> | FieldReadFunction<any>;
-  min?: FieldPolicy<any> | FieldReadFunction<any>;
-  stddev?: FieldPolicy<any> | FieldReadFunction<any>;
-  stddev_pop?: FieldPolicy<any> | FieldReadFunction<any>;
-  stddev_samp?: FieldPolicy<any> | FieldReadFunction<any>;
-  sum?: FieldPolicy<any> | FieldReadFunction<any>;
-  var_pop?: FieldPolicy<any> | FieldReadFunction<any>;
-  var_samp?: FieldPolicy<any> | FieldReadFunction<any>;
-  variance?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_avg_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_contracts_avg_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_avg_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_max_fieldsKeySpecifier = (
-  | 'accession_number'
-  | 'company_cik'
-  | 'company_geo'
-  | 'company_name'
-  | 'contents'
-  | 'description'
-  | 'filing_metadata'
-  | 'filing_type'
-  | 'sequence'
-  | 'text'
-  | data_sec_contracts_max_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_max_fieldsFieldPolicy = {
-  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  contents?: FieldPolicy<any> | FieldReadFunction<any>;
-  description?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_metadata?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  text?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_min_fieldsKeySpecifier = (
-  | 'accession_number'
-  | 'company_cik'
-  | 'company_geo'
-  | 'company_name'
-  | 'contents'
-  | 'description'
-  | 'filing_metadata'
-  | 'filing_type'
-  | 'sequence'
-  | 'text'
-  | data_sec_contracts_min_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_min_fieldsFieldPolicy = {
-  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  contents?: FieldPolicy<any> | FieldReadFunction<any>;
-  description?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_metadata?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  text?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_stddev_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_contracts_stddev_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_stddev_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_stddev_pop_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_contracts_stddev_pop_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_stddev_pop_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_stddev_samp_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_contracts_stddev_samp_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_stddev_samp_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_sum_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_contracts_sum_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_sum_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_var_pop_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_contracts_var_pop_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_var_pop_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_var_samp_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_contracts_var_samp_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_var_samp_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_contracts_variance_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_contracts_variance_fieldsKeySpecifier
-)[];
-export type data_sec_contracts_variance_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachmentsKeySpecifier = (
-  | 'accession_number'
-  | 'contents'
-  | 'created_at'
-  | 'description'
-  | 'filename'
-  | 'filing_type'
-  | 'sec_filing'
-  | 'sequence'
-  | 'text'
-  | 'updated_at'
-  | data_sec_filing_attachmentsKeySpecifier
-)[];
-export type data_sec_filing_attachmentsFieldPolicy = {
-  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  contents?: FieldPolicy<any> | FieldReadFunction<any>;
-  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
-  description?: FieldPolicy<any> | FieldReadFunction<any>;
-  filename?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  text?: FieldPolicy<any> | FieldReadFunction<any>;
-  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_aggregateKeySpecifier = (
-  | 'aggregate'
-  | 'nodes'
-  | data_sec_filing_attachments_aggregateKeySpecifier
-)[];
-export type data_sec_filing_attachments_aggregateFieldPolicy = {
-  aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  nodes?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_aggregate_fieldsKeySpecifier = (
-  | 'avg'
-  | 'count'
-  | 'max'
-  | 'min'
-  | 'stddev'
-  | 'stddev_pop'
-  | 'stddev_samp'
-  | 'sum'
-  | 'var_pop'
-  | 'var_samp'
-  | 'variance'
-  | data_sec_filing_attachments_aggregate_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_aggregate_fieldsFieldPolicy = {
-  avg?: FieldPolicy<any> | FieldReadFunction<any>;
-  count?: FieldPolicy<any> | FieldReadFunction<any>;
-  max?: FieldPolicy<any> | FieldReadFunction<any>;
-  min?: FieldPolicy<any> | FieldReadFunction<any>;
-  stddev?: FieldPolicy<any> | FieldReadFunction<any>;
-  stddev_pop?: FieldPolicy<any> | FieldReadFunction<any>;
-  stddev_samp?: FieldPolicy<any> | FieldReadFunction<any>;
-  sum?: FieldPolicy<any> | FieldReadFunction<any>;
-  var_pop?: FieldPolicy<any> | FieldReadFunction<any>;
-  var_samp?: FieldPolicy<any> | FieldReadFunction<any>;
-  variance?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_avg_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_filing_attachments_avg_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_avg_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_max_fieldsKeySpecifier = (
-  | 'accession_number'
-  | 'contents'
-  | 'created_at'
-  | 'description'
-  | 'filename'
-  | 'filing_type'
-  | 'sequence'
-  | 'text'
-  | 'updated_at'
-  | data_sec_filing_attachments_max_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_max_fieldsFieldPolicy = {
-  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  contents?: FieldPolicy<any> | FieldReadFunction<any>;
-  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
-  description?: FieldPolicy<any> | FieldReadFunction<any>;
-  filename?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  text?: FieldPolicy<any> | FieldReadFunction<any>;
-  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_min_fieldsKeySpecifier = (
-  | 'accession_number'
-  | 'contents'
-  | 'created_at'
-  | 'description'
-  | 'filename'
-  | 'filing_type'
-  | 'sequence'
-  | 'text'
-  | 'updated_at'
-  | data_sec_filing_attachments_min_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_min_fieldsFieldPolicy = {
-  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  contents?: FieldPolicy<any> | FieldReadFunction<any>;
-  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
-  description?: FieldPolicy<any> | FieldReadFunction<any>;
-  filename?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  text?: FieldPolicy<any> | FieldReadFunction<any>;
-  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_mutation_responseKeySpecifier = (
-  | 'affected_rows'
-  | 'returning'
-  | data_sec_filing_attachments_mutation_responseKeySpecifier
-)[];
-export type data_sec_filing_attachments_mutation_responseFieldPolicy = {
-  affected_rows?: FieldPolicy<any> | FieldReadFunction<any>;
-  returning?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_stddev_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_filing_attachments_stddev_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_stddev_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_stddev_pop_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_filing_attachments_stddev_pop_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_stddev_pop_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_stddev_samp_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_filing_attachments_stddev_samp_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_stddev_samp_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_sum_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_filing_attachments_sum_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_sum_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_var_pop_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_filing_attachments_var_pop_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_var_pop_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_var_samp_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_filing_attachments_var_samp_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_var_samp_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filing_attachments_variance_fieldsKeySpecifier = (
-  | 'sequence'
-  | data_sec_filing_attachments_variance_fieldsKeySpecifier
-)[];
-export type data_sec_filing_attachments_variance_fieldsFieldPolicy = {
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filingsKeySpecifier = (
-  | 'accession_number'
-  | 'cik'
-  | 'created_at'
-  | 'filing_type'
-  | 'header'
-  | 'sec_company'
-  | 'sec_filing_attachments'
-  | 'sec_filing_attachments_aggregate'
-  | 'updated_at'
-  | data_sec_filingsKeySpecifier
-)[];
-export type data_sec_filingsFieldPolicy = {
-  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  cik?: FieldPolicy<any> | FieldReadFunction<any>;
-  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  header?: FieldPolicy<any> | FieldReadFunction<any>;
-  sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
-  sec_filing_attachments?: FieldPolicy<any> | FieldReadFunction<any>;
-  sec_filing_attachments_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filings_aggregateKeySpecifier = (
-  | 'aggregate'
-  | 'nodes'
-  | data_sec_filings_aggregateKeySpecifier
-)[];
-export type data_sec_filings_aggregateFieldPolicy = {
-  aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  nodes?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filings_aggregate_fieldsKeySpecifier = (
-  | 'count'
-  | 'max'
-  | 'min'
-  | data_sec_filings_aggregate_fieldsKeySpecifier
-)[];
-export type data_sec_filings_aggregate_fieldsFieldPolicy = {
-  count?: FieldPolicy<any> | FieldReadFunction<any>;
-  max?: FieldPolicy<any> | FieldReadFunction<any>;
-  min?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filings_max_fieldsKeySpecifier = (
-  | 'accession_number'
-  | 'cik'
-  | 'created_at'
-  | 'filing_type'
-  | 'header'
-  | 'updated_at'
-  | data_sec_filings_max_fieldsKeySpecifier
-)[];
-export type data_sec_filings_max_fieldsFieldPolicy = {
-  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  cik?: FieldPolicy<any> | FieldReadFunction<any>;
-  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  header?: FieldPolicy<any> | FieldReadFunction<any>;
-  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filings_min_fieldsKeySpecifier = (
-  | 'accession_number'
-  | 'cik'
-  | 'created_at'
-  | 'filing_type'
-  | 'header'
-  | 'updated_at'
-  | data_sec_filings_min_fieldsKeySpecifier
-)[];
-export type data_sec_filings_min_fieldsFieldPolicy = {
-  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  cik?: FieldPolicy<any> | FieldReadFunction<any>;
-  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  header?: FieldPolicy<any> | FieldReadFunction<any>;
-  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
-};
-export type data_sec_filings_mutation_responseKeySpecifier = (
-  | 'affected_rows'
-  | 'returning'
-  | data_sec_filings_mutation_responseKeySpecifier
-)[];
-export type data_sec_filings_mutation_responseFieldPolicy = {
-  affected_rows?: FieldPolicy<any> | FieldReadFunction<any>;
-  returning?: FieldPolicy<any> | FieldReadFunction<any>;
-};
 export type migrationsKeySpecifier = (
   | 'executed_at'
   | 'hash'
@@ -660,103 +145,95 @@ export type migrations_variance_fieldsFieldPolicy = {
   id?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type mutation_rootKeySpecifier = (
-  | 'delete_data_sec_companies'
-  | 'delete_data_sec_companies_by_pk'
-  | 'delete_data_sec_filing_attachments'
-  | 'delete_data_sec_filing_attachments_by_pk'
-  | 'delete_data_sec_filings'
-  | 'delete_data_sec_filings_by_pk'
   | 'delete_migrations'
   | 'delete_migrations_by_pk'
   | 'delete_org'
   | 'delete_org_by_pk'
   | 'delete_org_type'
   | 'delete_org_type_by_pk'
+  | 'delete_sec_company'
+  | 'delete_sec_company_by_pk'
+  | 'delete_sec_filing'
+  | 'delete_sec_filing_attachment'
+  | 'delete_sec_filing_attachment_by_pk'
+  | 'delete_sec_filing_by_pk'
   | 'delete_user'
   | 'delete_user_by_pk'
-  | 'insert_data_sec_companies'
-  | 'insert_data_sec_companies_one'
-  | 'insert_data_sec_filing_attachments'
-  | 'insert_data_sec_filing_attachments_one'
-  | 'insert_data_sec_filings'
-  | 'insert_data_sec_filings_one'
   | 'insert_migrations'
   | 'insert_migrations_one'
   | 'insert_org'
   | 'insert_org_one'
   | 'insert_org_type'
   | 'insert_org_type_one'
+  | 'insert_sec_company'
+  | 'insert_sec_company_one'
+  | 'insert_sec_filing'
+  | 'insert_sec_filing_attachment'
+  | 'insert_sec_filing_attachment_one'
+  | 'insert_sec_filing_one'
   | 'insert_user'
   | 'insert_user_one'
-  | 'update_data_sec_companies'
-  | 'update_data_sec_companies_by_pk'
-  | 'update_data_sec_filing_attachments'
-  | 'update_data_sec_filing_attachments_by_pk'
-  | 'update_data_sec_filings'
-  | 'update_data_sec_filings_by_pk'
   | 'update_migrations'
   | 'update_migrations_by_pk'
   | 'update_org'
   | 'update_org_by_pk'
   | 'update_org_type'
   | 'update_org_type_by_pk'
+  | 'update_sec_company'
+  | 'update_sec_company_by_pk'
+  | 'update_sec_filing'
+  | 'update_sec_filing_attachment'
+  | 'update_sec_filing_attachment_by_pk'
+  | 'update_sec_filing_by_pk'
   | 'update_user'
   | 'update_user_by_pk'
   | mutation_rootKeySpecifier
 )[];
 export type mutation_rootFieldPolicy = {
-  delete_data_sec_companies?: FieldPolicy<any> | FieldReadFunction<any>;
-  delete_data_sec_companies_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
-  delete_data_sec_filing_attachments?:
-    | FieldPolicy<any>
-    | FieldReadFunction<any>;
-  delete_data_sec_filing_attachments_by_pk?:
-    | FieldPolicy<any>
-    | FieldReadFunction<any>;
-  delete_data_sec_filings?: FieldPolicy<any> | FieldReadFunction<any>;
-  delete_data_sec_filings_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   delete_migrations?: FieldPolicy<any> | FieldReadFunction<any>;
   delete_migrations_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   delete_org?: FieldPolicy<any> | FieldReadFunction<any>;
   delete_org_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   delete_org_type?: FieldPolicy<any> | FieldReadFunction<any>;
   delete_org_type_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  delete_sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
+  delete_sec_company_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  delete_sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
+  delete_sec_filing_attachment?: FieldPolicy<any> | FieldReadFunction<any>;
+  delete_sec_filing_attachment_by_pk?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
+  delete_sec_filing_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   delete_user?: FieldPolicy<any> | FieldReadFunction<any>;
   delete_user_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
-  insert_data_sec_companies?: FieldPolicy<any> | FieldReadFunction<any>;
-  insert_data_sec_companies_one?: FieldPolicy<any> | FieldReadFunction<any>;
-  insert_data_sec_filing_attachments?:
-    | FieldPolicy<any>
-    | FieldReadFunction<any>;
-  insert_data_sec_filing_attachments_one?:
-    | FieldPolicy<any>
-    | FieldReadFunction<any>;
-  insert_data_sec_filings?: FieldPolicy<any> | FieldReadFunction<any>;
-  insert_data_sec_filings_one?: FieldPolicy<any> | FieldReadFunction<any>;
   insert_migrations?: FieldPolicy<any> | FieldReadFunction<any>;
   insert_migrations_one?: FieldPolicy<any> | FieldReadFunction<any>;
   insert_org?: FieldPolicy<any> | FieldReadFunction<any>;
   insert_org_one?: FieldPolicy<any> | FieldReadFunction<any>;
   insert_org_type?: FieldPolicy<any> | FieldReadFunction<any>;
   insert_org_type_one?: FieldPolicy<any> | FieldReadFunction<any>;
+  insert_sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
+  insert_sec_company_one?: FieldPolicy<any> | FieldReadFunction<any>;
+  insert_sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
+  insert_sec_filing_attachment?: FieldPolicy<any> | FieldReadFunction<any>;
+  insert_sec_filing_attachment_one?: FieldPolicy<any> | FieldReadFunction<any>;
+  insert_sec_filing_one?: FieldPolicy<any> | FieldReadFunction<any>;
   insert_user?: FieldPolicy<any> | FieldReadFunction<any>;
   insert_user_one?: FieldPolicy<any> | FieldReadFunction<any>;
-  update_data_sec_companies?: FieldPolicy<any> | FieldReadFunction<any>;
-  update_data_sec_companies_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
-  update_data_sec_filing_attachments?:
-    | FieldPolicy<any>
-    | FieldReadFunction<any>;
-  update_data_sec_filing_attachments_by_pk?:
-    | FieldPolicy<any>
-    | FieldReadFunction<any>;
-  update_data_sec_filings?: FieldPolicy<any> | FieldReadFunction<any>;
-  update_data_sec_filings_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   update_migrations?: FieldPolicy<any> | FieldReadFunction<any>;
   update_migrations_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   update_org?: FieldPolicy<any> | FieldReadFunction<any>;
   update_org_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   update_org_type?: FieldPolicy<any> | FieldReadFunction<any>;
   update_org_type_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  update_sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
+  update_sec_company_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  update_sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
+  update_sec_filing_attachment?: FieldPolicy<any> | FieldReadFunction<any>;
+  update_sec_filing_attachment_by_pk?:
+    | FieldPolicy<any>
+    | FieldReadFunction<any>;
+  update_sec_filing_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   update_user?: FieldPolicy<any> | FieldReadFunction<any>;
   update_user_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
 };
@@ -975,17 +452,6 @@ export type org_variance_fieldsFieldPolicy = {
   id?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type query_rootKeySpecifier = (
-  | 'data_sec_companies'
-  | 'data_sec_companies_aggregate'
-  | 'data_sec_companies_by_pk'
-  | 'data_sec_contracts'
-  | 'data_sec_contracts_aggregate'
-  | 'data_sec_filing_attachments'
-  | 'data_sec_filing_attachments_aggregate'
-  | 'data_sec_filing_attachments_by_pk'
-  | 'data_sec_filings'
-  | 'data_sec_filings_aggregate'
-  | 'data_sec_filings_by_pk'
   | 'migrations'
   | 'migrations_aggregate'
   | 'migrations_by_pk'
@@ -995,25 +461,25 @@ export type query_rootKeySpecifier = (
   | 'org_type'
   | 'org_type_aggregate'
   | 'org_type_by_pk'
+  | 'sec_company'
+  | 'sec_company_aggregate'
+  | 'sec_company_by_pk'
+  | 'sec_contract'
+  | 'sec_contract_aggregate'
+  | 'sec_filing'
+  | 'sec_filing_aggregate'
+  | 'sec_filing_attachment'
+  | 'sec_filing_attachment_aggregate'
+  | 'sec_filing_attachment_by_pk'
+  | 'sec_filing_by_pk'
+  | 'sec_search'
+  | 'sec_search_aggregate'
   | 'user'
   | 'user_aggregate'
   | 'user_by_pk'
   | query_rootKeySpecifier
 )[];
 export type query_rootFieldPolicy = {
-  data_sec_companies?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_companies_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_companies_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_contracts?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_contracts_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filing_attachments?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filing_attachments_aggregate?:
-    | FieldPolicy<any>
-    | FieldReadFunction<any>;
-  data_sec_filing_attachments_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filings?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filings_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filings_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   migrations?: FieldPolicy<any> | FieldReadFunction<any>;
   migrations_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   migrations_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -1023,22 +489,541 @@ export type query_rootFieldPolicy = {
   org_type?: FieldPolicy<any> | FieldReadFunction<any>;
   org_type_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   org_type_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_company_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_company_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_contract?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_contract_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachment?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachment_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachment_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_search?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_search_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   user?: FieldPolicy<any> | FieldReadFunction<any>;
   user_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   user_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
 };
+export type sec_companyKeySpecifier = (
+  | 'cik'
+  | 'created_at'
+  | 'geo'
+  | 'name'
+  | 'sec_filing'
+  | 'sec_filing_aggregate'
+  | 'sic'
+  | 'sic_name'
+  | 'updated_at'
+  | sec_companyKeySpecifier
+)[];
+export type sec_companyFieldPolicy = {
+  cik?: FieldPolicy<any> | FieldReadFunction<any>;
+  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  geo?: FieldPolicy<any> | FieldReadFunction<any>;
+  name?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sic?: FieldPolicy<any> | FieldReadFunction<any>;
+  sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_company_aggregateKeySpecifier = (
+  | 'aggregate'
+  | 'nodes'
+  | sec_company_aggregateKeySpecifier
+)[];
+export type sec_company_aggregateFieldPolicy = {
+  aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  nodes?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_company_aggregate_fieldsKeySpecifier = (
+  | 'count'
+  | 'max'
+  | 'min'
+  | sec_company_aggregate_fieldsKeySpecifier
+)[];
+export type sec_company_aggregate_fieldsFieldPolicy = {
+  count?: FieldPolicy<any> | FieldReadFunction<any>;
+  max?: FieldPolicy<any> | FieldReadFunction<any>;
+  min?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_company_max_fieldsKeySpecifier = (
+  | 'cik'
+  | 'created_at'
+  | 'geo'
+  | 'name'
+  | 'sic'
+  | 'sic_name'
+  | 'updated_at'
+  | sec_company_max_fieldsKeySpecifier
+)[];
+export type sec_company_max_fieldsFieldPolicy = {
+  cik?: FieldPolicy<any> | FieldReadFunction<any>;
+  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  geo?: FieldPolicy<any> | FieldReadFunction<any>;
+  name?: FieldPolicy<any> | FieldReadFunction<any>;
+  sic?: FieldPolicy<any> | FieldReadFunction<any>;
+  sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_company_min_fieldsKeySpecifier = (
+  | 'cik'
+  | 'created_at'
+  | 'geo'
+  | 'name'
+  | 'sic'
+  | 'sic_name'
+  | 'updated_at'
+  | sec_company_min_fieldsKeySpecifier
+)[];
+export type sec_company_min_fieldsFieldPolicy = {
+  cik?: FieldPolicy<any> | FieldReadFunction<any>;
+  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  geo?: FieldPolicy<any> | FieldReadFunction<any>;
+  name?: FieldPolicy<any> | FieldReadFunction<any>;
+  sic?: FieldPolicy<any> | FieldReadFunction<any>;
+  sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_company_mutation_responseKeySpecifier = (
+  | 'affected_rows'
+  | 'returning'
+  | sec_company_mutation_responseKeySpecifier
+)[];
+export type sec_company_mutation_responseFieldPolicy = {
+  affected_rows?: FieldPolicy<any> | FieldReadFunction<any>;
+  returning?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contractKeySpecifier = (
+  | 'accession_number'
+  | 'company_cik'
+  | 'company_geo'
+  | 'company_name'
+  | 'contents'
+  | 'description'
+  | 'filing_metadata'
+  | 'filing_type'
+  | 'sequence'
+  | 'text'
+  | sec_contractKeySpecifier
+)[];
+export type sec_contractFieldPolicy = {
+  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  description?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_metadata?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+  text?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_aggregateKeySpecifier = (
+  | 'aggregate'
+  | 'nodes'
+  | sec_contract_aggregateKeySpecifier
+)[];
+export type sec_contract_aggregateFieldPolicy = {
+  aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  nodes?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_aggregate_fieldsKeySpecifier = (
+  | 'avg'
+  | 'count'
+  | 'max'
+  | 'min'
+  | 'stddev'
+  | 'stddev_pop'
+  | 'stddev_samp'
+  | 'sum'
+  | 'var_pop'
+  | 'var_samp'
+  | 'variance'
+  | sec_contract_aggregate_fieldsKeySpecifier
+)[];
+export type sec_contract_aggregate_fieldsFieldPolicy = {
+  avg?: FieldPolicy<any> | FieldReadFunction<any>;
+  count?: FieldPolicy<any> | FieldReadFunction<any>;
+  max?: FieldPolicy<any> | FieldReadFunction<any>;
+  min?: FieldPolicy<any> | FieldReadFunction<any>;
+  stddev?: FieldPolicy<any> | FieldReadFunction<any>;
+  stddev_pop?: FieldPolicy<any> | FieldReadFunction<any>;
+  stddev_samp?: FieldPolicy<any> | FieldReadFunction<any>;
+  sum?: FieldPolicy<any> | FieldReadFunction<any>;
+  var_pop?: FieldPolicy<any> | FieldReadFunction<any>;
+  var_samp?: FieldPolicy<any> | FieldReadFunction<any>;
+  variance?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_avg_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_contract_avg_fieldsKeySpecifier
+)[];
+export type sec_contract_avg_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_max_fieldsKeySpecifier = (
+  | 'accession_number'
+  | 'company_cik'
+  | 'company_geo'
+  | 'company_name'
+  | 'contents'
+  | 'description'
+  | 'filing_metadata'
+  | 'filing_type'
+  | 'sequence'
+  | 'text'
+  | sec_contract_max_fieldsKeySpecifier
+)[];
+export type sec_contract_max_fieldsFieldPolicy = {
+  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  description?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_metadata?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+  text?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_min_fieldsKeySpecifier = (
+  | 'accession_number'
+  | 'company_cik'
+  | 'company_geo'
+  | 'company_name'
+  | 'contents'
+  | 'description'
+  | 'filing_metadata'
+  | 'filing_type'
+  | 'sequence'
+  | 'text'
+  | sec_contract_min_fieldsKeySpecifier
+)[];
+export type sec_contract_min_fieldsFieldPolicy = {
+  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  description?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_metadata?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+  text?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_stddev_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_contract_stddev_fieldsKeySpecifier
+)[];
+export type sec_contract_stddev_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_stddev_pop_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_contract_stddev_pop_fieldsKeySpecifier
+)[];
+export type sec_contract_stddev_pop_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_stddev_samp_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_contract_stddev_samp_fieldsKeySpecifier
+)[];
+export type sec_contract_stddev_samp_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_sum_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_contract_sum_fieldsKeySpecifier
+)[];
+export type sec_contract_sum_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_var_pop_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_contract_var_pop_fieldsKeySpecifier
+)[];
+export type sec_contract_var_pop_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_var_samp_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_contract_var_samp_fieldsKeySpecifier
+)[];
+export type sec_contract_var_samp_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_contract_variance_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_contract_variance_fieldsKeySpecifier
+)[];
+export type sec_contract_variance_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filingKeySpecifier = (
+  | 'accession_number'
+  | 'cik'
+  | 'created_at'
+  | 'filing_type'
+  | 'header'
+  | 'sec_company'
+  | 'sec_filing_attachment'
+  | 'sec_filing_attachment_aggregate'
+  | 'updated_at'
+  | sec_filingKeySpecifier
+)[];
+export type sec_filingFieldPolicy = {
+  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  cik?: FieldPolicy<any> | FieldReadFunction<any>;
+  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  header?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachment?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachment_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_aggregateKeySpecifier = (
+  | 'aggregate'
+  | 'nodes'
+  | sec_filing_aggregateKeySpecifier
+)[];
+export type sec_filing_aggregateFieldPolicy = {
+  aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  nodes?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_aggregate_fieldsKeySpecifier = (
+  | 'count'
+  | 'max'
+  | 'min'
+  | sec_filing_aggregate_fieldsKeySpecifier
+)[];
+export type sec_filing_aggregate_fieldsFieldPolicy = {
+  count?: FieldPolicy<any> | FieldReadFunction<any>;
+  max?: FieldPolicy<any> | FieldReadFunction<any>;
+  min?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachmentKeySpecifier = (
+  | 'accession_number'
+  | 'contents'
+  | 'created_at'
+  | 'description'
+  | 'filename'
+  | 'filing_type'
+  | 'sec_filing'
+  | 'sequence'
+  | 'text'
+  | 'tsv_search_text'
+  | 'updated_at'
+  | sec_filing_attachmentKeySpecifier
+)[];
+export type sec_filing_attachmentFieldPolicy = {
+  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  description?: FieldPolicy<any> | FieldReadFunction<any>;
+  filename?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+  text?: FieldPolicy<any> | FieldReadFunction<any>;
+  tsv_search_text?: FieldPolicy<any> | FieldReadFunction<any>;
+  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_aggregateKeySpecifier = (
+  | 'aggregate'
+  | 'nodes'
+  | sec_filing_attachment_aggregateKeySpecifier
+)[];
+export type sec_filing_attachment_aggregateFieldPolicy = {
+  aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  nodes?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_aggregate_fieldsKeySpecifier = (
+  | 'avg'
+  | 'count'
+  | 'max'
+  | 'min'
+  | 'stddev'
+  | 'stddev_pop'
+  | 'stddev_samp'
+  | 'sum'
+  | 'var_pop'
+  | 'var_samp'
+  | 'variance'
+  | sec_filing_attachment_aggregate_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_aggregate_fieldsFieldPolicy = {
+  avg?: FieldPolicy<any> | FieldReadFunction<any>;
+  count?: FieldPolicy<any> | FieldReadFunction<any>;
+  max?: FieldPolicy<any> | FieldReadFunction<any>;
+  min?: FieldPolicy<any> | FieldReadFunction<any>;
+  stddev?: FieldPolicy<any> | FieldReadFunction<any>;
+  stddev_pop?: FieldPolicy<any> | FieldReadFunction<any>;
+  stddev_samp?: FieldPolicy<any> | FieldReadFunction<any>;
+  sum?: FieldPolicy<any> | FieldReadFunction<any>;
+  var_pop?: FieldPolicy<any> | FieldReadFunction<any>;
+  var_samp?: FieldPolicy<any> | FieldReadFunction<any>;
+  variance?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_avg_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_filing_attachment_avg_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_avg_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_max_fieldsKeySpecifier = (
+  | 'accession_number'
+  | 'contents'
+  | 'created_at'
+  | 'description'
+  | 'filename'
+  | 'filing_type'
+  | 'sequence'
+  | 'text'
+  | 'updated_at'
+  | sec_filing_attachment_max_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_max_fieldsFieldPolicy = {
+  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  description?: FieldPolicy<any> | FieldReadFunction<any>;
+  filename?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+  text?: FieldPolicy<any> | FieldReadFunction<any>;
+  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_min_fieldsKeySpecifier = (
+  | 'accession_number'
+  | 'contents'
+  | 'created_at'
+  | 'description'
+  | 'filename'
+  | 'filing_type'
+  | 'sequence'
+  | 'text'
+  | 'updated_at'
+  | sec_filing_attachment_min_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_min_fieldsFieldPolicy = {
+  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  description?: FieldPolicy<any> | FieldReadFunction<any>;
+  filename?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+  text?: FieldPolicy<any> | FieldReadFunction<any>;
+  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_mutation_responseKeySpecifier = (
+  | 'affected_rows'
+  | 'returning'
+  | sec_filing_attachment_mutation_responseKeySpecifier
+)[];
+export type sec_filing_attachment_mutation_responseFieldPolicy = {
+  affected_rows?: FieldPolicy<any> | FieldReadFunction<any>;
+  returning?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_stddev_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_filing_attachment_stddev_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_stddev_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_stddev_pop_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_filing_attachment_stddev_pop_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_stddev_pop_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_stddev_samp_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_filing_attachment_stddev_samp_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_stddev_samp_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_sum_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_filing_attachment_sum_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_sum_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_var_pop_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_filing_attachment_var_pop_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_var_pop_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_var_samp_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_filing_attachment_var_samp_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_var_samp_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_attachment_variance_fieldsKeySpecifier = (
+  | 'sequence'
+  | sec_filing_attachment_variance_fieldsKeySpecifier
+)[];
+export type sec_filing_attachment_variance_fieldsFieldPolicy = {
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_max_fieldsKeySpecifier = (
+  | 'accession_number'
+  | 'cik'
+  | 'created_at'
+  | 'filing_type'
+  | 'header'
+  | 'updated_at'
+  | sec_filing_max_fieldsKeySpecifier
+)[];
+export type sec_filing_max_fieldsFieldPolicy = {
+  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  cik?: FieldPolicy<any> | FieldReadFunction<any>;
+  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  header?: FieldPolicy<any> | FieldReadFunction<any>;
+  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_min_fieldsKeySpecifier = (
+  | 'accession_number'
+  | 'cik'
+  | 'created_at'
+  | 'filing_type'
+  | 'header'
+  | 'updated_at'
+  | sec_filing_min_fieldsKeySpecifier
+)[];
+export type sec_filing_min_fieldsFieldPolicy = {
+  accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  cik?: FieldPolicy<any> | FieldReadFunction<any>;
+  created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  header?: FieldPolicy<any> | FieldReadFunction<any>;
+  updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
+};
+export type sec_filing_mutation_responseKeySpecifier = (
+  | 'affected_rows'
+  | 'returning'
+  | sec_filing_mutation_responseKeySpecifier
+)[];
+export type sec_filing_mutation_responseFieldPolicy = {
+  affected_rows?: FieldPolicy<any> | FieldReadFunction<any>;
+  returning?: FieldPolicy<any> | FieldReadFunction<any>;
+};
 export type subscription_rootKeySpecifier = (
-  | 'data_sec_companies'
-  | 'data_sec_companies_aggregate'
-  | 'data_sec_companies_by_pk'
-  | 'data_sec_contracts'
-  | 'data_sec_contracts_aggregate'
-  | 'data_sec_filing_attachments'
-  | 'data_sec_filing_attachments_aggregate'
-  | 'data_sec_filing_attachments_by_pk'
-  | 'data_sec_filings'
-  | 'data_sec_filings_aggregate'
-  | 'data_sec_filings_by_pk'
   | 'migrations'
   | 'migrations_aggregate'
   | 'migrations_by_pk'
@@ -1048,25 +1033,25 @@ export type subscription_rootKeySpecifier = (
   | 'org_type'
   | 'org_type_aggregate'
   | 'org_type_by_pk'
+  | 'sec_company'
+  | 'sec_company_aggregate'
+  | 'sec_company_by_pk'
+  | 'sec_contract'
+  | 'sec_contract_aggregate'
+  | 'sec_filing'
+  | 'sec_filing_aggregate'
+  | 'sec_filing_attachment'
+  | 'sec_filing_attachment_aggregate'
+  | 'sec_filing_attachment_by_pk'
+  | 'sec_filing_by_pk'
+  | 'sec_search'
+  | 'sec_search_aggregate'
   | 'user'
   | 'user_aggregate'
   | 'user_by_pk'
   | subscription_rootKeySpecifier
 )[];
 export type subscription_rootFieldPolicy = {
-  data_sec_companies?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_companies_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_companies_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_contracts?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_contracts_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filing_attachments?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filing_attachments_aggregate?:
-    | FieldPolicy<any>
-    | FieldReadFunction<any>;
-  data_sec_filing_attachments_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filings?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filings_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
-  data_sec_filings_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
   migrations?: FieldPolicy<any> | FieldReadFunction<any>;
   migrations_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   migrations_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -1076,6 +1061,19 @@ export type subscription_rootFieldPolicy = {
   org_type?: FieldPolicy<any> | FieldReadFunction<any>;
   org_type_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   org_type_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_company_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_company_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_contract?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_contract_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachment?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachment_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachment_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_search?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_search_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   user?: FieldPolicy<any> | FieldReadFunction<any>;
   user_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   user_by_pk?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -1281,367 +1279,6 @@ export type user_variance_fieldsFieldPolicy = {
   id?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type TypedTypePolicies = TypePolicies & {
-  data_sec_companies?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_companiesKeySpecifier
-      | (() => undefined | data_sec_companiesKeySpecifier);
-    fields?: data_sec_companiesFieldPolicy;
-  };
-  data_sec_companies_aggregate?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_companies_aggregateKeySpecifier
-      | (() => undefined | data_sec_companies_aggregateKeySpecifier);
-    fields?: data_sec_companies_aggregateFieldPolicy;
-  };
-  data_sec_companies_aggregate_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_companies_aggregate_fieldsKeySpecifier
-      | (() => undefined | data_sec_companies_aggregate_fieldsKeySpecifier);
-    fields?: data_sec_companies_aggregate_fieldsFieldPolicy;
-  };
-  data_sec_companies_max_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_companies_max_fieldsKeySpecifier
-      | (() => undefined | data_sec_companies_max_fieldsKeySpecifier);
-    fields?: data_sec_companies_max_fieldsFieldPolicy;
-  };
-  data_sec_companies_min_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_companies_min_fieldsKeySpecifier
-      | (() => undefined | data_sec_companies_min_fieldsKeySpecifier);
-    fields?: data_sec_companies_min_fieldsFieldPolicy;
-  };
-  data_sec_companies_mutation_response?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_companies_mutation_responseKeySpecifier
-      | (() => undefined | data_sec_companies_mutation_responseKeySpecifier);
-    fields?: data_sec_companies_mutation_responseFieldPolicy;
-  };
-  data_sec_contracts?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_contractsKeySpecifier
-      | (() => undefined | data_sec_contractsKeySpecifier);
-    fields?: data_sec_contractsFieldPolicy;
-  };
-  data_sec_contracts_aggregate?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_contracts_aggregateKeySpecifier
-      | (() => undefined | data_sec_contracts_aggregateKeySpecifier);
-    fields?: data_sec_contracts_aggregateFieldPolicy;
-  };
-  data_sec_contracts_aggregate_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_contracts_aggregate_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_aggregate_fieldsKeySpecifier);
-    fields?: data_sec_contracts_aggregate_fieldsFieldPolicy;
-  };
-  data_sec_contracts_avg_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_contracts_avg_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_avg_fieldsKeySpecifier);
-    fields?: data_sec_contracts_avg_fieldsFieldPolicy;
-  };
-  data_sec_contracts_max_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_contracts_max_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_max_fieldsKeySpecifier);
-    fields?: data_sec_contracts_max_fieldsFieldPolicy;
-  };
-  data_sec_contracts_min_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_contracts_min_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_min_fieldsKeySpecifier);
-    fields?: data_sec_contracts_min_fieldsFieldPolicy;
-  };
-  data_sec_contracts_stddev_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_contracts_stddev_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_stddev_fieldsKeySpecifier);
-    fields?: data_sec_contracts_stddev_fieldsFieldPolicy;
-  };
-  data_sec_contracts_stddev_pop_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_contracts_stddev_pop_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_stddev_pop_fieldsKeySpecifier);
-    fields?: data_sec_contracts_stddev_pop_fieldsFieldPolicy;
-  };
-  data_sec_contracts_stddev_samp_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_contracts_stddev_samp_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_stddev_samp_fieldsKeySpecifier);
-    fields?: data_sec_contracts_stddev_samp_fieldsFieldPolicy;
-  };
-  data_sec_contracts_sum_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_contracts_sum_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_sum_fieldsKeySpecifier);
-    fields?: data_sec_contracts_sum_fieldsFieldPolicy;
-  };
-  data_sec_contracts_var_pop_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_contracts_var_pop_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_var_pop_fieldsKeySpecifier);
-    fields?: data_sec_contracts_var_pop_fieldsFieldPolicy;
-  };
-  data_sec_contracts_var_samp_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_contracts_var_samp_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_var_samp_fieldsKeySpecifier);
-    fields?: data_sec_contracts_var_samp_fieldsFieldPolicy;
-  };
-  data_sec_contracts_variance_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_contracts_variance_fieldsKeySpecifier
-      | (() => undefined | data_sec_contracts_variance_fieldsKeySpecifier);
-    fields?: data_sec_contracts_variance_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachmentsKeySpecifier
-      | (() => undefined | data_sec_filing_attachmentsKeySpecifier);
-    fields?: data_sec_filing_attachmentsFieldPolicy;
-  };
-  data_sec_filing_attachments_aggregate?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_aggregateKeySpecifier
-      | (() => undefined | data_sec_filing_attachments_aggregateKeySpecifier);
-    fields?: data_sec_filing_attachments_aggregateFieldPolicy;
-  };
-  data_sec_filing_attachments_aggregate_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_aggregate_fieldsKeySpecifier
-      | (() =>
-          | undefined
-          | data_sec_filing_attachments_aggregate_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_aggregate_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_avg_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_avg_fieldsKeySpecifier
-      | (() => undefined | data_sec_filing_attachments_avg_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_avg_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_max_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_max_fieldsKeySpecifier
-      | (() => undefined | data_sec_filing_attachments_max_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_max_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_min_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_min_fieldsKeySpecifier
-      | (() => undefined | data_sec_filing_attachments_min_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_min_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_mutation_response?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_mutation_responseKeySpecifier
-      | (() =>
-          | undefined
-          | data_sec_filing_attachments_mutation_responseKeySpecifier);
-    fields?: data_sec_filing_attachments_mutation_responseFieldPolicy;
-  };
-  data_sec_filing_attachments_stddev_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_stddev_fieldsKeySpecifier
-      | (() =>
-          | undefined
-          | data_sec_filing_attachments_stddev_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_stddev_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_stddev_pop_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_stddev_pop_fieldsKeySpecifier
-      | (() =>
-          | undefined
-          | data_sec_filing_attachments_stddev_pop_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_stddev_pop_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_stddev_samp_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_stddev_samp_fieldsKeySpecifier
-      | (() =>
-          | undefined
-          | data_sec_filing_attachments_stddev_samp_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_stddev_samp_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_sum_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_sum_fieldsKeySpecifier
-      | (() => undefined | data_sec_filing_attachments_sum_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_sum_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_var_pop_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_var_pop_fieldsKeySpecifier
-      | (() =>
-          | undefined
-          | data_sec_filing_attachments_var_pop_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_var_pop_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_var_samp_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_var_samp_fieldsKeySpecifier
-      | (() =>
-          | undefined
-          | data_sec_filing_attachments_var_samp_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_var_samp_fieldsFieldPolicy;
-  };
-  data_sec_filing_attachments_variance_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filing_attachments_variance_fieldsKeySpecifier
-      | (() =>
-          | undefined
-          | data_sec_filing_attachments_variance_fieldsKeySpecifier);
-    fields?: data_sec_filing_attachments_variance_fieldsFieldPolicy;
-  };
-  data_sec_filings?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_filingsKeySpecifier
-      | (() => undefined | data_sec_filingsKeySpecifier);
-    fields?: data_sec_filingsFieldPolicy;
-  };
-  data_sec_filings_aggregate?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_filings_aggregateKeySpecifier
-      | (() => undefined | data_sec_filings_aggregateKeySpecifier);
-    fields?: data_sec_filings_aggregateFieldPolicy;
-  };
-  data_sec_filings_aggregate_fields?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filings_aggregate_fieldsKeySpecifier
-      | (() => undefined | data_sec_filings_aggregate_fieldsKeySpecifier);
-    fields?: data_sec_filings_aggregate_fieldsFieldPolicy;
-  };
-  data_sec_filings_max_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_filings_max_fieldsKeySpecifier
-      | (() => undefined | data_sec_filings_max_fieldsKeySpecifier);
-    fields?: data_sec_filings_max_fieldsFieldPolicy;
-  };
-  data_sec_filings_min_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
-    keyFields?:
-      | false
-      | data_sec_filings_min_fieldsKeySpecifier
-      | (() => undefined | data_sec_filings_min_fieldsKeySpecifier);
-    fields?: data_sec_filings_min_fieldsFieldPolicy;
-  };
-  data_sec_filings_mutation_response?: Omit<
-    TypePolicy,
-    'fields' | 'keyFields'
-  > & {
-    keyFields?:
-      | false
-      | data_sec_filings_mutation_responseKeySpecifier
-      | (() => undefined | data_sec_filings_mutation_responseKeySpecifier);
-    fields?: data_sec_filings_mutation_responseFieldPolicy;
-  };
   migrations?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
     keyFields?:
       | false
@@ -1890,6 +1527,317 @@ export type TypedTypePolicies = TypePolicies & {
       | query_rootKeySpecifier
       | (() => undefined | query_rootKeySpecifier);
     fields?: query_rootFieldPolicy;
+  };
+  sec_company?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_companyKeySpecifier
+      | (() => undefined | sec_companyKeySpecifier);
+    fields?: sec_companyFieldPolicy;
+  };
+  sec_company_aggregate?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_company_aggregateKeySpecifier
+      | (() => undefined | sec_company_aggregateKeySpecifier);
+    fields?: sec_company_aggregateFieldPolicy;
+  };
+  sec_company_aggregate_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_company_aggregate_fieldsKeySpecifier
+      | (() => undefined | sec_company_aggregate_fieldsKeySpecifier);
+    fields?: sec_company_aggregate_fieldsFieldPolicy;
+  };
+  sec_company_max_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_company_max_fieldsKeySpecifier
+      | (() => undefined | sec_company_max_fieldsKeySpecifier);
+    fields?: sec_company_max_fieldsFieldPolicy;
+  };
+  sec_company_min_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_company_min_fieldsKeySpecifier
+      | (() => undefined | sec_company_min_fieldsKeySpecifier);
+    fields?: sec_company_min_fieldsFieldPolicy;
+  };
+  sec_company_mutation_response?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_company_mutation_responseKeySpecifier
+      | (() => undefined | sec_company_mutation_responseKeySpecifier);
+    fields?: sec_company_mutation_responseFieldPolicy;
+  };
+  sec_contract?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contractKeySpecifier
+      | (() => undefined | sec_contractKeySpecifier);
+    fields?: sec_contractFieldPolicy;
+  };
+  sec_contract_aggregate?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_aggregateKeySpecifier
+      | (() => undefined | sec_contract_aggregateKeySpecifier);
+    fields?: sec_contract_aggregateFieldPolicy;
+  };
+  sec_contract_aggregate_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_aggregate_fieldsKeySpecifier
+      | (() => undefined | sec_contract_aggregate_fieldsKeySpecifier);
+    fields?: sec_contract_aggregate_fieldsFieldPolicy;
+  };
+  sec_contract_avg_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_avg_fieldsKeySpecifier
+      | (() => undefined | sec_contract_avg_fieldsKeySpecifier);
+    fields?: sec_contract_avg_fieldsFieldPolicy;
+  };
+  sec_contract_max_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_max_fieldsKeySpecifier
+      | (() => undefined | sec_contract_max_fieldsKeySpecifier);
+    fields?: sec_contract_max_fieldsFieldPolicy;
+  };
+  sec_contract_min_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_min_fieldsKeySpecifier
+      | (() => undefined | sec_contract_min_fieldsKeySpecifier);
+    fields?: sec_contract_min_fieldsFieldPolicy;
+  };
+  sec_contract_stddev_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_stddev_fieldsKeySpecifier
+      | (() => undefined | sec_contract_stddev_fieldsKeySpecifier);
+    fields?: sec_contract_stddev_fieldsFieldPolicy;
+  };
+  sec_contract_stddev_pop_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_stddev_pop_fieldsKeySpecifier
+      | (() => undefined | sec_contract_stddev_pop_fieldsKeySpecifier);
+    fields?: sec_contract_stddev_pop_fieldsFieldPolicy;
+  };
+  sec_contract_stddev_samp_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_stddev_samp_fieldsKeySpecifier
+      | (() => undefined | sec_contract_stddev_samp_fieldsKeySpecifier);
+    fields?: sec_contract_stddev_samp_fieldsFieldPolicy;
+  };
+  sec_contract_sum_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_sum_fieldsKeySpecifier
+      | (() => undefined | sec_contract_sum_fieldsKeySpecifier);
+    fields?: sec_contract_sum_fieldsFieldPolicy;
+  };
+  sec_contract_var_pop_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_var_pop_fieldsKeySpecifier
+      | (() => undefined | sec_contract_var_pop_fieldsKeySpecifier);
+    fields?: sec_contract_var_pop_fieldsFieldPolicy;
+  };
+  sec_contract_var_samp_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_var_samp_fieldsKeySpecifier
+      | (() => undefined | sec_contract_var_samp_fieldsKeySpecifier);
+    fields?: sec_contract_var_samp_fieldsFieldPolicy;
+  };
+  sec_contract_variance_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_contract_variance_fieldsKeySpecifier
+      | (() => undefined | sec_contract_variance_fieldsKeySpecifier);
+    fields?: sec_contract_variance_fieldsFieldPolicy;
+  };
+  sec_filing?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_filingKeySpecifier
+      | (() => undefined | sec_filingKeySpecifier);
+    fields?: sec_filingFieldPolicy;
+  };
+  sec_filing_aggregate?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_filing_aggregateKeySpecifier
+      | (() => undefined | sec_filing_aggregateKeySpecifier);
+    fields?: sec_filing_aggregateFieldPolicy;
+  };
+  sec_filing_aggregate_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_filing_aggregate_fieldsKeySpecifier
+      | (() => undefined | sec_filing_aggregate_fieldsKeySpecifier);
+    fields?: sec_filing_aggregate_fieldsFieldPolicy;
+  };
+  sec_filing_attachment?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_filing_attachmentKeySpecifier
+      | (() => undefined | sec_filing_attachmentKeySpecifier);
+    fields?: sec_filing_attachmentFieldPolicy;
+  };
+  sec_filing_attachment_aggregate?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_aggregateKeySpecifier
+      | (() => undefined | sec_filing_attachment_aggregateKeySpecifier);
+    fields?: sec_filing_attachment_aggregateFieldPolicy;
+  };
+  sec_filing_attachment_aggregate_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_aggregate_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_aggregate_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_aggregate_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_avg_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_avg_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_avg_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_avg_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_max_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_max_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_max_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_max_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_min_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_min_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_min_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_min_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_mutation_response?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_mutation_responseKeySpecifier
+      | (() => undefined | sec_filing_attachment_mutation_responseKeySpecifier);
+    fields?: sec_filing_attachment_mutation_responseFieldPolicy;
+  };
+  sec_filing_attachment_stddev_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_stddev_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_stddev_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_stddev_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_stddev_pop_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_stddev_pop_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_stddev_pop_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_stddev_pop_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_stddev_samp_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_stddev_samp_fieldsKeySpecifier
+      | (() =>
+          | undefined
+          | sec_filing_attachment_stddev_samp_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_stddev_samp_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_sum_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_sum_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_sum_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_sum_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_var_pop_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_var_pop_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_var_pop_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_var_pop_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_var_samp_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_var_samp_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_var_samp_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_var_samp_fieldsFieldPolicy;
+  };
+  sec_filing_attachment_variance_fields?: Omit<
+    TypePolicy,
+    'fields' | 'keyFields'
+  > & {
+    keyFields?:
+      | false
+      | sec_filing_attachment_variance_fieldsKeySpecifier
+      | (() => undefined | sec_filing_attachment_variance_fieldsKeySpecifier);
+    fields?: sec_filing_attachment_variance_fieldsFieldPolicy;
+  };
+  sec_filing_max_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_filing_max_fieldsKeySpecifier
+      | (() => undefined | sec_filing_max_fieldsKeySpecifier);
+    fields?: sec_filing_max_fieldsFieldPolicy;
+  };
+  sec_filing_min_fields?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_filing_min_fieldsKeySpecifier
+      | (() => undefined | sec_filing_min_fieldsKeySpecifier);
+    fields?: sec_filing_min_fieldsFieldPolicy;
+  };
+  sec_filing_mutation_response?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
+    keyFields?:
+      | false
+      | sec_filing_mutation_responseKeySpecifier
+      | (() => undefined | sec_filing_mutation_responseKeySpecifier);
+    fields?: sec_filing_mutation_responseFieldPolicy;
   };
   subscription_root?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
     keyFields?:

@@ -1,55 +1,4 @@
 - table:
-    schema: data
-    name: sec_companies
-  array_relationships:
-  - name: sec_filings
-    using:
-      foreign_key_constraint_on:
-        column: cik
-        table:
-          schema: data
-          name: sec_filings
-- table:
-    schema: data
-    name: sec_contracts
-  select_permissions:
-  - role: user
-    permission:
-      columns:
-      - accession_number
-      - sequence
-      - company_name
-      - company_cik
-      - company_geo
-      - filing_metadata
-      - description
-      - filing_type
-      - text
-      - contents
-      filter: {}
-- table:
-    schema: data
-    name: sec_filing_attachments
-  object_relationships:
-  - name: sec_filing
-    using:
-      foreign_key_constraint_on: accession_number
-- table:
-    schema: data
-    name: sec_filings
-  object_relationships:
-  - name: sec_company
-    using:
-      foreign_key_constraint_on: cik
-  array_relationships:
-  - name: sec_filing_attachments
-    using:
-      foreign_key_constraint_on:
-        column: accession_number
-        table:
-          schema: data
-          name: sec_filing_attachments
-- table:
     schema: public
     name: migrations
 - table:
@@ -90,6 +39,91 @@
         table:
           schema: public
           name: org
+- table:
+    schema: public
+    name: sec_company
+  array_relationships:
+  - name: sec_filing
+    using:
+      foreign_key_constraint_on:
+        column: cik
+        table:
+          schema: public
+          name: sec_filing
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - cik
+      - geo
+      - name
+      - sic
+      - sic_name
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
+    name: sec_contract
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - accession_number
+      - sequence
+      - company_name
+      - company_cik
+      - company_geo
+      - filing_metadata
+      - description
+      - filing_type
+      - text
+      - contents
+      filter: {}
+- table:
+    schema: public
+    name: sec_filing
+  object_relationships:
+  - name: sec_company
+    using:
+      foreign_key_constraint_on: cik
+  array_relationships:
+  - name: sec_filing_attachment
+    using:
+      foreign_key_constraint_on:
+        column: accession_number
+        table:
+          schema: public
+          name: sec_filing_attachment
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - accession_number
+      - cik
+      - filing_type
+      - header
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
+    name: sec_filing_attachment
+  object_relationships:
+  - name: sec_filing
+    using:
+      foreign_key_constraint_on: accession_number
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - accession_number
+      - contents
+      - description
+      - filename
+      - filing_type
+      - sequence
+      - text
+      filter: {}
+      allow_aggregations: true
 - table:
     schema: public
     name: user
