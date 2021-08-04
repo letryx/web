@@ -5,9 +5,10 @@ module.exports = {
     es2021: true,
   },
   ignorePatterns: [
-    '.eslintrc.cjs',
+    '.eslintrc.js',
     'next.config.js',
     'jest.config.js',
+    'apollo.config.js',
     'lib/generated/**/*',
     'auth0/*',
   ],

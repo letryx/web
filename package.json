@@ -22,7 +22,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.1",
+    "@apollo/client": "^3.4.3",
     "@apollo/react-hooks": "^4.0.0",
     "@auth0/nextjs-auth0": "^1.5.0",
     "@chakra-ui/icons": "1.0.14",
@@ -37,7 +37,7 @@
     "@types/faker": "^5.5.7",
     "@types/jest": "^26.0.24",
     "@types/jsonp": "^0.2.1",
-    "@types/node": "^16.4.8",
+    "@types/node": "^16.4.10",
     "@types/react": "^17.0.15",
     "@types/react-dom": "^17.0.9",
     "@types/ws": "^7.4.7",
@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
-    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-env": "^7.14.9",
     "@babel/preset-typescript": "^7.14.5",
     "@graphql-codegen/cli": "^1.21.8",
     "@graphql-codegen/fragment-matcher": "^2.0.1",
@@ -76,9 +76,9 @@
     "@graphql-codegen/typescript-graphql-files-modules": "^1.18.1",
     "@graphql-codegen/typescript-operations": "^1.18.4",
     "@graphql-codegen/typescript-react-apollo": "^2.3.1",
-    "@typescript-eslint/eslint-plugin": "^4.28.5",
-    "@typescript-eslint/parser": "^4.28.5",
-    "@typescript-eslint/typescript-estree": "^4.28.5",
+    "@typescript-eslint/eslint-plugin": "^4.29.0",
+    "@typescript-eslint/parser": "^4.29.0",
+    "@typescript-eslint/typescript-estree": "^4.29.0",
     "babel-jest": "^27.0.6",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
@@ -91,7 +91,6 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "graphql-codegen-apollo-next-ssr": "^1.6.1",
     "jest": "^27.0.6",
     "prettier-plugin-organize-imports": "^2.3.3",
     "ts-jest": "^27.0.4"

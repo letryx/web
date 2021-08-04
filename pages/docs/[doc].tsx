@@ -1,11 +1,13 @@
 import {
   Container,
+  Heading,
   HeadingProps,
   Link,
   LinkProps,
   ListItem,
   ListItemProps,
   ListProps,
+  OrderedList,
   Text,
   TextProps,
   UnorderedList,
@@ -23,30 +25,31 @@ import { FC } from 'react';
 
 const components = {
   h1: ({ children }: HeadingProps) => (
-    <Text fontSize="3xl" my={8}>
+    <Heading size="lg" my={8}>
       {children}
-    </Text>
+    </Heading>
   ),
   h2: ({ children }: HeadingProps) => (
-    <Text fontSize="2xl" my={6}>
+    <Heading size="md" mt={8} mb={4} fontWeight="semibold" lineHeight="tall">
       {children}
-    </Text>
+    </Heading>
   ),
   h3: ({ children }: HeadingProps) => (
-    <Text fontSize="md" my={4}>
+    <Heading size="sm" my={4}>
       {children}
-    </Text>
+    </Heading>
   ),
-  // use #### for metadata
-  h4: ({ children }: HeadingProps) => (
-    <Text fontSize="md" my={12}>
-      {children}
-    </Text>
-  ),
+  // use #### for footer
+  h4: ({ children }: HeadingProps) => <Text my={12}>{children}</Text>,
   ul: ({ children }: ListProps) => (
     <UnorderedList my={2} pl={4}>
       {children}
     </UnorderedList>
+  ),
+  ol: ({ children }: ListProps) => (
+    <OrderedList my={2} pl={4}>
+      {children}
+    </OrderedList>
   ),
   li: ({ children }: ListItemProps) => <ListItem>{children}</ListItem>,
   p: ({ children }: TextProps) => <Text my={2}>{children}</Text>,
@@ -54,6 +57,11 @@ const components = {
     <Link {...props} target="_blank" style={{ textDecoration: 'underline' }}>
       {children}
     </Link>
+  ),
+  strong: ({ children }: TextProps) => (
+    <Text as="span" fontWeight="bold">
+      {children}
+    </Text>
   ),
   Layout,
 };
@@ -63,7 +71,7 @@ const Doc: FC<NextPageContext & { content: MDXRemoteSerializeResult }> = ({
 }) => {
   return (
     <Layout>
-      <Container maxWidth="800px">
+      <Container maxWidth="700px" textAlign="justify">
         <MDXRemote {...content} components={components} />
       </Container>
     </Layout>

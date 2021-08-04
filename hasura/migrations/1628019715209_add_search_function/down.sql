@@ -1,0 +1,1 @@
+drop function data.sec_search;

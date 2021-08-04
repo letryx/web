@@ -12,6 +12,22 @@ services:
       - letryx-internal
     command: echo ok
 
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_LISTEN_ADDRESS: '0.0.0.0'
+      PGADMIN_LISTEN_PORT: '7070'
+    volumes:
+      - 'pgadmin_data:/var/lib/pgadmin'
+    links:
+      - postgres
+    networks:
+      - letryx-internal
+    ports:
+      - '7070:7070'
+
   apollo-codegen:
     <<: *web-base
     environment:
@@ -47,8 +63,8 @@ services:
       POSTGRES_PASSWORD: postgrespassword
 
   graphql-engine:
-    # v2.0.3.cli-migrations-v3
-    image: ${HASURA_IMAGE}:v2.0.3
+    # v2.0.4.cli-migrations-v3
+    image: ${HASURA_IMAGE}:v2.0.4
     volumes:
       - ./hasura/metadata:/hasura-metadata
     networks:
@@ -82,4 +98,5 @@ networks:
     external: true
 
 volumes:
+  pgadmin_data:
   db_data:

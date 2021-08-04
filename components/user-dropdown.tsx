@@ -10,11 +10,11 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/react';
+import { NextChakraLink } from 'components/next-chakra-link';
 import { useAppContext } from 'lib/app-provider';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { CgLogOut } from 'react-icons/cg';
-import { NextChakraLink } from './next-chakra-link';
 
 export const UserDropdown: FC = () => {
   const { currentUser } = useAppContext();
@@ -55,7 +55,7 @@ export const UserDropdown: FC = () => {
     </Menu>
   ) : (
     <NextChakraLink
-      href={`/api/auth/login?returnTo=${router.pathname}`}
+      href={`/api/auth/login?returnTo=${router.asPath}`}
       textDecoration="none"
       _hover={{ textDecoration: 'none' }}
     >

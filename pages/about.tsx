@@ -44,6 +44,7 @@ const Profile: FC<ProfileProps> = ({
         h={48}
         src={photo_url}
         alt={`photo of ${name}`}
+        boxShadow="md"
         mb={4}
         pos="relative"
       />
@@ -54,7 +55,7 @@ const Profile: FC<ProfileProps> = ({
         letterSpacing="wide"
         fontSize="lg"
         fontWeight={600}
-        color="gray.500"
+        color={useColorModeValue('gray.700', 'gray.500')}
         mb={2}
         mt={1}
       >
@@ -62,7 +63,7 @@ const Profile: FC<ProfileProps> = ({
       </Text>
       <Text
         textAlign="center"
-        color={useColorModeValue('gray.700', 'gray.400')}
+        color={useColorModeValue('gray.700', 'gray.300')}
         px={3}
         fontSize="16px"
       >
@@ -85,7 +86,7 @@ const AboutPage: FC = () => {
           <Heading fontSize="4xl" pb={8}>
             About Letryx
           </Heading>
-          <Text color={useColorModeValue('gray.700', 'gray.400')} fontSize="xl">
+          <Text color={useColorModeValue('gray.700', 'gray.300')} fontSize="xl">
             Letryx is a web-based tool for M&amp;A attorneys and investment
             analysts that accelerates deal execution by identifying trends in
             precedent contracts and disclosures, and provides predictive

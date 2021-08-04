@@ -1,0 +1,20 @@
+fragment ContractList on sec_contract {
+  accession_number
+  sequence
+  company_cik
+  company_name
+  company_geo
+  description
+  filing_metadata
+  filing_type
+}
+
+query SequentialSECContracts($limit: Int = 20, $offset: Int = 0) {
+  sec_contract(
+    limit: $limit
+    offset: $offset
+    order_by: { accession_number: asc, sequence: asc }
+  ) {
+    ...ContractList
+  }
+}
