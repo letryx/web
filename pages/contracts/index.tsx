@@ -3,7 +3,7 @@ import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
 import {
   ContractListFragment,
-  useGetSecContractsQuery,
+  useGetSequentialSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
 import { FC } from 'react';
 
@@ -20,7 +20,7 @@ const ContractSnippet: FC<ContractListFragment> = ({
 );
 
 const ContractsPage: FC = () => {
-  const { data } = useGetSecContractsQuery({
+  const { data } = useGetSequentialSecContractsQuery({
     variables: { limit: 30, offset: 0 },
   });
   const contracts = data?.sec_contract || [];

@@ -119,7 +119,7 @@
       - contents
       - description
       - filename
-      - filing_type
+      - attachment_type
       - sequence
       - text
       filter: {}

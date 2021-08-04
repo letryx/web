@@ -2226,11 +2226,11 @@ columns and relationships of "sec_filing_attachment"
 """
 type sec_filing_attachment {
   accession_number: String!
+  attachment_type: String!
   contents: String!
   created_at: timestamptz
   description: String
   filename: String
-  filing_type: String!
 
   """An object relationship"""
   sec_filing: sec_filing!
@@ -2312,11 +2312,11 @@ input sec_filing_attachment_bool_exp {
   _not: sec_filing_attachment_bool_exp
   _or: [sec_filing_attachment_bool_exp!]
   accession_number: String_comparison_exp
+  attachment_type: String_comparison_exp
   contents: String_comparison_exp
   created_at: timestamptz_comparison_exp
   description: String_comparison_exp
   filename: String_comparison_exp
-  filing_type: String_comparison_exp
   sec_filing: sec_filing_bool_exp
   sequence: Int_comparison_exp
   text: String_comparison_exp
@@ -2347,11 +2347,11 @@ input type for inserting data into table "sec_filing_attachment"
 """
 input sec_filing_attachment_insert_input {
   accession_number: String
+  attachment_type: String
   contents: String
   created_at: timestamptz
   description: String
   filename: String
-  filing_type: String
   sec_filing: sec_filing_obj_rel_insert_input
   sequence: Int
   text: String
@@ -2362,11 +2362,11 @@ input sec_filing_attachment_insert_input {
 """aggregate max on columns"""
 type sec_filing_attachment_max_fields {
   accession_number: String
+  attachment_type: String
   contents: String
   created_at: timestamptz
   description: String
   filename: String
-  filing_type: String
   sequence: Int
   text: String
   updated_at: timestamptz
@@ -2377,11 +2377,11 @@ order by max() on columns of table "sec_filing_attachment"
 """
 input sec_filing_attachment_max_order_by {
   accession_number: order_by
+  attachment_type: order_by
   contents: order_by
   created_at: order_by
   description: order_by
   filename: order_by
-  filing_type: order_by
   sequence: order_by
   text: order_by
   updated_at: order_by
@@ -2390,11 +2390,11 @@ input sec_filing_attachment_max_order_by {
 """aggregate min on columns"""
 type sec_filing_attachment_min_fields {
   accession_number: String
+  attachment_type: String
   contents: String
   created_at: timestamptz
   description: String
   filename: String
-  filing_type: String
   sequence: Int
   text: String
   updated_at: timestamptz
@@ -2405,11 +2405,11 @@ order by min() on columns of table "sec_filing_attachment"
 """
 input sec_filing_attachment_min_order_by {
   accession_number: order_by
+  attachment_type: order_by
   contents: order_by
   created_at: order_by
   description: order_by
   filename: order_by
-  filing_type: order_by
   sequence: order_by
   text: order_by
   updated_at: order_by
@@ -2438,11 +2438,11 @@ input sec_filing_attachment_on_conflict {
 """Ordering options when selecting data from "sec_filing_attachment"."""
 input sec_filing_attachment_order_by {
   accession_number: order_by
+  attachment_type: order_by
   contents: order_by
   created_at: order_by
   description: order_by
   filename: order_by
-  filing_type: order_by
   sec_filing: sec_filing_order_by
   sequence: order_by
   text: order_by
@@ -2464,6 +2464,9 @@ enum sec_filing_attachment_select_column {
   accession_number
 
   """column name"""
+  attachment_type
+
+  """column name"""
   contents
 
   """column name"""
@@ -2474,9 +2477,6 @@ enum sec_filing_attachment_select_column {
 
   """column name"""
   filename
-
-  """column name"""
-  filing_type
 
   """column name"""
   sequence
@@ -2496,11 +2496,11 @@ input type for updating data in table "sec_filing_attachment"
 """
 input sec_filing_attachment_set_input {
   accession_number: String
+  attachment_type: String
   contents: String
   created_at: timestamptz
   description: String
   filename: String
-  filing_type: String
   sequence: Int
   text: String
   tsv_search_text: tsvector
@@ -2563,6 +2563,9 @@ enum sec_filing_attachment_update_column {
   accession_number
 
   """column name"""
+  attachment_type
+
+  """column name"""
   contents
 
   """column name"""
@@ -2573,9 +2576,6 @@ enum sec_filing_attachment_update_column {
 
   """column name"""
   filename
-
-  """column name"""
-  filing_type
 
   """column name"""
   sequence

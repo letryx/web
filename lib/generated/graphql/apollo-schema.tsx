@@ -1804,11 +1804,11 @@ export type Sec_Filing_Arr_Rel_Insert_Input = {
 export type Sec_Filing_Attachment = {
   __typename?: 'sec_filing_attachment';
   accession_number: Scalars['String'];
+  attachment_type: Scalars['String'];
   contents: Scalars['String'];
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
-  filing_type: Scalars['String'];
   /** An object relationship */
   sec_filing: Sec_Filing;
   sequence: Scalars['Int'];
@@ -1885,11 +1885,11 @@ export type Sec_Filing_Attachment_Bool_Exp = {
   _not?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
   _or?: Maybe<Array<Sec_Filing_Attachment_Bool_Exp>>;
   accession_number?: Maybe<String_Comparison_Exp>;
+  attachment_type?: Maybe<String_Comparison_Exp>;
   contents?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   filename?: Maybe<String_Comparison_Exp>;
-  filing_type?: Maybe<String_Comparison_Exp>;
   sec_filing?: Maybe<Sec_Filing_Bool_Exp>;
   sequence?: Maybe<Int_Comparison_Exp>;
   text?: Maybe<String_Comparison_Exp>;
@@ -1913,11 +1913,11 @@ export type Sec_Filing_Attachment_Inc_Input = {
 /** input type for inserting data into table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Insert_Input = {
   accession_number?: Maybe<Scalars['String']>;
+  attachment_type?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
   sec_filing?: Maybe<Sec_Filing_Obj_Rel_Insert_Input>;
   sequence?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
@@ -1929,11 +1929,11 @@ export type Sec_Filing_Attachment_Insert_Input = {
 export type Sec_Filing_Attachment_Max_Fields = {
   __typename?: 'sec_filing_attachment_max_fields';
   accession_number?: Maybe<Scalars['String']>;
+  attachment_type?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
   sequence?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -1942,11 +1942,11 @@ export type Sec_Filing_Attachment_Max_Fields = {
 /** order by max() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Max_Order_By = {
   accession_number?: Maybe<Order_By>;
+  attachment_type?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
   sequence?: Maybe<Order_By>;
   text?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
@@ -1956,11 +1956,11 @@ export type Sec_Filing_Attachment_Max_Order_By = {
 export type Sec_Filing_Attachment_Min_Fields = {
   __typename?: 'sec_filing_attachment_min_fields';
   accession_number?: Maybe<Scalars['String']>;
+  attachment_type?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
   sequence?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -1969,11 +1969,11 @@ export type Sec_Filing_Attachment_Min_Fields = {
 /** order by min() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Min_Order_By = {
   accession_number?: Maybe<Order_By>;
+  attachment_type?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
   sequence?: Maybe<Order_By>;
   text?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
@@ -1998,11 +1998,11 @@ export type Sec_Filing_Attachment_On_Conflict = {
 /** Ordering options when selecting data from "sec_filing_attachment". */
 export type Sec_Filing_Attachment_Order_By = {
   accession_number?: Maybe<Order_By>;
+  attachment_type?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
   sec_filing?: Maybe<Sec_Filing_Order_By>;
   sequence?: Maybe<Order_By>;
   text?: Maybe<Order_By>;
@@ -2021,6 +2021,8 @@ export enum Sec_Filing_Attachment_Select_Column {
   /** column name */
   AccessionNumber = 'accession_number',
   /** column name */
+  AttachmentType = 'attachment_type',
+  /** column name */
   Contents = 'contents',
   /** column name */
   CreatedAt = 'created_at',
@@ -2028,8 +2030,6 @@ export enum Sec_Filing_Attachment_Select_Column {
   Description = 'description',
   /** column name */
   Filename = 'filename',
-  /** column name */
-  FilingType = 'filing_type',
   /** column name */
   Sequence = 'sequence',
   /** column name */
@@ -2043,11 +2043,11 @@ export enum Sec_Filing_Attachment_Select_Column {
 /** input type for updating data in table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Set_Input = {
   accession_number?: Maybe<Scalars['String']>;
+  attachment_type?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
   sequence?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
   tsv_search_text?: Maybe<Scalars['tsvector']>;
@@ -2103,6 +2103,8 @@ export enum Sec_Filing_Attachment_Update_Column {
   /** column name */
   AccessionNumber = 'accession_number',
   /** column name */
+  AttachmentType = 'attachment_type',
+  /** column name */
   Contents = 'contents',
   /** column name */
   CreatedAt = 'created_at',
@@ -2110,8 +2112,6 @@ export enum Sec_Filing_Attachment_Update_Column {
   Description = 'description',
   /** column name */
   Filename = 'filename',
-  /** column name */
-  FilingType = 'filing_type',
   /** column name */
   Sequence = 'sequence',
   /** column name */
@@ -2988,12 +2988,12 @@ export type ContractListFragment = { __typename?: 'sec_contract' } & Pick<
   | 'filing_type'
 >;
 
-export type GetSecContractsQueryVariables = Exact<{
+export type GetSequentialSecContractsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 }>;
 
-export type GetSecContractsQuery = { __typename?: 'query_root' } & {
+export type GetSequentialSecContractsQuery = { __typename?: 'query_root' } & {
   sec_contract: Array<{ __typename?: 'sec_contract' } & ContractListFragment>;
 };
 
@@ -3054,8 +3054,8 @@ export const CurrentUserFragmentDoc = gql`
     }
   }
 `;
-export const GetSecContractsDocument = gql`
-  query GetSECContracts($limit: Int = 20, $offset: Int = 0) {
+export const GetSequentialSecContractsDocument = gql`
+  query GetSequentialSECContracts($limit: Int = 20, $offset: Int = 0) {
     sec_contract(
       limit: $limit
       offset: $offset
@@ -3068,55 +3068,55 @@ export const GetSecContractsDocument = gql`
 `;
 
 /**
- * __useGetSecContractsQuery__
+ * __useGetSequentialSecContractsQuery__
  *
- * To run a query within a React component, call `useGetSecContractsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetSecContractsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetSequentialSecContractsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSequentialSecContractsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetSecContractsQuery({
+ * const { data, loading, error } = useGetSequentialSecContractsQuery({
  *   variables: {
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
  *   },
  * });
  */
-export function useGetSecContractsQuery(
+export function useGetSequentialSecContractsQuery(
   baseOptions?: Apollo.QueryHookOptions<
-    GetSecContractsQuery,
-    GetSecContractsQueryVariables
+    GetSequentialSecContractsQuery,
+    GetSequentialSecContractsQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetSecContractsQuery, GetSecContractsQueryVariables>(
-    GetSecContractsDocument,
-    options
-  );
+  return Apollo.useQuery<
+    GetSequentialSecContractsQuery,
+    GetSequentialSecContractsQueryVariables
+  >(GetSequentialSecContractsDocument, options);
 }
-export function useGetSecContractsLazyQuery(
+export function useGetSequentialSecContractsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    GetSecContractsQuery,
-    GetSecContractsQueryVariables
+    GetSequentialSecContractsQuery,
+    GetSequentialSecContractsQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
-    GetSecContractsQuery,
-    GetSecContractsQueryVariables
-  >(GetSecContractsDocument, options);
+    GetSequentialSecContractsQuery,
+    GetSequentialSecContractsQueryVariables
+  >(GetSequentialSecContractsDocument, options);
 }
-export type GetSecContractsQueryHookResult = ReturnType<
-  typeof useGetSecContractsQuery
+export type GetSequentialSecContractsQueryHookResult = ReturnType<
+  typeof useGetSequentialSecContractsQuery
 >;
-export type GetSecContractsLazyQueryHookResult = ReturnType<
-  typeof useGetSecContractsLazyQuery
+export type GetSequentialSecContractsLazyQueryHookResult = ReturnType<
+  typeof useGetSequentialSecContractsLazyQuery
 >;
-export type GetSecContractsQueryResult = Apollo.QueryResult<
-  GetSecContractsQuery,
-  GetSecContractsQueryVariables
+export type GetSequentialSecContractsQueryResult = Apollo.QueryResult<
+  GetSequentialSecContractsQuery,
+  GetSequentialSecContractsQueryVariables
 >;
 export const GetCurrentUserDocument = gql`
   query GetCurrentUser($auth0_id: String!) {
