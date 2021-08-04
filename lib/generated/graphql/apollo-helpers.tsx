@@ -767,6 +767,7 @@ export type sec_filingKeySpecifier = (
   | 'accession_number'
   | 'cik'
   | 'created_at'
+  | 'filing_date'
   | 'filing_type'
   | 'header'
   | 'sec_company'
@@ -779,6 +780,7 @@ export type sec_filingFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
   cik?: FieldPolicy<any> | FieldReadFunction<any>;
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
   header?: FieldPolicy<any> | FieldReadFunction<any>;
   sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -984,6 +986,7 @@ export type sec_filing_max_fieldsKeySpecifier = (
   | 'accession_number'
   | 'cik'
   | 'created_at'
+  | 'filing_date'
   | 'filing_type'
   | 'header'
   | 'updated_at'
@@ -993,6 +996,7 @@ export type sec_filing_max_fieldsFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
   cik?: FieldPolicy<any> | FieldReadFunction<any>;
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
   header?: FieldPolicy<any> | FieldReadFunction<any>;
   updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -1001,6 +1005,7 @@ export type sec_filing_min_fieldsKeySpecifier = (
   | 'accession_number'
   | 'cik'
   | 'created_at'
+  | 'filing_date'
   | 'filing_type'
   | 'header'
   | 'updated_at'
@@ -1010,6 +1015,7 @@ export type sec_filing_min_fieldsFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
   cik?: FieldPolicy<any> | FieldReadFunction<any>;
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
   header?: FieldPolicy<any> | FieldReadFunction<any>;
   updated_at?: FieldPolicy<any> | FieldReadFunction<any>;

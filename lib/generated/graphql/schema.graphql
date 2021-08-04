@@ -81,6 +81,23 @@ input String_comparison_exp {
   _similar: String
 }
 
+scalar date
+
+"""
+Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'.
+"""
+input date_comparison_exp {
+  _eq: date
+  _gt: date
+  _gte: date
+  _in: [date!]
+  _is_null: Boolean
+  _lt: date
+  _lte: date
+  _neq: date
+  _nin: [date!]
+}
+
 """
 columns and relationships of "migrations"
 """
@@ -2141,6 +2158,7 @@ type sec_filing {
   accession_number: String!
   cik: String!
   created_at: timestamptz
+  filing_date: date!
   filing_type: String!
   header: String
 
@@ -2636,6 +2654,7 @@ input sec_filing_bool_exp {
   accession_number: String_comparison_exp
   cik: String_comparison_exp
   created_at: timestamptz_comparison_exp
+  filing_date: date_comparison_exp
   filing_type: String_comparison_exp
   header: String_comparison_exp
   sec_company: sec_company_bool_exp
@@ -2658,6 +2677,7 @@ input sec_filing_insert_input {
   accession_number: String
   cik: String
   created_at: timestamptz
+  filing_date: date
   filing_type: String
   header: String
   sec_company: sec_company_obj_rel_insert_input
@@ -2670,6 +2690,7 @@ type sec_filing_max_fields {
   accession_number: String
   cik: String
   created_at: timestamptz
+  filing_date: date
   filing_type: String
   header: String
   updated_at: timestamptz
@@ -2682,6 +2703,7 @@ input sec_filing_max_order_by {
   accession_number: order_by
   cik: order_by
   created_at: order_by
+  filing_date: order_by
   filing_type: order_by
   header: order_by
   updated_at: order_by
@@ -2692,6 +2714,7 @@ type sec_filing_min_fields {
   accession_number: String
   cik: String
   created_at: timestamptz
+  filing_date: date
   filing_type: String
   header: String
   updated_at: timestamptz
@@ -2704,6 +2727,7 @@ input sec_filing_min_order_by {
   accession_number: order_by
   cik: order_by
   created_at: order_by
+  filing_date: order_by
   filing_type: order_by
   header: order_by
   updated_at: order_by
@@ -2744,6 +2768,7 @@ input sec_filing_order_by {
   accession_number: order_by
   cik: order_by
   created_at: order_by
+  filing_date: order_by
   filing_type: order_by
   header: order_by
   sec_company: sec_company_order_by
@@ -2770,6 +2795,9 @@ enum sec_filing_select_column {
   created_at
 
   """column name"""
+  filing_date
+
+  """column name"""
   filing_type
 
   """column name"""
@@ -2786,6 +2814,7 @@ input sec_filing_set_input {
   accession_number: String
   cik: String
   created_at: timestamptz
+  filing_date: date
   filing_type: String
   header: String
   updated_at: timestamptz
@@ -2803,6 +2832,9 @@ enum sec_filing_update_column {
 
   """column name"""
   created_at
+
+  """column name"""
+  filing_date
 
   """column name"""
   filing_type
