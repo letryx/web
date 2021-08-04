@@ -9,7 +9,7 @@ fragment ContractList on sec_contract {
   filing_type
 }
 
-query GetSECContracts($limit: Int = 20, $offset: Int = 0) {
+query SequentialSECContracts($limit: Int = 20, $offset: Int = 0) {
   sec_contract(
     limit: $limit
     offset: $offset
