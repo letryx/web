@@ -1739,7 +1739,7 @@ columns and relationships of "sec_company"
 type sec_company {
   cik: String!
   created_at: timestamptz
-  geo: String
+  geo: String!
   name: String!
 
   """
@@ -1779,6 +1779,42 @@ type sec_company {
     """filter the rows returned"""
     where: sec_filing_bool_exp
   ): sec_filing_aggregate!
+
+  """An array relationship"""
+  sec_filing_attachments(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): [sec_filing_attachment!]!
+
+  """An aggregate relationship"""
+  sec_filing_attachments_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_attachment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_attachment_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_attachment_bool_exp
+  ): sec_filing_attachment_aggregate!
   sic: String!
   sic_name: String!
   updated_at: timestamptz
@@ -1813,6 +1849,7 @@ input sec_company_bool_exp {
   geo: String_comparison_exp
   name: String_comparison_exp
   sec_filing: sec_filing_bool_exp
+  sec_filing_attachments: sec_filing_attachment_bool_exp
   sic: String_comparison_exp
   sic_name: String_comparison_exp
   updated_at: timestamptz_comparison_exp
@@ -1835,6 +1872,7 @@ input sec_company_insert_input {
   geo: String
   name: String
   sec_filing: sec_filing_arr_rel_insert_input
+  sec_filing_attachments: sec_filing_attachment_arr_rel_insert_input
   sic: String
   sic_name: String
   updated_at: timestamptz
@@ -1899,6 +1937,7 @@ input sec_company_order_by {
   geo: order_by
   name: order_by
   sec_filing_aggregate: sec_filing_aggregate_order_by
+  sec_filing_attachments_aggregate: sec_filing_attachment_aggregate_order_by
   sic: order_by
   sic_name: order_by
   updated_at: order_by
@@ -2245,10 +2284,14 @@ columns and relationships of "sec_filing_attachment"
 type sec_filing_attachment {
   accession_number: String!
   attachment_type: String!
+  cik: String!
   contents: String!
   created_at: timestamptz
   description: String
   filename: String
+
+  """An object relationship"""
+  sec_company: sec_company!
 
   """An object relationship"""
   sec_filing: sec_filing!
@@ -2331,10 +2374,12 @@ input sec_filing_attachment_bool_exp {
   _or: [sec_filing_attachment_bool_exp!]
   accession_number: String_comparison_exp
   attachment_type: String_comparison_exp
+  cik: String_comparison_exp
   contents: String_comparison_exp
   created_at: timestamptz_comparison_exp
   description: String_comparison_exp
   filename: String_comparison_exp
+  sec_company: sec_company_bool_exp
   sec_filing: sec_filing_bool_exp
   sequence: Int_comparison_exp
   text: String_comparison_exp
@@ -2366,10 +2411,12 @@ input type for inserting data into table "sec_filing_attachment"
 input sec_filing_attachment_insert_input {
   accession_number: String
   attachment_type: String
+  cik: String
   contents: String
   created_at: timestamptz
   description: String
   filename: String
+  sec_company: sec_company_obj_rel_insert_input
   sec_filing: sec_filing_obj_rel_insert_input
   sequence: Int
   text: String
@@ -2381,6 +2428,7 @@ input sec_filing_attachment_insert_input {
 type sec_filing_attachment_max_fields {
   accession_number: String
   attachment_type: String
+  cik: String
   contents: String
   created_at: timestamptz
   description: String
@@ -2396,6 +2444,7 @@ order by max() on columns of table "sec_filing_attachment"
 input sec_filing_attachment_max_order_by {
   accession_number: order_by
   attachment_type: order_by
+  cik: order_by
   contents: order_by
   created_at: order_by
   description: order_by
@@ -2409,6 +2458,7 @@ input sec_filing_attachment_max_order_by {
 type sec_filing_attachment_min_fields {
   accession_number: String
   attachment_type: String
+  cik: String
   contents: String
   created_at: timestamptz
   description: String
@@ -2424,6 +2474,7 @@ order by min() on columns of table "sec_filing_attachment"
 input sec_filing_attachment_min_order_by {
   accession_number: order_by
   attachment_type: order_by
+  cik: order_by
   contents: order_by
   created_at: order_by
   description: order_by
@@ -2457,10 +2508,12 @@ input sec_filing_attachment_on_conflict {
 input sec_filing_attachment_order_by {
   accession_number: order_by
   attachment_type: order_by
+  cik: order_by
   contents: order_by
   created_at: order_by
   description: order_by
   filename: order_by
+  sec_company: sec_company_order_by
   sec_filing: sec_filing_order_by
   sequence: order_by
   text: order_by
@@ -2483,6 +2536,9 @@ enum sec_filing_attachment_select_column {
 
   """column name"""
   attachment_type
+
+  """column name"""
+  cik
 
   """column name"""
   contents
@@ -2515,6 +2571,7 @@ input type for updating data in table "sec_filing_attachment"
 input sec_filing_attachment_set_input {
   accession_number: String
   attachment_type: String
+  cik: String
   contents: String
   created_at: timestamptz
   description: String
@@ -2582,6 +2639,9 @@ enum sec_filing_attachment_update_column {
 
   """column name"""
   attachment_type
+
+  """column name"""
+  cik
 
   """column name"""
   contents

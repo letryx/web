@@ -513,6 +513,8 @@ export type sec_companyKeySpecifier = (
   | 'name'
   | 'sec_filing'
   | 'sec_filing_aggregate'
+  | 'sec_filing_attachments'
+  | 'sec_filing_attachments_aggregate'
   | 'sic'
   | 'sic_name'
   | 'updated_at'
@@ -525,6 +527,8 @@ export type sec_companyFieldPolicy = {
   name?: FieldPolicy<any> | FieldReadFunction<any>;
   sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
   sec_filing_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachments?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachments_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   sic?: FieldPolicy<any> | FieldReadFunction<any>;
   sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
   updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -811,10 +815,12 @@ export type sec_filing_aggregate_fieldsFieldPolicy = {
 export type sec_filing_attachmentKeySpecifier = (
   | 'accession_number'
   | 'attachment_type'
+  | 'cik'
   | 'contents'
   | 'created_at'
   | 'description'
   | 'filename'
+  | 'sec_company'
   | 'sec_filing'
   | 'sequence'
   | 'text'
@@ -825,10 +831,12 @@ export type sec_filing_attachmentKeySpecifier = (
 export type sec_filing_attachmentFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
   attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  cik?: FieldPolicy<any> | FieldReadFunction<any>;
   contents?: FieldPolicy<any> | FieldReadFunction<any>;
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
   filename?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
   sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
   text?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -881,6 +889,7 @@ export type sec_filing_attachment_avg_fieldsFieldPolicy = {
 export type sec_filing_attachment_max_fieldsKeySpecifier = (
   | 'accession_number'
   | 'attachment_type'
+  | 'cik'
   | 'contents'
   | 'created_at'
   | 'description'
@@ -893,6 +902,7 @@ export type sec_filing_attachment_max_fieldsKeySpecifier = (
 export type sec_filing_attachment_max_fieldsFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
   attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  cik?: FieldPolicy<any> | FieldReadFunction<any>;
   contents?: FieldPolicy<any> | FieldReadFunction<any>;
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -904,6 +914,7 @@ export type sec_filing_attachment_max_fieldsFieldPolicy = {
 export type sec_filing_attachment_min_fieldsKeySpecifier = (
   | 'accession_number'
   | 'attachment_type'
+  | 'cik'
   | 'contents'
   | 'created_at'
   | 'description'
@@ -916,6 +927,7 @@ export type sec_filing_attachment_min_fieldsKeySpecifier = (
 export type sec_filing_attachment_min_fieldsFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
   attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  cik?: FieldPolicy<any> | FieldReadFunction<any>;
   contents?: FieldPolicy<any> | FieldReadFunction<any>;
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;

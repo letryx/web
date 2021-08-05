@@ -1373,12 +1373,16 @@ export type Sec_Company = {
   __typename?: 'sec_company';
   cik: Scalars['String'];
   created_at?: Maybe<Scalars['timestamptz']>;
-  geo?: Maybe<Scalars['String']>;
+  geo: Scalars['String'];
   name: Scalars['String'];
   /** fetch data from the table: "sec_filing" */
   sec_filing: Array<Sec_Filing>;
   /** An aggregate relationship */
   sec_filing_aggregate: Sec_Filing_Aggregate;
+  /** An array relationship */
+  sec_filing_attachments: Array<Sec_Filing_Attachment>;
+  /** An aggregate relationship */
+  sec_filing_attachments_aggregate: Sec_Filing_Attachment_Aggregate;
   sic: Scalars['String'];
   sic_name: Scalars['String'];
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -1400,6 +1404,24 @@ export type Sec_CompanySec_Filing_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Sec_Filing_Order_By>>;
   where?: Maybe<Sec_Filing_Bool_Exp>;
+};
+
+/** columns and relationships of "sec_company" */
+export type Sec_CompanySec_Filing_AttachmentsArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+/** columns and relationships of "sec_company" */
+export type Sec_CompanySec_Filing_Attachments_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 /** aggregated selection of "sec_company" */
@@ -1433,6 +1455,7 @@ export type Sec_Company_Bool_Exp = {
   geo?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   sec_filing?: Maybe<Sec_Filing_Bool_Exp>;
+  sec_filing_attachments?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
   sic?: Maybe<String_Comparison_Exp>;
   sic_name?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
@@ -1451,6 +1474,7 @@ export type Sec_Company_Insert_Input = {
   geo?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   sec_filing?: Maybe<Sec_Filing_Arr_Rel_Insert_Input>;
+  sec_filing_attachments?: Maybe<Sec_Filing_Attachment_Arr_Rel_Insert_Input>;
   sic?: Maybe<Scalars['String']>;
   sic_name?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -1510,6 +1534,7 @@ export type Sec_Company_Order_By = {
   geo?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   sec_filing_aggregate?: Maybe<Sec_Filing_Aggregate_Order_By>;
+  sec_filing_attachments_aggregate?: Maybe<Sec_Filing_Attachment_Aggregate_Order_By>;
   sic?: Maybe<Order_By>;
   sic_name?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
@@ -1820,10 +1845,13 @@ export type Sec_Filing_Attachment = {
   __typename?: 'sec_filing_attachment';
   accession_number: Scalars['String'];
   attachment_type: Scalars['String'];
+  cik: Scalars['String'];
   contents: Scalars['String'];
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  sec_company: Sec_Company;
   /** An object relationship */
   sec_filing: Sec_Filing;
   sequence: Scalars['Int'];
@@ -1901,10 +1929,12 @@ export type Sec_Filing_Attachment_Bool_Exp = {
   _or?: Maybe<Array<Sec_Filing_Attachment_Bool_Exp>>;
   accession_number?: Maybe<String_Comparison_Exp>;
   attachment_type?: Maybe<String_Comparison_Exp>;
+  cik?: Maybe<String_Comparison_Exp>;
   contents?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   filename?: Maybe<String_Comparison_Exp>;
+  sec_company?: Maybe<Sec_Company_Bool_Exp>;
   sec_filing?: Maybe<Sec_Filing_Bool_Exp>;
   sequence?: Maybe<Int_Comparison_Exp>;
   text?: Maybe<String_Comparison_Exp>;
@@ -1929,10 +1959,12 @@ export type Sec_Filing_Attachment_Inc_Input = {
 export type Sec_Filing_Attachment_Insert_Input = {
   accession_number?: Maybe<Scalars['String']>;
   attachment_type?: Maybe<Scalars['String']>;
+  cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
+  sec_company?: Maybe<Sec_Company_Obj_Rel_Insert_Input>;
   sec_filing?: Maybe<Sec_Filing_Obj_Rel_Insert_Input>;
   sequence?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
@@ -1945,6 +1977,7 @@ export type Sec_Filing_Attachment_Max_Fields = {
   __typename?: 'sec_filing_attachment_max_fields';
   accession_number?: Maybe<Scalars['String']>;
   attachment_type?: Maybe<Scalars['String']>;
+  cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
@@ -1958,6 +1991,7 @@ export type Sec_Filing_Attachment_Max_Fields = {
 export type Sec_Filing_Attachment_Max_Order_By = {
   accession_number?: Maybe<Order_By>;
   attachment_type?: Maybe<Order_By>;
+  cik?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
@@ -1972,6 +2006,7 @@ export type Sec_Filing_Attachment_Min_Fields = {
   __typename?: 'sec_filing_attachment_min_fields';
   accession_number?: Maybe<Scalars['String']>;
   attachment_type?: Maybe<Scalars['String']>;
+  cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
@@ -1985,6 +2020,7 @@ export type Sec_Filing_Attachment_Min_Fields = {
 export type Sec_Filing_Attachment_Min_Order_By = {
   accession_number?: Maybe<Order_By>;
   attachment_type?: Maybe<Order_By>;
+  cik?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
@@ -2014,10 +2050,12 @@ export type Sec_Filing_Attachment_On_Conflict = {
 export type Sec_Filing_Attachment_Order_By = {
   accession_number?: Maybe<Order_By>;
   attachment_type?: Maybe<Order_By>;
+  cik?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
+  sec_company?: Maybe<Sec_Company_Order_By>;
   sec_filing?: Maybe<Sec_Filing_Order_By>;
   sequence?: Maybe<Order_By>;
   text?: Maybe<Order_By>;
@@ -2037,6 +2075,8 @@ export enum Sec_Filing_Attachment_Select_Column {
   AccessionNumber = 'accession_number',
   /** column name */
   AttachmentType = 'attachment_type',
+  /** column name */
+  Cik = 'cik',
   /** column name */
   Contents = 'contents',
   /** column name */
@@ -2059,6 +2099,7 @@ export enum Sec_Filing_Attachment_Select_Column {
 export type Sec_Filing_Attachment_Set_Input = {
   accession_number?: Maybe<Scalars['String']>;
   attachment_type?: Maybe<Scalars['String']>;
+  cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
@@ -2119,6 +2160,8 @@ export enum Sec_Filing_Attachment_Update_Column {
   AccessionNumber = 'accession_number',
   /** column name */
   AttachmentType = 'attachment_type',
+  /** column name */
+  Cik = 'cik',
   /** column name */
   Contents = 'contents',
   /** column name */
