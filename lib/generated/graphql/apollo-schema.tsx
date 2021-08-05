@@ -16,6 +16,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  date: GraphQL_Date;
   timestamp: Date;
   timestamptz: Date;
   tsvector: String;
@@ -65,6 +66,19 @@ export type String_Comparison_Exp = {
   _regex?: Maybe<Scalars['String']>;
   /** does the column match the given SQL regular expression */
   _similar?: Maybe<Scalars['String']>;
+};
+
+/** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: Maybe<Scalars['date']>;
+  _gt?: Maybe<Scalars['date']>;
+  _gte?: Maybe<Scalars['date']>;
+  _in?: Maybe<Array<Scalars['date']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['date']>;
+  _lte?: Maybe<Scalars['date']>;
+  _neq?: Maybe<Scalars['date']>;
+  _nin?: Maybe<Array<Scalars['date']>>;
 };
 
 /** columns and relationships of "migrations" */
@@ -1736,6 +1750,7 @@ export type Sec_Filing = {
   accession_number: Scalars['String'];
   cik: Scalars['String'];
   created_at?: Maybe<Scalars['timestamptz']>;
+  filing_date: Scalars['date'];
   filing_type: Scalars['String'];
   header?: Maybe<Scalars['String']>;
   /** An object relationship */
@@ -2163,6 +2178,7 @@ export type Sec_Filing_Bool_Exp = {
   accession_number?: Maybe<String_Comparison_Exp>;
   cik?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  filing_date?: Maybe<Date_Comparison_Exp>;
   filing_type?: Maybe<String_Comparison_Exp>;
   header?: Maybe<String_Comparison_Exp>;
   sec_company?: Maybe<Sec_Company_Bool_Exp>;
@@ -2181,6 +2197,7 @@ export type Sec_Filing_Insert_Input = {
   accession_number?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  filing_date?: Maybe<Scalars['date']>;
   filing_type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
   sec_company?: Maybe<Sec_Company_Obj_Rel_Insert_Input>;
@@ -2194,6 +2211,7 @@ export type Sec_Filing_Max_Fields = {
   accession_number?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  filing_date?: Maybe<Scalars['date']>;
   filing_type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -2204,6 +2222,7 @@ export type Sec_Filing_Max_Order_By = {
   accession_number?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  filing_date?: Maybe<Order_By>;
   filing_type?: Maybe<Order_By>;
   header?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
@@ -2215,6 +2234,7 @@ export type Sec_Filing_Min_Fields = {
   accession_number?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  filing_date?: Maybe<Scalars['date']>;
   filing_type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -2225,6 +2245,7 @@ export type Sec_Filing_Min_Order_By = {
   accession_number?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  filing_date?: Maybe<Order_By>;
   filing_type?: Maybe<Order_By>;
   header?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
@@ -2258,6 +2279,7 @@ export type Sec_Filing_Order_By = {
   accession_number?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  filing_date?: Maybe<Order_By>;
   filing_type?: Maybe<Order_By>;
   header?: Maybe<Order_By>;
   sec_company?: Maybe<Sec_Company_Order_By>;
@@ -2279,6 +2301,8 @@ export enum Sec_Filing_Select_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
+  FilingDate = 'filing_date',
+  /** column name */
   FilingType = 'filing_type',
   /** column name */
   Header = 'header',
@@ -2291,6 +2315,7 @@ export type Sec_Filing_Set_Input = {
   accession_number?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  filing_date?: Maybe<Scalars['date']>;
   filing_type?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -2304,6 +2329,8 @@ export enum Sec_Filing_Update_Column {
   Cik = 'cik',
   /** column name */
   CreatedAt = 'created_at',
+  /** column name */
+  FilingDate = 'filing_date',
   /** column name */
   FilingType = 'filing_type',
   /** column name */

@@ -50,6 +50,13 @@
         table:
           schema: public
           name: sec_filing
+  - name: sec_filing_attachments
+    using:
+      foreign_key_constraint_on:
+        column: cik
+        table:
+          schema: public
+          name: sec_filing_attachment
   select_permissions:
   - role: user
     permission:
@@ -100,6 +107,7 @@
       columns:
       - accession_number
       - cik
+      - filing_date
       - filing_type
       - header
       filter: {}
@@ -108,6 +116,9 @@
     schema: public
     name: sec_filing_attachment
   object_relationships:
+  - name: sec_company
+    using:
+      foreign_key_constraint_on: cik
   - name: sec_filing
     using:
       foreign_key_constraint_on: accession_number
@@ -116,12 +127,14 @@
     permission:
       columns:
       - accession_number
+      - attachment_type
+      - cik
       - contents
       - description
       - filename
-      - attachment_type
       - sequence
       - text
+      - tsv_search_text
       filter: {}
       allow_aggregations: true
 - table:

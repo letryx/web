@@ -22,6 +22,7 @@ generates:
         timestamp: Date
         timestamptz: Date
         tsvector: String
+        date: GraphQL_Date
       namingConvention: change-case-all#pascalCase
       strictScalars: true
       useExplicitTyping: true
