@@ -3046,38 +3046,61 @@ export type User_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
-export type ContractListFragment = { __typename?: 'sec_contract' } & Pick<
-  Sec_Contract,
-  | 'accession_number'
-  | 'sequence'
-  | 'company_cik'
-  | 'company_name'
-  | 'company_geo'
-  | 'description'
-  | 'filing_metadata'
-  | 'filing_type'
->;
+export type ContractListFragment = {
+  __typename?: 'sec_contract';
+  accession_number?: Maybe<string>;
+  sequence?: Maybe<number>;
+  company_cik?: Maybe<string>;
+  company_name?: Maybe<string>;
+  company_geo?: Maybe<string>;
+  description?: Maybe<string>;
+  filing_metadata?: Maybe<string>;
+  filing_type?: Maybe<string>;
+};
 
 export type GetSequentialSecContractsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 }>;
 
-export type GetSequentialSecContractsQuery = { __typename?: 'query_root' } & {
-  sec_contract: Array<{ __typename?: 'sec_contract' } & ContractListFragment>;
+export type GetSequentialSecContractsQuery = {
+  __typename?: 'query_root';
+  sec_contract: Array<{
+    __typename?: 'sec_contract';
+    accession_number?: Maybe<string>;
+    sequence?: Maybe<number>;
+    company_cik?: Maybe<string>;
+    company_name?: Maybe<string>;
+    company_geo?: Maybe<string>;
+    description?: Maybe<string>;
+    filing_metadata?: Maybe<string>;
+    filing_type?: Maybe<string>;
+  }>;
 };
 
-export type CurrentUserFragment = { __typename?: 'user' } & Pick<
-  User,
-  'id' | 'email' | 'name' | 'photo_url'
-> & { default_org: { __typename?: 'org' } & Pick<Org, 'id' | 'name'> };
+export type CurrentUserFragment = {
+  __typename?: 'user';
+  id: number;
+  email: string;
+  name: string;
+  photo_url?: Maybe<string>;
+  default_org: { __typename?: 'org'; id: number; name: string };
+};
 
 export type GetCurrentUserQueryVariables = Exact<{
   auth0_id: Scalars['String'];
 }>;
 
-export type GetCurrentUserQuery = { __typename?: 'query_root' } & {
-  user: Array<{ __typename?: 'user' } & CurrentUserFragment>;
+export type GetCurrentUserQuery = {
+  __typename?: 'query_root';
+  user: Array<{
+    __typename?: 'user';
+    id: number;
+    email: string;
+    name: string;
+    photo_url?: Maybe<string>;
+    default_org: { __typename?: 'org'; id: number; name: string };
+  }>;
 };
 
 export type SyncUserMutationVariables = Exact<{
@@ -3091,13 +3114,16 @@ export type SyncUserMutationVariables = Exact<{
   org: Org_Insert_Input;
 }>;
 
-export type SyncUserMutation = { __typename?: 'mutation_root' } & {
-  insert_user_one?: Maybe<
-    { __typename?: 'user' } & Pick<
-      User,
-      'id' | 'auth0_id' | 'email' | 'name'
-    > & { default_org: { __typename?: 'org' } & Pick<Org, 'id' | 'name'> }
-  >;
+export type SyncUserMutation = {
+  __typename?: 'mutation_root';
+  insert_user_one?: Maybe<{
+    __typename?: 'user';
+    id: number;
+    auth0_id: string;
+    email: string;
+    name: string;
+    default_org: { __typename?: 'org'; id: number; name: string };
+  }>;
 };
 
 export const ContractListFragmentDoc = gql`
