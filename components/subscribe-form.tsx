@@ -7,7 +7,6 @@ import {
   Button,
   Container,
   FormControl,
-  FormHelperText,
   HStack,
   Input,
   InputGroup,
@@ -148,9 +147,6 @@ const SubscribeForm: FC = () => {
           >
             Sign up for product updates
           </Button>
-          <FormControl hidden={status !== 'unsubmitted'}>
-            <FormHelperText>We will never share your email.</FormHelperText>
-          </FormControl>
           <Alert
             status={status === 'success' ? 'success' : 'error'}
             fontSize="md"

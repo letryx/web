@@ -42,7 +42,7 @@ const mockup: FC = () => (
         </MockupLink>
         <MockupLink
           name="Permitted Encumbrances with filters"
-          page="/img/filtered-permitted-encumbrances.pdf"
+          page="/img/mockups/permitted-encumbrances.png"
           isExternal
         >
           A qualitative analysis of a contract clause with regards to common

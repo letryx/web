@@ -106,7 +106,7 @@ const AboutPage: FC = () => {
               <Profile
                 name="Vlad Kobzar"
                 title="CEO &amp; Chief Scientist"
-                photo_url="/img/vlad.jpeg"
+                photo_url="/img/marketing/vlad.jpeg"
                 socialLinks={
                   <SocialLinks
                     socialLinks={[
@@ -127,7 +127,7 @@ const AboutPage: FC = () => {
               <Profile
                 name="Clifton King"
                 title="CTO"
-                photo_url="/img/clifton.jpeg"
+                photo_url="/img/marketing/clifton.jpeg"
                 socialLinks={
                   <SocialLinks
                     socialLinks={[
@@ -152,7 +152,7 @@ const AboutPage: FC = () => {
               <Profile
                 name="Luke Burns"
                 title="Co-founder"
-                photo_url="/img/luke.png"
+                photo_url="/img/marketing/luke.png"
                 socialLinks={
                   <SocialLinks
                     socialLinks={[
