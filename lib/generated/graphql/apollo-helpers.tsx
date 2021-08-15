@@ -511,10 +511,10 @@ export type sec_companyKeySpecifier = (
   | 'created_at'
   | 'geo'
   | 'name'
-  | 'sec_filing'
-  | 'sec_filing_aggregate'
   | 'sec_filing_attachments'
   | 'sec_filing_attachments_aggregate'
+  | 'sec_filings'
+  | 'sec_filings_aggregate'
   | 'sic'
   | 'sic_name'
   | 'updated_at'
@@ -525,10 +525,10 @@ export type sec_companyFieldPolicy = {
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   geo?: FieldPolicy<any> | FieldReadFunction<any>;
   name?: FieldPolicy<any> | FieldReadFunction<any>;
-  sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
-  sec_filing_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   sec_filing_attachments?: FieldPolicy<any> | FieldReadFunction<any>;
   sec_filing_attachments_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filings?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filings_aggregate?: FieldPolicy<any> | FieldReadFunction<any>;
   sic?: FieldPolicy<any> | FieldReadFunction<any>;
   sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
   updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -602,28 +602,42 @@ export type sec_company_mutation_responseFieldPolicy = {
 };
 export type sec_contractKeySpecifier = (
   | 'accession_number'
+  | 'attachment_type'
   | 'company_cik'
   | 'company_geo'
   | 'company_name'
-  | 'contents'
+  | 'company_sic'
+  | 'company_sic_name'
   | 'description'
-  | 'filing_metadata'
+  | 'filing_date'
+  | 'filing_header'
   | 'filing_type'
+  | 'relevance'
+  | 'sec_company'
+  | 'sec_filing'
+  | 'sec_filing_attachment'
   | 'sequence'
-  | 'text'
+  | 'tsv_search_text'
   | sec_contractKeySpecifier
 )[];
 export type sec_contractFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
   company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
   company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
   company_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_sic?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_metadata?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_header?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
+  sec_filing_attachment?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  text?: FieldPolicy<any> | FieldReadFunction<any>;
+  tsv_search_text?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_aggregateKeySpecifier = (
   | 'aggregate'
@@ -662,109 +676,137 @@ export type sec_contract_aggregate_fieldsFieldPolicy = {
   variance?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_avg_fieldsKeySpecifier = (
+  | 'relevance'
   | 'sequence'
   | sec_contract_avg_fieldsKeySpecifier
 )[];
 export type sec_contract_avg_fieldsFieldPolicy = {
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_max_fieldsKeySpecifier = (
   | 'accession_number'
+  | 'attachment_type'
   | 'company_cik'
   | 'company_geo'
   | 'company_name'
-  | 'contents'
+  | 'company_sic'
+  | 'company_sic_name'
   | 'description'
-  | 'filing_metadata'
+  | 'filing_date'
+  | 'filing_header'
   | 'filing_type'
+  | 'relevance'
   | 'sequence'
-  | 'text'
   | sec_contract_max_fieldsKeySpecifier
 )[];
 export type sec_contract_max_fieldsFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
   company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
   company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
   company_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_sic?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_metadata?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_header?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  text?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_min_fieldsKeySpecifier = (
   | 'accession_number'
+  | 'attachment_type'
   | 'company_cik'
   | 'company_geo'
   | 'company_name'
-  | 'contents'
+  | 'company_sic'
+  | 'company_sic_name'
   | 'description'
-  | 'filing_metadata'
+  | 'filing_date'
+  | 'filing_header'
   | 'filing_type'
+  | 'relevance'
   | 'sequence'
-  | 'text'
   | sec_contract_min_fieldsKeySpecifier
 )[];
 export type sec_contract_min_fieldsFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
+  attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
   company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
   company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
   company_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_sic?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_metadata?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_header?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  text?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_stddev_fieldsKeySpecifier = (
+  | 'relevance'
   | 'sequence'
   | sec_contract_stddev_fieldsKeySpecifier
 )[];
 export type sec_contract_stddev_fieldsFieldPolicy = {
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_stddev_pop_fieldsKeySpecifier = (
+  | 'relevance'
   | 'sequence'
   | sec_contract_stddev_pop_fieldsKeySpecifier
 )[];
 export type sec_contract_stddev_pop_fieldsFieldPolicy = {
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_stddev_samp_fieldsKeySpecifier = (
+  | 'relevance'
   | 'sequence'
   | sec_contract_stddev_samp_fieldsKeySpecifier
 )[];
 export type sec_contract_stddev_samp_fieldsFieldPolicy = {
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_sum_fieldsKeySpecifier = (
+  | 'relevance'
   | 'sequence'
   | sec_contract_sum_fieldsKeySpecifier
 )[];
 export type sec_contract_sum_fieldsFieldPolicy = {
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_var_pop_fieldsKeySpecifier = (
+  | 'relevance'
   | 'sequence'
   | sec_contract_var_pop_fieldsKeySpecifier
 )[];
 export type sec_contract_var_pop_fieldsFieldPolicy = {
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_var_samp_fieldsKeySpecifier = (
+  | 'relevance'
   | 'sequence'
   | sec_contract_var_samp_fieldsKeySpecifier
 )[];
 export type sec_contract_var_samp_fieldsFieldPolicy = {
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_variance_fieldsKeySpecifier = (
+  | 'relevance'
   | 'sequence'
   | sec_contract_variance_fieldsKeySpecifier
 )[];
 export type sec_contract_variance_fieldsFieldPolicy = {
+  relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_filingKeySpecifier = (

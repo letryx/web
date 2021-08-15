@@ -1,20 +1,30 @@
-fragment ContractList on sec_contract {
+fragment SearchResult on sec_contract {
   accession_number
   sequence
-  company_cik
   company_name
-  company_geo
-  description
-  filing_metadata
+  company_cik
+  # company_geo
   filing_type
+  # filing_metadata
+  filing_date
+  description
+  attachment_type
 }
 
-query GetSequentialSECContracts($limit: Int = 20, $offset: Int = 0) {
-  sec_contract(
-    limit: $limit
-    offset: $offset
-    order_by: { accession_number: asc, sequence: asc }
+# description: { _ilike: "%purchase and sale%", _nilike: "%amendment%" }
+query SearchSECContracts($search: String!) {
+  sec_search_aggregate(args: { search: $search }) {
+    aggregate {
+      filing_count: count(columns: accession_number, distinct: true)
+      company_count: count(columns: company_cik, distinct: true)
+      count
+    }
+  }
+  sec_search(
+    args: { search: $search }
+    limit: 20
+    order_by: { relevance: desc }
   ) {
-    ...ContractList
+    ...SearchResult
   }
 }
