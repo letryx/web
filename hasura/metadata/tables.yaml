@@ -43,13 +43,6 @@
     schema: public
     name: sec_company
   array_relationships:
-  - name: sec_filing
-    using:
-      foreign_key_constraint_on:
-        column: cik
-        table:
-          schema: public
-          name: sec_filing
   - name: sec_filing_attachments
     using:
       foreign_key_constraint_on:
@@ -57,6 +50,13 @@
         table:
           schema: public
           name: sec_filing_attachment
+  - name: sec_filings
+    using:
+      foreign_key_constraint_on:
+        column: cik
+        table:
+          schema: public
+          name: sec_filing
   select_permissions:
   - role: user
     permission:
@@ -71,21 +71,55 @@
 - table:
     schema: public
     name: sec_contract
+  object_relationships:
+  - name: sec_company
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: sec_company
+        insertion_order: null
+        column_mapping:
+          company_cik: cik
+  - name: sec_filing
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: sec_filing
+        insertion_order: null
+        column_mapping:
+          accession_number: accession_number
+  - name: sec_filing_attachment
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: sec_filing_attachment
+        insertion_order: null
+        column_mapping:
+          accession_number: accession_number
+          sequence: sequence
   select_permissions:
   - role: user
     permission:
       columns:
       - accession_number
-      - sequence
-      - company_name
+      - attachment_type
       - company_cik
       - company_geo
-      - filing_metadata
+      - company_name
+      - company_sic
+      - company_sic_name
       - description
+      - filing_date
+      - filing_header
       - filing_type
-      - text
-      - contents
+      - relevance
+      - sequence
+      - tsv_search_text
       filter: {}
+      allow_aggregations: true
 - table:
     schema: public
     name: sec_filing

@@ -22,6 +22,19 @@ export type Scalars = {
   tsvector: String;
 };
 
+/** Boolean expression to compare columns of type "Float". All fields are combined with logical 'AND'. */
+export type Float_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Float']>;
+  _gt?: Maybe<Scalars['Float']>;
+  _gte?: Maybe<Scalars['Float']>;
+  _in?: Maybe<Array<Scalars['Float']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Float']>;
+  _lte?: Maybe<Scalars['Float']>;
+  _neq?: Maybe<Scalars['Float']>;
+  _nin?: Maybe<Array<Scalars['Float']>>;
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: Maybe<Scalars['Int']>;
@@ -1171,7 +1184,7 @@ export type Query_Root = {
   sec_contract_aggregate: Sec_Contract_Aggregate;
   /** fetch data from the table: "sec_filing" */
   sec_filing: Array<Sec_Filing>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "sec_filing" */
   sec_filing_aggregate: Sec_Filing_Aggregate;
   /** An array relationship */
   sec_filing_attachment: Array<Sec_Filing_Attachment>;
@@ -1181,10 +1194,10 @@ export type Query_Root = {
   sec_filing_attachment_by_pk?: Maybe<Sec_Filing_Attachment>;
   /** fetch data from the table: "sec_filing" using primary key columns */
   sec_filing_by_pk?: Maybe<Sec_Filing>;
-  /** execute function "sec_search" which returns "sec_filing_attachment" */
-  sec_search: Array<Sec_Filing_Attachment>;
-  /** execute function "sec_search" and query aggregates on result of table type "sec_filing_attachment" */
-  sec_search_aggregate: Sec_Filing_Attachment_Aggregate;
+  /** execute function "sec_search" which returns "sec_contract" */
+  sec_search: Array<Sec_Contract>;
+  /** execute function "sec_search" and query aggregates on result of table type "sec_contract" */
+  sec_search_aggregate: Sec_Contract_Aggregate;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
@@ -1332,20 +1345,20 @@ export type Query_RootSec_Filing_By_PkArgs = {
 
 export type Query_RootSec_SearchArgs = {
   args: Sec_Search_Args;
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
+  where?: Maybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Query_RootSec_Search_AggregateArgs = {
   args: Sec_Search_Args;
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
+  where?: Maybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Query_RootUserArgs = {
@@ -1375,35 +1388,17 @@ export type Sec_Company = {
   created_at?: Maybe<Scalars['timestamptz']>;
   geo: Scalars['String'];
   name: Scalars['String'];
-  /** fetch data from the table: "sec_filing" */
-  sec_filing: Array<Sec_Filing>;
-  /** An aggregate relationship */
-  sec_filing_aggregate: Sec_Filing_Aggregate;
   /** An array relationship */
   sec_filing_attachments: Array<Sec_Filing_Attachment>;
   /** An aggregate relationship */
   sec_filing_attachments_aggregate: Sec_Filing_Attachment_Aggregate;
+  /** An array relationship */
+  sec_filings: Array<Sec_Filing>;
+  /** An aggregate relationship */
+  sec_filings_aggregate: Sec_Filing_Aggregate;
   sic: Scalars['String'];
   sic_name: Scalars['String'];
   updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** columns and relationships of "sec_company" */
-export type Sec_CompanySec_FilingArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
-  where?: Maybe<Sec_Filing_Bool_Exp>;
-};
-
-/** columns and relationships of "sec_company" */
-export type Sec_CompanySec_Filing_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
-  where?: Maybe<Sec_Filing_Bool_Exp>;
 };
 
 /** columns and relationships of "sec_company" */
@@ -1422,6 +1417,24 @@ export type Sec_CompanySec_Filing_Attachments_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
   where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+};
+
+/** columns and relationships of "sec_company" */
+export type Sec_CompanySec_FilingsArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
+  where?: Maybe<Sec_Filing_Bool_Exp>;
+};
+
+/** columns and relationships of "sec_company" */
+export type Sec_CompanySec_Filings_AggregateArgs = {
+  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
+  where?: Maybe<Sec_Filing_Bool_Exp>;
 };
 
 /** aggregated selection of "sec_company" */
@@ -1454,8 +1467,8 @@ export type Sec_Company_Bool_Exp = {
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   geo?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
-  sec_filing?: Maybe<Sec_Filing_Bool_Exp>;
   sec_filing_attachments?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  sec_filings?: Maybe<Sec_Filing_Bool_Exp>;
   sic?: Maybe<String_Comparison_Exp>;
   sic_name?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
@@ -1473,8 +1486,8 @@ export type Sec_Company_Insert_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
   geo?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
-  sec_filing?: Maybe<Sec_Filing_Arr_Rel_Insert_Input>;
   sec_filing_attachments?: Maybe<Sec_Filing_Attachment_Arr_Rel_Insert_Input>;
+  sec_filings?: Maybe<Sec_Filing_Arr_Rel_Insert_Input>;
   sic?: Maybe<Scalars['String']>;
   sic_name?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -1533,8 +1546,8 @@ export type Sec_Company_Order_By = {
   created_at?: Maybe<Order_By>;
   geo?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
-  sec_filing_aggregate?: Maybe<Sec_Filing_Aggregate_Order_By>;
   sec_filing_attachments_aggregate?: Maybe<Sec_Filing_Attachment_Aggregate_Order_By>;
+  sec_filings_aggregate?: Maybe<Sec_Filing_Aggregate_Order_By>;
   sic?: Maybe<Order_By>;
   sic_name?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
@@ -1596,15 +1609,25 @@ export enum Sec_Company_Update_Column {
 export type Sec_Contract = {
   __typename?: 'sec_contract';
   accession_number?: Maybe<Scalars['String']>;
+  attachment_type?: Maybe<Scalars['String']>;
   company_cik?: Maybe<Scalars['String']>;
   company_geo?: Maybe<Scalars['String']>;
   company_name?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
+  company_sic?: Maybe<Scalars['String']>;
+  company_sic_name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  filing_metadata?: Maybe<Scalars['String']>;
+  filing_date?: Maybe<Scalars['date']>;
+  filing_header?: Maybe<Scalars['String']>;
   filing_type?: Maybe<Scalars['String']>;
+  relevance?: Maybe<Scalars['Float']>;
+  /** An object relationship */
+  sec_company?: Maybe<Sec_Company>;
+  /** An object relationship */
+  sec_filing?: Maybe<Sec_Filing>;
+  /** An object relationship */
+  sec_filing_attachment?: Maybe<Sec_Filing_Attachment>;
   sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
+  tsv_search_text?: Maybe<Scalars['tsvector']>;
 };
 
 /** aggregated selection of "sec_contract" */
@@ -1639,6 +1662,7 @@ export type Sec_Contract_Aggregate_FieldsCountArgs = {
 /** aggregate avg on columns */
 export type Sec_Contract_Avg_Fields = {
   __typename?: 'sec_contract_avg_fields';
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Float']>;
 };
 
@@ -1648,59 +1672,79 @@ export type Sec_Contract_Bool_Exp = {
   _not?: Maybe<Sec_Contract_Bool_Exp>;
   _or?: Maybe<Array<Sec_Contract_Bool_Exp>>;
   accession_number?: Maybe<String_Comparison_Exp>;
+  attachment_type?: Maybe<String_Comparison_Exp>;
   company_cik?: Maybe<String_Comparison_Exp>;
   company_geo?: Maybe<String_Comparison_Exp>;
   company_name?: Maybe<String_Comparison_Exp>;
-  contents?: Maybe<String_Comparison_Exp>;
+  company_sic?: Maybe<String_Comparison_Exp>;
+  company_sic_name?: Maybe<String_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
-  filing_metadata?: Maybe<String_Comparison_Exp>;
+  filing_date?: Maybe<Date_Comparison_Exp>;
+  filing_header?: Maybe<String_Comparison_Exp>;
   filing_type?: Maybe<String_Comparison_Exp>;
+  relevance?: Maybe<Float_Comparison_Exp>;
+  sec_company?: Maybe<Sec_Company_Bool_Exp>;
+  sec_filing?: Maybe<Sec_Filing_Bool_Exp>;
+  sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
   sequence?: Maybe<Int_Comparison_Exp>;
-  text?: Maybe<String_Comparison_Exp>;
+  tsv_search_text?: Maybe<Tsvector_Comparison_Exp>;
 };
 
 /** aggregate max on columns */
 export type Sec_Contract_Max_Fields = {
   __typename?: 'sec_contract_max_fields';
   accession_number?: Maybe<Scalars['String']>;
+  attachment_type?: Maybe<Scalars['String']>;
   company_cik?: Maybe<Scalars['String']>;
   company_geo?: Maybe<Scalars['String']>;
   company_name?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
+  company_sic?: Maybe<Scalars['String']>;
+  company_sic_name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  filing_metadata?: Maybe<Scalars['String']>;
+  filing_date?: Maybe<Scalars['date']>;
+  filing_header?: Maybe<Scalars['String']>;
   filing_type?: Maybe<Scalars['String']>;
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
 export type Sec_Contract_Min_Fields = {
   __typename?: 'sec_contract_min_fields';
   accession_number?: Maybe<Scalars['String']>;
+  attachment_type?: Maybe<Scalars['String']>;
   company_cik?: Maybe<Scalars['String']>;
   company_geo?: Maybe<Scalars['String']>;
   company_name?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
+  company_sic?: Maybe<Scalars['String']>;
+  company_sic_name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  filing_metadata?: Maybe<Scalars['String']>;
+  filing_date?: Maybe<Scalars['date']>;
+  filing_header?: Maybe<Scalars['String']>;
   filing_type?: Maybe<Scalars['String']>;
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
 };
 
 /** Ordering options when selecting data from "sec_contract". */
 export type Sec_Contract_Order_By = {
   accession_number?: Maybe<Order_By>;
+  attachment_type?: Maybe<Order_By>;
   company_cik?: Maybe<Order_By>;
   company_geo?: Maybe<Order_By>;
   company_name?: Maybe<Order_By>;
-  contents?: Maybe<Order_By>;
+  company_sic?: Maybe<Order_By>;
+  company_sic_name?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
-  filing_metadata?: Maybe<Order_By>;
+  filing_date?: Maybe<Order_By>;
+  filing_header?: Maybe<Order_By>;
   filing_type?: Maybe<Order_By>;
+  relevance?: Maybe<Order_By>;
+  sec_company?: Maybe<Sec_Company_Order_By>;
+  sec_filing?: Maybe<Sec_Filing_Order_By>;
+  sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Order_By>;
   sequence?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
+  tsv_search_text?: Maybe<Order_By>;
 };
 
 /** select columns of table "sec_contract" */
@@ -1708,64 +1752,79 @@ export enum Sec_Contract_Select_Column {
   /** column name */
   AccessionNumber = 'accession_number',
   /** column name */
+  AttachmentType = 'attachment_type',
+  /** column name */
   CompanyCik = 'company_cik',
   /** column name */
   CompanyGeo = 'company_geo',
   /** column name */
   CompanyName = 'company_name',
   /** column name */
-  Contents = 'contents',
+  CompanySic = 'company_sic',
+  /** column name */
+  CompanySicName = 'company_sic_name',
   /** column name */
   Description = 'description',
   /** column name */
-  FilingMetadata = 'filing_metadata',
+  FilingDate = 'filing_date',
+  /** column name */
+  FilingHeader = 'filing_header',
   /** column name */
   FilingType = 'filing_type',
   /** column name */
+  Relevance = 'relevance',
+  /** column name */
   Sequence = 'sequence',
   /** column name */
-  Text = 'text',
+  TsvSearchText = 'tsv_search_text',
 }
 
 /** aggregate stddev on columns */
 export type Sec_Contract_Stddev_Fields = {
   __typename?: 'sec_contract_stddev_fields';
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Sec_Contract_Stddev_Pop_Fields = {
   __typename?: 'sec_contract_stddev_pop_fields';
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Sec_Contract_Stddev_Samp_Fields = {
   __typename?: 'sec_contract_stddev_samp_fields';
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
 export type Sec_Contract_Sum_Fields = {
   __typename?: 'sec_contract_sum_fields';
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate var_pop on columns */
 export type Sec_Contract_Var_Pop_Fields = {
   __typename?: 'sec_contract_var_pop_fields';
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
 export type Sec_Contract_Var_Samp_Fields = {
   __typename?: 'sec_contract_var_samp_fields';
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
 export type Sec_Contract_Variance_Fields = {
   __typename?: 'sec_contract_variance_fields';
+  relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Float']>;
 };
 
@@ -2383,6 +2442,12 @@ export enum Sec_Filing_Update_Column {
 }
 
 export type Sec_Search_Args = {
+  company_name_excludes?: Maybe<Scalars['String']>;
+  company_name_includes?: Maybe<Scalars['String']>;
+  description_excludes?: Maybe<Scalars['String']>;
+  description_includes?: Maybe<Scalars['String']>;
+  filing_date_gt?: Maybe<Scalars['date']>;
+  filing_date_lt?: Maybe<Scalars['date']>;
   search?: Maybe<Scalars['String']>;
 };
 
@@ -2418,7 +2483,7 @@ export type Subscription_Root = {
   sec_contract_aggregate: Sec_Contract_Aggregate;
   /** fetch data from the table: "sec_filing" */
   sec_filing: Array<Sec_Filing>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "sec_filing" */
   sec_filing_aggregate: Sec_Filing_Aggregate;
   /** An array relationship */
   sec_filing_attachment: Array<Sec_Filing_Attachment>;
@@ -2428,10 +2493,10 @@ export type Subscription_Root = {
   sec_filing_attachment_by_pk?: Maybe<Sec_Filing_Attachment>;
   /** fetch data from the table: "sec_filing" using primary key columns */
   sec_filing_by_pk?: Maybe<Sec_Filing>;
-  /** execute function "sec_search" which returns "sec_filing_attachment" */
-  sec_search: Array<Sec_Filing_Attachment>;
-  /** execute function "sec_search" and query aggregates on result of table type "sec_filing_attachment" */
-  sec_search_aggregate: Sec_Filing_Attachment_Aggregate;
+  /** execute function "sec_search" which returns "sec_contract" */
+  sec_search: Array<Sec_Contract>;
+  /** execute function "sec_search" and query aggregates on result of table type "sec_contract" */
+  sec_search_aggregate: Sec_Contract_Aggregate;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
@@ -2579,20 +2644,20 @@ export type Subscription_RootSec_Filing_By_PkArgs = {
 
 export type Subscription_RootSec_SearchArgs = {
   args: Sec_Search_Args;
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
+  where?: Maybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Subscription_RootSec_Search_AggregateArgs = {
   args: Sec_Search_Args;
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
+  where?: Maybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Subscription_RootUserArgs = {
@@ -3046,35 +3111,43 @@ export type User_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
-export type ContractListFragment = {
+export type SearchResultFragment = {
   __typename?: 'sec_contract';
   accession_number?: Maybe<string>;
   sequence?: Maybe<number>;
-  company_cik?: Maybe<string>;
   company_name?: Maybe<string>;
-  company_geo?: Maybe<string>;
-  description?: Maybe<string>;
-  filing_metadata?: Maybe<string>;
+  company_cik?: Maybe<string>;
   filing_type?: Maybe<string>;
+  filing_date?: Maybe<GraphQL_Date>;
+  description?: Maybe<string>;
+  attachment_type?: Maybe<string>;
 };
 
-export type GetSequentialSecContractsQueryVariables = Exact<{
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
+export type SearchSecContractsQueryVariables = Exact<{
+  search: Scalars['String'];
 }>;
 
-export type GetSequentialSecContractsQuery = {
+export type SearchSecContractsQuery = {
   __typename?: 'query_root';
-  sec_contract: Array<{
+  sec_search_aggregate: {
+    __typename?: 'sec_contract_aggregate';
+    aggregate?: Maybe<{
+      __typename?: 'sec_contract_aggregate_fields';
+      count: number;
+      filing_count: number;
+      company_count: number;
+    }>;
+  };
+  sec_search: Array<{
     __typename?: 'sec_contract';
     accession_number?: Maybe<string>;
     sequence?: Maybe<number>;
-    company_cik?: Maybe<string>;
     company_name?: Maybe<string>;
-    company_geo?: Maybe<string>;
-    description?: Maybe<string>;
-    filing_metadata?: Maybe<string>;
+    company_cik?: Maybe<string>;
     filing_type?: Maybe<string>;
+    filing_date?: Maybe<GraphQL_Date>;
+    description?: Maybe<string>;
+    attachment_type?: Maybe<string>;
   }>;
 };
 
@@ -3126,16 +3199,16 @@ export type SyncUserMutation = {
   }>;
 };
 
-export const ContractListFragmentDoc = gql`
-  fragment ContractList on sec_contract {
+export const SearchResultFragmentDoc = gql`
+  fragment SearchResult on sec_contract {
     accession_number
     sequence
-    company_cik
     company_name
-    company_geo
-    description
-    filing_metadata
+    company_cik
     filing_type
+    filing_date
+    description
+    attachment_type
   }
 `;
 export const CurrentUserFragmentDoc = gql`
@@ -3150,69 +3223,75 @@ export const CurrentUserFragmentDoc = gql`
     }
   }
 `;
-export const GetSequentialSecContractsDocument = gql`
-  query GetSequentialSECContracts($limit: Int = 20, $offset: Int = 0) {
-    sec_contract(
-      limit: $limit
-      offset: $offset
-      order_by: { accession_number: asc, sequence: asc }
+export const SearchSecContractsDocument = gql`
+  query SearchSECContracts($search: String!) {
+    sec_search_aggregate(args: { search: $search }) {
+      aggregate {
+        filing_count: count(columns: accession_number, distinct: true)
+        company_count: count(columns: company_cik, distinct: true)
+        count
+      }
+    }
+    sec_search(
+      args: { search: $search }
+      limit: 20
+      order_by: { relevance: desc }
     ) {
-      ...ContractList
+      ...SearchResult
     }
   }
-  ${ContractListFragmentDoc}
+  ${SearchResultFragmentDoc}
 `;
 
 /**
- * __useGetSequentialSecContractsQuery__
+ * __useSearchSecContractsQuery__
  *
- * To run a query within a React component, call `useGetSequentialSecContractsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetSequentialSecContractsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useSearchSecContractsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchSecContractsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetSequentialSecContractsQuery({
+ * const { data, loading, error } = useSearchSecContractsQuery({
  *   variables: {
- *      limit: // value for 'limit'
- *      offset: // value for 'offset'
+ *      search: // value for 'search'
  *   },
  * });
  */
-export function useGetSequentialSecContractsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    GetSequentialSecContractsQuery,
-    GetSequentialSecContractsQueryVariables
+export function useSearchSecContractsQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    SearchSecContractsQuery,
+    SearchSecContractsQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
-    GetSequentialSecContractsQuery,
-    GetSequentialSecContractsQueryVariables
-  >(GetSequentialSecContractsDocument, options);
+    SearchSecContractsQuery,
+    SearchSecContractsQueryVariables
+  >(SearchSecContractsDocument, options);
 }
-export function useGetSequentialSecContractsLazyQuery(
+export function useSearchSecContractsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
-    GetSequentialSecContractsQuery,
-    GetSequentialSecContractsQueryVariables
+    SearchSecContractsQuery,
+    SearchSecContractsQueryVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<
-    GetSequentialSecContractsQuery,
-    GetSequentialSecContractsQueryVariables
-  >(GetSequentialSecContractsDocument, options);
+    SearchSecContractsQuery,
+    SearchSecContractsQueryVariables
+  >(SearchSecContractsDocument, options);
 }
-export type GetSequentialSecContractsQueryHookResult = ReturnType<
-  typeof useGetSequentialSecContractsQuery
+export type SearchSecContractsQueryHookResult = ReturnType<
+  typeof useSearchSecContractsQuery
 >;
-export type GetSequentialSecContractsLazyQueryHookResult = ReturnType<
-  typeof useGetSequentialSecContractsLazyQuery
+export type SearchSecContractsLazyQueryHookResult = ReturnType<
+  typeof useSearchSecContractsLazyQuery
 >;
-export type GetSequentialSecContractsQueryResult = Apollo.QueryResult<
-  GetSequentialSecContractsQuery,
-  GetSequentialSecContractsQueryVariables
+export type SearchSecContractsQueryResult = Apollo.QueryResult<
+  SearchSecContractsQuery,
+  SearchSecContractsQueryVariables
 >;
 export const GetCurrentUserDocument = gql`
   query GetCurrentUser($auth0_id: String!) {

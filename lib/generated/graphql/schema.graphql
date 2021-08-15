@@ -14,6 +14,21 @@ directive @cached(
 ) on QUERY
 
 """
+Boolean expression to compare columns of type "Float". All fields are combined with logical 'AND'.
+"""
+input Float_comparison_exp {
+  _eq: Float
+  _gt: Float
+  _gte: Float
+  _in: [Float!]
+  _is_null: Boolean
+  _lt: Float
+  _lte: Float
+  _neq: Float
+  _nin: [Float!]
+}
+
+"""
 Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
 """
 input Int_comparison_exp {
@@ -1577,7 +1592,9 @@ type query_root {
     where: sec_filing_bool_exp
   ): [sec_filing!]!
 
-  """An aggregate relationship"""
+  """
+  fetch aggregated fields from the table: "sec_filing"
+  """
   sec_filing_aggregate(
     """distinct select on columns"""
     distinct_on: [sec_filing_select_column!]
@@ -1640,7 +1657,7 @@ type query_root {
   sec_filing_by_pk(accession_number: String!): sec_filing
 
   """
-  execute function "sec_search" which returns "sec_filing_attachment"
+  execute function "sec_search" which returns "sec_contract"
   """
   sec_search(
     """
@@ -1649,7 +1666,7 @@ type query_root {
     args: sec_search_args!
 
     """distinct select on columns"""
-    distinct_on: [sec_filing_attachment_select_column!]
+    distinct_on: [sec_contract_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -1658,14 +1675,14 @@ type query_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [sec_filing_attachment_order_by!]
+    order_by: [sec_contract_order_by!]
 
     """filter the rows returned"""
-    where: sec_filing_attachment_bool_exp
-  ): [sec_filing_attachment!]!
+    where: sec_contract_bool_exp
+  ): [sec_contract!]!
 
   """
-  execute function "sec_search" and query aggregates on result of table type "sec_filing_attachment"
+  execute function "sec_search" and query aggregates on result of table type "sec_contract"
   """
   sec_search_aggregate(
     """
@@ -1674,7 +1691,7 @@ type query_root {
     args: sec_search_args!
 
     """distinct select on columns"""
-    distinct_on: [sec_filing_attachment_select_column!]
+    distinct_on: [sec_contract_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -1683,11 +1700,11 @@ type query_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [sec_filing_attachment_order_by!]
+    order_by: [sec_contract_order_by!]
 
     """filter the rows returned"""
-    where: sec_filing_attachment_bool_exp
-  ): sec_filing_attachment_aggregate!
+    where: sec_contract_bool_exp
+  ): sec_contract_aggregate!
 
   """
   fetch data from the table: "user"
@@ -1742,44 +1759,6 @@ type sec_company {
   geo: String!
   name: String!
 
-  """
-  fetch data from the table: "sec_filing"
-  """
-  sec_filing(
-    """distinct select on columns"""
-    distinct_on: [sec_filing_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [sec_filing_order_by!]
-
-    """filter the rows returned"""
-    where: sec_filing_bool_exp
-  ): [sec_filing!]!
-
-  """An aggregate relationship"""
-  sec_filing_aggregate(
-    """distinct select on columns"""
-    distinct_on: [sec_filing_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [sec_filing_order_by!]
-
-    """filter the rows returned"""
-    where: sec_filing_bool_exp
-  ): sec_filing_aggregate!
-
   """An array relationship"""
   sec_filing_attachments(
     """distinct select on columns"""
@@ -1815,6 +1794,42 @@ type sec_company {
     """filter the rows returned"""
     where: sec_filing_attachment_bool_exp
   ): sec_filing_attachment_aggregate!
+
+  """An array relationship"""
+  sec_filings(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_bool_exp
+  ): [sec_filing!]!
+
+  """An aggregate relationship"""
+  sec_filings_aggregate(
+    """distinct select on columns"""
+    distinct_on: [sec_filing_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [sec_filing_order_by!]
+
+    """filter the rows returned"""
+    where: sec_filing_bool_exp
+  ): sec_filing_aggregate!
   sic: String!
   sic_name: String!
   updated_at: timestamptz
@@ -1848,8 +1863,8 @@ input sec_company_bool_exp {
   created_at: timestamptz_comparison_exp
   geo: String_comparison_exp
   name: String_comparison_exp
-  sec_filing: sec_filing_bool_exp
   sec_filing_attachments: sec_filing_attachment_bool_exp
+  sec_filings: sec_filing_bool_exp
   sic: String_comparison_exp
   sic_name: String_comparison_exp
   updated_at: timestamptz_comparison_exp
@@ -1871,8 +1886,8 @@ input sec_company_insert_input {
   created_at: timestamptz
   geo: String
   name: String
-  sec_filing: sec_filing_arr_rel_insert_input
   sec_filing_attachments: sec_filing_attachment_arr_rel_insert_input
+  sec_filings: sec_filing_arr_rel_insert_input
   sic: String
   sic_name: String
   updated_at: timestamptz
@@ -1936,8 +1951,8 @@ input sec_company_order_by {
   created_at: order_by
   geo: order_by
   name: order_by
-  sec_filing_aggregate: sec_filing_aggregate_order_by
   sec_filing_attachments_aggregate: sec_filing_attachment_aggregate_order_by
+  sec_filings_aggregate: sec_filing_aggregate_order_by
   sic: order_by
   sic_name: order_by
   updated_at: order_by
@@ -2018,15 +2033,28 @@ columns and relationships of "sec_contract"
 """
 type sec_contract {
   accession_number: String
+  attachment_type: String
   company_cik: String
   company_geo: String
   company_name: String
-  contents: String
+  company_sic: String
+  company_sic_name: String
   description: String
-  filing_metadata: String
+  filing_date: date
+  filing_header: String
   filing_type: String
+  relevance: Float
+
+  """An object relationship"""
+  sec_company: sec_company
+
+  """An object relationship"""
+  sec_filing: sec_filing
+
+  """An object relationship"""
+  sec_filing_attachment: sec_filing_attachment
   sequence: Int
-  text: String
+  tsv_search_text: tsvector
 }
 
 """
@@ -2056,6 +2084,7 @@ type sec_contract_aggregate_fields {
 
 """aggregate avg on columns"""
 type sec_contract_avg_fields {
+  relevance: Float
   sequence: Float
 }
 
@@ -2067,57 +2096,77 @@ input sec_contract_bool_exp {
   _not: sec_contract_bool_exp
   _or: [sec_contract_bool_exp!]
   accession_number: String_comparison_exp
+  attachment_type: String_comparison_exp
   company_cik: String_comparison_exp
   company_geo: String_comparison_exp
   company_name: String_comparison_exp
-  contents: String_comparison_exp
+  company_sic: String_comparison_exp
+  company_sic_name: String_comparison_exp
   description: String_comparison_exp
-  filing_metadata: String_comparison_exp
+  filing_date: date_comparison_exp
+  filing_header: String_comparison_exp
   filing_type: String_comparison_exp
+  relevance: Float_comparison_exp
+  sec_company: sec_company_bool_exp
+  sec_filing: sec_filing_bool_exp
+  sec_filing_attachment: sec_filing_attachment_bool_exp
   sequence: Int_comparison_exp
-  text: String_comparison_exp
+  tsv_search_text: tsvector_comparison_exp
 }
 
 """aggregate max on columns"""
 type sec_contract_max_fields {
   accession_number: String
+  attachment_type: String
   company_cik: String
   company_geo: String
   company_name: String
-  contents: String
+  company_sic: String
+  company_sic_name: String
   description: String
-  filing_metadata: String
+  filing_date: date
+  filing_header: String
   filing_type: String
+  relevance: Float
   sequence: Int
-  text: String
 }
 
 """aggregate min on columns"""
 type sec_contract_min_fields {
   accession_number: String
+  attachment_type: String
   company_cik: String
   company_geo: String
   company_name: String
-  contents: String
+  company_sic: String
+  company_sic_name: String
   description: String
-  filing_metadata: String
+  filing_date: date
+  filing_header: String
   filing_type: String
+  relevance: Float
   sequence: Int
-  text: String
 }
 
 """Ordering options when selecting data from "sec_contract"."""
 input sec_contract_order_by {
   accession_number: order_by
+  attachment_type: order_by
   company_cik: order_by
   company_geo: order_by
   company_name: order_by
-  contents: order_by
+  company_sic: order_by
+  company_sic_name: order_by
   description: order_by
-  filing_metadata: order_by
+  filing_date: order_by
+  filing_header: order_by
   filing_type: order_by
+  relevance: order_by
+  sec_company: sec_company_order_by
+  sec_filing: sec_filing_order_by
+  sec_filing_attachment: sec_filing_attachment_order_by
   sequence: order_by
-  text: order_by
+  tsv_search_text: order_by
 }
 
 """
@@ -2126,6 +2175,9 @@ select columns of table "sec_contract"
 enum sec_contract_select_column {
   """column name"""
   accession_number
+
+  """column name"""
+  attachment_type
 
   """column name"""
   company_cik
@@ -2137,56 +2189,72 @@ enum sec_contract_select_column {
   company_name
 
   """column name"""
-  contents
+  company_sic
+
+  """column name"""
+  company_sic_name
 
   """column name"""
   description
 
   """column name"""
-  filing_metadata
+  filing_date
+
+  """column name"""
+  filing_header
 
   """column name"""
   filing_type
 
   """column name"""
+  relevance
+
+  """column name"""
   sequence
 
   """column name"""
-  text
+  tsv_search_text
 }
 
 """aggregate stddev on columns"""
 type sec_contract_stddev_fields {
+  relevance: Float
   sequence: Float
 }
 
 """aggregate stddev_pop on columns"""
 type sec_contract_stddev_pop_fields {
+  relevance: Float
   sequence: Float
 }
 
 """aggregate stddev_samp on columns"""
 type sec_contract_stddev_samp_fields {
+  relevance: Float
   sequence: Float
 }
 
 """aggregate sum on columns"""
 type sec_contract_sum_fields {
+  relevance: Float
   sequence: Int
 }
 
 """aggregate var_pop on columns"""
 type sec_contract_var_pop_fields {
+  relevance: Float
   sequence: Float
 }
 
 """aggregate var_samp on columns"""
 type sec_contract_var_samp_fields {
+  relevance: Float
   sequence: Float
 }
 
 """aggregate variance on columns"""
 type sec_contract_variance_fields {
+  relevance: Float
   sequence: Float
 }
 
@@ -2907,6 +2975,12 @@ enum sec_filing_update_column {
 }
 
 input sec_search_args {
+  company_name_excludes: String
+  company_name_includes: String
+  description_excludes: String
+  description_includes: String
+  filing_date_gt: date
+  filing_date_lt: date
   search: String
 }
 
@@ -3143,7 +3217,9 @@ type subscription_root {
     where: sec_filing_bool_exp
   ): [sec_filing!]!
 
-  """An aggregate relationship"""
+  """
+  fetch aggregated fields from the table: "sec_filing"
+  """
   sec_filing_aggregate(
     """distinct select on columns"""
     distinct_on: [sec_filing_select_column!]
@@ -3206,7 +3282,7 @@ type subscription_root {
   sec_filing_by_pk(accession_number: String!): sec_filing
 
   """
-  execute function "sec_search" which returns "sec_filing_attachment"
+  execute function "sec_search" which returns "sec_contract"
   """
   sec_search(
     """
@@ -3215,7 +3291,7 @@ type subscription_root {
     args: sec_search_args!
 
     """distinct select on columns"""
-    distinct_on: [sec_filing_attachment_select_column!]
+    distinct_on: [sec_contract_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -3224,14 +3300,14 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [sec_filing_attachment_order_by!]
+    order_by: [sec_contract_order_by!]
 
     """filter the rows returned"""
-    where: sec_filing_attachment_bool_exp
-  ): [sec_filing_attachment!]!
+    where: sec_contract_bool_exp
+  ): [sec_contract!]!
 
   """
-  execute function "sec_search" and query aggregates on result of table type "sec_filing_attachment"
+  execute function "sec_search" and query aggregates on result of table type "sec_contract"
   """
   sec_search_aggregate(
     """
@@ -3240,7 +3316,7 @@ type subscription_root {
     args: sec_search_args!
 
     """distinct select on columns"""
-    distinct_on: [sec_filing_attachment_select_column!]
+    distinct_on: [sec_contract_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -3249,11 +3325,11 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [sec_filing_attachment_order_by!]
+    order_by: [sec_contract_order_by!]
 
     """filter the rows returned"""
-    where: sec_filing_attachment_bool_exp
-  ): sec_filing_attachment_aggregate!
+    where: sec_contract_bool_exp
+  ): sec_contract_aggregate!
 
   """
   fetch data from the table: "user"
