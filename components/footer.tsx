@@ -45,7 +45,9 @@ export const LinkGrid: FC<SimpleGridProps> = (props) => (
       <FooterHeading mb="4">Product</FooterHeading>
       <Stack>
         <NextChakraLink href="/">Updates</NextChakraLink>
-        <NextChakraLink href="/contracts">Contracts</NextChakraLink>
+        {process.env.NODE_ENV === 'development' && (
+          <NextChakraLink href="/contracts">Contracts</NextChakraLink>
+        )}
       </Stack>
     </Box>
     <Box minW="130px">
