@@ -1,3 +1,4 @@
+import { Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 
@@ -12,7 +13,7 @@ const Redirect: FC<RedirectProps> = ({ to, inPlace = false }) => {
     inPlace ? router.replace(to) : router.push(to);
   });
 
-  return <p>Redirecting to {to}...</p>;
+  return <Text>Redirecting to {to}...</Text>;
 };
 
 export { Redirect };

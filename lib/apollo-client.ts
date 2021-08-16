@@ -16,15 +16,17 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 let accessToken: string | null = null;
 
 // this is replaced by the client url via next.config.js
-if (!process.env.GRAPHQL_API_SSR_URL) {
+if (!process.env.GRAPHQL_API_SSR_URL || !process.env.GRAPHQL_API_URL) {
   throw new Error('GRAPHQL_API_SSR_URL must be set!');
 }
 
-const HTTP_URL = process.env.GRAPHQL_API_SSR_URL;
+const ssrMode = typeof window === 'undefined';
+
+const HTTP_URL = ssrMode
+  ? process.env.GRAPHQL_API_SSR_URL
+  : process.env.GRAPHQL_API_URL;
 
 const WS_URL = HTTP_URL.replace(/^http/i, 'ws');
-
-const ssrMode = typeof window === 'undefined';
 
 const requestAccessToken = async () => {
   if (accessToken) return;

@@ -8,15 +8,13 @@ import { useRouter } from 'next/router';
 import { createContext, FC, useContext } from 'react';
 
 interface AppContextProps {
-  isLoading: boolean;
-  isLoggedIn: boolean;
+  isAppLoading: boolean;
   currentUser: CurrentUserFragment | undefined;
 }
 
 const AppContext = createContext<AppContextProps>({
   currentUser: undefined,
-  isLoggedIn: false,
-  isLoading: true,
+  isAppLoading: true,
 });
 
 export function useAppContext(): AppContextProps {
@@ -44,10 +42,10 @@ const AppProvider: FC = ({ children }) => {
   const { asPath } = useRouter();
   const currentUser = userData?.user?.[0];
   const error = authError || userError;
-  const isLoading = authLoading || userLoading;
+  const isAppLoading = authLoading || userLoading;
 
   // handle case where auth0 hasn't refreshed the user's accesstoken
-  const shouldRefreshToken = !isLoading && auth0User && !currentUser;
+  const shouldRefreshToken = !isAppLoading && auth0User && !currentUser;
 
   if (error) {
     // eslint-disable-next-line no-console
@@ -62,9 +60,7 @@ const AppProvider: FC = ({ children }) => {
   }
 
   return (
-    <AppContext.Provider
-      value={{ isLoading, isLoggedIn: !!currentUser, currentUser }}
-    >
+    <AppContext.Provider value={{ isAppLoading, currentUser }}>
       {shouldRefreshToken ? (
         <>
           Refreshing authentication credentials....

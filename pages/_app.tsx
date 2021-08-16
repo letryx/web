@@ -1,8 +1,8 @@
 import { ApolloProvider, NormalizedCacheObject } from '@apollo/client';
 import { UserProvider } from '@auth0/nextjs-auth0';
+import { AppProvider } from 'components/app-provider';
+import { UIProvider } from 'components/ui-provider';
 import { createApolloClient } from 'lib/apollo-client';
-import { AppProvider } from 'lib/app-provider';
-import { UIProvider } from 'lib/ui-provider';
 import withApollo, { WithApolloProps } from 'next-with-apollo';
 import { AppProps } from 'next/app';
 import { FC } from 'react';

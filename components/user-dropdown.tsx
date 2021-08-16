@@ -10,8 +10,8 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/react';
+import { useAppContext } from 'components/app-provider';
 import { NextChakraLink } from 'components/next-chakra-link';
-import { useAppContext } from 'lib/app-provider';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { CgLogOut } from 'react-icons/cg';
