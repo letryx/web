@@ -1,8 +1,10 @@
 import { useUser } from '@auth0/nextjs-auth0';
+import { Redirect } from 'components/redirect';
 import {
   CurrentUserFragment,
   useGetCurrentUserQuery,
 } from 'lib/generated/graphql/apollo-schema';
+import { useRouter } from 'next/router';
 import { createContext, FC, useContext } from 'react';
 
 interface AppContextProps {
@@ -26,22 +28,30 @@ export function useAppContext(): AppContextProps {
 }
 
 const AppProvider: FC = ({ children }) => {
-  const { user, error: authError, isLoading: authLoading } = useUser();
+  const {
+    user: auth0User,
+    error: authError,
+    isLoading: authLoading,
+  } = useUser();
   const {
     data: userData,
     error: userError,
     loading: userLoading,
   } = useGetCurrentUserQuery({
-    skip: !user,
-    variables: { auth0_id: user?.sub || 'none' },
+    skip: !auth0User,
+    variables: { auth0_id: auth0User?.sub || 'none' },
   });
+  const { asPath } = useRouter();
   const currentUser = userData?.user?.[0];
   const error = authError || userError;
   const isLoading = authLoading || userLoading;
 
+  // handle case where auth0 hasn't refreshed the user's accesstoken
+  const shouldRefreshToken = !isLoading && auth0User && !currentUser;
+
   if (error) {
     // eslint-disable-next-line no-console
-    console.log(`Login error: ${error}`);
+    console.log('Login error:', error);
     if (
       typeof window !== 'undefined' &&
       process.env.NODE_ENV === 'development'
@@ -55,7 +65,14 @@ const AppProvider: FC = ({ children }) => {
     <AppContext.Provider
       value={{ isLoading, isLoggedIn: !!currentUser, currentUser }}
     >
-      {children}
+      {shouldRefreshToken ? (
+        <>
+          Refreshing authentication credentials....
+          <Redirect to={`/api/auth/login?returnTo=${asPath}`} />
+        </>
+      ) : (
+        children
+      )}
     </AppContext.Provider>
   );
 };
