@@ -15,6 +15,7 @@ import {
   InputLeftElement,
   InputProps,
   InputRightAddon,
+  Skeleton,
   Spacer,
   Stack,
   Table,
@@ -41,12 +42,14 @@ import { MdFilterList, MdSearch } from 'react-icons/md';
 type SearchBarProps = InputProps & {
   contractCount: number;
   setValue: Dispatch<SetStateAction<string>>;
+  isLoading: boolean;
 };
 
 const SearchBar: FC<SearchBarProps> = ({
   placeholder,
   setValue,
   contractCount,
+  isLoading,
   ...props
 }) => (
   <InputGroup>
@@ -62,7 +65,10 @@ const SearchBar: FC<SearchBarProps> = ({
       {...props}
     />
     <InputRightAddon textAlign="right">
-      {contractCount.toLocaleString()} contracts
+      <Skeleton minWidth="3rem" isLoaded={!isLoading} mr={2}>
+        {contractCount.toLocaleString()}
+      </Skeleton>{' '}
+      contracts
     </InputRightAddon>
   </InputGroup>
 );
@@ -87,6 +93,7 @@ type FilterProps = BoxProps & {
   maxDate: Date;
   setMinDate: (date: Date) => void;
   setMaxDate: (date: Date) => void;
+  isLoading: boolean;
 };
 
 const Filters: FC<FilterProps> = ({
@@ -95,6 +102,7 @@ const Filters: FC<FilterProps> = ({
   setMinDate,
   maxDate,
   setMaxDate,
+  isLoading,
   ...props
 }) => {
   // const { isOpen, onOpen, onClose } = useDisclosure();
@@ -106,7 +114,10 @@ const Filters: FC<FilterProps> = ({
             <FormLabel>
               <Flex pb={1}>
                 <Text height="100%" as="span">
-                  Companies ({companyCount.toLocaleString()})
+                  Companies{' '}
+                  <Skeleton isLoaded={!isLoading} display="inline">
+                    ({companyCount.toLocaleString()})
+                  </Skeleton>
                 </Text>
                 <Spacer />
                 <Tooltip label="Filter companies by name">
@@ -166,7 +177,7 @@ const ContractsPage: FC = () => {
 
   // const [searchDebounced] = useDebounce(search, 200);
 
-  const { data } = useSearchSecContractsQuery({
+  const { data, loading } = useSearchSecContractsQuery({
     variables: {
       minDate: minLocalDate,
       maxDate: maxLocalDate,
@@ -185,6 +196,7 @@ const ContractsPage: FC = () => {
     <Layout title="Contract Search">
       <Stack direction={['column', 'column', 'row']}>
         <Filters
+          isLoading={loading}
           companyCount={aggregates.company_count}
           minWidth={60}
           pt={[0, 0, 0]}
@@ -192,6 +204,7 @@ const ContractsPage: FC = () => {
         />
         <VStack width="100%">
           <SearchBar
+            isLoading={loading}
             contractCount={aggregates.count}
             placeholder="Search"
             setValue={setSearch}
@@ -206,9 +219,19 @@ const ContractsPage: FC = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {contracts.map((contract) => (
-                <ContractSnippet {...contract} />
-              ))}
+              {loading
+                ? Array(20)
+                    .fill(0)
+                    .map(() => (
+                      <Tr>
+                        <Td colspan="4">
+                          <Skeleton width="100%">Loading...</Skeleton>
+                        </Td>
+                      </Tr>
+                    ))
+                : contracts.map((contract) => (
+                    <ContractSnippet {...contract} />
+                  ))}
             </Tbody>
           </Table>
         </VStack>
