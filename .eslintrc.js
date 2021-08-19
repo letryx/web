@@ -10,6 +10,7 @@ module.exports = {
     'jest.config.js',
     'apollo.config.js',
     'lib/generated/**/*',
+    'schema-loader.js',
     'auth0/*',
   ],
   plugins: ['@typescript-eslint', 'eslint-comments', 'promise', 'prettier'],
@@ -64,6 +65,19 @@ module.exports = {
         classes: true,
         variables: true,
         typedefs: true,
+      },
+    ],
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'typeLike',
+        format: ['PascalCase'],
+      },
+      {
+        selector: 'variable',
+        format: ['camelCase', 'UPPER_CASE', 'snake_case', 'PascalCase'],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
       },
     ],
   },

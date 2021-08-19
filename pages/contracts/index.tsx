@@ -3,6 +3,7 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
   Box,
   BoxProps,
+  Button,
   Checkbox,
   CheckboxGroup,
   Flex,
@@ -18,12 +19,20 @@ import {
   InputRightAddon,
   List,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Skeleton,
   Spacer,
   Stack,
   Text,
   Tooltip,
   useColorModeValue,
+  useDisclosure,
   VStack,
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
@@ -69,15 +78,44 @@ const SearchBar: FC<SearchBarProps> = ({
   </InputGroup>
 );
 
-const ContractSnippet: FC<SearchResultFragment & { isLoading: boolean }> = ({
-  company_name,
-  filing_type,
-  description,
-  attachment_type,
-  filing_date,
-  isLoading,
-}) => (
-  <Skeleton isLoaded={!isLoading}>
+const ContractModal: FC<{ accesion_number: string; sequence: number }> = (
+  props
+) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <Button onClick={onOpen} {...props}>
+        View Contract
+      </Button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Contract title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>Ok</ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="ghost">Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+const ContractSnippet: FC<SearchResultFragment> = (contractProps) => {
+  const {
+    company_name,
+    filing_type,
+    description,
+    attachment_type,
+    filing_date,
+    accession_number,
+    sequence,
+  } = contractProps;
+  return (
     <ListItem>
       <Box>
         {filing_date}
@@ -85,10 +123,11 @@ const ContractSnippet: FC<SearchResultFragment & { isLoading: boolean }> = ({
         {filing_type}
         {attachment_type}
         {description}
+        <ContractModal accesion_number={accession_number} sequence={sequence} />
       </Box>
     </ListItem>
-  </Skeleton>
-);
+  );
+};
 
 type FilterProps = BoxProps & {
   companyCount: number;
@@ -214,17 +253,12 @@ const ContractsPage: FC = () => {
                 ? Array(20)
                     .fill(0)
                     .map((_, i) => (
-                      <ContractSnippet
-                        key={`tr-skele-${i}`}
-                        {...{
-                          description: 'X'.repeat(60),
-                          isLoading,
-                        }}
-                      />
+                      <Skeleton key={`skele-${i}`}>
+                        <Box width="100%" height="100px" />
+                      </Skeleton>
                     ))
                 : contracts.map((contract) => (
                     <ContractSnippet
-                      isLoading={false}
                       key={`tr-data-${contract.accession_number}-${contract.sequence}`}
                       {...contract}
                     />

@@ -1608,26 +1608,26 @@ export enum Sec_Company_Update_Column {
 /** columns and relationships of "sec_contract" */
 export type Sec_Contract = {
   __typename?: 'sec_contract';
-  accession_number?: Maybe<Scalars['String']>;
-  attachment_type?: Maybe<Scalars['String']>;
-  company_cik?: Maybe<Scalars['String']>;
-  company_geo?: Maybe<Scalars['String']>;
-  company_name?: Maybe<Scalars['String']>;
-  company_sic?: Maybe<Scalars['String']>;
-  company_sic_name?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  filing_date?: Maybe<Scalars['date']>;
-  filing_header?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
-  relevance?: Maybe<Scalars['Float']>;
+  accession_number: Scalars['String'];
+  sequence: Scalars['Int'];
+  company_name: Scalars['String'];
+  company_cik: Scalars['String'];
+  company_geo: Scalars['String'];
+  company_sic: Scalars['String'];
+  company_sic_name: Scalars['String'];
+  filing_type: Scalars['String'];
+  filing_header: Scalars['String'];
+  filing_date: Scalars['String'];
+  description: Scalars['String'];
+  attachment_type: Scalars['String'];
+  tsv_search_text: Scalars['String'];
+  relevance: Scalars['Float'];
   /** An object relationship */
   sec_company?: Maybe<Sec_Company>;
   /** An object relationship */
   sec_filing?: Maybe<Sec_Filing>;
   /** An object relationship */
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment>;
-  sequence?: Maybe<Scalars['Int']>;
-  tsv_search_text?: Maybe<Scalars['tsvector']>;
 };
 
 /** aggregated selection of "sec_contract" */
@@ -3113,15 +3113,15 @@ export type User_Variance_Order_By = {
 
 export type SearchResultFragment = {
   __typename?: 'sec_contract';
-  accession_number?: Maybe<string>;
-  sequence?: Maybe<number>;
-  company_name?: Maybe<string>;
-  company_cik?: Maybe<string>;
-  company_sic_name?: Maybe<string>;
-  filing_type?: Maybe<string>;
-  filing_date?: Maybe<Date>;
-  description?: Maybe<string>;
-  attachment_type?: Maybe<string>;
+  accession_number: string;
+  sequence: number;
+  company_name: string;
+  company_cik: string;
+  company_sic_name: string;
+  filing_type: string;
+  filing_date: string;
+  description: string;
+  attachment_type: string;
 };
 
 export type SearchSecContractsQueryVariables = Exact<{
@@ -3143,15 +3143,15 @@ export type SearchSecContractsQuery = {
   };
   sec_search: Array<{
     __typename?: 'sec_contract';
-    accession_number?: Maybe<string>;
-    sequence?: Maybe<number>;
-    company_name?: Maybe<string>;
-    company_cik?: Maybe<string>;
-    company_sic_name?: Maybe<string>;
-    filing_type?: Maybe<string>;
-    filing_date?: Maybe<Date>;
-    description?: Maybe<string>;
-    attachment_type?: Maybe<string>;
+    accession_number: string;
+    sequence: number;
+    company_name: string;
+    company_cik: string;
+    company_sic_name: string;
+    filing_type: string;
+    filing_date: string;
+    description: string;
+    attachment_type: string;
   }>;
 };
 
