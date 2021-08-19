@@ -82,7 +82,6 @@ export const Footer: FC = () => (
           spacing={{ base: '10', md: '20' }}
         >
           <LinkGrid spacing={{ base: '10', md: '20', lg: '28' }} flex="1" />
-          {/* <SubscribeForm width={{ base: 'full', md: 'sm' }} /> */}
         </Stack>
       </Stack>
       <Stack

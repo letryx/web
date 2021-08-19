@@ -10,10 +10,21 @@ import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { isEmpty } from '@chakra-ui/utils';
+import { LocalStorageWrapper, persistCache } from 'apollo3-cache-persist';
 import fetch from 'isomorphic-unfetch';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 let accessToken: string | null = null;
+
+const cache = new InMemoryCache({});
+
+if (typeof window !== 'undefined') {
+  await persistCache({
+    cache,
+    storage: new LocalStorageWrapper(window.localStorage),
+  });
+}
 
 // this is replaced by the client url via next.config.js
 if (!process.env.GRAPHQL_API_SSR_URL || !process.env.GRAPHQL_API_URL) {
@@ -106,6 +117,6 @@ export function createApolloClient(
   return new ApolloClient<NormalizedCacheObject>({
     ssrMode,
     link,
-    cache: new InMemoryCache().restore(initialState),
+    cache: isEmpty(initialState) ? cache : cache.restore(initialState),
   });
 }
