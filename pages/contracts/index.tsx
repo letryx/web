@@ -32,7 +32,7 @@ import {
   SearchResultFragment,
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { MdFilterList, MdSearch } from 'react-icons/md';
 
 type SearchBarProps = InputProps & {
@@ -165,21 +165,9 @@ const Filters: FC<FilterProps> = ({
 };
 
 const ContractsPage: FC = () => {
-  // const { data } = useGetSequentialSecContractsQuery({
-  //   variables: { limit: 30, offset: 0 },
-  // });
-
   const [search, setSearch] = useState('');
   const [minDate, setMinDate] = useState(new Date(1990, 0, 1));
   const [maxDate, setMaxDate] = useState(new Date());
-
-  // fix skeleton loading errors
-  const [, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // const [searchDebounced] = useDebounce(search, 200);
 
   const { data, loading: isLoading } = useSearchSecContractsQuery({
     variables: {
@@ -187,15 +175,15 @@ const ContractsPage: FC = () => {
       maxDate,
       search,
     },
-    skip: typeof window === undefined,
+    fetchPolicy: 'cache-and-network',
   });
 
-  const aggregates = data?.sec_search_aggregate?.aggregate || {
+  const aggregates = data?.sec_search_aggregate.aggregate || {
     count: 0,
     filing_count: 0,
     company_count: 0,
   };
-  const contracts = data?.sec_search.slice(0, aggregates.count) || [];
+  const contracts = data?.sec_search || [];
 
   return (
     <Layout title="Contract Search">

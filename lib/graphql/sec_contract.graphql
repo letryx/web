@@ -28,7 +28,11 @@ query SearchSECContracts($search: String!, $minDate: date, $maxDate: date) {
     }
   }
   sec_search(
-    args: { search: $search }
+    args: {
+      search: $search
+      filing_date_gt: $minDate
+      filing_date_lt: $maxDate
+    }
     limit: 20
     order_by: { relevance: desc }
   ) {

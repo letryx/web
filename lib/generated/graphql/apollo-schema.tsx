@@ -16,7 +16,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  date: GraphQL_Date;
+  date: Date;
   timestamp: Date;
   timestamptz: Date;
   tsvector: String;
@@ -3119,7 +3119,7 @@ export type SearchResultFragment = {
   company_cik?: Maybe<string>;
   company_sic_name?: Maybe<string>;
   filing_type?: Maybe<string>;
-  filing_date?: Maybe<GraphQL_Date>;
+  filing_date?: Maybe<Date>;
   description?: Maybe<string>;
   attachment_type?: Maybe<string>;
 };
@@ -3149,7 +3149,7 @@ export type SearchSecContractsQuery = {
     company_cik?: Maybe<string>;
     company_sic_name?: Maybe<string>;
     filing_type?: Maybe<string>;
-    filing_date?: Maybe<GraphQL_Date>;
+    filing_date?: Maybe<Date>;
     description?: Maybe<string>;
     attachment_type?: Maybe<string>;
   }>;
@@ -3244,7 +3244,11 @@ export const SearchSecContractsDocument = gql`
       }
     }
     sec_search(
-      args: { search: $search }
+      args: {
+        search: $search
+        filing_date_gt: $minDate
+        filing_date_lt: $maxDate
+      }
       limit: 20
       order_by: { relevance: desc }
     ) {
