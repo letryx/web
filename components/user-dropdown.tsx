@@ -9,6 +9,7 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Skeleton,
 } from '@chakra-ui/react';
 import { useAppContext } from 'components/app-provider';
 import { NextChakraLink } from 'components/next-chakra-link';
@@ -17,7 +18,7 @@ import { FC } from 'react';
 import { CgLogOut } from 'react-icons/cg';
 
 export const UserDropdown: FC = () => {
-  const { currentUser } = useAppContext();
+  const { currentUser, isAppLoading } = useAppContext();
   const router = useRouter();
 
   return currentUser?.name ? (
@@ -54,14 +55,16 @@ export const UserDropdown: FC = () => {
       </MenuList>
     </Menu>
   ) : (
-    <NextChakraLink
-      href={`/api/auth/login?returnTo=${router.asPath}`}
-      textDecoration="none"
-      _hover={{ textDecoration: 'none' }}
-    >
-      <Button colorScheme="gray" variant="solid" size="sm">
-        Log In
-      </Button>
-    </NextChakraLink>
+    <Skeleton isLoaded={!isAppLoading}>
+      <NextChakraLink
+        href={`/api/auth/login?returnTo=${router.asPath}`}
+        textDecoration="none"
+        _hover={{ textDecoration: 'none' }}
+      >
+        <Button colorScheme="gray" variant="solid" size="sm">
+          Log In
+        </Button>
+      </NextChakraLink>
+    </Skeleton>
   );
 };

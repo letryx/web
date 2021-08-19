@@ -16,17 +16,13 @@ import {
   InputLeftElement,
   InputProps,
   InputRightAddon,
+  List,
+  ListItem,
   Skeleton,
   Spacer,
   Stack,
-  Table,
-  Tbody,
-  Td,
   Text,
-  Th,
-  Thead,
   Tooltip,
-  Tr,
   useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
@@ -39,6 +35,9 @@ import {
 } from 'lib/generated/graphql/apollo-schema';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { MdFilterList, MdSearch } from 'react-icons/md';
+
+const toLocalDate = (date: Date) => LocalDate.from(nativeJs(date));
+const toDate = (localDate: LocalDate) => convert(localDate).toDate();
 
 type SearchBarProps = InputProps & {
   contractCount: number;
@@ -74,18 +73,25 @@ const SearchBar: FC<SearchBarProps> = ({
   </InputGroup>
 );
 
-const ContractSnippet: FC<SearchResultFragment> = ({
+const ContractSnippet: FC<SearchResultFragment & { isLoading: boolean }> = ({
   company_name,
   filing_type,
   description,
   attachment_type,
+  filing_date,
+  isLoading,
 }) => (
-  <Tr>
-    <Td>{company_name}</Td>
-    <Td>{filing_type}</Td>
-    <Td>{attachment_type}</Td>
-    <Td>{description}</Td>
-  </Tr>
+  <Skeleton isLoaded={!isLoading}>
+    <ListItem>
+      <Box>
+        {filing_date}
+        {company_name}
+        {filing_type}
+        {attachment_type}
+        {description}
+      </Box>
+    </ListItem>
+  </Skeleton>
 );
 
 type FilterProps = BoxProps & {
@@ -162,8 +168,6 @@ const Filters: FC<FilterProps> = ({
   );
 };
 
-const toLocalDate = (date: Date) => LocalDate.from(nativeJs(date));
-
 const ContractsPage: FC = () => {
   // const { data } = useGetSequentialSecContractsQuery({
   //   variables: { limit: 30, offset: 0 },
@@ -172,8 +176,8 @@ const ContractsPage: FC = () => {
   const [search, setSearch] = useState('');
   const [minLocalDate, setMinLocalDate] = useState(LocalDate.of(1990, 1, 1));
   const [maxLocalDate, setMaxLocalDate] = useState(LocalDate.now());
-  const minDate = convert(minLocalDate).toDate();
-  const maxDate = convert(maxLocalDate).toDate();
+  const minDate = toDate(minLocalDate);
+  const maxDate = toDate(maxLocalDate);
   const setMinDate = (date: Date) => setMinLocalDate(toLocalDate(date));
   const setMaxDate = (date: Date) => setMaxLocalDate(toLocalDate(date));
 
@@ -187,8 +191,8 @@ const ContractsPage: FC = () => {
 
   const { data, loading: isLoading } = useSearchSecContractsQuery({
     variables: {
-      minDate: minLocalDate,
-      maxDate: maxLocalDate,
+      minDate,
+      maxDate,
       search,
     },
     skip: typeof window === undefined,
@@ -218,34 +222,32 @@ const ContractsPage: FC = () => {
             setValue={setSearch}
           />
           <Box
-            overflowY={['auto', 'auto', 'scroll']}
+            overflowY={['auto', 'auto', 'auto']}
             maxHeight={['100%', '100%', '80vh']}
+            minHeight="3rem"
+            width="100%"
           >
-            <Table variant="striped">
-              <Thead>
-                <Tr>
-                  <Th>Filer</Th>
-                  <Th>Filing Type</Th>
-                  <Th>Attachment</Th>
-                  <Th>Description</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {isLoading
-                  ? Array(20)
-                      .fill(0)
-                      .map((_, i) => (
-                        <Tr key={`tr-${i}`}>
-                          <Td colSpan={4}>
-                            <Skeleton width="100%">Loading...</Skeleton>
-                          </Td>
-                        </Tr>
-                      ))
-                  : contracts.map((contract, i) => (
-                      <ContractSnippet key={`tr-${i}`} {...contract} />
-                    ))}
-              </Tbody>
-            </Table>
+            <List variant="striped" width="100%" spacing={3}>
+              {isLoading
+                ? Array(20)
+                    .fill(0)
+                    .map((_, i) => (
+                      <ContractSnippet
+                        key={`tr-${i}`}
+                        {...{
+                          description: 'X'.repeat(60),
+                          isLoading,
+                        }}
+                      />
+                    ))
+                : contracts.map((contract, i) => (
+                    <ContractSnippet
+                      isLoading={false}
+                      key={`tr-${i}`}
+                      {...contract}
+                    />
+                  ))}
+            </List>
           </Box>
         </VStack>
       </Stack>

@@ -3117,6 +3117,7 @@ export type SearchResultFragment = {
   sequence?: Maybe<number>;
   company_name?: Maybe<string>;
   company_cik?: Maybe<string>;
+  company_sic_name?: Maybe<string>;
   filing_type?: Maybe<string>;
   filing_date?: Maybe<GraphQL_Date>;
   description?: Maybe<string>;
@@ -3146,6 +3147,7 @@ export type SearchSecContractsQuery = {
     sequence?: Maybe<number>;
     company_name?: Maybe<string>;
     company_cik?: Maybe<string>;
+    company_sic_name?: Maybe<string>;
     filing_type?: Maybe<string>;
     filing_date?: Maybe<GraphQL_Date>;
     description?: Maybe<string>;
@@ -3207,6 +3209,7 @@ export const SearchResultFragmentDoc = gql`
     sequence
     company_name
     company_cik
+    company_sic_name
     filing_type
     filing_date
     description

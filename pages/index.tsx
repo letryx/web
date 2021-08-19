@@ -5,7 +5,7 @@ import { FC } from 'react';
 
 const IndexPage: FC = () => {
   return (
-    <Layout title="Letryx" hideNav>
+    <Layout title="Letryx">
       <Box textAlign="center" fontSize="xl" pt={8}>
         <SubscribeForm />
       </Box>

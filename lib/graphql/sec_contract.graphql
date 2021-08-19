@@ -3,6 +3,7 @@ fragment SearchResult on sec_contract {
   sequence
   company_name
   company_cik
+  company_sic_name
   # company_geo
   filing_type
   # filing_metadata
