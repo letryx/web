@@ -217,31 +217,36 @@ const ContractsPage: FC = () => {
             placeholder="Search"
             setValue={setSearch}
           />
-          <Table variant="striped">
-            <Thead>
-              <Tr>
-                <Th>Filer</Th>
-                <Th>Filing Type</Th>
-                <Th>Attachment</Th>
-                <Th>Description</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {isLoading
-                ? Array(20)
-                    .fill(0)
-                    .map((_, i) => (
-                      <Tr key={`tr-${i}`}>
-                        <Td colSpan={4}>
-                          <Skeleton width="100%">Loading...</Skeleton>
-                        </Td>
-                      </Tr>
-                    ))
-                : contracts.map((contract, i) => (
-                    <ContractSnippet key={`tr-${i}`} {...contract} />
-                  ))}
-            </Tbody>
-          </Table>
+          <Box
+            overflowY={['auto', 'auto', 'scroll']}
+            maxHeight={['100%', '100%', '80vh']}
+          >
+            <Table variant="striped">
+              <Thead>
+                <Tr>
+                  <Th>Filer</Th>
+                  <Th>Filing Type</Th>
+                  <Th>Attachment</Th>
+                  <Th>Description</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {isLoading
+                  ? Array(20)
+                      .fill(0)
+                      .map((_, i) => (
+                        <Tr key={`tr-${i}`}>
+                          <Td colSpan={4}>
+                            <Skeleton width="100%">Loading...</Skeleton>
+                          </Td>
+                        </Tr>
+                      ))
+                  : contracts.map((contract, i) => (
+                      <ContractSnippet key={`tr-${i}`} {...contract} />
+                    ))}
+              </Tbody>
+            </Table>
+          </Box>
         </VStack>
       </Stack>
     </Layout>
