@@ -28,16 +28,12 @@ import {
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import { Layout } from 'components/layout';
-import { convert, LocalDate, nativeJs } from 'js-joda';
 import {
   SearchResultFragment,
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { MdFilterList, MdSearch } from 'react-icons/md';
-
-const toLocalDate = (date: Date) => LocalDate.from(nativeJs(date));
-const toDate = (localDate: LocalDate) => convert(localDate).toDate();
 
 type SearchBarProps = InputProps & {
   contractCount: number;
@@ -174,12 +170,8 @@ const ContractsPage: FC = () => {
   // });
 
   const [search, setSearch] = useState('');
-  const [minLocalDate, setMinLocalDate] = useState(LocalDate.of(1990, 1, 1));
-  const [maxLocalDate, setMaxLocalDate] = useState(LocalDate.now());
-  const minDate = toDate(minLocalDate);
-  const maxDate = toDate(maxLocalDate);
-  const setMinDate = (date: Date) => setMinLocalDate(toLocalDate(date));
-  const setMaxDate = (date: Date) => setMaxLocalDate(toLocalDate(date));
+  const [minDate, setMinDate] = useState(new Date(1990, 0, 1));
+  const [maxDate, setMaxDate] = useState(new Date());
 
   // fix skeleton loading errors
   const [, setMounted] = useState(false);
@@ -198,12 +190,12 @@ const ContractsPage: FC = () => {
     skip: typeof window === undefined,
   });
 
-  const contracts = data?.sec_search || [];
   const aggregates = data?.sec_search_aggregate?.aggregate || {
     count: 0,
     filing_count: 0,
     company_count: 0,
   };
+  const contracts = data?.sec_search.slice(0, aggregates.count) || [];
 
   return (
     <Layout title="Contract Search">
@@ -233,17 +225,17 @@ const ContractsPage: FC = () => {
                     .fill(0)
                     .map((_, i) => (
                       <ContractSnippet
-                        key={`tr-${i}`}
+                        key={`tr-skele-${i}`}
                         {...{
                           description: 'X'.repeat(60),
                           isLoading,
                         }}
                       />
                     ))
-                : contracts.map((contract, i) => (
+                : contracts.map((contract) => (
                     <ContractSnippet
                       isLoading={false}
-                      key={`tr-${i}`}
+                      key={`tr-data-${contract.accession_number}-${contract.sequence}`}
                       {...contract}
                     />
                   ))}
