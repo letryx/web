@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
   Box,
@@ -36,7 +37,7 @@ import {
   SearchResultFragment,
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { MdFilterList, MdSearch } from 'react-icons/md';
 
 type SearchBarProps = InputProps & {
@@ -113,7 +114,7 @@ const Filters: FC<FilterProps> = ({
           <FormControl>
             <FormLabel>
               <Flex pb={1}>
-                <Text height="100%" as="span">
+                <Text fontSize="1.2rem" height="100%" as="span">
                   Companies{' '}
                   <Skeleton isLoaded={!isLoading} display="inline">
                     ({companyCount.toLocaleString()})
@@ -122,6 +123,7 @@ const Filters: FC<FilterProps> = ({
                 <Spacer />
                 <Tooltip label="Filter companies by name">
                   <IconButton
+                    mt={1}
                     variant="outline"
                     size="xs"
                     aria-label="Search company"
@@ -140,7 +142,7 @@ const Filters: FC<FilterProps> = ({
           <FormControl>
             <FormLabel>
               <Flex pb={1}>
-                <Text pt={1} height="100%" as="span">
+                <Text pt={1} fontSize="1.2rem" height="100%" as="span">
                   Filing Date
                 </Text>
               </Flex>
@@ -175,36 +177,42 @@ const ContractsPage: FC = () => {
   const setMinDate = (date: Date) => setMinLocalDate(toLocalDate(date));
   const setMaxDate = (date: Date) => setMaxLocalDate(toLocalDate(date));
 
+  // fix skeleton loading errors
+  const [, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // const [searchDebounced] = useDebounce(search, 200);
 
-  const { data, loading } = useSearchSecContractsQuery({
+  const { data, loading: isLoading } = useSearchSecContractsQuery({
     variables: {
       minDate: minLocalDate,
       maxDate: maxLocalDate,
       search,
     },
+    skip: typeof window === undefined,
   });
 
+  const contracts = data?.sec_search || [];
   const aggregates = data?.sec_search_aggregate?.aggregate || {
     count: 0,
     filing_count: 0,
     company_count: 0,
   };
-  const contracts = data?.sec_search || [];
 
   return (
     <Layout title="Contract Search">
       <Stack direction={['column', 'column', 'row']}>
         <Filters
-          isLoading={loading}
           companyCount={aggregates.company_count}
           minWidth={60}
           pt={[0, 0, 0]}
-          {...{ minDate, setMinDate, maxDate, setMaxDate }}
+          {...{ isLoading, minDate, setMinDate, maxDate, setMaxDate }}
         />
         <VStack width="100%">
           <SearchBar
-            isLoading={loading}
+            isLoading={isLoading}
             contractCount={aggregates.count}
             placeholder="Search"
             setValue={setSearch}
@@ -219,18 +227,18 @@ const ContractsPage: FC = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {loading
+              {isLoading
                 ? Array(20)
                     .fill(0)
-                    .map(() => (
-                      <Tr>
-                        <Td colspan="4">
+                    .map((_, i) => (
+                      <Tr key={`tr-${i}`}>
+                        <Td colSpan={4}>
                           <Skeleton width="100%">Loading...</Skeleton>
                         </Td>
                       </Tr>
                     ))
-                : contracts.map((contract) => (
-                    <ContractSnippet {...contract} />
+                : contracts.map((contract, i) => (
+                    <ContractSnippet key={`tr-${i}`} {...contract} />
                   ))}
             </Tbody>
           </Table>
