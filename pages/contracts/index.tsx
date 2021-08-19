@@ -166,8 +166,11 @@ const Filters: FC<FilterProps> = ({
 
 const ContractsPage: FC = () => {
   const [search, setSearch] = useState('');
+  const now = new Date();
   const [minDate, setMinDate] = useState(new Date(1990, 0, 1));
-  const [maxDate, setMaxDate] = useState(new Date());
+  const [maxDate, setMaxDate] = useState(
+    new Date(now.getFullYear(), now.getMonth(), now.getDay())
+  );
 
   const { data, loading: isLoading } = useSearchSecContractsQuery({
     variables: {
@@ -175,7 +178,6 @@ const ContractsPage: FC = () => {
       maxDate,
       search,
     },
-    fetchPolicy: 'cache-and-network',
   });
 
   const aggregates = data?.sec_search_aggregate.aggregate || {

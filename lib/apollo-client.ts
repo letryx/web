@@ -17,12 +17,15 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 let accessToken: string | null = null;
 
-const cache = new InMemoryCache({});
+const ssrMode = typeof window === 'undefined';
 
-if (typeof window !== 'undefined') {
+export const cache = new InMemoryCache({});
+
+if (!ssrMode) {
   await persistCache({
     cache,
     storage: new LocalStorageWrapper(window.localStorage),
+    debug: process.env.NODE_ENV === 'development',
   });
 }
 
@@ -30,8 +33,6 @@ if (typeof window !== 'undefined') {
 if (!process.env.GRAPHQL_API_SSR_URL || !process.env.GRAPHQL_API_URL) {
   throw new Error('GRAPHQL_API_SSR_URL must be set!');
 }
-
-const ssrMode = typeof window === 'undefined';
 
 const HTTP_URL = ssrMode
   ? process.env.GRAPHQL_API_SSR_URL
@@ -90,7 +91,7 @@ if (!ssrMode) {
       return (
         def.kind === 'OperationDefinition' &&
         def.operation === 'subscription' &&
-        typeof window !== 'undefined'
+        !ssrMode
       );
     },
     new WebSocketLink(
@@ -111,12 +112,11 @@ if (!ssrMode) {
   );
 }
 
-export function createApolloClient(
+export const createApolloClient = (
   initialState: NormalizedCacheObject
-): ApolloClient<NormalizedCacheObject> {
-  return new ApolloClient<NormalizedCacheObject>({
+): ApolloClient<NormalizedCacheObject> =>
+  new ApolloClient<NormalizedCacheObject>({
     ssrMode,
     link,
     cache: isEmpty(initialState) ? cache : cache.restore(initialState),
   });
-}

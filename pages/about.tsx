@@ -61,14 +61,14 @@ const Profile: FC<ProfileProps> = ({
       >
         {title}
       </Text>
-      <Text
+      <Box
         textAlign="center"
         color={useColorModeValue('gray.700', 'gray.300')}
         px={3}
         fontSize="16px"
       >
         {children}
-      </Text>
+      </Box>
       <Center>
         <Stack mt={4} direction="row" spacing={4}>
           {socialLinks}
