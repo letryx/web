@@ -27,6 +27,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Skeleton,
+  SkeletonText,
   Spacer,
   Stack,
   Text,
@@ -37,12 +38,23 @@ import {
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import { Layout } from 'components/layout';
+import createDOMPurify, { DOMPurifyI } from 'dompurify';
+import parse from 'html-react-parser';
 import {
   SearchResultFragment,
+  useGetSecContractQuery,
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { MdFilterList, MdSearch } from 'react-icons/md';
+
+let domPurify: DOMPurifyI | null = null;
+
+const isSSR = typeof window === 'undefined';
+
+if (!isSSR) {
+  domPurify = createDOMPurify(window);
+}
 
 type SearchBarProps = InputProps & {
   contractCount: number;
@@ -78,26 +90,63 @@ const SearchBar: FC<SearchBarProps> = ({
   </InputGroup>
 );
 
-const ContractModal: FC<{ accesion_number: string; sequence: number }> = (
-  props
-) => {
+const ContractModal: FC<SearchResultFragment> = ({
+  accession_number,
+  sequence,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { data, loading } = useGetSecContractQuery({
+    variables: { accession_number, sequence },
+    skip: isSSR || !isOpen,
+  });
+  let html = '';
+  let elements: JSX.Element | JSX.Element[] | string | null = null;
+  if (data && domPurify) {
+    html = domPurify.sanitize(data.sec_filing_attachment_by_pk?.contents || '');
+    elements = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
+    if (typeof elements === 'string') {
+      elements = <pre>{elements.trim()}</pre>;
+    }
+  }
+  const { description, sec_filing, attachment_type } =
+    data?.sec_filing_attachment_by_pk || {};
+  const { filing_date, filing_type, sec_company } = sec_filing || {};
+  const { name: companyName } = sec_company || {};
+
   return (
     <>
-      <Button onClick={onOpen} {...props}>
-        View Contract
-      </Button>
+      <Button onClick={onOpen}>View</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Contract title</ModalHeader>
+        <ModalContent width="60vw" maxWidth="800px">
+          <ModalHeader>
+            {loading ? (
+              <SkeletonText>{'x'.repeat(20)}</SkeletonText>
+            ) : (
+              description && (
+                <Text as="span" mr={3}>
+                  {description}
+                </Text>
+              )
+            )}
+            <Text as="span" fontSize="80%" fontWeight="normal">
+              ({filing_type} - {attachment_type})
+            </Text>
+            <Text fontSize="80%" fontWeight="normal">
+              Filed by {companyName} on {filing_date?.toString()}
+            </Text>
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>Ok</ModalBody>
+          <ModalBody>
+            <SkeletonText isLoaded={!loading}>
+              <Box px={4}>{elements}</Box>
+            </SkeletonText>
+          </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            {/* <Button variant="ghost">Secondary Action</Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -112,8 +161,6 @@ const ContractSnippet: FC<SearchResultFragment> = (contractProps) => {
     description,
     attachment_type,
     filing_date,
-    accession_number,
-    sequence,
   } = contractProps;
   return (
     <ListItem>
@@ -123,7 +170,7 @@ const ContractSnippet: FC<SearchResultFragment> = (contractProps) => {
         {filing_type}
         {attachment_type}
         {description}
-        <ContractModal accesion_number={accession_number} sequence={sequence} />
+        <ContractModal {...contractProps} />
       </Box>
     </ListItem>
   );

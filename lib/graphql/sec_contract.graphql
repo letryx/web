@@ -39,3 +39,29 @@ query SearchSECContracts($search: String!, $minDate: date, $maxDate: date) {
     ...SearchResult
   }
 }
+
+fragment SECContract on sec_filing_attachment {
+  sequence
+  sec_filing {
+    accession_number
+    filing_date
+    filing_type
+    sec_company {
+      name
+      sic
+      sic_name
+    }
+  }
+  attachment_type
+  description
+  contents
+}
+
+query GetSECContract($accession_number: String!, $sequence: Int!) {
+  sec_filing_attachment_by_pk(
+    accession_number: $accession_number
+    sequence: $sequence
+  ) {
+    ...SECContract
+  }
+}

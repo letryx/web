@@ -3155,6 +3155,54 @@ export type SearchSecContractsQuery = {
   }>;
 };
 
+export type SecContractFragment = {
+  __typename?: 'sec_filing_attachment';
+  sequence: number;
+  attachment_type: string;
+  description?: Maybe<string>;
+  contents: string;
+  sec_filing: {
+    __typename?: 'sec_filing';
+    accession_number: string;
+    filing_date: Date;
+    filing_type: string;
+    sec_company: {
+      __typename?: 'sec_company';
+      name: string;
+      sic: string;
+      sic_name: string;
+    };
+  };
+};
+
+export type GetSecContractQueryVariables = Exact<{
+  accession_number: Scalars['String'];
+  sequence: Scalars['Int'];
+}>;
+
+export type GetSecContractQuery = {
+  __typename?: 'query_root';
+  sec_filing_attachment_by_pk?: Maybe<{
+    __typename?: 'sec_filing_attachment';
+    sequence: number;
+    attachment_type: string;
+    description?: Maybe<string>;
+    contents: string;
+    sec_filing: {
+      __typename?: 'sec_filing';
+      accession_number: string;
+      filing_date: Date;
+      filing_type: string;
+      sec_company: {
+        __typename?: 'sec_company';
+        name: string;
+        sic: string;
+        sic_name: string;
+      };
+    };
+  }>;
+};
+
 export type CurrentUserFragment = {
   __typename?: 'user';
   id: number;
@@ -3214,6 +3262,24 @@ export const SearchResultFragmentDoc = gql`
     filing_date
     description
     attachment_type
+  }
+`;
+export const SecContractFragmentDoc = gql`
+  fragment SECContract on sec_filing_attachment {
+    sequence
+    sec_filing {
+      accession_number
+      filing_date
+      filing_type
+      sec_company {
+        name
+        sic
+        sic_name
+      }
+    }
+    attachment_type
+    description
+    contents
   }
 `;
 export const CurrentUserFragmentDoc = gql`
@@ -3309,6 +3375,69 @@ export type SearchSecContractsLazyQueryHookResult = ReturnType<
 export type SearchSecContractsQueryResult = Apollo.QueryResult<
   SearchSecContractsQuery,
   SearchSecContractsQueryVariables
+>;
+export const GetSecContractDocument = gql`
+  query GetSECContract($accession_number: String!, $sequence: Int!) {
+    sec_filing_attachment_by_pk(
+      accession_number: $accession_number
+      sequence: $sequence
+    ) {
+      ...SECContract
+    }
+  }
+  ${SecContractFragmentDoc}
+`;
+
+/**
+ * __useGetSecContractQuery__
+ *
+ * To run a query within a React component, call `useGetSecContractQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSecContractQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSecContractQuery({
+ *   variables: {
+ *      accession_number: // value for 'accession_number'
+ *      sequence: // value for 'sequence'
+ *   },
+ * });
+ */
+export function useGetSecContractQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetSecContractQuery,
+    GetSecContractQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetSecContractQuery, GetSecContractQueryVariables>(
+    GetSecContractDocument,
+    options
+  );
+}
+export function useGetSecContractLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetSecContractQuery,
+    GetSecContractQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetSecContractQuery, GetSecContractQueryVariables>(
+    GetSecContractDocument,
+    options
+  );
+}
+export type GetSecContractQueryHookResult = ReturnType<
+  typeof useGetSecContractQuery
+>;
+export type GetSecContractLazyQueryHookResult = ReturnType<
+  typeof useGetSecContractLazyQuery
+>;
+export type GetSecContractQueryResult = Apollo.QueryResult<
+  GetSecContractQuery,
+  GetSecContractQueryVariables
 >;
 export const GetCurrentUserDocument = gql`
   query GetCurrentUser($auth0_id: String!) {
