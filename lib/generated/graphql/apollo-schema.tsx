@@ -3125,6 +3125,8 @@ export type SearchResultFragment = {
 
 export type SearchSecContractsQueryVariables = Exact<{
   search: Scalars['String'];
+  minDate?: Maybe<Scalars['date']>;
+  maxDate?: Maybe<Scalars['date']>;
 }>;
 
 export type SearchSecContractsQuery = {
@@ -3224,8 +3226,14 @@ export const CurrentUserFragmentDoc = gql`
   }
 `;
 export const SearchSecContractsDocument = gql`
-  query SearchSECContracts($search: String!) {
-    sec_search_aggregate(args: { search: $search }) {
+  query SearchSECContracts($search: String!, $minDate: date, $maxDate: date) {
+    sec_search_aggregate(
+      args: {
+        search: $search
+        filing_date_gt: $minDate
+        filing_date_lt: $maxDate
+      }
+    ) {
       aggregate {
         filing_count: count(columns: accession_number, distinct: true)
         company_count: count(columns: company_cik, distinct: true)
@@ -3256,6 +3264,8 @@ export const SearchSecContractsDocument = gql`
  * const { data, loading, error } = useSearchSecContractsQuery({
  *   variables: {
  *      search: // value for 'search'
+ *      minDate: // value for 'minDate'
+ *      maxDate: // value for 'maxDate'
  *   },
  * });
  */

@@ -30,6 +30,7 @@ import {
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import { Layout } from 'components/layout';
+import { convert, LocalDate, nativeJs } from 'js-joda';
 import {
   SearchResultFragment,
   useSearchSecContractsQuery,
@@ -82,11 +83,21 @@ const ContractSnippet: FC<SearchResultFragment> = ({
 
 type FilterProps = BoxProps & {
   companyCount: number;
+  minDate: Date;
+  maxDate: Date;
+  setMinDate: (date: Date) => void;
+  setMaxDate: (date: Date) => void;
 };
 
-const Filters: FC<FilterProps> = ({ companyCount, ...props }) => {
-  const [minDate, setMinDate] = useState<Date>(new Date(1990, 0, 1));
-  const [maxDate, setMaxDate] = useState<Date>(new Date());
+const Filters: FC<FilterProps> = ({
+  companyCount,
+  minDate,
+  setMinDate,
+  maxDate,
+  setMaxDate,
+  ...props
+}) => {
+  // const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box {...props}>
       <Stack>
@@ -138,9 +149,7 @@ const Filters: FC<FilterProps> = ({ companyCount, ...props }) => {
   );
 };
 
-interface SearchParams {
-  search: string;
-}
+const toLocalDate = (date: Date) => LocalDate.from(nativeJs(date));
 
 const ContractsPage: FC = () => {
   // const { data } = useGetSequentialSecContractsQuery({
@@ -148,13 +157,21 @@ const ContractsPage: FC = () => {
   // });
 
   const [search, setSearch] = useState('');
+  const [minLocalDate, setMinLocalDate] = useState(LocalDate.of(1990, 1, 1));
+  const [maxLocalDate, setMaxLocalDate] = useState(LocalDate.now());
+  const minDate = convert(minLocalDate).toDate();
+  const maxDate = convert(maxLocalDate).toDate();
+  const setMinDate = (date: Date) => setMinLocalDate(toLocalDate(date));
+  const setMaxDate = (date: Date) => setMaxLocalDate(toLocalDate(date));
 
   // const [searchDebounced] = useDebounce(search, 200);
 
-  const searchParams: SearchParams = { search };
-
   const { data } = useSearchSecContractsQuery({
-    variables: searchParams,
+    variables: {
+      minDate: minLocalDate,
+      maxDate: maxLocalDate,
+      search,
+    },
   });
 
   const aggregates = data?.sec_search_aggregate?.aggregate || {
@@ -171,6 +188,7 @@ const ContractsPage: FC = () => {
           companyCount={aggregates.company_count}
           minWidth={60}
           pt={[0, 0, 0]}
+          {...{ minDate, setMinDate, maxDate, setMaxDate }}
         />
         <VStack width="100%">
           <SearchBar

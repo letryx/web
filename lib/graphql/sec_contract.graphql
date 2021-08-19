@@ -12,8 +12,14 @@ fragment SearchResult on sec_contract {
 }
 
 # description: { _ilike: "%purchase and sale%", _nilike: "%amendment%" }
-query SearchSECContracts($search: String!) {
-  sec_search_aggregate(args: { search: $search }) {
+query SearchSECContracts($search: String!, $minDate: date, $maxDate: date) {
+  sec_search_aggregate(
+    args: {
+      search: $search
+      filing_date_gt: $minDate
+      filing_date_lt: $maxDate
+    }
+  ) {
     aggregate {
       filing_count: count(columns: accession_number, distinct: true)
       company_count: count(columns: company_cik, distinct: true)
