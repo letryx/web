@@ -131,6 +131,7 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   const mountNode = contentRef?.contentWindow?.document?.body;
   const { scrollHeight, clientHeight, scrollWidth, clientWidth } =
     mountNode || {};
+  const textColor = useColorModeValue('black', 'white');
 
   useEffect(() => {
     // handle negative margin in docs
@@ -144,6 +145,17 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
     'style',
     `padding-right: ${paddingRight}px; overflow-y: hidden;`
   );
+  if (contentRef?.contentWindow?.document) {
+    const doc = contentRef?.contentWindow?.document;
+    const style_el = doc.createElement('style');
+    style_el.innerText = `
+      p,font,span,td {
+        color: ${textColor} !important;
+        background-color: transparent !important;
+      }
+    `;
+    mountNode?.appendChild(style_el);
+  }
 
   return (
     <>
