@@ -58,7 +58,7 @@ const SubscribeForm: FC = () => {
   );
   const [statusMessage, setStatusMessage] = useState('');
 
-  const onSubmit: FormEventHandler = async (event) => {
+  const onSubmit: FormEventHandler = (event) => {
     event.preventDefault();
     const qs = stringify({
       FNAME: fname,

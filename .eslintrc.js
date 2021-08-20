@@ -15,8 +15,11 @@ module.exports = {
   ],
   plugins: ['@typescript-eslint', 'eslint-comments', 'promise', 'prettier'],
   extends: [
+    'airbnb',
     'airbnb-typescript',
+    'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:prettier/recommended',
     'plugin:@next/next/recommended',
   ],

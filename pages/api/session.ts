@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable no-console */
 import { auth0 } from 'lib/auth0';
 import { NextApiRequest, NextApiResponse } from 'next';

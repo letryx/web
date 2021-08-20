@@ -45,8 +45,8 @@ const requestAccessToken = async () => {
 
   const res = await fetch('/api/session');
   if (res.ok) {
-    const json = await res.json();
-    accessToken = json.accessToken;
+    const json = (await res.json()) as Record<string, string>;
+    accessToken = json?.accessToken || null;
   } else {
     accessToken = null;
   }

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
   Box,
@@ -32,6 +31,7 @@ import {
   Stack,
   Text,
   Tooltip,
+  useBreakpointValue,
   useColorModeValue,
   useDisclosure,
   VStack,
@@ -45,8 +45,17 @@ import {
   useGetSecContractQuery,
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import {
+  Dispatch,
+  FC,
+  HTMLAttributes,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
+import { createPortal } from 'react-dom';
 import { MdFilterList, MdSearch } from 'react-icons/md';
+import { RemoveScroll } from 'react-remove-scroll';
 
 let domPurify: DOMPurifyI | null = null;
 
@@ -57,7 +66,7 @@ if (!isSSR) {
 }
 
 type SearchBarProps = InputProps & {
-  contractCount: number;
+  contractCount?: number;
   setValue: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
 };
@@ -82,13 +91,73 @@ const SearchBar: FC<SearchBarProps> = ({
       {...props}
     />
     <InputRightAddon textAlign="right">
-      <Skeleton minWidth="3rem" isLoaded={!isLoading} mr={2}>
-        {contractCount.toLocaleString()}
-      </Skeleton>{' '}
+      {contractCount ? (
+        contractCount.toLocaleString()
+      ) : (
+        <Skeleton minWidth="3rem" isLoaded={!isLoading} mr={2}>
+          99,999
+        </Skeleton>
+      )}{' '}
       contracts
     </InputRightAddon>
   </InputGroup>
 );
+
+interface IFrameProps extends HTMLAttributes<HTMLElement> {
+  allow?: string;
+  allowFullScreen?: boolean;
+  allowTransparency?: boolean;
+  frameBorder?: number | string;
+  height?: number | string;
+  marginHeight?: number;
+  marginWidth?: number;
+  name?: string;
+  sandbox?: string;
+  scrolling?: string;
+  seamless?: boolean;
+  src?: string;
+  srcDoc?: string;
+  width?: number | string;
+}
+
+export const FunctionalIFrameComponent: FC<IFrameProps> = ({
+  children,
+  title,
+  ...props
+}) => {
+  const [contentRef, setContentRef] = useState<HTMLIFrameElement | null>(null);
+  const [paddingRight, setPaddingRight] = useState(0);
+  const [height, setHeight] = useState(500);
+  const mountNode = contentRef?.contentWindow?.document?.body;
+  const { scrollHeight, clientHeight, scrollWidth, clientWidth } =
+    mountNode || {};
+
+  useEffect(() => {
+    // handle negative margin in docs
+    if (!mountNode) return;
+    if (mountNode.scrollWidth > mountNode.clientWidth) {
+      setPaddingRight(mountNode.scrollWidth - mountNode.clientWidth + 30);
+    }
+    setHeight(mountNode.scrollHeight);
+  }, [mountNode, scrollHeight, clientHeight, scrollWidth, clientWidth]);
+  mountNode?.setAttribute(
+    'style',
+    `padding-right: ${paddingRight}px; overflow-y: hidden;`
+  );
+
+  return (
+    <>
+      <iframe
+        height={`${height}px`}
+        title={title}
+        {...{ ...props }}
+        ref={setContentRef}
+      >
+        {mountNode && createPortal(children, mountNode)}
+      </iframe>
+    </>
+  );
+};
 
 const ContractModal: FC<SearchResultFragment> = ({
   accession_number,
@@ -99,16 +168,33 @@ const ContractModal: FC<SearchResultFragment> = ({
     variables: { accession_number, sequence },
     skip: isSSR || !isOpen,
   });
+  const fontSize = useBreakpointValue({ sm: '100%', md: '110%', lg: '120%' });
   let html = '';
   let elements: JSX.Element | JSX.Element[] | string | null = null;
-  if (data && domPurify) {
-    html = domPurify.sanitize(data.sec_filing_attachment_by_pk?.contents || '');
+  if (data && domPurify && data.sec_filing_attachment_by_pk?.contents) {
+    html = domPurify.sanitize(data.sec_filing_attachment_by_pk?.contents, {
+      // KEEP_CONTENT: false,
+      IN_PLACE: true,
+    });
     elements = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
-    if (typeof elements === 'string') {
-      elements = <pre>{elements.trim()}</pre>;
-    } else {
-      elements = <Box style={{ zoom: '1.3' }}>{elements}</Box>;
-    }
+    elements = (
+      <FunctionalIFrameComponent
+        title={`contract-${accession_number}-${sequence}`}
+        width="100%"
+      >
+        <RemoveScroll forwardProps>
+          <>
+            {typeof elements === 'string' ? (
+              <Box as="pre" style={{ whiteSpace: 'pre-wrap', fontSize }}>
+                {elements}
+              </Box>
+            ) : (
+              elements
+            )}
+          </>
+        </RemoveScroll>
+      </FunctionalIFrameComponent>
+    );
   }
   const { description, sec_filing, attachment_type } =
     data?.sec_filing_attachment_by_pk || {};
@@ -118,12 +204,12 @@ const ContractModal: FC<SearchResultFragment> = ({
   return (
     <>
       <Button onClick={onOpen}>View</Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
         <ModalOverlay />
-        <ModalContent width="60vw" maxWidth="800px">
+        <ModalContent width="95vw" maxWidth="900px">
           <ModalHeader>
             {loading ? (
-              <SkeletonText>{'x'.repeat(20)}</SkeletonText>
+              <Skeleton>{'x'.repeat(20)}</Skeleton>
             ) : (
               description && (
                 <Text as="span" mr={3}>
@@ -140,8 +226,10 @@ const ContractModal: FC<SearchResultFragment> = ({
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <SkeletonText isLoaded={!loading}>
-              <Box px={4}>{elements}</Box>
+            <SkeletonText isLoaded={!loading} noOfLines={30}>
+              <Box px={4} textAlign="left">
+                {elements}
+              </Box>
             </SkeletonText>
           </ModalBody>
           <ModalFooter>
@@ -179,7 +267,7 @@ const ContractSnippet: FC<SearchResultFragment> = (contractProps) => {
 };
 
 type FilterProps = BoxProps & {
-  companyCount: number;
+  companyCount?: number;
   minDate: Date;
   maxDate: Date;
   setMinDate: (date: Date) => void;
@@ -204,11 +292,18 @@ const Filters: FC<FilterProps> = ({
           <FormControl>
             <FormLabel>
               <Flex pb={1}>
-                <Text fontSize="1.2rem" height="100%" as="span">
+                <Text
+                  fontSize="1.2rem"
+                  height="100%"
+                  as="span"
+                  suppressHydrationWarning
+                >
                   Companies{' '}
-                  <Skeleton isLoaded={!isLoading} display="inline">
-                    ({companyCount.toLocaleString()})
-                  </Skeleton>
+                  {companyCount ? (
+                    `(${companyCount.toLocaleString()})`
+                  ) : (
+                    <Skeleton>999</Skeleton>
+                  )}
                 </Text>
                 <Spacer />
                 <Tooltip label="Filter companies by name">
@@ -268,28 +363,30 @@ const ContractsPage: FC = () => {
     },
   });
 
-  const aggregates = data?.sec_search_aggregate.aggregate || {
-    count: 0,
-    filing_count: 0,
-    company_count: 0,
-  };
+  const { company_count: companyCount, count: contractCount } =
+    data?.sec_search_aggregate.aggregate || {};
   const contracts = data?.sec_search || [];
 
   return (
-    <Layout title="Contract Search">
+    <Layout title="Contracts">
       <Stack direction={['column', 'column', 'row']}>
         <Filters
-          companyCount={aggregates.company_count}
           minWidth={60}
           pt={[0, 0, 0]}
-          {...{ isLoading, minDate, setMinDate, maxDate, setMaxDate }}
+          {...{
+            isLoading,
+            companyCount,
+            minDate,
+            setMinDate,
+            maxDate,
+            setMaxDate,
+          }}
         />
         <VStack width="100%">
           <SearchBar
-            isLoading={isLoading}
-            contractCount={aggregates.count}
             placeholder="Search"
             setValue={setSearch}
+            {...{ isLoading, contractCount }}
           />
           <Box
             overflowY={['auto', 'auto', 'auto']}
@@ -302,6 +399,7 @@ const ContractsPage: FC = () => {
                 ? Array(20)
                     .fill(0)
                     .map((_, i) => (
+                      // eslint-disable-next-line react/no-array-index-key
                       <Skeleton key={`skele-${i}`}>
                         <Box width="100%" height="100px" />
                       </Skeleton>

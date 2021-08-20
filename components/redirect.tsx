@@ -10,7 +10,7 @@ interface RedirectProps {
 const Redirect: FC<RedirectProps> = ({ to, inPlace = false }) => {
   const router = useRouter();
   useEffect(() => {
-    inPlace ? router.replace(to) : router.push(to);
+    (inPlace ? router.replace(to) : router.push(to)) as never;
   });
 
   return <Text>Redirecting to {to}...</Text>;

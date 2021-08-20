@@ -12,6 +12,7 @@ const App: FC<AppProps & WithApolloProps<NormalizedCacheObject>> = ({
   pageProps,
   apollo,
 }) => (
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   <ApolloProvider client={apollo}>
     <UIProvider>
       <UserProvider>
