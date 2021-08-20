@@ -181,13 +181,16 @@ const ContractModal: FC<SearchResultFragment> = ({
     skip: isSSR || !isOpen,
   });
   const fontSize = useBreakpointValue({ sm: '100%', md: '110%', lg: '120%' });
-  let html = '';
+  const color = useColorModeValue('black', 'white');
   let elements: JSX.Element | JSX.Element[] | string | null = null;
   if (data && domPurify && data.sec_filing_attachment_by_pk?.contents) {
-    html = domPurify.sanitize(data.sec_filing_attachment_by_pk?.contents, {
-      // KEEP_CONTENT: false,
-      IN_PLACE: true,
-    });
+    const html = domPurify.sanitize(
+      data.sec_filing_attachment_by_pk?.contents,
+      {
+        // KEEP_CONTENT: false,
+        IN_PLACE: true,
+      }
+    );
     elements = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
     // check if all elemnts are strings and use <pre> if so
     if (
@@ -201,15 +204,19 @@ const ContractModal: FC<SearchResultFragment> = ({
         title={`contract-${accession_number}-${sequence}`}
         width="100%"
       >
-        <RemoveScroll forwardProps>
+        <RemoveScroll forwardProps noIsolation>
           <>
-            {typeof elements === 'string' ? (
-              <Box as="pre" style={{ whiteSpace: 'pre-wrap', fontSize }}>
-                {elements}
-              </Box>
-            ) : (
-              elements
-            )}
+            <Box
+              as={typeof elements === 'string' ? 'pre' : 'div'}
+              style={{
+                whiteSpace:
+                  typeof elements === 'string' ? 'pre-wrap' : 'normal',
+                color,
+                fontSize,
+              }}
+            >
+              {elements}
+            </Box>
           </>
         </RemoveScroll>
       </FunctionalIFrameComponent>
