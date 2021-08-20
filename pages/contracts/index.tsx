@@ -106,6 +106,8 @@ const ContractModal: FC<SearchResultFragment> = ({
     elements = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
     if (typeof elements === 'string') {
       elements = <pre>{elements.trim()}</pre>;
+    } else {
+      elements = <Box style={{ zoom: '1.3' }}>{elements}</Box>;
     }
   }
   const { description, sec_filing, attachment_type } =
