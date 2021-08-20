@@ -189,6 +189,13 @@ const ContractModal: FC<SearchResultFragment> = ({
       IN_PLACE: true,
     });
     elements = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
+    // check if all elemnts are strings and use <pre> if so
+    if (
+      Array.isArray(elements) &&
+      elements.every((x) => typeof x === 'string')
+    ) {
+      elements = elements.join('\n');
+    }
     elements = (
       <FunctionalIFrameComponent
         title={`contract-${accession_number}-${sequence}`}
