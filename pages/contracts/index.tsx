@@ -151,6 +151,7 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
     style_el.innerText = `
       p,font,span,td {
         color: ${textColor} !important;
+        border-color: ${textColor} !important;
         background-color: transparent !important;
       }
     `;
