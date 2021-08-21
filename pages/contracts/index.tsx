@@ -149,7 +149,7 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
     const doc = contentRef?.contentWindow?.document;
     const style_el = doc.createElement('style');
     style_el.innerText = `
-      p,font,span,td {
+      p,font,span,tr,td {
         color: ${textColor} !important;
         border-color: ${textColor} !important;
         background-color: transparent !important;
@@ -181,7 +181,10 @@ const ContractModal: FC<SearchResultFragment> = ({
     variables: { accession_number, sequence },
     skip: isSSR || !isOpen,
   });
-  const fontSize = useBreakpointValue({ sm: '100%', md: '110%', lg: '120%' });
+  const fontSize =
+    useBreakpointValue(['90%', '100%', '110%', '120%']) || '100%';
+  const whiteSpace =
+    useBreakpointValue(['pre-line', 'pre-line', 'pre-wrap']) || 'pre-wrap';
   const color = useColorModeValue('black', 'white');
   let elements: JSX.Element | JSX.Element[] | string | null = null;
   if (data && domPurify && data.sec_filing_attachment_by_pk?.contents) {
@@ -200,6 +203,7 @@ const ContractModal: FC<SearchResultFragment> = ({
     ) {
       elements = elements.join('\n');
     }
+    const isText = typeof elements === 'string';
     elements = (
       <FunctionalIFrameComponent
         title={`contract-${accession_number}-${sequence}`}
@@ -208,10 +212,10 @@ const ContractModal: FC<SearchResultFragment> = ({
         <RemoveScroll forwardProps noIsolation>
           <>
             <Box
-              as={typeof elements === 'string' ? 'pre' : 'div'}
+              as={isText ? 'pre' : 'div'}
               style={{
-                whiteSpace:
-                  typeof elements === 'string' ? 'pre-wrap' : 'normal',
+                zoom: '1',
+                whiteSpace: isText ? whiteSpace : 'normal',
                 color,
                 fontSize,
               }}
@@ -252,11 +256,9 @@ const ContractModal: FC<SearchResultFragment> = ({
             </Text>
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody px={[2, 4, 6]}>
             <SkeletonText isLoaded={!loading} noOfLines={30}>
-              <Box px={4} textAlign="left">
-                {elements}
-              </Box>
+              <Box textAlign="left">{elements}</Box>
             </SkeletonText>
           </ModalBody>
           <ModalFooter>
@@ -416,8 +418,8 @@ const ContractsPage: FC = () => {
             {...{ isLoading, contractCount }}
           />
           <Box
-            overflowY={['auto', 'auto', 'auto']}
-            maxHeight={['100%', '100%', '80vh']}
+            // overflowY={['auto', 'auto', 'auto']}
+            // maxHeight={['100%', '100%', '80vh']}
             minHeight="3rem"
             width="100%"
           >
