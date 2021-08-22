@@ -183,8 +183,8 @@ const ContractModal: FC<SearchResultFragment> = ({
   });
   const fontSize =
     useBreakpointValue(['90%', '100%', '110%', '120%']) || '100%';
-  const whiteSpace =
-    useBreakpointValue(['pre-line', 'pre-line', 'pre-wrap']) || 'pre-wrap';
+  const whiteSpace: 'pre-line' | 'pre-wrap' =
+    useBreakpointValue(['pre-line', 'pre-wrap', 'pre-wrap']) || 'pre-wrap';
   const color = useColorModeValue('black', 'white');
   let elements: JSX.Element | JSX.Element[] | string | null = null;
   if (data && domPurify && data.sec_filing_attachment_by_pk?.contents) {
