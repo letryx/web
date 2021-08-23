@@ -38,7 +38,7 @@ import {
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import { Layout } from 'components/layout';
-import createDOMPurify, { DOMPurifyI } from 'dompurify';
+import createDOMPurify from 'dompurify';
 import parse from 'html-react-parser';
 import {
   SearchResultFragment,
@@ -57,7 +57,7 @@ import { createPortal } from 'react-dom';
 import { MdFilterList, MdSearch } from 'react-icons/md';
 import { RemoveScroll } from 'react-remove-scroll';
 
-let domPurify: DOMPurifyI | null = null;
+let domPurify: createDOMPurify.DOMPurifyI | null;
 
 const isSSR = typeof window === 'undefined';
 
@@ -196,14 +196,11 @@ const ContractModal: FC<SearchResultFragment> = ({
       }
     );
     elements = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
+    elements = (Array.isArray(elements) ? elements : [elements]).map((el) =>
+      typeof el === 'string' ? <pre>{el}</pre> : el
+    );
     // check if all elemnts are strings and use <pre> if so
-    if (
-      Array.isArray(elements) &&
-      elements.every((x) => typeof x === 'string')
-    ) {
-      elements = elements.join('\n');
-    }
-    const isText = typeof elements === 'string';
+    const isText = elements.every((el) => typeof el === 'string');
     elements = (
       <FunctionalIFrameComponent
         title={`contract-${accession_number}-${sequence}`}
@@ -212,9 +209,7 @@ const ContractModal: FC<SearchResultFragment> = ({
         <RemoveScroll forwardProps noIsolation>
           <>
             <Box
-              as={isText ? 'pre' : 'div'}
               style={{
-                zoom: '1',
                 whiteSpace: isText ? whiteSpace : 'normal',
                 color,
                 fontSize,
