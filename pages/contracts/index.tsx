@@ -172,60 +172,65 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   );
 };
 
-const ContractModal: FC<SearchResultFragment> = ({
+const stringToDOM = (rawHtml: string | undefined): JSX.Element[] => {
+  if (!domPurify || !rawHtml) return [];
+  const html = domPurify.sanitize(rawHtml, {
+    // KEEP_CONTENT: false,
+    IN_PLACE: true,
+  });
+  const parsedHtml = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
+  return (Array.isArray(parsedHtml) ? parsedHtml : [parsedHtml]).map((el) =>
+    typeof el === 'string' && el.trim() ? <pre>{el}</pre> : <>{el}</>
+  );
+};
+
+interface ContractIFrameProps extends SearchResultFragment {
+  dom: JSX.Element[];
+}
+
+const ContractIFrame: FC<ContractIFrameProps> = ({
+  dom,
   accession_number,
   sequence,
 }) => {
+  const fontSize =
+    useBreakpointValue(['90%', '100%', '110%', '120%']) || '100%';
+  const color = useColorModeValue('black', 'white');
+
+  return (
+    <FunctionalIFrameComponent
+      title={`contract-${accession_number}-${sequence}`}
+      width="100%"
+    >
+      <RemoveScroll forwardProps noIsolation>
+        <>
+          <Box
+            style={{
+              color,
+              fontSize,
+            }}
+          >
+            {dom}
+          </Box>
+        </>
+      </RemoveScroll>
+    </FunctionalIFrameComponent>
+  );
+};
+
+const ContractModal: FC<SearchResultFragment> = (contract) => {
+  const { accession_number, sequence } = contract;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, loading } = useGetSecContractQuery({
     variables: { accession_number, sequence },
     skip: isSSR || !isOpen,
   });
-  const fontSize =
-    useBreakpointValue(['90%', '100%', '110%', '120%']) || '100%';
-  const whiteSpace: 'pre-line' | 'pre-wrap' =
-    useBreakpointValue(['pre-line', 'pre-wrap', 'pre-wrap']) || 'pre-wrap';
-  const color = useColorModeValue('black', 'white');
-  let elements: JSX.Element | JSX.Element[] | string | null = null;
-  if (data && domPurify && data.sec_filing_attachment_by_pk?.contents) {
-    const html = domPurify.sanitize(
-      data.sec_filing_attachment_by_pk?.contents,
-      {
-        // KEEP_CONTENT: false,
-        IN_PLACE: true,
-      }
-    );
-    elements = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
-    elements = (Array.isArray(elements) ? elements : [elements]).map((el) =>
-      typeof el === 'string' ? <pre>{el}</pre> : el
-    );
-    // check if all elemnts are strings and use <pre> if so
-    const isText = elements.every((el) => typeof el === 'string');
-    elements = (
-      <FunctionalIFrameComponent
-        title={`contract-${accession_number}-${sequence}`}
-        width="100%"
-      >
-        <RemoveScroll forwardProps noIsolation>
-          <>
-            <Box
-              style={{
-                whiteSpace: isText ? whiteSpace : 'normal',
-                color,
-                fontSize,
-              }}
-            >
-              {elements}
-            </Box>
-          </>
-        </RemoveScroll>
-      </FunctionalIFrameComponent>
-    );
-  }
+
   const { description, sec_filing, attachment_type } =
     data?.sec_filing_attachment_by_pk || {};
   const { filing_date, filing_type, sec_company } = sec_filing || {};
   const { name: companyName } = sec_company || {};
+  const dom = stringToDOM(data?.sec_filing_attachment_by_pk?.contents);
 
   return (
     <>
@@ -253,7 +258,7 @@ const ContractModal: FC<SearchResultFragment> = ({
           <ModalCloseButton />
           <ModalBody px={[2, 4, 6]}>
             <SkeletonText isLoaded={!loading} noOfLines={30}>
-              <Box textAlign="left">{elements}</Box>
+              <ContractIFrame {...{ dom, ...contract }} />
             </SkeletonText>
           </ModalBody>
           <ModalFooter>
