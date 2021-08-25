@@ -8,7 +8,7 @@ import NextDocument, {
   Main,
   NextScript,
 } from 'next/document';
-import fonts from 'styles/font-face';
+import globalStyles from 'styles/global-styles';
 
 export default class Document extends NextDocument {
   static getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
@@ -19,7 +19,7 @@ export default class Document extends NextDocument {
     return (
       <Html>
         <Head>
-          <Global styles={fonts} />
+          <Global styles={globalStyles} />
         </Head>
         <body>
           <ColorModeScript />
