@@ -49,7 +49,11 @@ const SearchBar: FC<SearchBarProps> = ({
       <MdSearch fontSize="1.5rem" />
     </InputLeftElement>
     <Input
+      type="text"
       autoFocus
+      autoCapitalize="off"
+      autoCorrect="off"
+      autoComplete="off"
       placeholder={placeholder}
       aria-label={placeholder}
       _placeholder={{ color: useColorModeValue('gray.600', 'gray.200') }}
