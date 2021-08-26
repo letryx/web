@@ -54,18 +54,21 @@ interface IFrameProps extends HTMLAttributes<HTMLElement> {
   src?: string;
   srcDoc?: string;
   width?: number | string;
+  propagationTargetId?: string;
 }
 
 export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   children,
   title,
+  propagationTargetId,
   ...props
 }) => {
   const [contentRef, setContentRef] = useState<HTMLIFrameElement | null>(null);
   const [paddingRight, setPaddingRight] = useState(0);
   const [height, setHeight] = useState(500);
-  const domBody = contentRef?.contentWindow?.document?.body;
-  const domHead = contentRef?.contentWindow?.document?.head;
+  const contentWindow = contentRef?.contentWindow;
+  const domBody = contentWindow?.document?.body;
+  const domHead = contentWindow?.document?.head;
   const { scrollHeight, clientHeight, scrollWidth, clientWidth } =
     domBody || {};
   const color = useColorModeValue('black', 'white');
@@ -78,6 +81,16 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
     }
     setHeight(domBody.scrollHeight);
   }, [domBody, scrollHeight, clientHeight, scrollWidth, clientWidth]);
+
+  useEffect(() => {
+    if (!propagationTargetId) return;
+    ['keyup', 'keydown'].forEach((eventType) =>
+      contentWindow?.addEventListener(eventType, (e) => {
+        const el = document.getElementById(propagationTargetId);
+        el?.dispatchEvent(new KeyboardEvent(eventType, e));
+      })
+    );
+  }, [contentWindow, propagationTargetId]);
 
   domBody?.setAttribute(
     'style',
@@ -153,6 +166,7 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
     <FunctionalIFrameComponent
       title={`contract-${accession_number}-${sequence}`}
       width="100%"
+      propagationTargetId={`contract-modal-${accession_number}-${sequence}`}
     >
       <RemoveScroll forwardProps noIsolation>
         <>
@@ -203,7 +217,10 @@ export const ContractModal: FC<SearchResultFragment> = (contract) => {
             </Text>
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody px={[2, 4, 6]}>
+          <ModalBody
+            px={[2, 4, 6]}
+            id={`contract-modal-${accession_number}-${sequence}`}
+          >
             <SkeletonText isLoaded={!loading} noOfLines={30}>
               <ContractIFrame {...{ dom, ...contract }} />
             </SkeletonText>
