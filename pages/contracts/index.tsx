@@ -25,7 +25,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
-import { ContractSnippet } from 'components/contract';
+import { ContractListItem } from 'components/contract';
 import { Layout } from 'components/layout';
 import { useSearchSecContractsQuery } from 'lib/generated/graphql/apollo-schema';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
@@ -94,8 +94,8 @@ const Filters: FC<FilterProps> = ({
   // const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box {...props}>
-      <Stack>
-        <Box pr={3} pb={5}>
+      <Stack spacing={5}>
+        <Box>
           <FormControl>
             <FormLabel>
               <Flex pb={1}>
@@ -130,7 +130,7 @@ const Filters: FC<FilterProps> = ({
             <FormHelperText>More...</FormHelperText>
           </FormControl>
         </Box>
-        <Box pr={3} pb={5}>
+        <Box pr={[0, 0, 3]}>
           <FormControl>
             <FormLabel>
               <Flex pb={1}>
@@ -139,11 +139,11 @@ const Filters: FC<FilterProps> = ({
                 </Text>
               </Flex>
             </FormLabel>
-            <InputGroup textAlign="right" pr={3}>
+            <InputGroup>
               <InputLeftAddon width={20}>After:</InputLeftAddon>
               <SingleDatepicker date={minDate} onDateChange={setMinDate} />
             </InputGroup>
-            <InputGroup pr={3}>
+            <InputGroup>
               <InputLeftAddon width={20}>Before:</InputLeftAddon>
               <SingleDatepicker date={maxDate} onDateChange={setMaxDate} />
             </InputGroup>
@@ -179,7 +179,7 @@ const ContractsPage: FC = () => {
       <Stack direction={['column', 'column', 'row']}>
         <Filters
           minWidth={60}
-          pt={[0, 0, 0]}
+          pt={0}
           {...{
             isLoading,
             companyCount,
@@ -212,7 +212,7 @@ const ContractsPage: FC = () => {
                       </Skeleton>
                     ))
                 : contracts.map((contract) => (
-                    <ContractSnippet
+                    <ContractListItem
                       key={`tr-data-${contract.accession_number}-${contract.sequence}`}
                       {...contract}
                     />

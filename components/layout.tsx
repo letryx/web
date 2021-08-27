@@ -33,8 +33,8 @@ export const Layout: FC<LayoutProps> = ({
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Container maxWidth="1200px">
-        <Container px={0} maxWidth="1200px" minHeight="75vh">
+      <Container maxWidth="1200px" overflow="hidden">
+        <Box px={0} maxWidth="1200px" minHeight="75vh">
           <TopBar hideNav={hideNav} />
           <Breadcrumb
             // fontWeight="semibold"
@@ -52,7 +52,7 @@ export const Layout: FC<LayoutProps> = ({
             ))}
           </Breadcrumb>
           <Box pt={4}>{children}</Box>
-        </Container>
+        </Box>
         <Footer />
       </Container>
     </div>

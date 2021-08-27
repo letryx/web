@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   ListItem,
   Modal,
   ModalBody,
@@ -11,6 +12,7 @@ import {
   ModalOverlay,
   Skeleton,
   SkeletonText,
+  Spacer,
   Text,
   useBreakpointValue,
   useColorModeValue,
@@ -237,23 +239,34 @@ export const ContractModal: FC<SearchResultFragment> = (contract) => {
   );
 };
 
-export const ContractSnippet: FC<SearchResultFragment> = (contractProps) => {
-  const {
-    company_name,
-    filing_type,
-    description,
-    attachment_type,
-    filing_date,
-  } = contractProps;
+export const ContractSnippet: FC<SearchResultFragment> = ({
+  description,
+  children,
+  attachment_type,
+  company_name,
+  filing_type,
+}) => (
+  <Flex>
+    <Box flexShrink={2} flexGrow={2}>
+      <Text flexShrink={3} casing="capitalize">
+        {description?.toLowerCase() || attachment_type}
+      </Text>
+      <Text flexShrink={3}>
+        {company_name} ({filing_type})
+      </Text>
+    </Box>
+    <Spacer minWidth="1rem" />
+    <Box alignSelf="center">{children}</Box>
+  </Flex>
+);
+
+export const ContractListItem: FC<SearchResultFragment> = (contractProps) => {
   return (
     <ListItem>
       <Box>
-        {filing_date}
-        {company_name}
-        {filing_type}
-        {attachment_type}
-        {description}
-        <ContractModal {...contractProps} />
+        <ContractSnippet {...contractProps}>
+          <ContractModal {...contractProps} />
+        </ContractSnippet>
       </Box>
     </ListItem>
   );

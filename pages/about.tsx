@@ -30,13 +30,12 @@ const Profile: FC<ProfileProps> = ({
 }) => (
   <Center>
     <Box
-      maxW="320px"
-      w="320px"
-      height="max-content"
+      w="300px"
       bg={useColorModeValue('white', 'gray.900')}
       boxShadow="2xl"
       rounded="lg"
-      p={6}
+      py={6}
+      px={4}
       textAlign="center"
     >
       <Avatar
@@ -100,7 +99,7 @@ const AboutPage: FC = () => {
           <Center>
             <Stack
               py="6"
-              spacing={12}
+              spacing={4}
               direction={['column', 'column', 'column', 'row']}
             >
               <Profile
