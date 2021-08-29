@@ -14,6 +14,7 @@ import { isEmpty } from '@chakra-ui/utils';
 import { LocalStorageWrapper, persistCache } from 'apollo3-cache-persist';
 import fetch from 'isomorphic-unfetch';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { isExpired } from './auth0';
 
 let accessToken: string | null = null;
 
@@ -41,7 +42,9 @@ const HTTP_URL = ssrMode
 const WS_URL = HTTP_URL.replace(/^http/i, 'ws');
 
 const requestAccessToken = async () => {
-  if (accessToken) return;
+  if (accessToken && !isExpired(accessToken)) {
+    return;
+  }
 
   const res = await fetch('/api/session');
   if (res.ok) {

@@ -59,6 +59,7 @@
     "html-react-parser": "^1.2.8",
     "isomorphic-unfetch": "^3.1.0",
     "jsonp": "^0.2.1",
+    "jwt-decode": "^3.1.2",
     "next": "^11.1.0",
     "next-mdx-remote": "^3.0.4",
     "next-with-apollo": "^5.2.1",
