@@ -17,6 +17,10 @@ jobs:
       GRAPHQL_API_SSR_URL: https://api.letryx.com/v1/graphql
       # use random secret to prevent `TypeError: "secret" is required`
       AUTH0_SECRET: Y1cgGEHhbYXt0ZZAblvC46NtW7aJhkqW
+      AUTH0_ISSUER_BASE_URL: https://letryx.us.auth0.com
+      AUTH0_BASE_URL: http://localhost:3000
+      AUTH0_CLIENT_ID: j2Zg8RLw6htnoB8I7hlKYxa8JVmDFUGR
+      AUTH0_CLIENT_SECRET: 2bAxof3JccJmKQIRIa7AwdpFk93qERx8_gjttfdzaUJLPfqWIOMxOyivToKOd-yZ
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
