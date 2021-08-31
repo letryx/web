@@ -27,6 +27,7 @@ import {
 import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { RemoveScroll } from 'react-remove-scroll';
+import { ShowDate } from './data';
 
 const isSSR = typeof window === 'undefined';
 let domPurify: createDOMPurify.DOMPurifyI | null;
@@ -245,8 +246,12 @@ export const ContractSnippet: FC<SearchResultFragment> = ({
   attachment_type,
   company_name,
   filing_type,
+  filing_date,
 }) => (
   <Flex>
+    <Box alignSelf="center" px={4} width="160px" textAlign="right">
+      <ShowDate date={filing_date} kind="short" />
+    </Box>
     <Box flexShrink={2} flexGrow={2}>
       <Text flexShrink={3} casing="capitalize">
         {description?.toLowerCase() || attachment_type}

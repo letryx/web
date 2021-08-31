@@ -33,6 +33,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 'off',
+    'react/require-default-props': 'off',
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': [0],
     indent: [0],

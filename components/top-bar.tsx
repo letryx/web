@@ -19,9 +19,11 @@ const Nav: FC = () => (
   </nav>
 );
 
-const TopBar: FC<{ hideNav?: boolean; user?: string }> = ({
-  hideNav = false,
-}) => (
+interface TopBarProps {
+  hideNav?: boolean;
+}
+
+const TopBar: FC<TopBarProps> = ({ hideNav = false }) => (
   <header>
     <Flex py={4} justifyContent="space-between" alignItems="right">
       <Flex
