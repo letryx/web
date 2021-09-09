@@ -602,42 +602,42 @@ export type sec_company_mutation_responseFieldPolicy = {
 };
 export type sec_contractKeySpecifier = (
   | 'accession_number'
-  | 'sequence'
-  | 'company_name'
+  | 'attachment_type'
   | 'company_cik'
   | 'company_geo'
+  | 'company_name'
   | 'company_sic'
   | 'company_sic_name'
-  | 'filing_type'
-  | 'filing_header'
-  | 'filing_date'
   | 'description'
-  | 'attachment_type'
-  | 'tsv_search_text'
+  | 'filing_date'
+  | 'filing_header'
+  | 'filing_type'
   | 'relevance'
   | 'sec_company'
   | 'sec_filing'
   | 'sec_filing_attachment'
+  | 'sequence'
+  | 'tsv_search_text'
   | sec_contractKeySpecifier
 )[];
 export type sec_contractFieldPolicy = {
   accession_number?: FieldPolicy<any> | FieldReadFunction<any>;
-  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
-  company_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
   company_cik?: FieldPolicy<any> | FieldReadFunction<any>;
   company_geo?: FieldPolicy<any> | FieldReadFunction<any>;
+  company_name?: FieldPolicy<any> | FieldReadFunction<any>;
   company_sic?: FieldPolicy<any> | FieldReadFunction<any>;
   company_sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_header?: FieldPolicy<any> | FieldReadFunction<any>;
-  filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
-  attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
-  tsv_search_text?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_header?: FieldPolicy<any> | FieldReadFunction<any>;
+  filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
   relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sec_company?: FieldPolicy<any> | FieldReadFunction<any>;
   sec_filing?: FieldPolicy<any> | FieldReadFunction<any>;
   sec_filing_attachment?: FieldPolicy<any> | FieldReadFunction<any>;
+  sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+  tsv_search_text?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_aggregateKeySpecifier = (
   | 'aggregate'

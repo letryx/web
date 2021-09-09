@@ -4,10 +4,12 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -1609,18 +1611,16 @@ export enum Sec_Company_Update_Column {
 export type Sec_Contract = {
   __typename?: 'sec_contract';
   accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
-  company_name: Scalars['String'];
+  attachment_type: Scalars['String'];
   company_cik: Scalars['String'];
   company_geo: Scalars['String'];
+  company_name: Scalars['String'];
   company_sic: Scalars['String'];
   company_sic_name: Scalars['String'];
-  filing_type: Scalars['String'];
-  filing_header: Scalars['String'];
-  filing_date: Scalars['String'];
   description: Scalars['String'];
-  attachment_type: Scalars['String'];
-  tsv_search_text: Scalars['String'];
+  filing_date: Scalars['String'];
+  filing_header: Scalars['String'];
+  filing_type: Scalars['String'];
   relevance: Scalars['Float'];
   /** An object relationship */
   sec_company?: Maybe<Sec_Company>;
@@ -1628,6 +1628,8 @@ export type Sec_Contract = {
   sec_filing?: Maybe<Sec_Filing>;
   /** An object relationship */
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment>;
+  sequence: Scalars['Int'];
+  tsv_search_text: Scalars['String'];
 };
 
 /** aggregated selection of "sec_contract" */
