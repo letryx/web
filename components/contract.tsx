@@ -38,7 +38,17 @@ if (!isSSR) {
     // remove negative margins
     const style = node.getAttribute('style') || '';
     const negMarginsRegex = /(margin-\w+)\s*:\s*-[\d.]*\s*\w*/gim;
-    node.setAttribute('style', style.replaceAll(negMarginsRegex, '$1: 0'));
+    node.setAttribute('style', style.replaceAll(negMarginsRegex, '$1: 4'));
+    if (
+      node.tagName === 'DIV' &&
+      node.getAttribute('align')?.toLowerCase() === 'justify'
+    ) {
+      const alignCenterRegex = /(.*)text-align\w*:\s*center\s*;?(.*)/gim;
+      node.setAttribute(
+        'style',
+        node.getAttribute('style')?.replaceAll(alignCenterRegex, '$1 $2') || ''
+      );
+    }
   });
 }
 
@@ -121,6 +131,7 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
           color: ${color} !important;
           border-color: ${color} !important;
           background-color: transparent !important;
+          line-height: 1.2;
         }`;
     }
   }
