@@ -1,7 +1,5 @@
 import {
-  Box,
-  Flex,
-  Spacer,
+  Skeleton,
   Table,
   Tbody,
   Td,
@@ -16,32 +14,10 @@ import { ShowDate } from 'components/date';
 import { SearchResultFragment } from 'lib/generated/graphql/apollo-schema';
 import { FC } from 'react';
 
-export const ContractSnippet: FC<SearchResultFragment> = ({
-  description,
-  children,
-  attachment_type,
-  company_name,
-  filing_type,
-  filing_date,
-}) => (
-  <Flex>
-    <Box alignSelf="center" px={4} width="160px" textAlign="right">
-      <ShowDate date={filing_date} kind="short" />
-    </Box>
-    <Box flexShrink={2} flexGrow={2}>
-      <Text flexShrink={3} casing="capitalize">
-        {description?.toLowerCase() || attachment_type}
-      </Text>
-      <Text flexShrink={3}>
-        {company_name} ({filing_type})
-      </Text>
-    </Box>
-    <Spacer minWidth="1rem" />
-    <Box alignSelf="center">{children}</Box>
-  </Flex>
-);
+export const PAGE_SIZE = 12;
 
 interface ContractTableProps {
+  isLoading: boolean;
   contracts: SearchResultFragment[];
 }
 
@@ -76,7 +52,10 @@ const ContractRow: FC<ContractRowProps> = ({ contract }) => {
   );
 };
 
-export const TableContent: FC<ContractTableProps> = ({ contracts }) => {
+export const TableContent: FC<ContractTableProps> = ({
+  contracts,
+  isLoading,
+}) => {
   return (
     <Table variant="simple" my="6" borderWidth="1px" fontSize="sm">
       <Thead bg={mode('gray.50', 'gray.800')}>
@@ -88,9 +67,15 @@ export const TableContent: FC<ContractTableProps> = ({ contracts }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {contracts.map((contract) => (
-          <ContractRow contract={contract} />
-        ))}
+        {isLoading
+          ? [...Array(PAGE_SIZE).keys()].map(() => (
+              <Tr>
+                <Td colSpan={4}>
+                  <Skeleton width="100%" height="43px" />
+                </Td>
+              </Tr>
+            ))
+          : contracts.map((contract) => <ContractRow contract={contract} />)}
       </Tbody>
     </Table>
   );

@@ -3130,6 +3130,8 @@ export type SearchSecContractsQueryVariables = Exact<{
   search: Scalars['String'];
   minDate?: Maybe<Scalars['date']>;
   maxDate?: Maybe<Scalars['date']>;
+  limit: Scalars['Int'];
+  offset?: Maybe<Scalars['Int']>;
 }>;
 
 export type SearchSecContractsQuery = {
@@ -3297,7 +3299,13 @@ export const CurrentUserFragmentDoc = gql`
   }
 `;
 export const SearchSecContractsDocument = gql`
-  query SearchSECContracts($search: String!, $minDate: date, $maxDate: date) {
+  query SearchSECContracts(
+    $search: String!
+    $minDate: date
+    $maxDate: date
+    $limit: Int!
+    $offset: Int
+  ) {
     sec_search_aggregate(
       args: {
         search: $search
@@ -3317,8 +3325,9 @@ export const SearchSecContractsDocument = gql`
         filing_date_gt: $minDate
         filing_date_lt: $maxDate
       }
-      limit: 20
       order_by: { relevance: desc }
+      limit: $limit
+      offset: $offset
     ) {
       ...SearchResult
     }
@@ -3341,6 +3350,8 @@ export const SearchSecContractsDocument = gql`
  *      search: // value for 'search'
  *      minDate: // value for 'minDate'
  *      maxDate: // value for 'maxDate'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
  *   },
  * });
  */

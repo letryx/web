@@ -13,7 +13,13 @@ fragment SearchResult on sec_contract {
 }
 
 # description: { _ilike: "%purchase and sale%", _nilike: "%amendment%" }
-query SearchSECContracts($search: String!, $minDate: date, $maxDate: date) {
+query SearchSECContracts(
+  $search: String!
+  $minDate: date
+  $maxDate: date
+  $limit: Int!
+  $offset: Int
+) {
   sec_search_aggregate(
     args: {
       search: $search
@@ -33,8 +39,9 @@ query SearchSECContracts($search: String!, $minDate: date, $maxDate: date) {
       filing_date_gt: $minDate
       filing_date_lt: $maxDate
     }
-    limit: 20
     order_by: { relevance: desc }
+    limit: $limit
+    offset: $offset
   ) {
     ...SearchResult
   }
