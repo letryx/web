@@ -15,7 +15,6 @@ import {
   InputLeftElement,
   InputProps,
   InputRightAddon,
-  List,
   Skeleton,
   Spacer,
   Stack,
@@ -25,7 +24,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
-import { ContractListItem } from 'components/contract';
+import { TableContent } from 'components/contract/table';
 import { Layout } from 'components/layout';
 import { useSearchSecContractsQuery } from 'lib/generated/graphql/apollo-schema';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
@@ -195,29 +194,8 @@ const ContractsPage: FC = () => {
             setValue={setSearch}
             {...{ isLoading, contractCount }}
           />
-          <Box
-            // overflowY={['auto', 'auto', 'auto']}
-            // maxHeight={['100%', '100%', '80vh']}
-            minHeight="3rem"
-            width="100%"
-          >
-            <List variant="striped" width="100%" spacing={3}>
-              {isLoading
-                ? Array(20)
-                    .fill(0)
-                    .map((_, i) => (
-                      // eslint-disable-next-line react/no-array-index-key
-                      <Skeleton key={`skele-${i}`}>
-                        <Box width="100%" height="100px" />
-                      </Skeleton>
-                    ))
-                : contracts.map((contract) => (
-                    <ContractListItem
-                      key={`tr-data-${contract.accession_number}-${contract.sequence}`}
-                      {...contract}
-                    />
-                  ))}
-            </List>
+          <Box minHeight="3rem" width="100%">
+            <TableContent contracts={contracts} />
           </Box>
         </VStack>
       </Stack>

@@ -1,33 +1,10 @@
-import {
-  Box,
-  Button,
-  Flex,
-  ListItem,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Skeleton,
-  SkeletonText,
-  Spacer,
-  Text,
-  useBreakpointValue,
-  useColorModeValue,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Box, useBreakpointValue, useColorModeValue } from '@chakra-ui/react';
 import createDOMPurify from 'dompurify';
 import parse from 'html-react-parser';
-import {
-  SearchResultFragment,
-  useGetSecContractQuery,
-} from 'lib/generated/graphql/apollo-schema';
+import { SearchResultFragment } from 'lib/generated/graphql/apollo-schema';
 import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { RemoveScroll } from 'react-remove-scroll';
-import { ShowDate } from './data';
 
 const isSSR = typeof window === 'undefined';
 let domPurify: createDOMPurify.DOMPurifyI | null;
@@ -164,17 +141,18 @@ const stringToDOM = (rawHtml: string | undefined): JSX.Element[] => {
 };
 
 interface ContractIFrameProps extends SearchResultFragment {
-  dom: JSX.Element[];
+  htmlString: string;
 }
 
 export const ContractIFrame: FC<ContractIFrameProps> = ({
-  dom,
+  htmlString,
   accession_number,
   sequence,
 }) => {
   const fontSize =
     useBreakpointValue(['90%', '100%', '110%', '120%']) || '100%';
   const color = useColorModeValue('black', 'white');
+  const dom = stringToDOM(htmlString);
 
   return (
     <FunctionalIFrameComponent
@@ -190,100 +168,5 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
         </>
       </RemoveScroll>
     </FunctionalIFrameComponent>
-  );
-};
-
-export const ContractModal: FC<SearchResultFragment> = (contract) => {
-  const { accession_number, sequence } = contract;
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, loading } = useGetSecContractQuery({
-    variables: { accession_number, sequence },
-    skip: isSSR || !isOpen,
-  });
-
-  const { description, sec_filing, attachment_type } =
-    data?.sec_filing_attachment_by_pk || {};
-  const { filing_date, filing_type, sec_company } = sec_filing || {};
-  const { name: companyName } = sec_company || {};
-  const dom = stringToDOM(data?.sec_filing_attachment_by_pk?.contents);
-
-  return (
-    <>
-      <Button onClick={onOpen}>View</Button>
-      <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
-        <ModalOverlay />
-        <ModalContent width="95vw" maxWidth="900px">
-          <ModalHeader>
-            {loading ? (
-              <Skeleton>{'x'.repeat(20)}</Skeleton>
-            ) : (
-              description && (
-                <Text as="span" mr={3}>
-                  {description}
-                </Text>
-              )
-            )}
-            <Text as="span" fontSize="80%" fontWeight="normal">
-              ({filing_type} - {attachment_type})
-            </Text>
-            <Text fontSize="80%" fontWeight="normal">
-              Filed by {companyName} on {filing_date?.toString()}
-            </Text>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody
-            px={[2, 4, 6]}
-            id={`contract-modal-${accession_number}-${sequence}`}
-          >
-            <SkeletonText isLoaded={!loading} noOfLines={30}>
-              <ContractIFrame {...{ dom, ...contract }} />
-            </SkeletonText>
-          </ModalBody>
-          <ModalFooter>
-            <Button mr={3} onClick={onClose}>
-              Close
-            </Button>
-            {/* <Button variant="ghost">Secondary Action</Button> */}
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  );
-};
-
-export const ContractSnippet: FC<SearchResultFragment> = ({
-  description,
-  children,
-  attachment_type,
-  company_name,
-  filing_type,
-  filing_date,
-}) => (
-  <Flex>
-    <Box alignSelf="center" px={4} width="160px" textAlign="right">
-      <ShowDate date={filing_date} kind="short" />
-    </Box>
-    <Box flexShrink={2} flexGrow={2}>
-      <Text flexShrink={3} casing="capitalize">
-        {description?.toLowerCase() || attachment_type}
-      </Text>
-      <Text flexShrink={3}>
-        {company_name} ({filing_type})
-      </Text>
-    </Box>
-    <Spacer minWidth="1rem" />
-    <Box alignSelf="center">{children}</Box>
-  </Flex>
-);
-
-export const ContractListItem: FC<SearchResultFragment> = (contractProps) => {
-  return (
-    <ListItem>
-      <Box>
-        <ContractSnippet {...contractProps}>
-          <ContractModal {...contractProps} />
-        </ContractSnippet>
-      </Box>
-    </ListItem>
   );
 };
