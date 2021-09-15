@@ -44,7 +44,9 @@ const ContractRow: FC<ContractRowProps> = ({ contract }) => {
         <Text>{description || `${attachment_type}`}</Text>
         <Text>{company_name}</Text>
       </Td>
-      <Th>{filing_type}</Th>
+      <Th>
+        <Text>{filing_type}</Text>
+      </Th>
       <Td textAlign="right">
         <ContractModal {...contract} />
       </Td>

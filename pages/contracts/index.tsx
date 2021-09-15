@@ -104,6 +104,25 @@ const Filters: FC<FilterProps> = ({
   return (
     <Box {...props}>
       <Stack spacing={5}>
+        <Box pr={[0, 0, 3]}>
+          <FormControl>
+            <FormLabel>
+              <Flex pb={1}>
+                <Text pt={1} fontSize="1.2rem" height="100%" as="span">
+                  Filing Date
+                </Text>
+              </Flex>
+            </FormLabel>
+            <InputGroup>
+              <InputLeftAddon width={20}>After:</InputLeftAddon>
+              <SingleDatepicker date={minDate} onDateChange={setMinDate} />
+            </InputGroup>
+            <InputGroup>
+              <InputLeftAddon width={20}>Before:</InputLeftAddon>
+              <SingleDatepicker date={maxDate} onDateChange={setMaxDate} />
+            </InputGroup>
+          </FormControl>
+        </Box>
         <Box>
           <FormControl>
             <FormLabel>
@@ -139,25 +158,6 @@ const Filters: FC<FilterProps> = ({
             <FormHelperText>More...</FormHelperText>
           </FormControl>
         </Box>
-        <Box pr={[0, 0, 3]}>
-          <FormControl>
-            <FormLabel>
-              <Flex pb={1}>
-                <Text pt={1} fontSize="1.2rem" height="100%" as="span">
-                  Filing Date
-                </Text>
-              </Flex>
-            </FormLabel>
-            <InputGroup>
-              <InputLeftAddon width={20}>After:</InputLeftAddon>
-              <SingleDatepicker date={minDate} onDateChange={setMinDate} />
-            </InputGroup>
-            <InputGroup>
-              <InputLeftAddon width={20}>Before:</InputLeftAddon>
-              <SingleDatepicker date={maxDate} onDateChange={setMaxDate} />
-            </InputGroup>
-          </FormControl>
-        </Box>
       </Stack>
     </Box>
   );
@@ -186,6 +186,10 @@ const ContractsPage: FC = () => {
       },
     });
 
+  useEffect(
+    () => setCurrentPage(1),
+    [search, minDate, maxDate, setCurrentPage]
+  );
   const { data, loading: isLoading } = useSearchSecContractsQuery({
     variables: {
       minDate,
@@ -208,7 +212,7 @@ const ContractsPage: FC = () => {
       <Stack direction={['column', 'column', 'row']}>
         <Filters
           minWidth={60}
-          pt={0}
+          pt={[0, 0, 7]}
           {...{
             isLoading,
             companyCount,
