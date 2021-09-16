@@ -104,7 +104,7 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
           margin-right: -${paddingRight}px;
         }
 
-        p, font, span, tr, td {
+        p, font, span, tr, td, table {
           color: ${color} !important;
           border-color: ${color} !important;
           background-color: transparent !important;

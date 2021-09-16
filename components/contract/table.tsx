@@ -44,10 +44,10 @@ const ContractRow: FC<ContractRowProps> = ({ contract }) => {
         <Text>{description || `${attachment_type}`}</Text>
         <Text>{company_name}</Text>
       </Td>
-      <Th>
+      <Th isNumeric>
         <Text>{filing_type}</Text>
       </Th>
-      <Td textAlign="right">
+      <Td isNumeric>
         <ContractModal {...contract} />
       </Td>
     </Tr>
@@ -63,8 +63,8 @@ export const TableContent: FC<ContractTableProps> = ({
       <Thead bg={mode('gray.50', 'gray.800')}>
         <Tr>
           <Th isNumeric>Filing Date</Th>
-          <Th>Description / Filer</Th>
-          <Th>Filing Type</Th>
+          <Th width="60%">Description / Filer</Th>
+          <Th isNumeric>Filing Type</Th>
           <Th />
         </Tr>
       </Thead>
