@@ -12,11 +12,8 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import {
   Box,
   BoxProps,
-  Checkbox,
-  CheckboxGroup,
   Flex,
   FormControl,
-  FormHelperText,
   FormLabel,
   IconButton,
   Input,
@@ -152,10 +149,10 @@ const Filters: FC<FilterProps> = ({
                 </Tooltip>
               </Flex>
             </FormLabel>
-            <CheckboxGroup>
+            {/* <CheckboxGroup>
               <Checkbox>yeah ok</Checkbox>
             </CheckboxGroup>
-            <FormHelperText>More...</FormHelperText>
+            <FormHelperText>More...</FormHelperText> */}
           </FormControl>
         </Box>
       </Stack>

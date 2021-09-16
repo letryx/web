@@ -40,13 +40,22 @@ const ContractRow: FC<ContractRowProps> = ({ contract }) => {
       <Td isNumeric>
         <ShowDate kind="short" date={filing_date} />
       </Td>
-      <Td>
-        <Text>{description || `${attachment_type}`}</Text>
-        <Text>{company_name}</Text>
-      </Td>
       <Th isNumeric>
-        <Text>{filing_type}</Text>
+        <Text fontSize="0.9rem" fontWeight="semibold">
+          {filing_type}
+        </Text>
+        <Text fontSize="0.7rem" fontWeight="normal">
+          {attachment_type}
+        </Text>
       </Th>
+      <Td>
+        <Text casing="capitalize">
+          {description?.toLowerCase() || `${attachment_type}`}
+        </Text>
+        <Text fontWeight="semibold" casing="capitalize">
+          {company_name.toLowerCase()}
+        </Text>
+      </Td>
       <Td isNumeric>
         <ContractModal {...contract} />
       </Td>
@@ -59,12 +68,12 @@ export const TableContent: FC<ContractTableProps> = ({
   isLoading,
 }) => {
   return (
-    <Table variant="simple" my="6" borderWidth="1px" fontSize="sm">
+    <Table variant="simple" borderWidth="1px" fontSize="0.9rem">
       <Thead bg={mode('gray.50', 'gray.800')}>
         <Tr>
           <Th isNumeric>Filing Date</Th>
-          <Th width="60%">Description / Filer</Th>
           <Th isNumeric>Filing Type</Th>
+          <Th width="60%">Description / Filer</Th>
           <Th />
         </Tr>
       </Thead>
