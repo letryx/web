@@ -4,7 +4,7 @@ export function get<T>(key: string): T | undefined {
   if (typeof window !== 'undefined') {
     const data = window.localStorage.getItem(key);
     if (data) {
-      const val: T = JSON.parse(data);
+      const val = JSON.parse(data) as T;
       return val;
     }
   }

@@ -21,7 +21,7 @@ import {
 } from 'pages/api/mockups/permitted-encumbrances';
 import { FC } from 'react';
 
-export const getStaticProps: GetStaticProps = async () => ({
+export const getStaticProps: GetStaticProps = () => ({
   props: { clause: clauseComparison },
   revalidate: 1, // in seconds
 });
@@ -132,6 +132,7 @@ const Mockup: FC<{ clause: ISection }> = ({ clause }) => {
                 (
                 <Text
                   as="span"
+                  // eslint-disable-next-line react-hooks/rules-of-hooks
                   color={useColorModeValue('gray.700', 'gray.100')}
                 >
                   {clauseName}

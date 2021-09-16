@@ -1338,7 +1338,7 @@ export type user_variance_fieldsFieldPolicy = {
   default_org_id?: FieldPolicy<any> | FieldReadFunction<any>;
   id?: FieldPolicy<any> | FieldReadFunction<any>;
 };
-export type TypedTypePolicies = TypePolicies & {
+export type StrictTypedTypePolicies = {
   migrations?: Omit<TypePolicy, 'fields' | 'keyFields'> & {
     keyFields?:
       | false
@@ -2002,3 +2002,4 @@ export type TypedTypePolicies = TypePolicies & {
     fields?: user_variance_fieldsFieldPolicy;
   };
 };
+export type TypedTypePolicies = StrictTypedTypePolicies & TypePolicies;

@@ -3,6 +3,7 @@ fragment SearchResult on sec_contract {
   sequence
   company_name
   company_cik
+  company_sic_name
   # company_geo
   filing_type
   # filing_metadata
@@ -12,8 +13,20 @@ fragment SearchResult on sec_contract {
 }
 
 # description: { _ilike: "%purchase and sale%", _nilike: "%amendment%" }
-query SearchSECContracts($search: String!) {
-  sec_search_aggregate(args: { search: $search }) {
+query SearchSECContracts(
+  $search: String!
+  $minDate: date
+  $maxDate: date
+  $limit: Int!
+  $offset: Int
+) {
+  sec_search_aggregate(
+    args: {
+      search: $search
+      filing_date_gt: $minDate
+      filing_date_lt: $maxDate
+    }
+  ) {
     aggregate {
       filing_count: count(columns: accession_number, distinct: true)
       company_count: count(columns: company_cik, distinct: true)
@@ -21,10 +34,41 @@ query SearchSECContracts($search: String!) {
     }
   }
   sec_search(
-    args: { search: $search }
-    limit: 20
+    args: {
+      search: $search
+      filing_date_gt: $minDate
+      filing_date_lt: $maxDate
+    }
     order_by: { relevance: desc }
+    limit: $limit
+    offset: $offset
   ) {
     ...SearchResult
+  }
+}
+
+fragment SECContract on sec_filing_attachment {
+  sequence
+  sec_filing {
+    accession_number
+    filing_date
+    filing_type
+    sec_company {
+      name
+      sic
+      sic_name
+    }
+  }
+  attachment_type
+  description
+  contents
+}
+
+query GetSECContract($accession_number: String!, $sequence: Int!) {
+  sec_filing_attachment_by_pk(
+    accession_number: $accession_number
+    sequence: $sequence
+  ) {
+    ...SECContract
   }
 }

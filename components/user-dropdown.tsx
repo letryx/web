@@ -4,20 +4,21 @@ import {
   Button,
   HStack,
   Icon,
+  Link,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
+  Skeleton,
 } from '@chakra-ui/react';
 import { useAppContext } from 'components/app-provider';
-import { NextChakraLink } from 'components/next-chakra-link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { CgLogOut } from 'react-icons/cg';
 
 export const UserDropdown: FC = () => {
-  const { currentUser } = useAppContext();
+  const { currentUser, isAppLoading } = useAppContext();
   const router = useRouter();
 
   return currentUser?.name ? (
@@ -45,23 +46,22 @@ export const UserDropdown: FC = () => {
         <MenuDivider />
         <MenuItem icon={<Icon as={SettingsIcon} />}>Settings</MenuItem>
         <MenuDivider />
-        <NextChakraLink
-          href="/api/auth/logout"
-          _hover={{ textDecoration: 'none' }}
-        >
+        <Link href="/api/auth/logout" _hover={{ textDecoration: 'none' }}>
           <MenuItem icon={<Icon w={4} h={4} as={CgLogOut} />}>Log Out</MenuItem>
-        </NextChakraLink>
+        </Link>
       </MenuList>
     </Menu>
   ) : (
-    <NextChakraLink
-      href={`/api/auth/login?returnTo=${router.asPath}`}
-      textDecoration="none"
-      _hover={{ textDecoration: 'none' }}
-    >
-      <Button colorScheme="gray" variant="solid" size="sm">
-        Log In
-      </Button>
-    </NextChakraLink>
+    <Skeleton isLoaded={!isAppLoading}>
+      <Link
+        href={`/api/auth/login?returnTo=${router.asPath}`}
+        textDecoration="none"
+        _hover={{ textDecoration: 'none' }}
+      >
+        <Button colorScheme="gray" variant="solid" size="sm">
+          Log In
+        </Button>
+      </Link>
+    </Skeleton>
   );
 };

@@ -10,17 +10,30 @@ import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { isEmpty } from '@chakra-ui/utils';
+import { LocalStorageWrapper, persistCache } from 'apollo3-cache-persist';
 import fetch from 'isomorphic-unfetch';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { isExpired } from './auth0';
 
 let accessToken: string | null = null;
+
+const ssrMode = typeof window === 'undefined';
+
+export const cache = new InMemoryCache({});
+
+if (!ssrMode) {
+  await persistCache({
+    cache,
+    storage: new LocalStorageWrapper(window.localStorage),
+    debug: process.env.NODE_ENV === 'development',
+  });
+}
 
 // this is replaced by the client url via next.config.js
 if (!process.env.GRAPHQL_API_SSR_URL || !process.env.GRAPHQL_API_URL) {
   throw new Error('GRAPHQL_API_SSR_URL must be set!');
 }
-
-const ssrMode = typeof window === 'undefined';
 
 const HTTP_URL = ssrMode
   ? process.env.GRAPHQL_API_SSR_URL
@@ -29,12 +42,14 @@ const HTTP_URL = ssrMode
 const WS_URL = HTTP_URL.replace(/^http/i, 'ws');
 
 const requestAccessToken = async () => {
-  if (accessToken) return;
+  if (accessToken && !isExpired(accessToken)) {
+    return;
+  }
 
   const res = await fetch('/api/session');
   if (res.ok) {
-    const json = await res.json();
-    accessToken = json.accessToken;
+    const json = (await res.json()) as Record<string, string>;
+    accessToken = json?.accessToken || null;
   } else {
     accessToken = null;
   }
@@ -79,7 +94,7 @@ if (!ssrMode) {
       return (
         def.kind === 'OperationDefinition' &&
         def.operation === 'subscription' &&
-        typeof window !== 'undefined'
+        !ssrMode
       );
     },
     new WebSocketLink(
@@ -100,12 +115,11 @@ if (!ssrMode) {
   );
 }
 
-export function createApolloClient(
+export const createApolloClient = (
   initialState: NormalizedCacheObject
-): ApolloClient<NormalizedCacheObject> {
-  return new ApolloClient<NormalizedCacheObject>({
+): ApolloClient<NormalizedCacheObject> =>
+  new ApolloClient<NormalizedCacheObject>({
     ssrMode,
     link,
-    cache: new InMemoryCache().restore(initialState),
+    cache: isEmpty(initialState) ? cache : cache.restore(initialState),
   });
-}

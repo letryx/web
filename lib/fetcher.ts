@@ -21,7 +21,7 @@ export async function fetcher<T>(
   opts: RequestInit = {}
 ): Promise<APIResponse<T>> {
   const res = await fetch(url, withAuth(opts));
-  const data: T = await res.json();
+  const data = (await res.json()) as T;
   return { res, data };
 }
 

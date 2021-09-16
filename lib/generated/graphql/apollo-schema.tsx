@@ -4,10 +4,12 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -16,7 +18,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  date: GraphQL_Date;
+  date: Date;
   timestamp: Date;
   timestamptz: Date;
   tsvector: String;
@@ -1608,26 +1610,26 @@ export enum Sec_Company_Update_Column {
 /** columns and relationships of "sec_contract" */
 export type Sec_Contract = {
   __typename?: 'sec_contract';
-  accession_number?: Maybe<Scalars['String']>;
-  attachment_type?: Maybe<Scalars['String']>;
-  company_cik?: Maybe<Scalars['String']>;
-  company_geo?: Maybe<Scalars['String']>;
-  company_name?: Maybe<Scalars['String']>;
-  company_sic?: Maybe<Scalars['String']>;
-  company_sic_name?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  filing_date?: Maybe<Scalars['date']>;
-  filing_header?: Maybe<Scalars['String']>;
-  filing_type?: Maybe<Scalars['String']>;
-  relevance?: Maybe<Scalars['Float']>;
+  accession_number: Scalars['String'];
+  attachment_type: Scalars['String'];
+  company_cik: Scalars['String'];
+  company_geo: Scalars['String'];
+  company_name: Scalars['String'];
+  company_sic: Scalars['String'];
+  company_sic_name: Scalars['String'];
+  description: Scalars['String'];
+  filing_date: Scalars['String'];
+  filing_header: Scalars['String'];
+  filing_type: Scalars['String'];
+  relevance: Scalars['Float'];
   /** An object relationship */
   sec_company?: Maybe<Sec_Company>;
   /** An object relationship */
   sec_filing?: Maybe<Sec_Filing>;
   /** An object relationship */
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment>;
-  sequence?: Maybe<Scalars['Int']>;
-  tsv_search_text?: Maybe<Scalars['tsvector']>;
+  sequence: Scalars['Int'];
+  tsv_search_text: Scalars['String'];
 };
 
 /** aggregated selection of "sec_contract" */
@@ -3113,18 +3115,23 @@ export type User_Variance_Order_By = {
 
 export type SearchResultFragment = {
   __typename?: 'sec_contract';
-  accession_number?: Maybe<string>;
-  sequence?: Maybe<number>;
-  company_name?: Maybe<string>;
-  company_cik?: Maybe<string>;
-  filing_type?: Maybe<string>;
-  filing_date?: Maybe<GraphQL_Date>;
-  description?: Maybe<string>;
-  attachment_type?: Maybe<string>;
+  accession_number: string;
+  sequence: number;
+  company_name: string;
+  company_cik: string;
+  company_sic_name: string;
+  filing_type: string;
+  filing_date: string;
+  description: string;
+  attachment_type: string;
 };
 
 export type SearchSecContractsQueryVariables = Exact<{
   search: Scalars['String'];
+  minDate?: Maybe<Scalars['date']>;
+  maxDate?: Maybe<Scalars['date']>;
+  limit: Scalars['Int'];
+  offset?: Maybe<Scalars['Int']>;
 }>;
 
 export type SearchSecContractsQuery = {
@@ -3140,14 +3147,63 @@ export type SearchSecContractsQuery = {
   };
   sec_search: Array<{
     __typename?: 'sec_contract';
-    accession_number?: Maybe<string>;
-    sequence?: Maybe<number>;
-    company_name?: Maybe<string>;
-    company_cik?: Maybe<string>;
-    filing_type?: Maybe<string>;
-    filing_date?: Maybe<GraphQL_Date>;
+    accession_number: string;
+    sequence: number;
+    company_name: string;
+    company_cik: string;
+    company_sic_name: string;
+    filing_type: string;
+    filing_date: string;
+    description: string;
+    attachment_type: string;
+  }>;
+};
+
+export type SecContractFragment = {
+  __typename?: 'sec_filing_attachment';
+  sequence: number;
+  attachment_type: string;
+  description?: Maybe<string>;
+  contents: string;
+  sec_filing: {
+    __typename?: 'sec_filing';
+    accession_number: string;
+    filing_date: Date;
+    filing_type: string;
+    sec_company: {
+      __typename?: 'sec_company';
+      name: string;
+      sic: string;
+      sic_name: string;
+    };
+  };
+};
+
+export type GetSecContractQueryVariables = Exact<{
+  accession_number: Scalars['String'];
+  sequence: Scalars['Int'];
+}>;
+
+export type GetSecContractQuery = {
+  __typename?: 'query_root';
+  sec_filing_attachment_by_pk?: Maybe<{
+    __typename?: 'sec_filing_attachment';
+    sequence: number;
+    attachment_type: string;
     description?: Maybe<string>;
-    attachment_type?: Maybe<string>;
+    contents: string;
+    sec_filing: {
+      __typename?: 'sec_filing';
+      accession_number: string;
+      filing_date: Date;
+      filing_type: string;
+      sec_company: {
+        __typename?: 'sec_company';
+        name: string;
+        sic: string;
+        sic_name: string;
+      };
+    };
   }>;
 };
 
@@ -3205,10 +3261,29 @@ export const SearchResultFragmentDoc = gql`
     sequence
     company_name
     company_cik
+    company_sic_name
     filing_type
     filing_date
     description
     attachment_type
+  }
+`;
+export const SecContractFragmentDoc = gql`
+  fragment SECContract on sec_filing_attachment {
+    sequence
+    sec_filing {
+      accession_number
+      filing_date
+      filing_type
+      sec_company {
+        name
+        sic
+        sic_name
+      }
+    }
+    attachment_type
+    description
+    contents
   }
 `;
 export const CurrentUserFragmentDoc = gql`
@@ -3224,8 +3299,20 @@ export const CurrentUserFragmentDoc = gql`
   }
 `;
 export const SearchSecContractsDocument = gql`
-  query SearchSECContracts($search: String!) {
-    sec_search_aggregate(args: { search: $search }) {
+  query SearchSECContracts(
+    $search: String!
+    $minDate: date
+    $maxDate: date
+    $limit: Int!
+    $offset: Int
+  ) {
+    sec_search_aggregate(
+      args: {
+        search: $search
+        filing_date_gt: $minDate
+        filing_date_lt: $maxDate
+      }
+    ) {
       aggregate {
         filing_count: count(columns: accession_number, distinct: true)
         company_count: count(columns: company_cik, distinct: true)
@@ -3233,9 +3320,14 @@ export const SearchSecContractsDocument = gql`
       }
     }
     sec_search(
-      args: { search: $search }
-      limit: 20
+      args: {
+        search: $search
+        filing_date_gt: $minDate
+        filing_date_lt: $maxDate
+      }
       order_by: { relevance: desc }
+      limit: $limit
+      offset: $offset
     ) {
       ...SearchResult
     }
@@ -3256,6 +3348,10 @@ export const SearchSecContractsDocument = gql`
  * const { data, loading, error } = useSearchSecContractsQuery({
  *   variables: {
  *      search: // value for 'search'
+ *      minDate: // value for 'minDate'
+ *      maxDate: // value for 'maxDate'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
  *   },
  * });
  */
@@ -3292,6 +3388,69 @@ export type SearchSecContractsLazyQueryHookResult = ReturnType<
 export type SearchSecContractsQueryResult = Apollo.QueryResult<
   SearchSecContractsQuery,
   SearchSecContractsQueryVariables
+>;
+export const GetSecContractDocument = gql`
+  query GetSECContract($accession_number: String!, $sequence: Int!) {
+    sec_filing_attachment_by_pk(
+      accession_number: $accession_number
+      sequence: $sequence
+    ) {
+      ...SECContract
+    }
+  }
+  ${SecContractFragmentDoc}
+`;
+
+/**
+ * __useGetSecContractQuery__
+ *
+ * To run a query within a React component, call `useGetSecContractQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSecContractQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSecContractQuery({
+ *   variables: {
+ *      accession_number: // value for 'accession_number'
+ *      sequence: // value for 'sequence'
+ *   },
+ * });
+ */
+export function useGetSecContractQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetSecContractQuery,
+    GetSecContractQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetSecContractQuery, GetSecContractQueryVariables>(
+    GetSecContractDocument,
+    options
+  );
+}
+export function useGetSecContractLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetSecContractQuery,
+    GetSecContractQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetSecContractQuery, GetSecContractQueryVariables>(
+    GetSecContractDocument,
+    options
+  );
+}
+export type GetSecContractQueryHookResult = ReturnType<
+  typeof useGetSecContractQuery
+>;
+export type GetSecContractLazyQueryHookResult = ReturnType<
+  typeof useGetSecContractLazyQuery
+>;
+export type GetSecContractQueryResult = Apollo.QueryResult<
+  GetSecContractQuery,
+  GetSecContractQueryVariables
 >;
 export const GetCurrentUserDocument = gql`
   query GetCurrentUser($auth0_id: String!) {

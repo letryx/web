@@ -13,7 +13,7 @@ export default async (
   if (req.method !== 'POST') throw new Error('only accepts POST');
 
   const { IP_STACK_KEY, DISCORD_SIGNUPS_HOOK } = process.env;
-  const hookData = req.body;
+  const hookData = req.body as Record<string, string>;
   const { type } = hookData;
 
   console.log(hookData);
@@ -25,11 +25,14 @@ export default async (
   const company = hookData['data[merges][COMPANY]'];
 
   // geo data
-  let geoStr;
+  let geoStr = '';
   if (!IP_STACK_KEY) throw new Error('set IP_STACK_KEY');
   if (ip && IP_STACK_KEY) {
     const geoUrl = `http://api.ipstack.com/${ip}?access_key=${IP_STACK_KEY}`;
-    const geoData = await (await fetch(geoUrl)).json();
+    const geoData = (await (await fetch(geoUrl)).json()) as Record<
+      string,
+      string
+    >;
     const { country_code, country_name, region_code, city } = geoData;
     geoStr = `from ${city}, ${
       country_code === 'US' ? region_code : country_name
@@ -53,7 +56,9 @@ export default async (
 
   if (discordRes.status !== 200) {
     throw new Error(
-      `Discord hook ${discordRes.status}: ${await discordRes.json()}`
+      `Discord hook ${discordRes.status}: ${JSON.stringify(
+        await discordRes.json()
+      )}`
     );
   }
 

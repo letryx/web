@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import fakerStatic from 'faker';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore (currently no .d.ts available yet)
@@ -16,7 +19,7 @@ export function fakerFromSeed(seed: number | string): typeof fakerStatic {
   const faker = new Faker({ locale: 'en' });
   faker.seed(typeof seed === 'string' ? hashcode(seed) : seed);
   faker.locales.en = faker_en;
-  return faker;
+  return faker as typeof fakerStatic;
 }
 
 /* eslint-disable no-bitwise */

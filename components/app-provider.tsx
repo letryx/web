@@ -55,7 +55,7 @@ const AppProvider: FC = ({ children }) => {
       process.env.NODE_ENV === 'development'
     ) {
       // eslint-disable-next-line no-alert
-      alert(`Login error: ${error}`);
+      alert(`Login error: ${error.name}: ${error.message}`);
     }
   }
 

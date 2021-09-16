@@ -4,6 +4,7 @@ schema:
       headers:
         content-type: 'application/json'
         x-hasura-admin-secret: '${HASURA_GRAPHQL_ADMIN_SECRET}'
+      loader: ./schema-loader.js
 documents:
   - '{components,pages}/**/*.{ts,tsx,graphql}'
   - 'lib/!(generated)/**/*.{ts,tsx,graphql}'
@@ -22,7 +23,7 @@ generates:
         timestamp: Date
         timestamptz: Date
         tsvector: String
-        date: GraphQL_Date
+        date: Date
       namingConvention: change-case-all#pascalCase
       strictScalars: true
       useExplicitTyping: true
