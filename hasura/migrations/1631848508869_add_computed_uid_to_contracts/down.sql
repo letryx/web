@@ -1,0 +1,1 @@
+DROP FUNCTION sec_contract_uid

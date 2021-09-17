@@ -1630,6 +1630,8 @@ export type Sec_Contract = {
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment>;
   sequence: Scalars['Int'];
   tsv_search_text: Scalars['String'];
+  /** A computed field, executes function "sec_contract_uid" */
+  uid?: Maybe<Scalars['String']>;
 };
 
 /** aggregated selection of "sec_contract" */
@@ -1690,6 +1692,7 @@ export type Sec_Contract_Bool_Exp = {
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
   sequence?: Maybe<Int_Comparison_Exp>;
   tsv_search_text?: Maybe<Tsvector_Comparison_Exp>;
+  uid?: Maybe<String_Comparison_Exp>;
 };
 
 /** aggregate max on columns */
@@ -1747,6 +1750,7 @@ export type Sec_Contract_Order_By = {
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Order_By>;
   sequence?: Maybe<Order_By>;
   tsv_search_text?: Maybe<Order_By>;
+  uid?: Maybe<Order_By>;
 };
 
 /** select columns of table "sec_contract" */
