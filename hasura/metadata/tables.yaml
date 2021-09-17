@@ -124,6 +124,8 @@
       - relevance
       - sequence
       - tsv_search_text
+      computed_fields:
+      - uid
       filter: {}
       allow_aggregations: true
 - table:
