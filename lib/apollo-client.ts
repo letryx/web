@@ -11,7 +11,6 @@ import { RetryLink } from '@apollo/client/link/retry';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { isEmpty } from '@chakra-ui/utils';
-import { LocalStorageWrapper, persistCache } from 'apollo3-cache-persist';
 import fetch from 'isomorphic-unfetch';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { isExpired } from './auth0';
@@ -22,13 +21,13 @@ const ssrMode = typeof window === 'undefined';
 
 export const cache = new InMemoryCache({});
 
-if (!ssrMode) {
-  await persistCache({
-    cache,
-    storage: new LocalStorageWrapper(window.localStorage),
-    debug: process.env.NODE_ENV === 'development',
-  });
-}
+// if (!ssrMode) {
+//   await persistCache({
+//     cache,
+//     storage: new LocalStorageWrapper(window.localStorage),
+//     debug: process.env.NODE_ENV === 'development',
+//   });
+// }
 
 // this is replaced by the client url via next.config.js
 if (!process.env.GRAPHQL_API_SSR_URL || !process.env.GRAPHQL_API_URL) {
