@@ -100,6 +100,12 @@
         column_mapping:
           accession_number: accession_number
           sequence: sequence
+  computed_fields:
+  - name: uid
+    definition:
+      function:
+        schema: public
+        name: sec_contract_uid
   select_permissions:
   - role: user
     permission:
@@ -118,6 +124,8 @@
       - relevance
       - sequence
       - tsv_search_text
+      computed_fields:
+      - uid
       filter: {}
       allow_aggregations: true
 - table:

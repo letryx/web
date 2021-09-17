@@ -1630,6 +1630,8 @@ export type Sec_Contract = {
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment>;
   sequence: Scalars['Int'];
   tsv_search_text: Scalars['String'];
+  /** A computed field, executes function "sec_contract_uid" */
+  uid?: Maybe<Scalars['String']>;
 };
 
 /** aggregated selection of "sec_contract" */
@@ -1690,6 +1692,7 @@ export type Sec_Contract_Bool_Exp = {
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
   sequence?: Maybe<Int_Comparison_Exp>;
   tsv_search_text?: Maybe<Tsvector_Comparison_Exp>;
+  uid?: Maybe<String_Comparison_Exp>;
 };
 
 /** aggregate max on columns */
@@ -1747,6 +1750,7 @@ export type Sec_Contract_Order_By = {
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Order_By>;
   sequence?: Maybe<Order_By>;
   tsv_search_text?: Maybe<Order_By>;
+  uid?: Maybe<Order_By>;
 };
 
 /** select columns of table "sec_contract" */
@@ -3130,14 +3134,16 @@ export type SearchSecContractsQueryVariables = Exact<{
   search: Scalars['String'];
   minDate?: Maybe<Scalars['date']>;
   maxDate?: Maybe<Scalars['date']>;
-  limit: Scalars['Int'];
+  limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
+  uidsOnly?: Maybe<Scalars['Boolean']>;
 }>;
 
 export type SearchSecContractsQuery = {
   __typename?: 'query_root';
   sec_search_aggregate: {
     __typename?: 'sec_contract_aggregate';
+    nodes?: Maybe<Array<{ __typename?: 'sec_contract'; uid?: Maybe<string> }>>;
     aggregate?: Maybe<{
       __typename?: 'sec_contract_aggregate_fields';
       count: number;
@@ -3145,18 +3151,20 @@ export type SearchSecContractsQuery = {
       company_count: number;
     }>;
   };
-  sec_search: Array<{
-    __typename?: 'sec_contract';
-    accession_number: string;
-    sequence: number;
-    company_name: string;
-    company_cik: string;
-    company_sic_name: string;
-    filing_type: string;
-    filing_date: string;
-    description: string;
-    attachment_type: string;
-  }>;
+  sec_search?: Maybe<
+    Array<{
+      __typename?: 'sec_contract';
+      accession_number: string;
+      sequence: number;
+      company_name: string;
+      company_cik: string;
+      company_sic_name: string;
+      filing_type: string;
+      filing_date: string;
+      description: string;
+      attachment_type: string;
+    }>
+  >;
 };
 
 export type SecContractFragment = {
@@ -3303,8 +3311,9 @@ export const SearchSecContractsDocument = gql`
     $search: String!
     $minDate: date
     $maxDate: date
-    $limit: Int!
-    $offset: Int
+    $limit: Int = 20
+    $offset: Int = 0
+    $uidsOnly: Boolean = false
   ) {
     sec_search_aggregate(
       args: {
@@ -3313,6 +3322,9 @@ export const SearchSecContractsDocument = gql`
         filing_date_lt: $maxDate
       }
     ) {
+      nodes @include(if: $uidsOnly) {
+        uid
+      }
       aggregate {
         filing_count: count(columns: accession_number, distinct: true)
         company_count: count(columns: company_cik, distinct: true)
@@ -3328,7 +3340,7 @@ export const SearchSecContractsDocument = gql`
       order_by: { relevance: desc }
       limit: $limit
       offset: $offset
-    ) {
+    ) @skip(if: $uidsOnly) {
       ...SearchResult
     }
   }
@@ -3352,6 +3364,7 @@ export const SearchSecContractsDocument = gql`
  *      maxDate: // value for 'maxDate'
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
+ *      uidsOnly: // value for 'uidsOnly'
  *   },
  * });
  */

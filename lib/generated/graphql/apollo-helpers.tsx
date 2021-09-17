@@ -618,6 +618,7 @@ export type sec_contractKeySpecifier = (
   | 'sec_filing_attachment'
   | 'sequence'
   | 'tsv_search_text'
+  | 'uid'
   | sec_contractKeySpecifier
 )[];
 export type sec_contractFieldPolicy = {
@@ -638,6 +639,7 @@ export type sec_contractFieldPolicy = {
   sec_filing_attachment?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
   tsv_search_text?: FieldPolicy<any> | FieldReadFunction<any>;
+  uid?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_aggregateKeySpecifier = (
   | 'aggregate'

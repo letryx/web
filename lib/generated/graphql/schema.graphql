@@ -2055,6 +2055,11 @@ type sec_contract {
   sec_filing_attachment: sec_filing_attachment
   sequence: Int
   tsv_search_text: tsvector
+
+  """
+  A computed field, executes function "sec_contract_uid"
+  """
+  uid: String
 }
 
 """
@@ -2112,6 +2117,7 @@ input sec_contract_bool_exp {
   sec_filing_attachment: sec_filing_attachment_bool_exp
   sequence: Int_comparison_exp
   tsv_search_text: tsvector_comparison_exp
+  uid: String_comparison_exp
 }
 
 """aggregate max on columns"""
@@ -2167,6 +2173,7 @@ input sec_contract_order_by {
   sec_filing_attachment: sec_filing_attachment_order_by
   sequence: order_by
   tsv_search_text: order_by
+  uid: order_by
 }
 
 """

@@ -17,8 +17,9 @@ query SearchSECContracts(
   $search: String!
   $minDate: date
   $maxDate: date
-  $limit: Int!
-  $offset: Int
+  $limit: Int = 20
+  $offset: Int = 0
+  $uidsOnly: Boolean = false
 ) {
   sec_search_aggregate(
     args: {
@@ -27,6 +28,9 @@ query SearchSECContracts(
       filing_date_lt: $maxDate
     }
   ) {
+    nodes @include(if: $uidsOnly) {
+      uid
+    }
     aggregate {
       filing_count: count(columns: accession_number, distinct: true)
       company_count: count(columns: company_cik, distinct: true)
@@ -42,7 +46,7 @@ query SearchSECContracts(
     order_by: { relevance: desc }
     limit: $limit
     offset: $offset
-  ) {
+  ) @skip(if: $uidsOnly) {
     ...SearchResult
   }
 }
