@@ -16,6 +16,7 @@ import { SearchBar } from 'components/contract/search-bar';
 import { PAGE_SIZE, TableContent } from 'components/contract/table';
 import { Layout } from 'components/layout';
 import {
+  SearchResultFragment,
   SearchSecContractsDocument,
   SearchSecContractsQuery,
   SearchSecContractsQueryVariables,
@@ -83,9 +84,20 @@ const ContractsPage: FC = () => {
     setAddIsLoading(false);
     // eslint-disable-next-line no-console
     if (res.error) console.log('error fetching add comps', res.error);
-    (res.data.sec_search_aggregate?.nodes || []).forEach((x) => {
-      if (x.uid) compSet.add(x.uid);
+    (res.data.sec_search_aggregate?.nodes || []).forEach(({ uid }) => {
+      if (uid) compSet.add(uid);
     });
+    setCompSet(compSet);
+    setCompSetSize(compSet.size);
+  };
+
+  const addContract = ({ uid }: SearchResultFragment): void => {
+    if (!uid) return;
+    if (compSet.has(uid)) {
+      compSet.delete(uid);
+    } else {
+      compSet.add(uid);
+    }
     setCompSet(compSet);
     setCompSetSize(compSet.size);
   };
@@ -122,7 +134,7 @@ const ContractsPage: FC = () => {
             }}
           />
           <Box minHeight="3rem" width="100%">
-            <TableContent {...{ contracts, isLoading }} />
+            <TableContent {...{ contracts, compSet, addContract, isLoading }} />
           </Box>
           <Pagination
             pagesCount={pagesCount}

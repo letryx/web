@@ -3119,6 +3119,7 @@ export type User_Variance_Order_By = {
 
 export type SearchResultFragment = {
   __typename?: 'sec_contract';
+  uid?: Maybe<string>;
   accession_number: string;
   sequence: number;
   company_name: string;
@@ -3154,6 +3155,7 @@ export type SearchSecContractsQuery = {
   sec_search?: Maybe<
     Array<{
       __typename?: 'sec_contract';
+      uid?: Maybe<string>;
       accession_number: string;
       sequence: number;
       company_name: string;
@@ -3265,6 +3267,7 @@ export type SyncUserMutation = {
 
 export const SearchResultFragmentDoc = gql`
   fragment SearchResult on sec_contract {
+    uid
     accession_number
     sequence
     company_name

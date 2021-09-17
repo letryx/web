@@ -1,4 +1,5 @@
 fragment SearchResult on sec_contract {
+  uid
   accession_number
   sequence
   company_name

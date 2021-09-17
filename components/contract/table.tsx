@@ -1,4 +1,6 @@
 import {
+  Button,
+  HStack,
   Skeleton,
   Table,
   Tbody,
@@ -13,19 +15,28 @@ import { ContractModal } from 'components/contract/modal';
 import { ShowDate } from 'components/date';
 import { SearchResultFragment } from 'lib/generated/graphql/apollo-schema';
 import { FC } from 'react';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 
 export const PAGE_SIZE = 12;
 
 interface ContractTableProps {
   isLoading: boolean;
   contracts: SearchResultFragment[];
+  compSet: Set<string>;
+  addContract: (contract: SearchResultFragment) => void;
 }
 
 interface ContractRowProps {
   contract: SearchResultFragment;
+  addContract: (contract: SearchResultFragment) => void;
+  isAdded: boolean;
 }
 
-const ContractRow: FC<ContractRowProps> = ({ contract }) => {
+const ContractRow: FC<ContractRowProps> = ({
+  contract,
+  addContract,
+  isAdded,
+}) => {
   const {
     accession_number,
     sequence,
@@ -57,7 +68,17 @@ const ContractRow: FC<ContractRowProps> = ({ contract }) => {
         </Text>
       </Td>
       <Td isNumeric>
-        <ContractModal {...contract} />
+        <HStack>
+          <Button
+            variant="outline"
+            colorScheme={isAdded ? 'red' : 'messenger'}
+            onClick={() => addContract(contract)}
+            size="xs"
+          >
+            {isAdded ? <FaMinus /> : <FaPlus />}
+          </Button>
+          <ContractModal {...contract} />
+        </HStack>
       </Td>
     </Tr>
   );
@@ -66,6 +87,8 @@ const ContractRow: FC<ContractRowProps> = ({ contract }) => {
 export const TableContent: FC<ContractTableProps> = ({
   contracts,
   isLoading,
+  addContract,
+  compSet,
 }) => {
   return (
     <Table variant="simple" borderWidth="1px" fontSize="0.9rem">
@@ -86,7 +109,12 @@ export const TableContent: FC<ContractTableProps> = ({
                 </Td>
               </Tr>
             ))
-          : contracts.map((contract) => <ContractRow contract={contract} />)}
+          : contracts.map((contract) => (
+              <ContractRow
+                isAdded={!!(contract.uid && compSet.has(contract.uid))}
+                {...{ contract, addContract }}
+              />
+            ))}
       </Tbody>
     </Table>
   );

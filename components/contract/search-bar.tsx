@@ -65,20 +65,20 @@ export const SearchBar: FC<SearchBarProps> = ({
           <Skeleton minWidth="3rem" isLoaded={!isLoading} mr={2}>
             99,999
           </Skeleton>
-        )}{' '}
-        contracts
+        )}
       </Text>
     </InputRightAddon>
     <Button
       ml="2"
       colorScheme="messenger"
-      width={compSetSize > 0 ? '20px' : '90px'}
       onClick={onClickAdd}
       isLoading={addIsLoading}
-      leftIcon={compSetSize > 0 ? undefined : <FaPlusCircle />}
+      leftIcon={<FaPlusCircle />}
       textAlign="center"
+      width="70px"
+      minWidth="70px"
     >
-      {compSetSize > 0 ? <Icon as={FaPlusCircle} /> : 'Add'}
+      All
     </Button>
     {compSetSize > 0 && (
       <Menu isLazy>
