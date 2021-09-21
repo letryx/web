@@ -128,8 +128,11 @@ export const ContractFilters: FC<FilterProps> = ({
               }
             >
               {contractTypes.map(({ contract_type }) => (
-                <option value={contract_type || undefined}>
-                  {contract_type?.toLowerCase().toLocaleUpperCase()}
+                <option
+                  value={contract_type || undefined}
+                  style={{ textTransform: 'capitalize' }}
+                >
+                  {contract_type?.toLowerCase()}
                 </option>
               ))}
             </Select>

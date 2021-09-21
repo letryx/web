@@ -63,7 +63,7 @@ const ContractRow: FC<ContractRowProps> = ({
       <Td>
         <Text casing="capitalize">
           {description?.toLowerCase() ||
-            contract_type?.toLocaleUpperCase() ||
+            contract_type?.toLowerCase() ||
             `${attachment_type}`}
         </Text>
         <Text fontWeight="semibold" casing="capitalize">
