@@ -2,7 +2,7 @@ import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Box, Breadcrumb, BreadcrumbItem, Container } from '@chakra-ui/react';
 import { Footer } from 'components/footer';
 import { NextBreadcrumbLink } from 'components/next-chakra-link';
-import { TopBar } from 'components/top-bar';
+import { TopBar, TopBarProps } from 'components/top-bar';
 import Head from 'next/head';
 import { FC, ReactNode } from 'react';
 
@@ -15,14 +15,14 @@ type LayoutProps = {
   children?: ReactNode;
   title?: string;
   breadcrumbs?: IBreadcrumb[];
-  hideNav?: boolean;
-};
+} & TopBarProps;
 
 export const Layout: FC<LayoutProps> = ({
   children,
   title = 'Letryx',
   breadcrumbs = [],
   hideNav = false,
+  showMatterNumber = false,
 }) => {
   // const { asPath } = useRouter();
   // breadcrumbs.push({ title, href: asPath });
@@ -35,7 +35,7 @@ export const Layout: FC<LayoutProps> = ({
       </Head>
       <Container maxWidth="1200px" overflow="hidden">
         <Box px={0} maxWidth="1200px" minHeight="75vh">
-          <TopBar hideNav={hideNav} />
+          <TopBar hideNav={hideNav} showMatterNumber={showMatterNumber} />
           <Breadcrumb
             // fontWeight="semibold"
             // fontSize="1.2rem"

@@ -115,7 +115,7 @@ const ContractsPage: FC = () => {
   };
 
   return (
-    <Layout title="Contracts">
+    <Layout title="Contracts" showMatterNumber>
       <Stack direction={['column', 'column', 'row']}>
         <ContractFilters
           minWidth={60}

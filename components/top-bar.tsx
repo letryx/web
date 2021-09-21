@@ -1,4 +1,4 @@
-import { Flex, HStack } from '@chakra-ui/react';
+import { Flex, HStack, Select } from '@chakra-ui/react';
 import { ColorModeSwitcher } from 'components/color-mode-switcher';
 import { Logo } from 'components/logo';
 import { NextChakraLink } from 'components/next-chakra-link';
@@ -19,11 +19,15 @@ const Nav: FC = () => (
   </nav>
 );
 
-interface TopBarProps {
+export interface TopBarProps {
   hideNav?: boolean;
+  showMatterNumber?: boolean;
 }
 
-const TopBar: FC<TopBarProps> = ({ hideNav = false }) => (
+const TopBar: FC<TopBarProps> = ({
+  hideNav = false,
+  showMatterNumber = false,
+}) => (
   <header>
     <Flex py={4} justifyContent="space-between" alignItems="right">
       <Flex
@@ -33,6 +37,7 @@ const TopBar: FC<TopBarProps> = ({ hideNav = false }) => (
       >
         {hideNav || <Nav />}
       </Flex>
+      <Flex>{showMatterNumber && <Select placeholder="006911.0122" />}</Flex>
       <HStack justifySelf="flex-end" spacing={1}>
         <ColorModeSwitcher />
         {hideNav || <UserDropdown />}
