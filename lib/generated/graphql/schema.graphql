@@ -3007,6 +3007,7 @@ enum sec_filing_update_column {
 input sec_search_args {
   company_name_excludes: String
   company_name_includes: String
+  contract_type_eq: String
   description_excludes: String
   description_includes: String
   filing_date_gt: date

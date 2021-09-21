@@ -1,3 +1,5 @@
+DROP FUNCTION public.sec_search(text, date, date, text, text, text, text);
+
 CREATE
 OR REPLACE FUNCTION public.sec_search(
   search text DEFAULT NULL :: text,

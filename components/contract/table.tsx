@@ -45,6 +45,7 @@ const ContractRow: FC<ContractRowProps> = ({
     attachment_type,
     filing_date,
     description,
+    contract_type,
   } = contract;
   return (
     <Tr key={`row-${accession_number}-${sequence}`}>
@@ -61,7 +62,9 @@ const ContractRow: FC<ContractRowProps> = ({
       </Th>
       <Td>
         <Text casing="capitalize">
-          {description?.toLowerCase() || `${attachment_type}`}
+          {description?.toLowerCase() ||
+            contract_type?.toLocaleUpperCase() ||
+            `${attachment_type}`}
         </Text>
         <Text fontWeight="semibold" casing="capitalize">
           {company_name.toLowerCase()}
@@ -95,7 +98,9 @@ export const TableContent: FC<ContractTableProps> = ({
       <Thead bg={mode('gray.50', 'gray.800')}>
         <Tr>
           <Th isNumeric>Filing Date</Th>
-          <Th isNumeric>Filing Type</Th>
+          <Th width="12%" isNumeric>
+            Filing Type
+          </Th>
           <Th width="60%">Description / Filer</Th>
           <Th />
         </Tr>
