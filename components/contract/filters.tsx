@@ -49,25 +49,6 @@ export const ContractFilters: FC<FilterProps> = ({
   return (
     <Box {...props}>
       <Stack spacing={5}>
-        <Box pr={[0, 0, 3]}>
-          <FormControl>
-            <FormLabel>
-              <Flex pb={1}>
-                <Text pt={1} fontSize="1.2rem" height="100%" as="span">
-                  Filing Date
-                </Text>
-              </Flex>
-            </FormLabel>
-            <InputGroup>
-              <InputLeftAddon width={20}>After:</InputLeftAddon>
-              <SingleDatepicker date={minDate} onDateChange={setMinDate} />
-            </InputGroup>
-            <InputGroup>
-              <InputLeftAddon width={20}>Before:</InputLeftAddon>
-              <SingleDatepicker date={maxDate} onDateChange={setMaxDate} />
-            </InputGroup>
-          </FormControl>
-        </Box>
         <Box>
           <FormControl>
             <FormLabel>
@@ -103,6 +84,26 @@ export const ContractFilters: FC<FilterProps> = ({
             <FormHelperText>More...</FormHelperText> */}
           </FormControl>
         </Box>
+        <Box pr={[0, 0, 3]}>
+          <FormControl>
+            <FormLabel>
+              <Flex pb={1}>
+                <Text pt={1} fontSize="1.2rem" height="100%" as="span">
+                  Filing Date
+                </Text>
+              </Flex>
+            </FormLabel>
+            <InputGroup>
+              <InputLeftAddon width={20}>After:</InputLeftAddon>
+              <SingleDatepicker date={minDate} onDateChange={setMinDate} />
+            </InputGroup>
+            <InputGroup>
+              <InputLeftAddon width={20}>Before:</InputLeftAddon>
+              <SingleDatepicker date={maxDate} onDateChange={setMaxDate} />
+            </InputGroup>
+          </FormControl>
+        </Box>
+
         <Box pr={[0, 0, 3]}>
           <FormControl>
             <FormLabel>
