@@ -51,11 +51,17 @@ const ContractsPage: FC = () => {
     () => setCurrentPage(1),
     [search, minDate, maxDate, setCurrentPage]
   );
+
+  const [selectedContractType, setSelectedContractType] = useState<
+    undefined | string
+  >();
+
   const { data, loading: isLoading } = useSearchSecContractsQuery({
     variables: {
       minDate,
       maxDate,
       search,
+      contractType: selectedContractType,
       limit: PAGE_SIZE,
       offset,
     },
@@ -79,7 +85,13 @@ const ContractsPage: FC = () => {
       SearchSecContractsQueryVariables
     >({
       query: SearchSecContractsDocument,
-      variables: { uidsOnly: true, search, minDate, maxDate },
+      variables: {
+        uidsOnly: true,
+        search,
+        minDate,
+        maxDate,
+        contractType: selectedContractType,
+      },
     });
     setAddIsLoading(false);
     // eslint-disable-next-line no-console
@@ -115,6 +127,8 @@ const ContractsPage: FC = () => {
             setMinDate,
             maxDate,
             setMaxDate,
+            selectedContractType,
+            setSelectedContractType,
           }}
         />
         <VStack width="100%">

@@ -11,6 +11,7 @@ fragment SearchResult on sec_contract {
   filing_date
   description
   attachment_type
+  contract_type
 }
 
 # description: { _ilike: "%purchase and sale%", _nilike: "%amendment%" }
@@ -21,12 +22,14 @@ query SearchSECContracts(
   $limit: Int = 20
   $offset: Int = 0
   $uidsOnly: Boolean = false
+  $contractType: String
 ) {
   sec_search_aggregate(
     args: {
       search: $search
       filing_date_gt: $minDate
       filing_date_lt: $maxDate
+      contract_type_eq: $contractType
     }
   ) {
     nodes @include(if: $uidsOnly) {
@@ -43,6 +46,7 @@ query SearchSECContracts(
       search: $search
       filing_date_gt: $minDate
       filing_date_lt: $maxDate
+      contract_type_eq: $contractType
     }
     order_by: { relevance: desc }
     limit: $limit
@@ -75,5 +79,19 @@ query GetSECContract($accession_number: String!, $sequence: Int!) {
     sequence: $sequence
   ) {
     ...SECContract
+  }
+}
+
+fragment ContractTypeFragment on sec_filing_attachment {
+  contract_type
+}
+
+query GetContractTypes {
+  sec_filing_attachment(
+    distinct_on: [contract_type]
+    # discard null
+    where: { contract_type: { _like: "%" } }
+  ) {
+    ...ContractTypeFragment
   }
 }

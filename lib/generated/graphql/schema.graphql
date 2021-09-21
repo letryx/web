@@ -2039,6 +2039,7 @@ type sec_contract {
   company_name: String
   company_sic: String
   company_sic_name: String
+  contract_type: String
   description: String
   filing_date: date
   filing_header: String
@@ -2107,6 +2108,7 @@ input sec_contract_bool_exp {
   company_name: String_comparison_exp
   company_sic: String_comparison_exp
   company_sic_name: String_comparison_exp
+  contract_type: String_comparison_exp
   description: String_comparison_exp
   filing_date: date_comparison_exp
   filing_header: String_comparison_exp
@@ -2129,6 +2131,7 @@ type sec_contract_max_fields {
   company_name: String
   company_sic: String
   company_sic_name: String
+  contract_type: String
   description: String
   filing_date: date
   filing_header: String
@@ -2146,6 +2149,7 @@ type sec_contract_min_fields {
   company_name: String
   company_sic: String
   company_sic_name: String
+  contract_type: String
   description: String
   filing_date: date
   filing_header: String
@@ -2163,6 +2167,7 @@ input sec_contract_order_by {
   company_name: order_by
   company_sic: order_by
   company_sic_name: order_by
+  contract_type: order_by
   description: order_by
   filing_date: order_by
   filing_header: order_by
@@ -2200,6 +2205,9 @@ enum sec_contract_select_column {
 
   """column name"""
   company_sic_name
+
+  """column name"""
+  contract_type
 
   """column name"""
   description
@@ -2361,6 +2369,7 @@ type sec_filing_attachment {
   attachment_type: String!
   cik: String!
   contents: String!
+  contract_type: String
   created_at: timestamptz
   description: String
   filename: String
@@ -2451,6 +2460,7 @@ input sec_filing_attachment_bool_exp {
   attachment_type: String_comparison_exp
   cik: String_comparison_exp
   contents: String_comparison_exp
+  contract_type: String_comparison_exp
   created_at: timestamptz_comparison_exp
   description: String_comparison_exp
   filename: String_comparison_exp
@@ -2488,6 +2498,7 @@ input sec_filing_attachment_insert_input {
   attachment_type: String
   cik: String
   contents: String
+  contract_type: String
   created_at: timestamptz
   description: String
   filename: String
@@ -2505,6 +2516,7 @@ type sec_filing_attachment_max_fields {
   attachment_type: String
   cik: String
   contents: String
+  contract_type: String
   created_at: timestamptz
   description: String
   filename: String
@@ -2521,6 +2533,7 @@ input sec_filing_attachment_max_order_by {
   attachment_type: order_by
   cik: order_by
   contents: order_by
+  contract_type: order_by
   created_at: order_by
   description: order_by
   filename: order_by
@@ -2535,6 +2548,7 @@ type sec_filing_attachment_min_fields {
   attachment_type: String
   cik: String
   contents: String
+  contract_type: String
   created_at: timestamptz
   description: String
   filename: String
@@ -2551,6 +2565,7 @@ input sec_filing_attachment_min_order_by {
   attachment_type: order_by
   cik: order_by
   contents: order_by
+  contract_type: order_by
   created_at: order_by
   description: order_by
   filename: order_by
@@ -2585,6 +2600,7 @@ input sec_filing_attachment_order_by {
   attachment_type: order_by
   cik: order_by
   contents: order_by
+  contract_type: order_by
   created_at: order_by
   description: order_by
   filename: order_by
@@ -2619,6 +2635,9 @@ enum sec_filing_attachment_select_column {
   contents
 
   """column name"""
+  contract_type
+
+  """column name"""
   created_at
 
   """column name"""
@@ -2648,6 +2667,7 @@ input sec_filing_attachment_set_input {
   attachment_type: String
   cik: String
   contents: String
+  contract_type: String
   created_at: timestamptz
   description: String
   filename: String
@@ -2720,6 +2740,9 @@ enum sec_filing_attachment_update_column {
 
   """column name"""
   contents
+
+  """column name"""
+  contract_type
 
   """column name"""
   created_at
@@ -2984,6 +3007,7 @@ enum sec_filing_update_column {
 input sec_search_args {
   company_name_excludes: String
   company_name_includes: String
+  contract_type_eq: String
   description_excludes: String
   description_includes: String
   filing_date_gt: date

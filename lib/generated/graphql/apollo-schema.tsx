@@ -1617,6 +1617,7 @@ export type Sec_Contract = {
   company_name: Scalars['String'];
   company_sic: Scalars['String'];
   company_sic_name: Scalars['String'];
+  contract_type?: Maybe<Scalars['String']>;
   description: Scalars['String'];
   filing_date: Scalars['String'];
   filing_header: Scalars['String'];
@@ -1682,6 +1683,7 @@ export type Sec_Contract_Bool_Exp = {
   company_name?: Maybe<String_Comparison_Exp>;
   company_sic?: Maybe<String_Comparison_Exp>;
   company_sic_name?: Maybe<String_Comparison_Exp>;
+  contract_type?: Maybe<String_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   filing_date?: Maybe<Date_Comparison_Exp>;
   filing_header?: Maybe<String_Comparison_Exp>;
@@ -1705,6 +1707,7 @@ export type Sec_Contract_Max_Fields = {
   company_name?: Maybe<Scalars['String']>;
   company_sic?: Maybe<Scalars['String']>;
   company_sic_name?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   filing_date?: Maybe<Scalars['date']>;
   filing_header?: Maybe<Scalars['String']>;
@@ -1723,6 +1726,7 @@ export type Sec_Contract_Min_Fields = {
   company_name?: Maybe<Scalars['String']>;
   company_sic?: Maybe<Scalars['String']>;
   company_sic_name?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   filing_date?: Maybe<Scalars['date']>;
   filing_header?: Maybe<Scalars['String']>;
@@ -1740,6 +1744,7 @@ export type Sec_Contract_Order_By = {
   company_name?: Maybe<Order_By>;
   company_sic?: Maybe<Order_By>;
   company_sic_name?: Maybe<Order_By>;
+  contract_type?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filing_date?: Maybe<Order_By>;
   filing_header?: Maybe<Order_By>;
@@ -1769,6 +1774,8 @@ export enum Sec_Contract_Select_Column {
   CompanySic = 'company_sic',
   /** column name */
   CompanySicName = 'company_sic_name',
+  /** column name */
+  ContractType = 'contract_type',
   /** column name */
   Description = 'description',
   /** column name */
@@ -1912,6 +1919,7 @@ export type Sec_Filing_Attachment = {
   attachment_type: Scalars['String'];
   cik: Scalars['String'];
   contents: Scalars['String'];
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -1996,6 +2004,7 @@ export type Sec_Filing_Attachment_Bool_Exp = {
   attachment_type?: Maybe<String_Comparison_Exp>;
   cik?: Maybe<String_Comparison_Exp>;
   contents?: Maybe<String_Comparison_Exp>;
+  contract_type?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   filename?: Maybe<String_Comparison_Exp>;
@@ -2026,6 +2035,7 @@ export type Sec_Filing_Attachment_Insert_Input = {
   attachment_type?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -2044,6 +2054,7 @@ export type Sec_Filing_Attachment_Max_Fields = {
   attachment_type?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -2058,6 +2069,7 @@ export type Sec_Filing_Attachment_Max_Order_By = {
   attachment_type?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
+  contract_type?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
@@ -2073,6 +2085,7 @@ export type Sec_Filing_Attachment_Min_Fields = {
   attachment_type?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -2087,6 +2100,7 @@ export type Sec_Filing_Attachment_Min_Order_By = {
   attachment_type?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
+  contract_type?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
@@ -2117,6 +2131,7 @@ export type Sec_Filing_Attachment_Order_By = {
   attachment_type?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
+  contract_type?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
@@ -2145,6 +2160,8 @@ export enum Sec_Filing_Attachment_Select_Column {
   /** column name */
   Contents = 'contents',
   /** column name */
+  ContractType = 'contract_type',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Description = 'description',
@@ -2166,6 +2183,7 @@ export type Sec_Filing_Attachment_Set_Input = {
   attachment_type?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -2229,6 +2247,8 @@ export enum Sec_Filing_Attachment_Update_Column {
   Cik = 'cik',
   /** column name */
   Contents = 'contents',
+  /** column name */
+  ContractType = 'contract_type',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -2450,6 +2470,7 @@ export enum Sec_Filing_Update_Column {
 export type Sec_Search_Args = {
   company_name_excludes?: Maybe<Scalars['String']>;
   company_name_includes?: Maybe<Scalars['String']>;
+  contract_type_eq?: Maybe<Scalars['String']>;
   description_excludes?: Maybe<Scalars['String']>;
   description_includes?: Maybe<Scalars['String']>;
   filing_date_gt?: Maybe<Scalars['date']>;
@@ -3129,6 +3150,7 @@ export type SearchResultFragment = {
   filing_date: string;
   description: string;
   attachment_type: string;
+  contract_type?: Maybe<string>;
 };
 
 export type SearchSecContractsQueryVariables = Exact<{
@@ -3138,6 +3160,7 @@ export type SearchSecContractsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   uidsOnly?: Maybe<Scalars['Boolean']>;
+  contractType?: Maybe<Scalars['String']>;
 }>;
 
 export type SearchSecContractsQuery = {
@@ -3165,6 +3188,7 @@ export type SearchSecContractsQuery = {
       filing_date: string;
       description: string;
       attachment_type: string;
+      contract_type?: Maybe<string>;
     }>
   >;
 };
@@ -3214,6 +3238,21 @@ export type GetSecContractQuery = {
         sic_name: string;
       };
     };
+  }>;
+};
+
+export type ContractTypeFragmentFragment = {
+  __typename?: 'sec_filing_attachment';
+  contract_type?: Maybe<string>;
+};
+
+export type GetContractTypesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetContractTypesQuery = {
+  __typename?: 'query_root';
+  sec_filing_attachment: Array<{
+    __typename?: 'sec_filing_attachment';
+    contract_type?: Maybe<string>;
   }>;
 };
 
@@ -3277,6 +3316,7 @@ export const SearchResultFragmentDoc = gql`
     filing_date
     description
     attachment_type
+    contract_type
   }
 `;
 export const SecContractFragmentDoc = gql`
@@ -3295,6 +3335,11 @@ export const SecContractFragmentDoc = gql`
     attachment_type
     description
     contents
+  }
+`;
+export const ContractTypeFragmentFragmentDoc = gql`
+  fragment ContractTypeFragment on sec_filing_attachment {
+    contract_type
   }
 `;
 export const CurrentUserFragmentDoc = gql`
@@ -3317,12 +3362,14 @@ export const SearchSecContractsDocument = gql`
     $limit: Int = 20
     $offset: Int = 0
     $uidsOnly: Boolean = false
+    $contractType: String
   ) {
     sec_search_aggregate(
       args: {
         search: $search
         filing_date_gt: $minDate
         filing_date_lt: $maxDate
+        contract_type_eq: $contractType
       }
     ) {
       nodes @include(if: $uidsOnly) {
@@ -3339,6 +3386,7 @@ export const SearchSecContractsDocument = gql`
         search: $search
         filing_date_gt: $minDate
         filing_date_lt: $maxDate
+        contract_type_eq: $contractType
       }
       order_by: { relevance: desc }
       limit: $limit
@@ -3368,6 +3416,7 @@ export const SearchSecContractsDocument = gql`
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
  *      uidsOnly: // value for 'uidsOnly'
+ *      contractType: // value for 'contractType'
  *   },
  * });
  */
@@ -3467,6 +3516,67 @@ export type GetSecContractLazyQueryHookResult = ReturnType<
 export type GetSecContractQueryResult = Apollo.QueryResult<
   GetSecContractQuery,
   GetSecContractQueryVariables
+>;
+export const GetContractTypesDocument = gql`
+  query GetContractTypes {
+    sec_filing_attachment(
+      distinct_on: [contract_type]
+      where: { contract_type: { _like: "%" } }
+    ) {
+      ...ContractTypeFragment
+    }
+  }
+  ${ContractTypeFragmentFragmentDoc}
+`;
+
+/**
+ * __useGetContractTypesQuery__
+ *
+ * To run a query within a React component, call `useGetContractTypesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetContractTypesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetContractTypesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetContractTypesQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetContractTypesQuery,
+    GetContractTypesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetContractTypesQuery, GetContractTypesQueryVariables>(
+    GetContractTypesDocument,
+    options
+  );
+}
+export function useGetContractTypesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetContractTypesQuery,
+    GetContractTypesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetContractTypesQuery,
+    GetContractTypesQueryVariables
+  >(GetContractTypesDocument, options);
+}
+export type GetContractTypesQueryHookResult = ReturnType<
+  typeof useGetContractTypesQuery
+>;
+export type GetContractTypesLazyQueryHookResult = ReturnType<
+  typeof useGetContractTypesLazyQuery
+>;
+export type GetContractTypesQueryResult = Apollo.QueryResult<
+  GetContractTypesQuery,
+  GetContractTypesQueryVariables
 >;
 export const GetCurrentUserDocument = gql`
   query GetCurrentUser($auth0_id: String!) {
