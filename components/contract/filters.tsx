@@ -123,7 +123,9 @@ export const ContractFilters: FC<FilterProps> = ({
               maxWidth={['100%', '100%', '250px']}
               fontSize="sm"
               value={selectedContractType}
-              onChange={(e) => setSelectedContractType(e.target.value)}
+              onChange={(e) =>
+                setSelectedContractType(e.target.value || undefined)
+              }
             >
               {contractTypes.map(({ contract_type }) => (
                 <option value={contract_type || undefined}>
