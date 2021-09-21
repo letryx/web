@@ -608,6 +608,7 @@ export type sec_contractKeySpecifier = (
   | 'company_name'
   | 'company_sic'
   | 'company_sic_name'
+  | 'contract_type'
   | 'description'
   | 'filing_date'
   | 'filing_header'
@@ -629,6 +630,7 @@ export type sec_contractFieldPolicy = {
   company_name?: FieldPolicy<any> | FieldReadFunction<any>;
   company_sic?: FieldPolicy<any> | FieldReadFunction<any>;
   company_sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  contract_type?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_header?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -694,6 +696,7 @@ export type sec_contract_max_fieldsKeySpecifier = (
   | 'company_name'
   | 'company_sic'
   | 'company_sic_name'
+  | 'contract_type'
   | 'description'
   | 'filing_date'
   | 'filing_header'
@@ -710,6 +713,7 @@ export type sec_contract_max_fieldsFieldPolicy = {
   company_name?: FieldPolicy<any> | FieldReadFunction<any>;
   company_sic?: FieldPolicy<any> | FieldReadFunction<any>;
   company_sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  contract_type?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_header?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -725,6 +729,7 @@ export type sec_contract_min_fieldsKeySpecifier = (
   | 'company_name'
   | 'company_sic'
   | 'company_sic_name'
+  | 'contract_type'
   | 'description'
   | 'filing_date'
   | 'filing_header'
@@ -741,6 +746,7 @@ export type sec_contract_min_fieldsFieldPolicy = {
   company_name?: FieldPolicy<any> | FieldReadFunction<any>;
   company_sic?: FieldPolicy<any> | FieldReadFunction<any>;
   company_sic_name?: FieldPolicy<any> | FieldReadFunction<any>;
+  contract_type?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_date?: FieldPolicy<any> | FieldReadFunction<any>;
   filing_header?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -861,6 +867,7 @@ export type sec_filing_attachmentKeySpecifier = (
   | 'attachment_type'
   | 'cik'
   | 'contents'
+  | 'contract_type'
   | 'created_at'
   | 'description'
   | 'filename'
@@ -877,6 +884,7 @@ export type sec_filing_attachmentFieldPolicy = {
   attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
   cik?: FieldPolicy<any> | FieldReadFunction<any>;
   contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  contract_type?: FieldPolicy<any> | FieldReadFunction<any>;
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
   filename?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -935,6 +943,7 @@ export type sec_filing_attachment_max_fieldsKeySpecifier = (
   | 'attachment_type'
   | 'cik'
   | 'contents'
+  | 'contract_type'
   | 'created_at'
   | 'description'
   | 'filename'
@@ -948,6 +957,7 @@ export type sec_filing_attachment_max_fieldsFieldPolicy = {
   attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
   cik?: FieldPolicy<any> | FieldReadFunction<any>;
   contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  contract_type?: FieldPolicy<any> | FieldReadFunction<any>;
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
   filename?: FieldPolicy<any> | FieldReadFunction<any>;
@@ -960,6 +970,7 @@ export type sec_filing_attachment_min_fieldsKeySpecifier = (
   | 'attachment_type'
   | 'cik'
   | 'contents'
+  | 'contract_type'
   | 'created_at'
   | 'description'
   | 'filename'
@@ -973,6 +984,7 @@ export type sec_filing_attachment_min_fieldsFieldPolicy = {
   attachment_type?: FieldPolicy<any> | FieldReadFunction<any>;
   cik?: FieldPolicy<any> | FieldReadFunction<any>;
   contents?: FieldPolicy<any> | FieldReadFunction<any>;
+  contract_type?: FieldPolicy<any> | FieldReadFunction<any>;
   created_at?: FieldPolicy<any> | FieldReadFunction<any>;
   description?: FieldPolicy<any> | FieldReadFunction<any>;
   filename?: FieldPolicy<any> | FieldReadFunction<any>;

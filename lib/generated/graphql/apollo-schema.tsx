@@ -1617,6 +1617,7 @@ export type Sec_Contract = {
   company_name: Scalars['String'];
   company_sic: Scalars['String'];
   company_sic_name: Scalars['String'];
+  contract_type?: Maybe<Scalars['String']>;
   description: Scalars['String'];
   filing_date: Scalars['String'];
   filing_header: Scalars['String'];
@@ -1682,6 +1683,7 @@ export type Sec_Contract_Bool_Exp = {
   company_name?: Maybe<String_Comparison_Exp>;
   company_sic?: Maybe<String_Comparison_Exp>;
   company_sic_name?: Maybe<String_Comparison_Exp>;
+  contract_type?: Maybe<String_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   filing_date?: Maybe<Date_Comparison_Exp>;
   filing_header?: Maybe<String_Comparison_Exp>;
@@ -1705,6 +1707,7 @@ export type Sec_Contract_Max_Fields = {
   company_name?: Maybe<Scalars['String']>;
   company_sic?: Maybe<Scalars['String']>;
   company_sic_name?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   filing_date?: Maybe<Scalars['date']>;
   filing_header?: Maybe<Scalars['String']>;
@@ -1723,6 +1726,7 @@ export type Sec_Contract_Min_Fields = {
   company_name?: Maybe<Scalars['String']>;
   company_sic?: Maybe<Scalars['String']>;
   company_sic_name?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   filing_date?: Maybe<Scalars['date']>;
   filing_header?: Maybe<Scalars['String']>;
@@ -1740,6 +1744,7 @@ export type Sec_Contract_Order_By = {
   company_name?: Maybe<Order_By>;
   company_sic?: Maybe<Order_By>;
   company_sic_name?: Maybe<Order_By>;
+  contract_type?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filing_date?: Maybe<Order_By>;
   filing_header?: Maybe<Order_By>;
@@ -1769,6 +1774,8 @@ export enum Sec_Contract_Select_Column {
   CompanySic = 'company_sic',
   /** column name */
   CompanySicName = 'company_sic_name',
+  /** column name */
+  ContractType = 'contract_type',
   /** column name */
   Description = 'description',
   /** column name */
@@ -1912,6 +1919,7 @@ export type Sec_Filing_Attachment = {
   attachment_type: Scalars['String'];
   cik: Scalars['String'];
   contents: Scalars['String'];
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -1996,6 +2004,7 @@ export type Sec_Filing_Attachment_Bool_Exp = {
   attachment_type?: Maybe<String_Comparison_Exp>;
   cik?: Maybe<String_Comparison_Exp>;
   contents?: Maybe<String_Comparison_Exp>;
+  contract_type?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   filename?: Maybe<String_Comparison_Exp>;
@@ -2026,6 +2035,7 @@ export type Sec_Filing_Attachment_Insert_Input = {
   attachment_type?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -2044,6 +2054,7 @@ export type Sec_Filing_Attachment_Max_Fields = {
   attachment_type?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -2058,6 +2069,7 @@ export type Sec_Filing_Attachment_Max_Order_By = {
   attachment_type?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
+  contract_type?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
@@ -2073,6 +2085,7 @@ export type Sec_Filing_Attachment_Min_Fields = {
   attachment_type?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -2087,6 +2100,7 @@ export type Sec_Filing_Attachment_Min_Order_By = {
   attachment_type?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
+  contract_type?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
@@ -2117,6 +2131,7 @@ export type Sec_Filing_Attachment_Order_By = {
   attachment_type?: Maybe<Order_By>;
   cik?: Maybe<Order_By>;
   contents?: Maybe<Order_By>;
+  contract_type?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   filename?: Maybe<Order_By>;
@@ -2145,6 +2160,8 @@ export enum Sec_Filing_Attachment_Select_Column {
   /** column name */
   Contents = 'contents',
   /** column name */
+  ContractType = 'contract_type',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Description = 'description',
@@ -2166,6 +2183,7 @@ export type Sec_Filing_Attachment_Set_Input = {
   attachment_type?: Maybe<Scalars['String']>;
   cik?: Maybe<Scalars['String']>;
   contents?: Maybe<Scalars['String']>;
+  contract_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   filename?: Maybe<Scalars['String']>;
@@ -2229,6 +2247,8 @@ export enum Sec_Filing_Attachment_Update_Column {
   Cik = 'cik',
   /** column name */
   Contents = 'contents',
+  /** column name */
+  ContractType = 'contract_type',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
