@@ -69,6 +69,7 @@ export const ContractFilters: FC<FilterProps> = ({
                 <Spacer />
                 <Tooltip label="Filter companies by name">
                   <IconButton
+                    hidden
                     mt={1}
                     variant="outline"
                     size="xs"
