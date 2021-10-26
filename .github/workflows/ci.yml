@@ -9,9 +9,8 @@ on:
       - '*'
 
 env:
-  AUTH0_BASE_URL: http://localhost:3000
+  AUTH0_BASE_URL: https://letryx.com
   AUTH0_ISSUER_BASE_URL: https://letryx.us.auth0.com
-  # use random secret to prevent `TypeError: "secret" is required`
   AUTH0_SECRET: ${{ secrets.AUTH0_SECRET }}
   AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
   AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
