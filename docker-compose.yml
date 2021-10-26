@@ -72,8 +72,8 @@ services:
       POSTGRES_PASSWORD: postgrespassword
 
   graphql-engine:
-    # v2.0.9.cli-migrations-v3
-    image: ${HASURA_IMAGE}:v2.0.9
+    # v2.0.10.cli-migrations-v3
+    image: ${HASURA_IMAGE}:v2.0.10
     volumes:
       - ./hasura/metadata:/hasura-metadata
     networks:
