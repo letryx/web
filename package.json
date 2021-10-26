@@ -13,10 +13,10 @@
   "scripts": {
     "build": "next build",
     "codegen": "eval $(egrep '^GRAPHQL_API_URL=' .env | xargs) graphql-codegen --config codegen.yml --target typescript --tagName gql --customScalarsPrefix=GraphQL_",
-    "schema": "eval $(egrep '^HASURA_GRAPHQL_ADMIN_SECRET=' .env | xargs) gq http://localhost:6060/v1/graphql -H \\'X-Hasura-Admin-Secret: $HASURA_GRAPHQL_ADMIN_SECRET\\' --introspect > lib/generated/graphql/schema.graphql",
     "console": "hasura console --no-browser",
     "dev": "next",
     "lint": "eslint components pages lib styles test",
+    "schema": "eval $(egrep '^HASURA_GRAPHQL_ADMIN_SECRET=' .env | xargs) gq http://localhost:6060/v1/graphql -H \\'X-Hasura-Admin-Secret: $HASURA_GRAPHQL_ADMIN_SECRET\\' --introspect > lib/generated/graphql/schema.graphql",
     "start": "next start",
     "test": "jest",
     "type-check": "tsc"
@@ -40,6 +40,7 @@
     "@next/mdx": "^11.1.2",
     "@types/dompurify": "^2.2.3",
     "@types/faker": "^5.5.8",
+    "@types/http-errors": "^1.8.1",
     "@types/jest": "^27.0.1",
     "@types/jsonp": "^0.2.1",
     "@types/node": "^16.9.1",
@@ -93,7 +94,6 @@
     "@graphql-codegen/typescript-operations": "^2.1.4",
     "@graphql-codegen/typescript-react-apollo": "^3.1.4",
     "@types/debounce": "^1.2.0",
-    "@types/http-errors": "^1.8.1",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "@typescript-eslint/typescript-estree": "^4.31.1",
