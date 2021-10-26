@@ -84,7 +84,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             AUTH0_SECRET=${{ env.AUTH0_SECRET }}
-            AUTH0_BASE_URL= ${{ env.AUTH0_BASE_URL }}
+            AUTH0_BASE_URL=${{ env.AUTH0_BASE_URL }}
             AUTH0_CLIENT_ID=${{ env.AUTH0_CLIENT_ID }}
             AUTH0_CLIENT_SECRET=${{ env.AUTH0_CLIENT_SECRET }}
             AUTH0_ISSUER_BASE_URL=${{ env.AUTH0_ISSUER_BASE_URL }}
