@@ -49,6 +49,7 @@ jobs:
         run: yarn build
 
   docker:
+    needs: build
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
@@ -79,7 +80,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: false
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
