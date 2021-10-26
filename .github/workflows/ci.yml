@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: 14
 
-      - name: Cache yarn
+      - name: Cache yarn directory
         uses: c-hive/gha-yarn-cache@v2
 
       - name: Install dependencies
@@ -83,11 +83,11 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            AUTH0_BASE_URL= ${{ env.AUTH0_BASE_URL }}
-            AUTH0_ISSUER_BASE_URL=${{ env.AUTH0_ISSUER_BASE_URL }}
             AUTH0_SECRET=${{ env.AUTH0_SECRET }}
+            AUTH0_BASE_URL= ${{ env.AUTH0_BASE_URL }}
             AUTH0_CLIENT_ID=${{ env.AUTH0_CLIENT_ID }}
             AUTH0_CLIENT_SECRET=${{ env.AUTH0_CLIENT_SECRET }}
+            AUTH0_ISSUER_BASE_URL=${{ env.AUTH0_ISSUER_BASE_URL }}
             GRAPHQL_API_URL=${{ env.GRAPHQL_API_URL }}
             GRAPHQL_API_SSR_URL=${{ env.GRAPHQL_API_SSR_URL }}
 
