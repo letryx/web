@@ -17,6 +17,7 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
     volumes:
       - .:/usr/app
+      - ./node_modules:/usr/src/app/node_modules
     networks:
       - letryx-internal
     command: echo ok
@@ -42,9 +43,8 @@ services:
     environment:
       GRAPHQL_API_URL: 'http://graphql-engine:8080/v1/graphql'
     command: >-
-      npx graphql-codegen
-        --config codegen.yml --target typescript --tagName gql
-        --watch
+      npx --package @graphql-codegen/cli graphql-codegen
+        --config codegen.yml --target typescript --tagName gql --watch
 
   nextjs:
     <<: *web-base
