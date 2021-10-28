@@ -1,14 +1,22 @@
 replicaCount: 1
 
 config:
+  auth0Scope: "openid profile email offline_access"
   auth0BaseURL: https://letryx.com
+  auth0Audience: https://api.letryx.com
   auth0IssuerBaseURL: https://letryx.us.auth0.com
+  auth0PostLogoutRedirect: https://letryx.com
+  auth0SessionRollingDuration: 604800
+
   auth0Secret: ""
   auth0ClientID: ""
   auth0ClientSecret: ""
 
-  graphqlAPIURL: ""
-  graphqlAPISSRURL: ""
+  discordSignupsWebhook: ""
+  ipstackKey: ""
+
+  graphqlAPIURL: https://api.letryx.com/v1/graphql
+  graphqlAPISSRURL: https://api.letryx.com/v1/graphql
 
 image:
   registry: ghcr.io
