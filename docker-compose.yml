@@ -15,6 +15,8 @@ services:
       GRAPHQL_API_URL: '$GRAPHQL_API_URL'
       GRAPHQL_API_SSR_URL: '$GRAPHQL_API_SSR_URL'
       HASURA_GRAPHQL_ADMIN_SECRET: '$HASURA_GRAPHQL_ADMIN_SECRET'
+      # next.js is running out of heap space in development mode
+      NODE_OPTIONS: '--max-old-space-size=8192'
     volumes:
       - .:/usr/app
       - ./node_modules:/usr/src/app/node_modules

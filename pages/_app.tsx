@@ -26,5 +26,5 @@ const App: FC<AppProps & WithApolloProps<NormalizedCacheObject>> = ({
 
 // https://github.com/lfades/next-with-apollo#using-_app
 export default withApollo(({ initialState }) =>
-  createApolloClient(initialState || {})
+  createApolloClient(initialState as NormalizedCacheObject)
 )(App);
