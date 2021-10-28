@@ -3140,7 +3140,7 @@ export type User_Variance_Order_By = {
 
 export type SearchResultFragment = {
   __typename?: 'sec_contract';
-  uid?: Maybe<string>;
+  uid?: string | null | undefined;
   accession_number: string;
   sequence: number;
   company_name: string;
@@ -3150,7 +3150,7 @@ export type SearchResultFragment = {
   filing_date: string;
   description: string;
   attachment_type: string;
-  contract_type?: Maybe<string>;
+  contract_type?: string | null | undefined;
 };
 
 export type SearchSecContractsQueryVariables = Exact<{
@@ -3167,37 +3167,41 @@ export type SearchSecContractsQuery = {
   __typename?: 'query_root';
   sec_search_aggregate: {
     __typename?: 'sec_contract_aggregate';
-    nodes?: Maybe<Array<{ __typename?: 'sec_contract'; uid?: Maybe<string> }>>;
-    aggregate?: Maybe<{
-      __typename?: 'sec_contract_aggregate_fields';
-      count: number;
-      filing_count: number;
-      company_count: number;
-    }>;
-  };
-  sec_search?: Maybe<
-    Array<{
+    nodes?: Array<{
       __typename?: 'sec_contract';
-      uid?: Maybe<string>;
-      accession_number: string;
-      sequence: number;
-      company_name: string;
-      company_cik: string;
-      company_sic_name: string;
-      filing_type: string;
-      filing_date: string;
-      description: string;
-      attachment_type: string;
-      contract_type?: Maybe<string>;
-    }>
-  >;
+      uid?: string | null | undefined;
+    }>;
+    aggregate?:
+      | {
+          __typename?: 'sec_contract_aggregate_fields';
+          count: number;
+          filing_count: number;
+          company_count: number;
+        }
+      | null
+      | undefined;
+  };
+  sec_search?: Array<{
+    __typename?: 'sec_contract';
+    uid?: string | null | undefined;
+    accession_number: string;
+    sequence: number;
+    company_name: string;
+    company_cik: string;
+    company_sic_name: string;
+    filing_type: string;
+    filing_date: string;
+    description: string;
+    attachment_type: string;
+    contract_type?: string | null | undefined;
+  }>;
 };
 
 export type SecContractFragment = {
   __typename?: 'sec_filing_attachment';
   sequence: number;
   attachment_type: string;
-  description?: Maybe<string>;
+  description?: string | null | undefined;
   contents: string;
   sec_filing: {
     __typename?: 'sec_filing';
@@ -3220,30 +3224,33 @@ export type GetSecContractQueryVariables = Exact<{
 
 export type GetSecContractQuery = {
   __typename?: 'query_root';
-  sec_filing_attachment_by_pk?: Maybe<{
-    __typename?: 'sec_filing_attachment';
-    sequence: number;
-    attachment_type: string;
-    description?: Maybe<string>;
-    contents: string;
-    sec_filing: {
-      __typename?: 'sec_filing';
-      accession_number: string;
-      filing_date: Date;
-      filing_type: string;
-      sec_company: {
-        __typename?: 'sec_company';
-        name: string;
-        sic: string;
-        sic_name: string;
-      };
-    };
-  }>;
+  sec_filing_attachment_by_pk?:
+    | {
+        __typename?: 'sec_filing_attachment';
+        sequence: number;
+        attachment_type: string;
+        description?: string | null | undefined;
+        contents: string;
+        sec_filing: {
+          __typename?: 'sec_filing';
+          accession_number: string;
+          filing_date: Date;
+          filing_type: string;
+          sec_company: {
+            __typename?: 'sec_company';
+            name: string;
+            sic: string;
+            sic_name: string;
+          };
+        };
+      }
+    | null
+    | undefined;
 };
 
 export type ContractTypeFragmentFragment = {
   __typename?: 'sec_filing_attachment';
-  contract_type?: Maybe<string>;
+  contract_type?: string | null | undefined;
 };
 
 export type GetContractTypesQueryVariables = Exact<{ [key: string]: never }>;
@@ -3252,7 +3259,7 @@ export type GetContractTypesQuery = {
   __typename?: 'query_root';
   sec_filing_attachment: Array<{
     __typename?: 'sec_filing_attachment';
-    contract_type?: Maybe<string>;
+    contract_type?: string | null | undefined;
   }>;
 };
 
@@ -3261,7 +3268,7 @@ export type CurrentUserFragment = {
   id: number;
   email: string;
   name: string;
-  photo_url?: Maybe<string>;
+  photo_url?: string | null | undefined;
   default_org: { __typename?: 'org'; id: number; name: string };
 };
 
@@ -3276,7 +3283,7 @@ export type GetCurrentUserQuery = {
     id: number;
     email: string;
     name: string;
-    photo_url?: Maybe<string>;
+    photo_url?: string | null | undefined;
     default_org: { __typename?: 'org'; id: number; name: string };
   }>;
 };
@@ -3294,14 +3301,17 @@ export type SyncUserMutationVariables = Exact<{
 
 export type SyncUserMutation = {
   __typename?: 'mutation_root';
-  insert_user_one?: Maybe<{
-    __typename?: 'user';
-    id: number;
-    auth0_id: string;
-    email: string;
-    name: string;
-    default_org: { __typename?: 'org'; id: number; name: string };
-  }>;
+  insert_user_one?:
+    | {
+        __typename?: 'user';
+        id: number;
+        auth0_id: string;
+        email: string;
+        name: string;
+        default_org: { __typename?: 'org'; id: number; name: string };
+      }
+    | null
+    | undefined;
 };
 
 export const SearchResultFragmentDoc = gql`

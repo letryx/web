@@ -18,7 +18,7 @@ module.exports = withMDX({
       config.resolve.fallback.net = false;
       config.resolve.fallback.tls = false;
     }
-    config.experiments = { topLevelAwait: true };
+    config.experiments = { topLevelAwait: true, layers: true };
     return config;
   },
 });
