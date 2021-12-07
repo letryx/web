@@ -2468,6 +2468,7 @@ export enum Sec_Filing_Update_Column {
 }
 
 export type Sec_Search_Args = {
+  company_cik_eq?: Maybe<Scalars['String']>;
   company_name_excludes?: Maybe<Scalars['String']>;
   company_name_includes?: Maybe<Scalars['String']>;
   contract_type_eq?: Maybe<Scalars['String']>;
@@ -3161,6 +3162,7 @@ export type SearchSecContractsQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>;
   uidsOnly?: Maybe<Scalars['Boolean']>;
   contractType?: Maybe<Scalars['String']>;
+  companyCiks?: Maybe<Scalars['String']>;
 }>;
 
 export type SearchSecContractsQuery = {
@@ -3195,6 +3197,7 @@ export type SearchSecContractsQuery = {
     attachment_type: string;
     contract_type?: string | null | undefined;
   }>;
+  companies: Array<{ __typename?: 'sec_contract'; company_cik: string }>;
 };
 
 export type SecContractFragment = {
@@ -3215,6 +3218,27 @@ export type SecContractFragment = {
       sic_name: string;
     };
   };
+};
+
+export type CompanyFragment = {
+  __typename?: 'sec_contract';
+  company_cik: string;
+  company_name: string;
+  company_geo: string;
+};
+
+export type GetSecContractCompaniesQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetSecContractCompaniesQuery = {
+  __typename?: 'query_root';
+  sec_contract: Array<{
+    __typename?: 'sec_contract';
+    company_cik: string;
+    company_name: string;
+    company_geo: string;
+  }>;
 };
 
 export type GetSecContractQueryVariables = Exact<{
@@ -3347,6 +3371,13 @@ export const SecContractFragmentDoc = gql`
     contents
   }
 `;
+export const CompanyFragmentDoc = gql`
+  fragment Company on sec_contract {
+    company_cik
+    company_name
+    company_geo
+  }
+`;
 export const ContractTypeFragmentFragmentDoc = gql`
   fragment ContractTypeFragment on sec_filing_attachment {
     contract_type
@@ -3373,6 +3404,7 @@ export const SearchSecContractsDocument = gql`
     $offset: Int = 0
     $uidsOnly: Boolean = false
     $contractType: String
+    $companyCiks: String
   ) {
     sec_search_aggregate(
       args: {
@@ -3380,6 +3412,7 @@ export const SearchSecContractsDocument = gql`
         filing_date_gt: $minDate
         filing_date_lt: $maxDate
         contract_type_eq: $contractType
+        company_cik_eq: $companyCiks
       }
     ) {
       nodes @include(if: $uidsOnly) {
@@ -3397,12 +3430,25 @@ export const SearchSecContractsDocument = gql`
         filing_date_gt: $minDate
         filing_date_lt: $maxDate
         contract_type_eq: $contractType
+        company_cik_eq: $companyCiks
       }
       order_by: { relevance: desc }
       limit: $limit
       offset: $offset
     ) @skip(if: $uidsOnly) {
       ...SearchResult
+    }
+    companies: sec_search(
+      args: {
+        search: $search
+        filing_date_gt: $minDate
+        filing_date_lt: $maxDate
+        contract_type_eq: $contractType
+        company_cik_eq: $companyCiks
+      }
+      distinct_on: [company_cik]
+    ) {
+      company_cik
     }
   }
   ${SearchResultFragmentDoc}
@@ -3427,6 +3473,7 @@ export const SearchSecContractsDocument = gql`
  *      offset: // value for 'offset'
  *      uidsOnly: // value for 'uidsOnly'
  *      contractType: // value for 'contractType'
+ *      companyCiks: // value for 'companyCiks'
  *   },
  * });
  */
@@ -3463,6 +3510,64 @@ export type SearchSecContractsLazyQueryHookResult = ReturnType<
 export type SearchSecContractsQueryResult = Apollo.QueryResult<
   SearchSecContractsQuery,
   SearchSecContractsQueryVariables
+>;
+export const GetSecContractCompaniesDocument = gql`
+  query GetSECContractCompanies {
+    sec_contract(distinct_on: [company_cik]) {
+      ...Company
+    }
+  }
+  ${CompanyFragmentDoc}
+`;
+
+/**
+ * __useGetSecContractCompaniesQuery__
+ *
+ * To run a query within a React component, call `useGetSecContractCompaniesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSecContractCompaniesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSecContractCompaniesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetSecContractCompaniesQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetSecContractCompaniesQuery,
+    GetSecContractCompaniesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    GetSecContractCompaniesQuery,
+    GetSecContractCompaniesQueryVariables
+  >(GetSecContractCompaniesDocument, options);
+}
+export function useGetSecContractCompaniesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetSecContractCompaniesQuery,
+    GetSecContractCompaniesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    GetSecContractCompaniesQuery,
+    GetSecContractCompaniesQueryVariables
+  >(GetSecContractCompaniesDocument, options);
+}
+export type GetSecContractCompaniesQueryHookResult = ReturnType<
+  typeof useGetSecContractCompaniesQuery
+>;
+export type GetSecContractCompaniesLazyQueryHookResult = ReturnType<
+  typeof useGetSecContractCompaniesLazyQuery
+>;
+export type GetSecContractCompaniesQueryResult = Apollo.QueryResult<
+  GetSecContractCompaniesQuery,
+  GetSecContractCompaniesQueryVariables
 >;
 export const GetSecContractDocument = gql`
   query GetSECContract($accession_number: String!, $sequence: Int!) {

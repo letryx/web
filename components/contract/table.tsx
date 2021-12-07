@@ -92,35 +92,33 @@ export const TableContent: FC<ContractTableProps> = ({
   isLoading,
   addContract,
   compSet,
-}) => {
-  return (
-    <Table variant="simple" borderWidth="1px" fontSize="0.9rem">
-      <Thead bg={mode('gray.50', 'gray.800')}>
-        <Tr>
-          <Th isNumeric>Filing Date</Th>
-          <Th width="12%" isNumeric>
-            Filing Type
-          </Th>
-          <Th width="60%">Description / Filer</Th>
-          <Th />
-        </Tr>
-      </Thead>
-      <Tbody>
-        {isLoading
-          ? [...Array(PAGE_SIZE).keys()].map(() => (
-              <Tr>
-                <Td colSpan={4}>
-                  <Skeleton width="100%" height="43px" />
-                </Td>
-              </Tr>
-            ))
-          : contracts.map((contract) => (
-              <ContractRow
-                isAdded={!!(contract.uid && compSet.has(contract.uid))}
-                {...{ contract, addContract }}
-              />
-            ))}
-      </Tbody>
-    </Table>
-  );
-};
+}) => (
+  <Table variant="simple" borderWidth="1px" fontSize="0.9rem">
+    <Thead bg={mode('gray.50', 'gray.800')}>
+      <Tr>
+        <Th isNumeric>Filing Date</Th>
+        <Th width="12%" isNumeric>
+          Filing Type
+        </Th>
+        <Th width="60%">Description / Filer</Th>
+        <Th />
+      </Tr>
+    </Thead>
+    <Tbody>
+      {isLoading
+        ? [...Array(PAGE_SIZE).keys()].map(() => (
+          <Tr>
+            <Td colSpan={4}>
+              <Skeleton width="100%" height="43px" />
+            </Td>
+          </Tr>
+        ))
+        : contracts.map((contract) => (
+          <ContractRow
+            isAdded={!!(contract.uid && compSet.has(contract.uid))}
+            {...{ contract, addContract }}
+          />
+        ))}
+    </Tbody>
+  </Table>
+);
