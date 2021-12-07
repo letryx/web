@@ -1,5 +1,5 @@
 // Adapted from https://github.com/letryx/chakra-dayzed-datepicker to allow for date typing
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Input,
   Popover,
