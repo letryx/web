@@ -1,0 +1,69 @@
+replicaCount: 1
+
+config:
+  auth0Scope: "openid profile email offline_access"
+  auth0BaseURL: https://letryx.com
+  auth0Audience: https://api.letryx.com
+  auth0IssuerBaseURL: https://letryx.us.auth0.com
+  auth0PostLogoutRedirect: https://letryx.com
+  auth0SessionRollingDuration: 604800
+
+  auth0Secret: ""
+  auth0ClientID: ""
+  auth0ClientSecret: ""
+
+  discordSignupsWebhook: ""
+  ipstackKey: ""
+
+  graphqlAPIURL: https://api.letryx.com/v1/graphql
+  graphqlAPISSRURL: https://api.letryx.com/v1/graphql
+
+image:
+  registry: ghcr.io
+  repository: letryx/web
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+  nodePort: ""
+
+ingress:
+  enabled: false
+  tls: false
+  className: ""
+  annotations: {}
+  hostname: web.local
+  path: /
+  pathType: ImplementationSpecific
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: null
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

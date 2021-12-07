@@ -2,11 +2,9 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - '*'
+    branches: [ main ]
 
 env:
   AUTH0_BASE_URL: https://letryx.com
