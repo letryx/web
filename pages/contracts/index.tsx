@@ -14,7 +14,7 @@ import {
   SearchSecContractsQueryVariables,
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
-import { map } from 'lodash';
+import { flatMap, map } from 'lodash';
 import { FC, useEffect, useMemo, useState } from 'react';
 
 const ContractsPage: FC = () => {
@@ -62,12 +62,16 @@ const ContractsPage: FC = () => {
 
   const { company_count: companyCount, count: contractCount } =
     data?.sec_search_aggregate.aggregate || {};
-  const searchCompanies = useMemo(() => {
-    if (data?.companies) {
-      return map(data.companies, (x) => x.company_cik);
-    }
-    return [];
-  }, [data?.companies]);
+  const searchCompanies = useMemo(
+    () => data?.companies && map(data.companies, (x) => x.company_cik),
+    [data?.companies]
+  );
+  const searchContractTypes = useMemo(
+    () =>
+      data?.contract_types &&
+      flatMap(data.contract_types, (x) => x.contract_type || []),
+    [data?.contract_types]
+  );
 
   useEffect(() => setTotalContracts(contractCount), [contractCount]);
 
@@ -134,6 +138,7 @@ const ContractsPage: FC = () => {
             selectedCompanies,
             setSelectedCompanies,
             searchCompanies,
+            searchContractTypes,
           }}
         />
         <VStack width="100%">

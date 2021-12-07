@@ -70,6 +70,19 @@ query SearchSECContracts(
   ) {
     company_cik
   }
+  contract_types: sec_search(
+    args: {
+      # If we want the contract_types list to be constrained
+      # by typed queries, uncomment the next line
+      # search: $search
+      filing_date_gt: $minDate
+      filing_date_lt: $maxDate
+      company_cik_eq: $companyCiks
+    }
+    distinct_on: [contract_type]
+  ) {
+    contract_type
+  }
 }
 
 fragment SECContract on sec_filing_attachment {

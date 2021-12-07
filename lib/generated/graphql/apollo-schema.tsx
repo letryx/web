@@ -3198,6 +3198,10 @@ export type SearchSecContractsQuery = {
     contract_type?: string | null | undefined;
   }>;
   companies: Array<{ __typename?: 'sec_contract'; company_cik: string }>;
+  contract_types: Array<{
+    __typename?: 'sec_contract';
+    contract_type?: string | null | undefined;
+  }>;
 };
 
 export type SecContractFragment = {
@@ -3447,6 +3451,16 @@ export const SearchSecContractsDocument = gql`
       distinct_on: [company_cik]
     ) {
       company_cik
+    }
+    contract_types: sec_search(
+      args: {
+        filing_date_gt: $minDate
+        filing_date_lt: $maxDate
+        company_cik_eq: $companyCiks
+      }
+      distinct_on: [contract_type]
+    ) {
+      contract_type
     }
   }
   ${SearchResultFragmentDoc}

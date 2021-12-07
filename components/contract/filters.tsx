@@ -287,7 +287,7 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
           suppressHydrationWarning
         >
           Companies{' '}
-          {companyCount ? (
+          {companyCount !== undefined ? (
             `(${companyCount.toLocaleString()})`
           ) : (
             <Skeleton as="span">999</Skeleton>
@@ -404,6 +404,7 @@ type FilterProps = BoxProps & {
   selectedCompanies: string[] | undefined;
   setSelectedCompanies: (sc: string[] | undefined) => void;
   searchCompanies: string[] | undefined;
+  searchContractTypes: string[] | undefined;
 };
 
 export const ContractFilters: FC<FilterProps> = ({
@@ -418,11 +419,18 @@ export const ContractFilters: FC<FilterProps> = ({
   selectedCompanies,
   setSelectedCompanies,
   searchCompanies,
+  searchContractTypes,
   ...props
 }) => {
   const { data: contractTypeData } = useGetContractTypesQuery();
 
-  const contractTypes = contractTypeData?.sec_filing_attachment || [];
+  const contractTypes = useMemo(() => {
+    const contractTypeSet = new Set(searchContractTypes || []);
+    return filter(
+      contractTypeData?.sec_filing_attachment || [],
+      (ct) => !!ct.contract_type && contractTypeSet.has(ct.contract_type)
+    );
+  }, [contractTypeData, searchContractTypes]);
 
   // const {isOpen, onOpen, onClose} = useDisclosure();
   return (
