@@ -62,10 +62,8 @@ const ContractsPage: FC = () => {
 
   const { company_count: companyCount, count: contractCount } =
     data?.sec_search_aggregate.aggregate || {};
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const companies = useMemo(() => {
+  const searchCompanies = useMemo(() => {
     if (data?.companies) {
-      // eslint-disable-next-line
       return map(data.companies, (x) => x.company_cik);
     }
     return [];
@@ -135,7 +133,7 @@ const ContractsPage: FC = () => {
             setSelectedContractType,
             selectedCompanies,
             setSelectedCompanies,
-            searchCompanies: companies,
+            searchCompanies,
           }}
         />
         <VStack width="100%">

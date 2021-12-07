@@ -163,8 +163,8 @@ const CompanyTable: FC<CompanyTableProps> = ({
         </Thead>
         <Tbody>
           {isLoading
-            ? [...Array(PAGE_SIZE).keys()].map(() => (
-                <Tr>
+            ? [...Array(PAGE_SIZE).keys()].map((page) => (
+                <Tr key={page}>
                   <Td colSpan={4}>
                     <Skeleton width="100%" height="43px" />
                   </Td>
@@ -194,7 +194,6 @@ const CompanyTable: FC<CompanyTableProps> = ({
 interface CompanyFilterModalProps {
   selectedCompanies: string[] | undefined;
   setSelectedCompanies: (ids: string[] | undefined) => void;
-  // eslint-disable-next-line react/no-unused-prop-types
   searchCompanies: string[] | undefined;
   companyCount: number | undefined;
 }
@@ -205,6 +204,7 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
   setSelectedCompanies,
   selectedCompanies,
   companyCount,
+  searchCompanies,
 }) => {
   const [open, setOpen] = useState(false);
   const [liveSelectedCompanies, setLiveSelectedCompanies] = useState<string[]>(
@@ -221,13 +221,25 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
     });
     return result;
   }, [companiesData]);
+  const [allCompanies, companiesLoading] = useMemo(() => {
+    if (!searchCompanies || !companiesData?.sec_contract) {
+      return [companiesData?.sec_contract || [], true];
+    }
+    const searchCiks = new Set(searchCompanies);
+    return [
+      filter(companiesData?.sec_contract || [], (company) =>
+        searchCiks.has(company.company_cik)
+      ),
+      false,
+    ];
+  }, [searchCompanies, companiesData?.sec_contract]);
   const fuse = useMemo(
     () =>
-      new Fuse(companiesData?.sec_contract || [], {
+      new Fuse(allCompanies, {
         keys: ['company_name', 'company_geo'],
         includeScore: true,
       }),
-    [companiesData]
+    [allCompanies]
   );
   const [search, setSearch] = useState('');
   const onOpen = () => {
@@ -260,12 +272,11 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
   };
 
   const companies = useMemo(() => {
-    const result = companiesData?.sec_contract || [];
     if (!search) {
-      return result;
+      return allCompanies;
     }
     return map(fuse.search(search), (x) => x.item);
-  }, [companiesData, search, fuse]);
+  }, [allCompanies, search, fuse]);
   return (
     <>
       <Flex pb={1}>
@@ -364,7 +375,7 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
             </InputGroup>
             <CompanyTable
               companies={companies}
-              isLoading={loading}
+              isLoading={loading || companiesLoading}
               toggleSelection={onSelect}
               selectedCompanies={liveSelectedCompanies}
               selectAll={onSelectAll}
@@ -478,7 +489,7 @@ export const ContractFilters: FC<FilterProps> = ({
               style={{ textTransform: 'capitalize' }}
             >
               {contractTypes.map(({ contract_type }) => (
-                <option value={contract_type || undefined}>
+                <option value={contract_type || undefined} key={contract_type}>
                   {contract_type?.toLowerCase()}
                 </option>
               ))}

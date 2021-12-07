@@ -3440,11 +3440,9 @@ export const SearchSecContractsDocument = gql`
     }
     companies: sec_search(
       args: {
-        search: $search
         filing_date_gt: $minDate
         filing_date_lt: $maxDate
         contract_type_eq: $contractType
-        company_cik_eq: $companyCiks
       }
       distinct_on: [company_cik]
     ) {
