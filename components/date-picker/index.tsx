@@ -1,5 +1,4 @@
 // Adapted from https://github.com/letryx/chakra-dayzed-datepicker to allow for date typing
-import React, { useRef, useState } from 'react';
 import {
   Input,
   Popover,
@@ -8,16 +7,13 @@ import {
   PopoverTrigger,
   useOutsideClick,
 } from '@chakra-ui/react';
-import { useDayzed } from 'dayzed';
 import { format, parse } from 'date-fns';
+import { useDayzed } from 'dayzed';
+import { useRef, useState } from 'react';
 import { CalendarPanel } from './calendar-panel';
-import {
-  DatepickerConfigs,
-  DatepickerProps,
-  OnDateSelected,
-} from './types';
+import { DatepickerConfigs, DatepickerProps, OnDateSelected } from './types';
 
-export const Month_Names_Full = [
+export const MonthNamesFull = [
   'January',
   'February',
   'March',
@@ -32,7 +28,7 @@ export const Month_Names_Full = [
   'December',
 ];
 
-export const Month_Names_Short = [
+export const MonthNamesShort = [
   'Jan',
   'Feb',
   'Mar',
@@ -47,7 +43,7 @@ export const Month_Names_Short = [
   'Dec',
 ];
 
-export const Weekday_Names_Short = [
+export const WeekdayNamesShort = [
   'Sun',
   'Mon',
   'Tue',
@@ -56,7 +52,6 @@ export const Weekday_Names_Short = [
   'Fri',
   'Sat',
 ];
-
 
 export interface SingleDatepickerProps extends DatepickerProps {
   date: Date;
@@ -69,8 +64,8 @@ export interface SingleDatepickerProps extends DatepickerProps {
 
 const DefaultConfigs = {
   dateFormat: 'yyyy-MM-dd',
-  monthNames: Month_Names_Short,
-  dayNames: Weekday_Names_Short,
+  monthNames: MonthNamesShort,
+  dayNames: WeekdayNamesShort,
 };
 
 export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
@@ -87,7 +82,7 @@ export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
   const [popoverOpen, setPopoverOpen] = useState(false);
 
   useOutsideClick({
-    ref: ref,
+    ref,
     handler: () => setPopoverOpen(false),
   });
 
@@ -96,19 +91,25 @@ export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
   );
 
   // dayzed utils
-  const handleOnDateSelected: OnDateSelected = ({ selectable, date }) => {
+  const handleOnDateSelected: OnDateSelected = ({
+    selectable,
+    date: _date,
+  }) => {
     if (!selectable) return;
-    if (date instanceof Date && !isNaN(date.getTime())) {
-      onDateChange(date);
-      setTypedValue(format(date, configs.dateFormat));
+    if (_date instanceof Date && !Number.isNaN(_date.getTime())) {
+      onDateChange(_date);
+      setTypedValue(format(_date, configs.dateFormat));
       setPopoverOpen(false);
-      return;
     }
   };
   const onBlur = () => {
     if (typedValue !== format(date, configs.dateFormat)) {
       const parsedDate = parse(typedValue, configs.dateFormat, date);
-      if (parsedDate instanceof Date && !isNaN(parsedDate.getTime()) && parsedDate.getTime() !== date.getTime()) {
+      if (
+        parsedDate instanceof Date &&
+        !Number.isNaN(parsedDate.getTime()) &&
+        parsedDate.getTime() !== date.getTime()
+      ) {
         onDateChange(parsedDate);
         setTypedValue(format(parsedDate, configs.dateFormat));
         setPopoverOpen(false);

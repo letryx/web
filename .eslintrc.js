@@ -30,6 +30,9 @@ module.exports = {
     tsconfigRootDir: __dirname,
     extraFileExtensions: ['.cjs'],
   },
+  globals: {
+    isNaN: 'readonly',
+  },
   rules: {
     'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 'off',

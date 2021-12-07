@@ -1,11 +1,10 @@
 import { Button, ButtonProps } from '@chakra-ui/react';
 import { Calendar, GetBackForwardPropsOptions } from 'dayzed';
-import React, { Fragment } from 'react';
 import { DatepickerProps } from './types';
 
 export interface DatepickerBackBtnsProps extends DatepickerProps {
   calendars: Calendar[];
-  getBackProps: (data: GetBackForwardPropsOptions) => Record<string, any>;
+  getBackProps: (data: GetBackForwardPropsOptions) => Record<string, unknown>;
 }
 
 const DefaultBtnStyle: ButtonProps = {
@@ -13,13 +12,14 @@ const DefaultBtnStyle: ButtonProps = {
   size: 'sm',
 };
 
-export const DatepickerBackBtns: React.FC<DatepickerBackBtnsProps> = (
-  props
-) => {
-  const { calendars, getBackProps } = props;
-  const customBtnProps = props.propsConfigs?.dateNavBtnProps;
+export const DatepickerBackBtns: React.FC<DatepickerBackBtnsProps> = ({
+  calendars,
+  getBackProps,
+  propsConfigs,
+}) => {
+  const customBtnProps = propsConfigs?.dateNavBtnProps;
   return (
-    <Fragment>
+    <>
       <Button
         {...getBackProps({
           calendars,
@@ -37,22 +37,25 @@ export const DatepickerBackBtns: React.FC<DatepickerBackBtnsProps> = (
       >
         {'<'}
       </Button>
-    </Fragment>
+    </>
   );
 };
 
 export interface DatepickerForwardBtnsProps extends DatepickerProps {
   calendars: Calendar[];
-  getForwardProps: (data: GetBackForwardPropsOptions) => Record<string, any>;
+  getForwardProps: (
+    data: GetBackForwardPropsOptions
+  ) => Record<string, unknown>;
 }
 
-export const DatepickerForwardBtns: React.FC<DatepickerForwardBtnsProps> = (
-  props
-) => {
-  const { calendars, getForwardProps } = props;
-  const customBtnProps = props.propsConfigs?.dateNavBtnProps;
+export const DatepickerForwardBtns: React.FC<DatepickerForwardBtnsProps> = ({
+  calendars,
+  getForwardProps,
+  propsConfigs,
+}) => {
+  const customBtnProps = propsConfigs?.dateNavBtnProps;
   return (
-    <Fragment>
+    <>
       <Button
         {...getForwardProps({ calendars })}
         {...DefaultBtnStyle}
@@ -70,6 +73,6 @@ export const DatepickerForwardBtns: React.FC<DatepickerForwardBtnsProps> = (
       >
         {'>>'}
       </Button>
-    </Fragment>
+    </>
   );
 };

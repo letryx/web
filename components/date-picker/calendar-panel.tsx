@@ -1,17 +1,16 @@
 import {
-  HStack,
-  VStack,
-  Heading,
-  Divider,
-  SimpleGrid,
   Box,
+  Divider,
+  Heading,
+  HStack,
+  SimpleGrid,
   Stack,
+  VStack,
 } from '@chakra-ui/react';
 import { RenderProps } from 'dayzed';
-import React from 'react';
-import { DatepickerConfigs, DatepickerProps } from './types';
 import { DatepickerBackBtns, DatepickerForwardBtns } from './date-nav-btns';
 import { DayOfMonth } from './day-of-month';
+import { DatepickerConfigs, DatepickerProps } from './types';
 
 interface CalendarPanelProps extends DatepickerProps {
   renderProps: RenderProps;

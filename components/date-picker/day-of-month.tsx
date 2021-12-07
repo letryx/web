@@ -1,6 +1,5 @@
 import { Button } from '@chakra-ui/react';
 import { DateObj, RenderProps } from 'dayzed';
-import React from 'react';
 import { DatepickerProps } from './types';
 
 interface DayOfMonthProps extends DatepickerProps {
@@ -23,13 +22,13 @@ export const DayOfMonth: React.FC<DayOfMonthProps> = ({
     propsConfigs?.dayOfMonthBtnProps || {};
   let bg = selected || isInRange ? selectedBg || 'purple.200' : 'transparent';
   bg = !selectable ? customBtnProps?.disabledBg || 'red.200' : bg;
-  const halfGap = 0.125; //default Chakra-gap-space-1 is 0.25rem
+  const halfGap = 0.125; // default Chakra-gap-space-1 is 0.25rem
   return (
     <Button
       {...getDateProps({
         dateObj,
         disabled: !selectable,
-        onMouseEnter: onMouseEnter,
+        onMouseEnter,
       })}
       disabled={!selectable}
       size="sm"
