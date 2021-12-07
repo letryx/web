@@ -107,18 +107,18 @@ export const TableContent: FC<ContractTableProps> = ({
     <Tbody>
       {isLoading
         ? [...Array(PAGE_SIZE).keys()].map(() => (
-          <Tr>
-            <Td colSpan={4}>
-              <Skeleton width="100%" height="43px" />
-            </Td>
-          </Tr>
-        ))
+            <Tr>
+              <Td colSpan={4}>
+                <Skeleton width="100%" height="43px" />
+              </Td>
+            </Tr>
+          ))
         : contracts.map((contract) => (
-          <ContractRow
-            isAdded={!!(contract.uid && compSet.has(contract.uid))}
-            {...{ contract, addContract }}
-          />
-        ))}
+            <ContractRow
+              isAdded={!!(contract.uid && compSet.has(contract.uid))}
+              {...{ contract, addContract }}
+            />
+          ))}
     </Tbody>
   </Table>
 );

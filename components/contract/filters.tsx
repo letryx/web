@@ -6,10 +6,10 @@ import {
   FormControl,
   FormLabel,
   IconButton,
+  Input,
   InputGroup,
   InputLeftAddon,
   InputLeftElement,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -21,25 +21,38 @@ import {
   Skeleton,
   Spacer,
   Stack,
-  Text,
-  Tooltip,
   Table,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
+  Tooltip,
   Tr,
   useColorModeValue as mode,
 } from '@chakra-ui/react';
-import Fuse from 'fuse.js';
-import { filter, flatMap, forEach, map, take, uniq, difference, intersection } from 'lodash';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
-import { CompanyFragment, useGetContractTypesQuery, useGetSecContractCompaniesQuery } from 'lib/generated/graphql/apollo-schema';
+import { Paginator, useFixedPagination } from 'components/paginator';
+import Fuse from 'fuse.js';
+import {
+  CompanyFragment,
+  useGetContractTypesQuery,
+  useGetSecContractCompaniesQuery,
+} from 'lib/generated/graphql/apollo-schema';
+import {
+  difference,
+  filter,
+  flatMap,
+  forEach,
+  intersection,
+  map,
+  take,
+  uniq,
+} from 'lodash';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { MdFilterList, MdSearch } from 'react-icons/md';
 import { PAGE_SIZE } from './table';
-import { Paginator, useFixedPagination } from 'components/paginator';
 
 interface CompanyRowProps {
   company: CompanyFragment;
@@ -47,12 +60,12 @@ interface CompanyRowProps {
   toggleSelection: (cik: string, selected: boolean) => void;
 }
 
-const CompanyRow: FC<CompanyRowProps> = ({ company, selected, toggleSelection }) => {
-  const {
-    company_cik,
-    company_name,
-    company_geo,
-  } = company;
+const CompanyRow: FC<CompanyRowProps> = ({
+  company,
+  selected,
+  toggleSelection,
+}) => {
+  const { company_cik, company_name, company_geo } = company;
   return (
     <Tr key={`row-${company_cik}`}>
       <Td>
@@ -94,28 +107,37 @@ const CompanyTable: FC<CompanyTableProps> = ({
   selectedCompanies,
   selectAll,
 }) => {
-  const [{
-    pagesCount,
-    currentPage,
-    setCurrentPage,
-    pages,
-  }, pagedCompanies] = useFixedPagination(companies, 10);
-  const selection = useMemo(() => new Set(selectedCompanies), [selectedCompanies]);
+  const [{ pagesCount, currentPage, setCurrentPage, pages }, pagedCompanies] =
+    useFixedPagination(companies, 10);
+  const selection = useMemo(
+    () => new Set(selectedCompanies),
+    [selectedCompanies]
+  );
   const [allOption, setAllOption] = useState(false);
 
   const onToggleAllClicked = () => {
-    selectAll(map(companies, c => c.company_cik), allOption);
+    selectAll(
+      map(companies, (c) => c.company_cik),
+      allOption
+    );
     setAllOption(!allOption);
   };
 
   useEffect(() => {
-    if (intersection(selectedCompanies || [], map(companies, c => c.company_cik)).length === 0) {
+    if (
+      intersection(
+        selectedCompanies || [],
+        map(companies, (c) => c.company_cik)
+      ).length === 0
+    ) {
       setAllOption(true);
     }
   }, [selectedCompanies, companies, setAllOption]);
   const actionCount = useMemo(() => {
-    const ciks = map(companies, c => c.company_cik);
-    const overlap = allOption ? difference(ciks, selectedCompanies || []) : intersection(ciks, selectedCompanies || []);
+    const ciks = map(companies, (c) => c.company_cik);
+    const overlap = allOption
+      ? difference(ciks, selectedCompanies || [])
+      : intersection(ciks, selectedCompanies || []);
     return overlap.length;
   }, [selectedCompanies, companies, allOption]);
   return (
@@ -126,31 +148,36 @@ const CompanyTable: FC<CompanyTableProps> = ({
             <Th>Company Name</Th>
             <Th>Geo</Th>
             <Th isNumeric>
-              { allOption ? 'Select' : 'Clear'} ({actionCount})
+              {allOption ? 'Select' : 'Clear'} ({actionCount})
               <Button
-                  variant="outline"
-                  colorScheme={allOption ? 'messenger' : 'red'}
-                  onClick={onToggleAllClicked}
-                  size="xs"
-                  ml={2}
-                >
-                  { allOption ? <FaPlus /> : <FaMinus /> }
-                </Button>
+                variant="outline"
+                colorScheme={allOption ? 'messenger' : 'red'}
+                onClick={onToggleAllClicked}
+                size="xs"
+                ml={2}
+              >
+                {allOption ? <FaPlus /> : <FaMinus />}
+              </Button>
             </Th>
           </Tr>
         </Thead>
         <Tbody>
           {isLoading
             ? [...Array(PAGE_SIZE).keys()].map(() => (
-              <Tr>
-                <Td colSpan={4}>
-                  <Skeleton width="100%" height="43px" />
-                </Td>
-              </Tr>
-            ))
+                <Tr>
+                  <Td colSpan={4}>
+                    <Skeleton width="100%" height="43px" />
+                  </Td>
+                </Tr>
+              ))
             : pagedCompanies.map((company) => (
-              <CompanyRow key={company.company_cik} company={company} selected={selection.has(company.company_cik)} toggleSelection={toggleSelection} />
-            ))}
+                <CompanyRow
+                  key={company.company_cik}
+                  company={company}
+                  selected={selection.has(company.company_cik)}
+                  toggleSelection={toggleSelection}
+                />
+              ))}
         </Tbody>
       </Table>
       <Paginator
@@ -167,6 +194,7 @@ const CompanyTable: FC<CompanyTableProps> = ({
 interface CompanyFilterModalProps {
   selectedCompanies: string[] | undefined;
   setSelectedCompanies: (ids: string[] | undefined) => void;
+  // eslint-disable-next-line react/no-unused-prop-types
   searchCompanies: string[] | undefined;
   companyCount: number | undefined;
 }
@@ -179,39 +207,55 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
   companyCount,
 }) => {
   const [open, setOpen] = useState(false);
-  const [liveSelectedCompanies, setLiveSelectedCompanies] = useState<string[]>(selectedCompanies || []);
+  const [liveSelectedCompanies, setLiveSelectedCompanies] = useState<string[]>(
+    selectedCompanies || []
+  );
   const { data: companiesData, loading } = useGetSecContractCompaniesQuery();
   const companyByCik = useMemo(() => {
     if (!companiesData?.sec_contract) {
       return {};
     }
     const result: { [cik: string]: CompanyFragment } = {};
-    forEach(companiesData.sec_contract, company => {
+    forEach(companiesData.sec_contract, (company) => {
       result[company.company_cik] = company;
     });
     return result;
   }, [companiesData]);
-  const fuse = useMemo(() => new Fuse(companiesData?.sec_contract || [], { keys: ['company_name', 'company_geo'], includeScore: true }), [companiesData]);
-  const [search, setSearch] = useState("");
+  const fuse = useMemo(
+    () =>
+      new Fuse(companiesData?.sec_contract || [], {
+        keys: ['company_name', 'company_geo'],
+        includeScore: true,
+      }),
+    [companiesData]
+  );
+  const [search, setSearch] = useState('');
   const onOpen = () => {
     setLiveSelectedCompanies(selectedCompanies || []);
     setOpen(true);
   };
   const onClose = () => {
-    setSelectedCompanies(liveSelectedCompanies?.length ? liveSelectedCompanies : undefined);
+    setSelectedCompanies(
+      liveSelectedCompanies?.length ? liveSelectedCompanies : undefined
+    );
     setOpen(false);
   };
 
   const onSelectAll = (ciks: string[], select: boolean) => {
     setLiveSelectedCompanies(
-      select ? uniq([...liveSelectedCompanies, ...ciks]) : difference(liveSelectedCompanies, ciks)
+      select
+        ? uniq([...liveSelectedCompanies, ...ciks])
+        : difference(liveSelectedCompanies, ciks)
     );
   };
   const onSelect = (cik: string, select: boolean) => {
     onSelectAll([cik], select);
   };
   const onRemove = (cik: string) => {
-    const filtered = filter(selectedCompanies || [], company => cik !== company);
+    const filtered = filter(
+      selectedCompanies || [],
+      (company) => cik !== company
+    );
     setSelectedCompanies(filtered.length ? filtered : undefined);
   };
 
@@ -220,7 +264,7 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
     if (!search) {
       return result;
     }
-    return map(fuse.search(search), x => x.item);
+    return map(fuse.search(search), (x) => x.item);
   }, [companiesData, search, fuse]);
   return (
     <>
@@ -254,9 +298,11 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
         {flatMap(
           take(
             selectedCompanies || [],
-            (selectedCompanies?.length || 0) > MAX_COMPANIES_TO_SHOW + 1 ? MAX_COMPANIES_TO_SHOW : MAX_COMPANIES_TO_SHOW + 1
+            (selectedCompanies?.length || 0) > MAX_COMPANIES_TO_SHOW + 1
+              ? MAX_COMPANIES_TO_SHOW
+              : MAX_COMPANIES_TO_SHOW + 1
           ),
-          cik => {
+          (cik) => {
             const company = companyByCik[cik];
             if (!company) {
               return null;
@@ -272,36 +318,29 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
                 >
                   <FaMinus />
                 </Button>
-                <Text
-                  fontSize="1rem"
-                  as="span"
-                  suppressHydrationWarning
-                  pl={1}
-                >
+                <Text fontSize="1rem" as="span" suppressHydrationWarning pl={1}>
                   {company.company_name}
                 </Text>
               </Flex>
-            )
-          })
-        }
-        { (selectedCompanies?.length || 0) > MAX_COMPANIES_TO_SHOW + 1 && (
-          <Button
-            variant="outline"
-            onClick={onOpen}
-            size="xs"
-            mt={1}
-            mb={1}
-          >
-            + {(selectedCompanies?.length || 0) - (MAX_COMPANIES_TO_SHOW + 1)} more companies
+            );
+          }
+        )}
+        {(selectedCompanies?.length || 0) > MAX_COMPANIES_TO_SHOW + 1 && (
+          <Button variant="outline" onClick={onOpen} size="xs" mt={1} mb={1}>
+            + {(selectedCompanies?.length || 0) - (MAX_COMPANIES_TO_SHOW + 1)}{' '}
+            more companies
           </Button>
-        ) }
+        )}
       </Flex>
       <Modal isOpen={open} onClose={onClose} blockScrollOnMount={false}>
         <ModalOverlay />
         <ModalContent width="95vw" maxWidth="900px">
           <ModalHeader>
             <Text as="span" mr={3}>
-              Filter by company{liveSelectedCompanies.length ? ` (${liveSelectedCompanies.length} selected)` : ''}
+              Filter by company
+              {liveSelectedCompanies.length
+                ? ` (${liveSelectedCompanies.length} selected)`
+                : ''}
             </Text>
           </ModalHeader>
           <ModalCloseButton />

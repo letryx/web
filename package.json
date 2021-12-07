@@ -15,7 +15,7 @@
     "codegen": "eval $(egrep '^GRAPHQL_API_URL=' .env | xargs) graphql-codegen --config codegen.yml --target typescript --tagName gql --customScalarsPrefix=GraphQL_",
     "console": "hasura console --no-browser",
     "dev": "next",
-    "fix": "eslint components pages lib styles test --fix",
+    "lint-fix": "eslint components pages lib styles test --fix",
     "lint": "eslint components pages lib styles test",
     "schema": "eval $(egrep '^HASURA_GRAPHQL_ADMIN_SECRET=' .env | xargs) gq http://localhost:6060/v1/graphql -H \\'X-Hasura-Admin-Secret: $HASURA_GRAPHQL_ADMIN_SECRET\\' --introspect > lib/generated/graphql/schema.graphql",
     "start": "next start",

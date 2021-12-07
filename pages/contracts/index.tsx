@@ -92,7 +92,9 @@ const ContractsPage: FC = () => {
         minDate,
         maxDate,
         contractType: selectedContractType,
-        companyCiks: selectedCompanies ? selectedCompanies.join(',') : undefined,
+        companyCiks: selectedCompanies
+          ? selectedCompanies.join(',')
+          : undefined,
       },
     });
     setAddIsLoading(false);
