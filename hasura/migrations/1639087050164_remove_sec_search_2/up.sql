@@ -1,0 +1,1 @@
+drop function if exists sec_search_2;
