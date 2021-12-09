@@ -31,7 +31,7 @@ import {
   Tr,
   useColorModeValue as mode,
 } from '@chakra-ui/react';
-import { SingleDatepicker } from 'chakra-dayzed-datepicker';
+import { SingleDatepicker } from 'components/date-picker';
 import { Paginator, useFixedPagination } from 'components/paginator';
 import Fuse from 'fuse.js';
 import {

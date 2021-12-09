@@ -50,7 +50,6 @@
     "@types/ws": "^8.2.0",
     "add": "^2.0.6",
     "apollo3-cache-persist": "^0.13.0",
-    "chakra-dayzed-datepicker": "^0.1.1",
     "date-fns": "^2.25.0",
     "dayzed": "^3.2.2",
     "debounce": "^1.2.1",
