@@ -14,6 +14,7 @@ import {
   SearchSecContractsQueryVariables,
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
+import { arrayToLiteral } from 'lib/scalar-serializers';
 import { flatMap, map } from 'lodash';
 import { FC, useEffect, useMemo, useState } from 'react';
 
@@ -54,7 +55,9 @@ const ContractsPage: FC = () => {
       maxDate,
       search,
       contractType: selectedContractType,
-      companyCiks: selectedCompanies ? selectedCompanies.join(',') : undefined,
+      companyCiks: selectedCompanies
+        ? arrayToLiteral(selectedCompanies)
+        : undefined,
       limit: PAGE_SIZE,
       offset,
     },
@@ -95,7 +98,7 @@ const ContractsPage: FC = () => {
         maxDate,
         contractType: selectedContractType,
         companyCiks: selectedCompanies
-          ? selectedCompanies.join(',')
+          ? arrayToLiteral(selectedCompanies)
           : undefined,
       },
     });

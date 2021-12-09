@@ -23,7 +23,7 @@ query SearchSECContracts(
   $offset: Int = 0
   $uidsOnly: Boolean = false
   $contractType: String
-  $companyCiks: String
+  $companyCiks: _text
 ) {
   sec_search_aggregate(
     args: {
@@ -102,17 +102,13 @@ fragment SECContract on sec_filing_attachment {
   contents
 }
 
-
-
 fragment Company on sec_contract {
   company_cik
   company_name
   company_geo
 }
 query GetSECContractCompanies {
-  sec_contract(
-    distinct_on: [company_cik]
-  ) {
+  sec_contract(distinct_on: [company_cik]) {
     ...Company
   }
 }

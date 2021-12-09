@@ -96,6 +96,8 @@ input String_comparison_exp {
   _similar: String
 }
 
+scalar _text
+
 scalar date
 
 """
@@ -3005,6 +3007,7 @@ enum sec_filing_update_column {
 }
 
 input sec_search_args {
+  company_cik_eq: _text
   company_name_excludes: String
   company_name_includes: String
   contract_type_eq: String
