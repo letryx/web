@@ -14,7 +14,7 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
-import { SingleDatepicker } from 'chakra-dayzed-datepicker';
+import { SingleDatepicker } from 'components/date-picker';
 import { useGetContractTypesQuery } from 'lib/generated/graphql/apollo-schema';
 import { FC } from 'react';
 import { MdFilterList } from 'react-icons/md';
