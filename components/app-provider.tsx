@@ -5,7 +5,7 @@ import {
   useGetCurrentUserQuery,
 } from 'lib/generated/graphql/apollo-schema';
 import { useRouter } from 'next/router';
-import { createContext, FC, useContext } from 'react';
+import { createContext, FC, useContext, useMemo } from 'react';
 
 interface AppContextProps {
   isAppLoading: boolean;
@@ -59,8 +59,15 @@ const AppProvider: FC = ({ children }) => {
     }
   }
 
+  // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-constructed-context-values.md
+  const providerValue = useMemo(
+    () => ({ isAppLoading, currentUser }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [currentUser?.id || -1]
+  );
+
   return (
-    <AppContext.Provider value={{ isAppLoading, currentUser }}>
+    <AppContext.Provider value={providerValue}>
       {shouldRefreshToken ? (
         <>
           Refreshing authentication credentials....
