@@ -24,7 +24,6 @@ generates:
         timestamptz: Date
         tsvector: String
         date: Date
-        _text: String
       namingConvention: change-case-all#pascalCase
       strictScalars: true
       useExplicitTyping: true
