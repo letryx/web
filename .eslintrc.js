@@ -36,6 +36,8 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': [0],
+    'react/function-component-definition': [0],
+    'react/jsx-no-useless-fragment': [0],
     indent: [0],
     quotes: ['error', 'single', { avoidEscape: true }],
     'react/self-closing-comp': [
