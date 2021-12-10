@@ -23,7 +23,7 @@ query SearchSECContracts(
   $offset: Int = 0
   $uidsOnly: Boolean = false
   $contractType: String
-  $companyCiks: _text
+  $companyCiks: String
 ) {
   sec_search_aggregate(
     args: {

@@ -18,7 +18,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  _text: String;
   date: Date;
   timestamp: Date;
   timestamptz: Date;
@@ -2469,7 +2468,7 @@ export enum Sec_Filing_Update_Column {
 }
 
 export type Sec_Search_Args = {
-  company_cik_eq?: Maybe<Scalars['_text']>;
+  company_cik_eq?: Maybe<Scalars['String']>;
   company_name_excludes?: Maybe<Scalars['String']>;
   company_name_includes?: Maybe<Scalars['String']>;
   contract_type_eq?: Maybe<Scalars['String']>;
@@ -3163,7 +3162,7 @@ export type SearchSecContractsQueryVariables = Exact<{
   offset?: Maybe<Scalars['Int']>;
   uidsOnly?: Maybe<Scalars['Boolean']>;
   contractType?: Maybe<Scalars['String']>;
-  companyCiks?: Maybe<Scalars['_text']>;
+  companyCiks?: Maybe<Scalars['String']>;
 }>;
 
 export type SearchSecContractsQuery = {
@@ -3409,7 +3408,7 @@ export const SearchSecContractsDocument = gql`
     $offset: Int = 0
     $uidsOnly: Boolean = false
     $contractType: String
-    $companyCiks: _text
+    $companyCiks: String
   ) {
     sec_search_aggregate(
       args: {
