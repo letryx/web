@@ -23,6 +23,7 @@ query SearchSECContracts(
   $offset: Int = 0
   $uidsOnly: Boolean = false
   $contractType: String
+  $companyCiks: _text
 ) {
   sec_search_aggregate(
     args: {
@@ -30,6 +31,7 @@ query SearchSECContracts(
       filing_date_gt: $minDate
       filing_date_lt: $maxDate
       contract_type_eq: $contractType
+      company_cik_eq: $companyCiks
     }
   ) {
     nodes @include(if: $uidsOnly) {
@@ -47,12 +49,39 @@ query SearchSECContracts(
       filing_date_gt: $minDate
       filing_date_lt: $maxDate
       contract_type_eq: $contractType
+      company_cik_eq: $companyCiks
     }
     order_by: { relevance: desc }
     limit: $limit
     offset: $offset
   ) @skip(if: $uidsOnly) {
     ...SearchResult
+  }
+  companies: sec_search(
+    args: {
+      # If we want the company list to be constrained
+      # by typed queries, uncomment the next line
+      # search: $search
+      filing_date_gt: $minDate
+      filing_date_lt: $maxDate
+      contract_type_eq: $contractType
+    }
+    distinct_on: [company_cik]
+  ) {
+    company_cik
+  }
+  contract_types: sec_search(
+    args: {
+      # If we want the contract_types list to be constrained
+      # by typed queries, uncomment the next line
+      # search: $search
+      filing_date_gt: $minDate
+      filing_date_lt: $maxDate
+      company_cik_eq: $companyCiks
+    }
+    distinct_on: [contract_type]
+  ) {
+    contract_type
   }
 }
 
@@ -71,6 +100,17 @@ fragment SECContract on sec_filing_attachment {
   attachment_type
   description
   contents
+}
+
+fragment Company on sec_contract {
+  company_cik
+  company_name
+  company_geo
+}
+query GetSECContractCompanies {
+  sec_contract(distinct_on: [company_cik]) {
+    ...Company
+  }
 }
 
 query GetSECContract($accession_number: String!, $sequence: Int!) {

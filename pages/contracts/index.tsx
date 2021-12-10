@@ -1,20 +1,12 @@
-import {
-  Pagination,
-  PaginationContainer,
-  PaginationNext,
-  PaginationPage,
-  PaginationPageGroup,
-  PaginationPrevious,
-  PaginationSeparator,
-  usePagination,
-} from '@ajna/pagination';
+import { usePagination } from '@ajna/pagination';
 import { useApolloClient } from '@apollo/client';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { Box, Stack, useColorModeValue, VStack } from '@chakra-ui/react';
+import { Box, Stack, VStack } from '@chakra-ui/react';
 import { ContractFilters } from 'components/contract/filters';
 import { SearchBar } from 'components/contract/search-bar';
 import { PAGE_SIZE, TableContent } from 'components/contract/table';
 import { Layout } from 'components/layout';
+import { Paginator } from 'components/paginator';
 import {
   SearchResultFragment,
   SearchSecContractsDocument,
@@ -22,7 +14,9 @@ import {
   SearchSecContractsQueryVariables,
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
-import { FC, useEffect, useState } from 'react';
+import { arrayToLiteral } from 'lib/scalar-serializers';
+import { flatMap, map } from 'lodash';
+import { FC, useEffect, useMemo, useState } from 'react';
 
 const ContractsPage: FC = () => {
   const [search, setSearch] = useState('');
@@ -32,11 +26,7 @@ const ContractsPage: FC = () => {
     new Date(now.getFullYear(), now.getMonth(), now.getDay())
   );
 
-  const pageBgColor = useColorModeValue('white', 'gray.700');
-  const selectedPageBgColor = useColorModeValue('gray.200', 'gray.600');
-
   const [totalContracts, setTotalContracts] = useState<number | undefined>();
-
   const { currentPage, setCurrentPage, pagesCount, pages, offset } =
     usePagination({
       initialState: { currentPage: 1, pageSize: PAGE_SIZE },
@@ -52,16 +42,22 @@ const ContractsPage: FC = () => {
     [search, minDate, maxDate, setCurrentPage]
   );
 
+  const [selectedCompanies, setSelectedCompanies] = useState<
+    undefined | string[]
+  >();
+
   const [selectedContractType, setSelectedContractType] = useState<
     undefined | string
   >();
-
   const { data, loading: isLoading } = useSearchSecContractsQuery({
     variables: {
       minDate,
       maxDate,
       search,
       contractType: selectedContractType,
+      companyCiks: selectedCompanies
+        ? arrayToLiteral(selectedCompanies)
+        : undefined,
       limit: PAGE_SIZE,
       offset,
     },
@@ -69,6 +65,16 @@ const ContractsPage: FC = () => {
 
   const { company_count: companyCount, count: contractCount } =
     data?.sec_search_aggregate.aggregate || {};
+  const searchCompanies = useMemo(
+    () => data?.companies && map(data.companies, (x) => x.company_cik),
+    [data?.companies]
+  );
+  const searchContractTypes = useMemo(
+    () =>
+      data?.contract_types &&
+      flatMap(data.contract_types, (x) => x.contract_type || []),
+    [data?.contract_types]
+  );
 
   useEffect(() => setTotalContracts(contractCount), [contractCount]);
 
@@ -91,6 +97,9 @@ const ContractsPage: FC = () => {
         minDate,
         maxDate,
         contractType: selectedContractType,
+        companyCiks: selectedCompanies
+          ? arrayToLiteral(selectedCompanies)
+          : undefined,
       },
     });
     setAddIsLoading(false);
@@ -129,6 +138,10 @@ const ContractsPage: FC = () => {
             setMaxDate,
             selectedContractType,
             setSelectedContractType,
+            selectedCompanies,
+            setSelectedCompanies,
+            searchCompanies,
+            searchContractTypes,
           }}
         />
         <VStack width="100%">
@@ -150,47 +163,13 @@ const ContractsPage: FC = () => {
           <Box minHeight="3rem" width="100%">
             <TableContent {...{ contracts, compSet, addContract, isLoading }} />
           </Box>
-          <Pagination
+          <Paginator
             pagesCount={pagesCount}
             currentPage={currentPage}
-            onPageChange={setCurrentPage}
+            setCurrentPage={setCurrentPage}
             isDisabled={isLoading}
-          >
-            <PaginationContainer justify="space-between" w="full">
-              <PaginationPrevious
-                backgroundColor={pageBgColor}
-                _disabled={{
-                  backgroundColor: selectedPageBgColor,
-                  pointerEvents: 'none',
-                }}
-                _hover={{ backgroundColor: selectedPageBgColor }}
-              >
-                Previous
-              </PaginationPrevious>
-              <PaginationPageGroup isInline separator={<PaginationSeparator />}>
-                {pages.map((page: number) => (
-                  <PaginationPage
-                    key={`pagination_page_${page}`}
-                    px={2}
-                    page={page}
-                    backgroundColor={pageBgColor}
-                    _current={{ backgroundColor: selectedPageBgColor }}
-                    _hover={{ backgroundColor: selectedPageBgColor }}
-                  />
-                ))}
-              </PaginationPageGroup>
-              <PaginationNext
-                backgroundColor={pageBgColor}
-                _disabled={{
-                  backgroundColor: selectedPageBgColor,
-                  pointerEvents: 'none',
-                }}
-                _hover={{ backgroundColor: selectedPageBgColor }}
-              >
-                Next
-              </PaginationNext>
-            </PaginationContainer>
-          </Pagination>
+            pages={pages}
+          />
         </VStack>
       </Stack>
     </Layout>

@@ -1,0 +1,1 @@
+DROP FUNCTION "public"."sec_search"("pg_catalog"."text", "pg_catalog"."date", "pg_catalog"."date", "pg_catalog"."text", "pg_catalog"."text", "pg_catalog"."text", "pg_catalog"."text", "pg_catalog"."text");
