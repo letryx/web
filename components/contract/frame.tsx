@@ -18,15 +18,16 @@ if (!isSSR) {
     const style = node.getAttribute('style') || '';
     const negMarginsRegex = /(margin-\w+)\s*:\s*-[\d.]*\s*\w*/gim;
     node.setAttribute('style', style.replaceAll(negMarginsRegex, '$1: 4'));
-    if (
-      node.tagName === 'DIV' &&
-      node.getAttribute('align')?.toLowerCase() === 'justify'
-    ) {
-      const alignCenterRegex = /(.*)text-align\w*:\s*center\s*;?(.*)/gim;
-      node.setAttribute(
-        'style',
-        node.getAttribute('style')?.replaceAll(alignCenterRegex, '$1 $2') || ''
-      );
+    if (node.tagName === 'DIV') {
+      if (node.getAttribute('align')?.toLowerCase() === 'justify') {
+        const alignCenterRegex = /(.*)text-align\w*:\s*center\s*;?(.*)/gim;
+        node.setAttribute(
+          'style',
+          node.getAttribute('style')?.replaceAll(alignCenterRegex, '$1 $2') ||
+            ''
+        );
+      }
+      // node.getAttribute
     }
   });
 }
@@ -58,23 +59,18 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   ...props
 }) => {
   const [contentRef, setContentRef] = useState<HTMLIFrameElement | null>(null);
-  const [paddingRight, setPaddingRight] = useState(0);
   const [height, setHeight] = useState(500);
   const contentWindow = contentRef?.contentWindow;
   const domBody = contentWindow?.document?.body;
   const domHead = contentWindow?.document?.head;
-  const { scrollHeight, clientHeight, scrollWidth, clientWidth } =
-    domBody || {};
   const color = useColorModeValue('black', 'white');
 
   // handle negative margin in docs
   useEffect(() => {
-    if (!domBody) return;
-    if (domBody.scrollWidth > domBody.clientWidth) {
-      setPaddingRight(domBody.scrollWidth - domBody.clientWidth);
+    if (domBody?.scrollHeight) {
+      setHeight(domBody.scrollHeight);
     }
-    setHeight(domBody.scrollHeight);
-  }, [domBody, scrollHeight, clientHeight, scrollWidth, clientWidth]);
+  }, [domBody?.scrollHeight]);
 
   useEffect(() => {
     if (!propagationTargetId) return;
@@ -94,11 +90,6 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
     domHead?.prepend(baseTag);
   }
 
-  domBody?.setAttribute(
-    'style',
-    `padding-right: ${paddingRight}px; overflow-y: hidden;`
-  );
-
   // idempotently set css
   if (domHead) {
     if (domHead.lastElementChild?.tagName?.toLowerCase() !== 'style') {
@@ -110,10 +101,19 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
           overflow-y: hidden;
         }
 
+        * {
+          text-indent: 0 !important;
+          max-width: 100% !important;
+        }
+
+        img {
+          height: auto !important;
+          width: auto !important;
+        }
+
         pre {
           width: 100%;
           white-space: pre-wrap;
-          margin-right: -${paddingRight}px;
         }
 
         p, font, span, tr, td, table {
@@ -121,7 +121,8 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
           border-color: ${color} !important;
           background-color: transparent !important;
           line-height: 1.2;
-        }`;
+        }
+        `;
     }
   }
 
