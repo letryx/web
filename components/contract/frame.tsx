@@ -6,6 +6,8 @@ import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { RemoveScroll } from 'react-remove-scroll';
 
+const SEC_BASE_URL = 'https://www.sec.gov/Archives/edgar/data';
+
 const isSSR = typeof window === 'undefined';
 let domPurify: createDOMPurify.DOMPurifyI | null;
 
@@ -45,12 +47,14 @@ interface IFrameProps extends HTMLAttributes<HTMLElement> {
   srcDoc?: string;
   width?: number | string;
   propagationTargetId?: string;
+  baseUrl?: string;
 }
 
 export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   children,
   title,
   propagationTargetId,
+  baseUrl,
   ...props
 }) => {
   const [contentRef, setContentRef] = useState<HTMLIFrameElement | null>(null);
@@ -81,6 +85,14 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
       })
     );
   }, [contentWindow, propagationTargetId]);
+
+  if (baseUrl && domHead?.firstElementChild?.tagName !== 'BASE') {
+    // set base url
+    const baseTag = document.createElement('base');
+    baseTag.setAttribute('href', baseUrl);
+    // baseTag.
+    domHead?.prepend(baseTag);
+  }
 
   domBody?.setAttribute(
     'style',
@@ -146,6 +158,7 @@ interface ContractIFrameProps extends SearchResultFragment {
 
 export const ContractIFrame: FC<ContractIFrameProps> = ({
   htmlString,
+  company_cik,
   accession_number,
   sequence,
 }) => {
@@ -154,9 +167,19 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
   const color = useColorModeValue('black', 'white');
   const dom = stringToDOM(htmlString);
 
+  const baseUrl = `${[
+    SEC_BASE_URL,
+    // remove leading 0's
+    Number(company_cik).toString(),
+    // strip out hyphens
+    accession_number.replace(/[^\d]/g, ''),
+    // requires trailing /
+  ].join('/')}/`;
+
   return (
     <FunctionalIFrameComponent
       title={`contract-${accession_number}-${sequence}`}
+      baseUrl={baseUrl}
       width="100%"
       propagationTargetId={`contract-modal-${accession_number}-${sequence}`}
     >
