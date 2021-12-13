@@ -6,6 +6,8 @@ import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { RemoveScroll } from 'react-remove-scroll';
 
+const SEC_BASE_URL = 'https://www.sec.gov/Archives/edgar/data';
+
 const isSSR = typeof window === 'undefined';
 let domPurify: createDOMPurify.DOMPurifyI | null;
 
@@ -16,15 +18,16 @@ if (!isSSR) {
     const style = node.getAttribute('style') || '';
     const negMarginsRegex = /(margin-\w+)\s*:\s*-[\d.]*\s*\w*/gim;
     node.setAttribute('style', style.replaceAll(negMarginsRegex, '$1: 4'));
-    if (
-      node.tagName === 'DIV' &&
-      node.getAttribute('align')?.toLowerCase() === 'justify'
-    ) {
-      const alignCenterRegex = /(.*)text-align\w*:\s*center\s*;?(.*)/gim;
-      node.setAttribute(
-        'style',
-        node.getAttribute('style')?.replaceAll(alignCenterRegex, '$1 $2') || ''
-      );
+    if (node.tagName === 'DIV') {
+      if (node.getAttribute('align')?.toLowerCase() === 'justify') {
+        const alignCenterRegex = /(.*)text-align\w*:\s*center\s*;?(.*)/gim;
+        node.setAttribute(
+          'style',
+          node.getAttribute('style')?.replaceAll(alignCenterRegex, '$1 $2') ||
+            ''
+        );
+      }
+      // node.getAttribute
     }
   });
 }
@@ -45,32 +48,29 @@ interface IFrameProps extends HTMLAttributes<HTMLElement> {
   srcDoc?: string;
   width?: number | string;
   propagationTargetId?: string;
+  baseUrl?: string;
 }
 
 export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   children,
   title,
   propagationTargetId,
+  baseUrl,
   ...props
 }) => {
   const [contentRef, setContentRef] = useState<HTMLIFrameElement | null>(null);
-  const [paddingRight, setPaddingRight] = useState(0);
   const [height, setHeight] = useState(500);
   const contentWindow = contentRef?.contentWindow;
   const domBody = contentWindow?.document?.body;
   const domHead = contentWindow?.document?.head;
-  const { scrollHeight, clientHeight, scrollWidth, clientWidth } =
-    domBody || {};
   const color = useColorModeValue('black', 'white');
 
   // handle negative margin in docs
   useEffect(() => {
-    if (!domBody) return;
-    if (domBody.scrollWidth > domBody.clientWidth) {
-      setPaddingRight(domBody.scrollWidth - domBody.clientWidth);
+    if (domBody?.scrollHeight) {
+      setHeight(domBody.scrollHeight);
     }
-    setHeight(domBody.scrollHeight);
-  }, [domBody, scrollHeight, clientHeight, scrollWidth, clientWidth]);
+  }, [domBody?.scrollHeight]);
 
   useEffect(() => {
     if (!propagationTargetId) return;
@@ -82,10 +82,13 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
     );
   }, [contentWindow, propagationTargetId]);
 
-  domBody?.setAttribute(
-    'style',
-    `padding-right: ${paddingRight}px; overflow-y: hidden;`
-  );
+  if (baseUrl && domHead?.firstElementChild?.tagName !== 'BASE') {
+    // set base url
+    const baseTag = document.createElement('base');
+    baseTag.setAttribute('href', baseUrl);
+    // baseTag.
+    domHead?.prepend(baseTag);
+  }
 
   // idempotently set css
   if (domHead) {
@@ -98,10 +101,19 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
           overflow-y: hidden;
         }
 
+        * {
+          text-indent: 0 !important;
+          max-width: 100% !important;
+        }
+
+        img {
+          height: auto !important;
+          width: auto !important;
+        }
+
         pre {
           width: 100%;
           white-space: pre-wrap;
-          margin-right: -${paddingRight}px;
         }
 
         p, font, span, tr, td, table {
@@ -109,7 +121,8 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
           border-color: ${color} !important;
           background-color: transparent !important;
           line-height: 1.2;
-        }`;
+        }
+        `;
     }
   }
 
@@ -146,6 +159,7 @@ interface ContractIFrameProps extends SearchResultFragment {
 
 export const ContractIFrame: FC<ContractIFrameProps> = ({
   htmlString,
+  company_cik,
   accession_number,
   sequence,
 }) => {
@@ -154,9 +168,19 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
   const color = useColorModeValue('black', 'white');
   const dom = stringToDOM(htmlString);
 
+  const baseUrl = `${[
+    SEC_BASE_URL,
+    // remove leading 0's
+    Number(company_cik).toString(),
+    // strip out hyphens
+    accession_number.replace(/[^\d]/g, ''),
+    // requires trailing /
+  ].join('/')}/`;
+
   return (
     <FunctionalIFrameComponent
       title={`contract-${accession_number}-${sequence}`}
+      baseUrl={baseUrl}
       width="100%"
       propagationTargetId={`contract-modal-${accession_number}-${sequence}`}
     >
