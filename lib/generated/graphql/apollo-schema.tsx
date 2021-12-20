@@ -1,6 +1,7 @@
 import * as Apollo from '@apollo/client';
 import { gql } from '@apollo/client';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
@@ -26,74 +27,74 @@ export type Scalars = {
 
 /** Boolean expression to compare columns of type "Float". All fields are combined with logical 'AND'. */
 export type Float_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Float']>;
-  _gt?: Maybe<Scalars['Float']>;
-  _gte?: Maybe<Scalars['Float']>;
-  _in?: Maybe<Array<Scalars['Float']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['Float']>;
-  _lte?: Maybe<Scalars['Float']>;
-  _neq?: Maybe<Scalars['Float']>;
-  _nin?: Maybe<Array<Scalars['Float']>>;
+  _eq?: InputMaybe<Scalars['Float']>;
+  _gt?: InputMaybe<Scalars['Float']>;
+  _gte?: InputMaybe<Scalars['Float']>;
+  _in?: InputMaybe<Array<Scalars['Float']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Float']>;
+  _lte?: InputMaybe<Scalars['Float']>;
+  _neq?: InputMaybe<Scalars['Float']>;
+  _nin?: InputMaybe<Array<Scalars['Float']>>;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Int']>;
-  _gt?: Maybe<Scalars['Int']>;
-  _gte?: Maybe<Scalars['Int']>;
-  _in?: Maybe<Array<Scalars['Int']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['Int']>;
-  _lte?: Maybe<Scalars['Int']>;
-  _neq?: Maybe<Scalars['Int']>;
-  _nin?: Maybe<Array<Scalars['Int']>>;
+  _eq?: InputMaybe<Scalars['Int']>;
+  _gt?: InputMaybe<Scalars['Int']>;
+  _gte?: InputMaybe<Scalars['Int']>;
+  _in?: InputMaybe<Array<Scalars['Int']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Int']>;
+  _lte?: InputMaybe<Scalars['Int']>;
+  _neq?: InputMaybe<Scalars['Int']>;
+  _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
-  _eq?: Maybe<Scalars['String']>;
-  _gt?: Maybe<Scalars['String']>;
-  _gte?: Maybe<Scalars['String']>;
+  _eq?: InputMaybe<Scalars['String']>;
+  _gt?: InputMaybe<Scalars['String']>;
+  _gte?: InputMaybe<Scalars['String']>;
   /** does the column match the given case-insensitive pattern */
-  _ilike?: Maybe<Scalars['String']>;
-  _in?: Maybe<Array<Scalars['String']>>;
+  _ilike?: InputMaybe<Scalars['String']>;
+  _in?: InputMaybe<Array<Scalars['String']>>;
   /** does the column match the given POSIX regular expression, case insensitive */
-  _iregex?: Maybe<Scalars['String']>;
-  _is_null?: Maybe<Scalars['Boolean']>;
+  _iregex?: InputMaybe<Scalars['String']>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
   /** does the column match the given pattern */
-  _like?: Maybe<Scalars['String']>;
-  _lt?: Maybe<Scalars['String']>;
-  _lte?: Maybe<Scalars['String']>;
-  _neq?: Maybe<Scalars['String']>;
+  _like?: InputMaybe<Scalars['String']>;
+  _lt?: InputMaybe<Scalars['String']>;
+  _lte?: InputMaybe<Scalars['String']>;
+  _neq?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given case-insensitive pattern */
-  _nilike?: Maybe<Scalars['String']>;
-  _nin?: Maybe<Array<Scalars['String']>>;
+  _nilike?: InputMaybe<Scalars['String']>;
+  _nin?: InputMaybe<Array<Scalars['String']>>;
   /** does the column NOT match the given POSIX regular expression, case insensitive */
-  _niregex?: Maybe<Scalars['String']>;
+  _niregex?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given pattern */
-  _nlike?: Maybe<Scalars['String']>;
+  _nlike?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given POSIX regular expression, case sensitive */
-  _nregex?: Maybe<Scalars['String']>;
+  _nregex?: InputMaybe<Scalars['String']>;
   /** does the column NOT match the given SQL regular expression */
-  _nsimilar?: Maybe<Scalars['String']>;
+  _nsimilar?: InputMaybe<Scalars['String']>;
   /** does the column match the given POSIX regular expression, case sensitive */
-  _regex?: Maybe<Scalars['String']>;
+  _regex?: InputMaybe<Scalars['String']>;
   /** does the column match the given SQL regular expression */
-  _similar?: Maybe<Scalars['String']>;
+  _similar?: InputMaybe<Scalars['String']>;
 };
 
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
 export type Date_Comparison_Exp = {
-  _eq?: Maybe<Scalars['date']>;
-  _gt?: Maybe<Scalars['date']>;
-  _gte?: Maybe<Scalars['date']>;
-  _in?: Maybe<Array<Scalars['date']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['date']>;
-  _lte?: Maybe<Scalars['date']>;
-  _neq?: Maybe<Scalars['date']>;
-  _nin?: Maybe<Array<Scalars['date']>>;
+  _eq?: InputMaybe<Scalars['date']>;
+  _gt?: InputMaybe<Scalars['date']>;
+  _gte?: InputMaybe<Scalars['date']>;
+  _in?: InputMaybe<Array<Scalars['date']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['date']>;
+  _lte?: InputMaybe<Scalars['date']>;
+  _neq?: InputMaybe<Scalars['date']>;
+  _nin?: InputMaybe<Array<Scalars['date']>>;
 };
 
 /** columns and relationships of "migrations" */
@@ -130,8 +131,8 @@ export type Migrations_Aggregate_Fields = {
 
 /** aggregate fields of "migrations" */
 export type Migrations_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Migrations_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Migrations_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
@@ -142,13 +143,13 @@ export type Migrations_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "migrations". All fields are combined with a logical 'AND'. */
 export type Migrations_Bool_Exp = {
-  _and?: Maybe<Array<Migrations_Bool_Exp>>;
-  _not?: Maybe<Migrations_Bool_Exp>;
-  _or?: Maybe<Array<Migrations_Bool_Exp>>;
-  executed_at?: Maybe<Timestamp_Comparison_Exp>;
-  hash?: Maybe<String_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Migrations_Bool_Exp>>;
+  _not?: InputMaybe<Migrations_Bool_Exp>;
+  _or?: InputMaybe<Array<Migrations_Bool_Exp>>;
+  executed_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  hash?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "migrations" */
@@ -161,15 +162,15 @@ export enum Migrations_Constraint {
 
 /** input type for incrementing numeric columns in table "migrations" */
 export type Migrations_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "migrations" */
 export type Migrations_Insert_Input = {
-  executed_at?: Maybe<Scalars['timestamp']>;
-  hash?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
+  executed_at?: InputMaybe<Scalars['timestamp']>;
+  hash?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -203,15 +204,15 @@ export type Migrations_Mutation_Response = {
 export type Migrations_On_Conflict = {
   constraint: Migrations_Constraint;
   update_columns?: Array<Migrations_Update_Column>;
-  where?: Maybe<Migrations_Bool_Exp>;
+  where?: InputMaybe<Migrations_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "migrations". */
 export type Migrations_Order_By = {
-  executed_at?: Maybe<Order_By>;
-  hash?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
+  executed_at?: InputMaybe<Order_By>;
+  hash?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: migrations */
@@ -233,10 +234,10 @@ export enum Migrations_Select_Column {
 
 /** input type for updating data in table "migrations" */
 export type Migrations_Set_Input = {
-  executed_at?: Maybe<Scalars['timestamp']>;
-  hash?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
+  executed_at?: InputMaybe<Scalars['timestamp']>;
+  hash?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
@@ -456,176 +457,176 @@ export type Mutation_RootDelete_User_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootInsert_MigrationsArgs = {
   objects: Array<Migrations_Insert_Input>;
-  on_conflict?: Maybe<Migrations_On_Conflict>;
+  on_conflict?: InputMaybe<Migrations_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Migrations_OneArgs = {
   object: Migrations_Insert_Input;
-  on_conflict?: Maybe<Migrations_On_Conflict>;
+  on_conflict?: InputMaybe<Migrations_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_OrgArgs = {
   objects: Array<Org_Insert_Input>;
-  on_conflict?: Maybe<Org_On_Conflict>;
+  on_conflict?: InputMaybe<Org_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Org_OneArgs = {
   object: Org_Insert_Input;
-  on_conflict?: Maybe<Org_On_Conflict>;
+  on_conflict?: InputMaybe<Org_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Org_TypeArgs = {
   objects: Array<Org_Type_Insert_Input>;
-  on_conflict?: Maybe<Org_Type_On_Conflict>;
+  on_conflict?: InputMaybe<Org_Type_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Org_Type_OneArgs = {
   object: Org_Type_Insert_Input;
-  on_conflict?: Maybe<Org_Type_On_Conflict>;
+  on_conflict?: InputMaybe<Org_Type_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Sec_CompanyArgs = {
   objects: Array<Sec_Company_Insert_Input>;
-  on_conflict?: Maybe<Sec_Company_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Company_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Sec_Company_OneArgs = {
   object: Sec_Company_Insert_Input;
-  on_conflict?: Maybe<Sec_Company_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Company_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Sec_FilingArgs = {
   objects: Array<Sec_Filing_Insert_Input>;
-  on_conflict?: Maybe<Sec_Filing_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Filing_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Sec_Filing_AttachmentArgs = {
   objects: Array<Sec_Filing_Attachment_Insert_Input>;
-  on_conflict?: Maybe<Sec_Filing_Attachment_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Filing_Attachment_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Sec_Filing_Attachment_OneArgs = {
   object: Sec_Filing_Attachment_Insert_Input;
-  on_conflict?: Maybe<Sec_Filing_Attachment_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Filing_Attachment_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_Sec_Filing_OneArgs = {
   object: Sec_Filing_Insert_Input;
-  on_conflict?: Maybe<Sec_Filing_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Filing_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_UserArgs = {
   objects: Array<User_Insert_Input>;
-  on_conflict?: Maybe<User_On_Conflict>;
+  on_conflict?: InputMaybe<User_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootInsert_User_OneArgs = {
   object: User_Insert_Input;
-  on_conflict?: Maybe<User_On_Conflict>;
+  on_conflict?: InputMaybe<User_On_Conflict>;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_MigrationsArgs = {
-  _inc?: Maybe<Migrations_Inc_Input>;
-  _set?: Maybe<Migrations_Set_Input>;
+  _inc?: InputMaybe<Migrations_Inc_Input>;
+  _set?: InputMaybe<Migrations_Set_Input>;
   where: Migrations_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Migrations_By_PkArgs = {
-  _inc?: Maybe<Migrations_Inc_Input>;
-  _set?: Maybe<Migrations_Set_Input>;
+  _inc?: InputMaybe<Migrations_Inc_Input>;
+  _set?: InputMaybe<Migrations_Set_Input>;
   pk_columns: Migrations_Pk_Columns_Input;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_OrgArgs = {
-  _inc?: Maybe<Org_Inc_Input>;
-  _set?: Maybe<Org_Set_Input>;
+  _inc?: InputMaybe<Org_Inc_Input>;
+  _set?: InputMaybe<Org_Set_Input>;
   where: Org_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Org_By_PkArgs = {
-  _inc?: Maybe<Org_Inc_Input>;
-  _set?: Maybe<Org_Set_Input>;
+  _inc?: InputMaybe<Org_Inc_Input>;
+  _set?: InputMaybe<Org_Set_Input>;
   pk_columns: Org_Pk_Columns_Input;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Org_TypeArgs = {
-  _set?: Maybe<Org_Type_Set_Input>;
+  _set?: InputMaybe<Org_Type_Set_Input>;
   where: Org_Type_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Org_Type_By_PkArgs = {
-  _set?: Maybe<Org_Type_Set_Input>;
+  _set?: InputMaybe<Org_Type_Set_Input>;
   pk_columns: Org_Type_Pk_Columns_Input;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Sec_CompanyArgs = {
-  _set?: Maybe<Sec_Company_Set_Input>;
+  _set?: InputMaybe<Sec_Company_Set_Input>;
   where: Sec_Company_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Sec_Company_By_PkArgs = {
-  _set?: Maybe<Sec_Company_Set_Input>;
+  _set?: InputMaybe<Sec_Company_Set_Input>;
   pk_columns: Sec_Company_Pk_Columns_Input;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Sec_FilingArgs = {
-  _set?: Maybe<Sec_Filing_Set_Input>;
+  _set?: InputMaybe<Sec_Filing_Set_Input>;
   where: Sec_Filing_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Sec_Filing_AttachmentArgs = {
-  _inc?: Maybe<Sec_Filing_Attachment_Inc_Input>;
-  _set?: Maybe<Sec_Filing_Attachment_Set_Input>;
+  _inc?: InputMaybe<Sec_Filing_Attachment_Inc_Input>;
+  _set?: InputMaybe<Sec_Filing_Attachment_Set_Input>;
   where: Sec_Filing_Attachment_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Sec_Filing_Attachment_By_PkArgs = {
-  _inc?: Maybe<Sec_Filing_Attachment_Inc_Input>;
-  _set?: Maybe<Sec_Filing_Attachment_Set_Input>;
+  _inc?: InputMaybe<Sec_Filing_Attachment_Inc_Input>;
+  _set?: InputMaybe<Sec_Filing_Attachment_Set_Input>;
   pk_columns: Sec_Filing_Attachment_Pk_Columns_Input;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_Sec_Filing_By_PkArgs = {
-  _set?: Maybe<Sec_Filing_Set_Input>;
+  _set?: InputMaybe<Sec_Filing_Set_Input>;
   pk_columns: Sec_Filing_Pk_Columns_Input;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_UserArgs = {
-  _inc?: Maybe<User_Inc_Input>;
-  _set?: Maybe<User_Set_Input>;
+  _inc?: InputMaybe<User_Inc_Input>;
+  _set?: InputMaybe<User_Set_Input>;
   where: User_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_RootUpdate_User_By_PkArgs = {
-  _inc?: Maybe<User_Inc_Input>;
-  _set?: Maybe<User_Set_Input>;
+  _inc?: InputMaybe<User_Inc_Input>;
+  _set?: InputMaybe<User_Set_Input>;
   pk_columns: User_Pk_Columns_Input;
 };
 
@@ -665,20 +666,20 @@ export type Org = {
 
 /** columns and relationships of "org" */
 export type OrgUsersArgs = {
-  distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Order_By>>;
-  where?: Maybe<User_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Order_By>>;
+  where?: InputMaybe<User_Bool_Exp>;
 };
 
 /** columns and relationships of "org" */
 export type OrgUsers_AggregateArgs = {
-  distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Order_By>>;
-  where?: Maybe<User_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Order_By>>;
+  where?: InputMaybe<User_Bool_Exp>;
 };
 
 /** aggregated selection of "org" */
@@ -706,30 +707,30 @@ export type Org_Aggregate_Fields = {
 
 /** aggregate fields of "org" */
 export type Org_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Org_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Org_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "org" */
 export type Org_Aggregate_Order_By = {
-  avg?: Maybe<Org_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Org_Max_Order_By>;
-  min?: Maybe<Org_Min_Order_By>;
-  stddev?: Maybe<Org_Stddev_Order_By>;
-  stddev_pop?: Maybe<Org_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Org_Stddev_Samp_Order_By>;
-  sum?: Maybe<Org_Sum_Order_By>;
-  var_pop?: Maybe<Org_Var_Pop_Order_By>;
-  var_samp?: Maybe<Org_Var_Samp_Order_By>;
-  variance?: Maybe<Org_Variance_Order_By>;
+  avg?: InputMaybe<Org_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Org_Max_Order_By>;
+  min?: InputMaybe<Org_Min_Order_By>;
+  stddev?: InputMaybe<Org_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Org_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Org_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Org_Sum_Order_By>;
+  var_pop?: InputMaybe<Org_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Org_Var_Samp_Order_By>;
+  variance?: InputMaybe<Org_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "org" */
 export type Org_Arr_Rel_Insert_Input = {
   data: Array<Org_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Org_On_Conflict>;
+  on_conflict?: InputMaybe<Org_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -740,23 +741,23 @@ export type Org_Avg_Fields = {
 
 /** order by avg() on columns of table "org" */
 export type Org_Avg_Order_By = {
-  id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "org". All fields are combined with a logical 'AND'. */
 export type Org_Bool_Exp = {
-  _and?: Maybe<Array<Org_Bool_Exp>>;
-  _not?: Maybe<Org_Bool_Exp>;
-  _or?: Maybe<Array<Org_Bool_Exp>>;
-  auth0_connection_id?: Maybe<String_Comparison_Exp>;
-  auth0_connection_name?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  org_type?: Maybe<Org_Type_Bool_Exp>;
-  type?: Maybe<Org_Type_Enum_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-  users?: Maybe<User_Bool_Exp>;
+  _and?: InputMaybe<Array<Org_Bool_Exp>>;
+  _not?: InputMaybe<Org_Bool_Exp>;
+  _or?: InputMaybe<Array<Org_Bool_Exp>>;
+  auth0_connection_id?: InputMaybe<String_Comparison_Exp>;
+  auth0_connection_name?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  org_type?: InputMaybe<Org_Type_Bool_Exp>;
+  type?: InputMaybe<Org_Type_Enum_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  users?: InputMaybe<User_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "org" */
@@ -771,20 +772,20 @@ export enum Org_Constraint {
 
 /** input type for incrementing numeric columns in table "org" */
 export type Org_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "org" */
 export type Org_Insert_Input = {
-  auth0_connection_id?: Maybe<Scalars['String']>;
-  auth0_connection_name?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  org_type?: Maybe<Org_Type_Obj_Rel_Insert_Input>;
-  type?: Maybe<Org_Type_Enum>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-  users?: Maybe<User_Arr_Rel_Insert_Input>;
+  auth0_connection_id?: InputMaybe<Scalars['String']>;
+  auth0_connection_name?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  org_type?: InputMaybe<Org_Type_Obj_Rel_Insert_Input>;
+  type?: InputMaybe<Org_Type_Enum>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  users?: InputMaybe<User_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -800,12 +801,12 @@ export type Org_Max_Fields = {
 
 /** order by max() on columns of table "org" */
 export type Org_Max_Order_By = {
-  auth0_connection_id?: Maybe<Order_By>;
-  auth0_connection_name?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  auth0_connection_id?: InputMaybe<Order_By>;
+  auth0_connection_name?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -821,12 +822,12 @@ export type Org_Min_Fields = {
 
 /** order by min() on columns of table "org" */
 export type Org_Min_Order_By = {
-  auth0_connection_id?: Maybe<Order_By>;
-  auth0_connection_name?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  auth0_connection_id?: InputMaybe<Order_By>;
+  auth0_connection_name?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "org" */
@@ -842,27 +843,27 @@ export type Org_Mutation_Response = {
 export type Org_Obj_Rel_Insert_Input = {
   data: Org_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Org_On_Conflict>;
+  on_conflict?: InputMaybe<Org_On_Conflict>;
 };
 
 /** on conflict condition type for table "org" */
 export type Org_On_Conflict = {
   constraint: Org_Constraint;
   update_columns?: Array<Org_Update_Column>;
-  where?: Maybe<Org_Bool_Exp>;
+  where?: InputMaybe<Org_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "org". */
 export type Org_Order_By = {
-  auth0_connection_id?: Maybe<Order_By>;
-  auth0_connection_name?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  org_type?: Maybe<Org_Type_Order_By>;
-  type?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-  users_aggregate?: Maybe<User_Aggregate_Order_By>;
+  auth0_connection_id?: InputMaybe<Order_By>;
+  auth0_connection_name?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  org_type?: InputMaybe<Org_Type_Order_By>;
+  type?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  users_aggregate?: InputMaybe<User_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: org */
@@ -890,13 +891,13 @@ export enum Org_Select_Column {
 
 /** input type for updating data in table "org" */
 export type Org_Set_Input = {
-  auth0_connection_id?: Maybe<Scalars['String']>;
-  auth0_connection_name?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  type?: Maybe<Org_Type_Enum>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  auth0_connection_id?: InputMaybe<Scalars['String']>;
+  auth0_connection_name?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<Org_Type_Enum>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate stddev on columns */
@@ -907,7 +908,7 @@ export type Org_Stddev_Fields = {
 
 /** order by stddev() on columns of table "org" */
 export type Org_Stddev_Order_By = {
-  id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -918,7 +919,7 @@ export type Org_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "org" */
 export type Org_Stddev_Pop_Order_By = {
-  id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -929,7 +930,7 @@ export type Org_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "org" */
 export type Org_Stddev_Samp_Order_By = {
-  id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -940,7 +941,7 @@ export type Org_Sum_Fields = {
 
 /** order by sum() on columns of table "org" */
 export type Org_Sum_Order_By = {
-  id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "org_type" */
@@ -956,20 +957,20 @@ export type Org_Type = {
 
 /** columns and relationships of "org_type" */
 export type Org_TypeOrgsArgs = {
-  distinct_on?: Maybe<Array<Org_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Order_By>>;
-  where?: Maybe<Org_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Order_By>>;
+  where?: InputMaybe<Org_Bool_Exp>;
 };
 
 /** columns and relationships of "org_type" */
 export type Org_TypeOrgs_AggregateArgs = {
-  distinct_on?: Maybe<Array<Org_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Order_By>>;
-  where?: Maybe<Org_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Order_By>>;
+  where?: InputMaybe<Org_Bool_Exp>;
 };
 
 /** aggregated selection of "org_type" */
@@ -989,18 +990,18 @@ export type Org_Type_Aggregate_Fields = {
 
 /** aggregate fields of "org_type" */
 export type Org_Type_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Org_Type_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Org_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Boolean expression to filter rows from the table "org_type". All fields are combined with a logical 'AND'. */
 export type Org_Type_Bool_Exp = {
-  _and?: Maybe<Array<Org_Type_Bool_Exp>>;
-  _not?: Maybe<Org_Type_Bool_Exp>;
-  _or?: Maybe<Array<Org_Type_Bool_Exp>>;
-  comment?: Maybe<String_Comparison_Exp>;
-  orgs?: Maybe<Org_Bool_Exp>;
-  value?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Org_Type_Bool_Exp>>;
+  _not?: InputMaybe<Org_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<Org_Type_Bool_Exp>>;
+  comment?: InputMaybe<String_Comparison_Exp>;
+  orgs?: InputMaybe<Org_Bool_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "org_type" */
@@ -1018,18 +1019,18 @@ export enum Org_Type_Enum {
 
 /** Boolean expression to compare columns of type "org_type_enum". All fields are combined with logical 'AND'. */
 export type Org_Type_Enum_Comparison_Exp = {
-  _eq?: Maybe<Org_Type_Enum>;
-  _in?: Maybe<Array<Org_Type_Enum>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Org_Type_Enum>;
-  _nin?: Maybe<Array<Org_Type_Enum>>;
+  _eq?: InputMaybe<Org_Type_Enum>;
+  _in?: InputMaybe<Array<Org_Type_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Org_Type_Enum>;
+  _nin?: InputMaybe<Array<Org_Type_Enum>>;
 };
 
 /** input type for inserting data into table "org_type" */
 export type Org_Type_Insert_Input = {
-  comment?: Maybe<Scalars['String']>;
-  orgs?: Maybe<Org_Arr_Rel_Insert_Input>;
-  value?: Maybe<Scalars['String']>;
+  comment?: InputMaybe<Scalars['String']>;
+  orgs?: InputMaybe<Org_Arr_Rel_Insert_Input>;
+  value?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -1059,21 +1060,21 @@ export type Org_Type_Mutation_Response = {
 export type Org_Type_Obj_Rel_Insert_Input = {
   data: Org_Type_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Org_Type_On_Conflict>;
+  on_conflict?: InputMaybe<Org_Type_On_Conflict>;
 };
 
 /** on conflict condition type for table "org_type" */
 export type Org_Type_On_Conflict = {
   constraint: Org_Type_Constraint;
   update_columns?: Array<Org_Type_Update_Column>;
-  where?: Maybe<Org_Type_Bool_Exp>;
+  where?: InputMaybe<Org_Type_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "org_type". */
 export type Org_Type_Order_By = {
-  comment?: Maybe<Order_By>;
-  orgs_aggregate?: Maybe<Org_Aggregate_Order_By>;
-  value?: Maybe<Order_By>;
+  comment?: InputMaybe<Order_By>;
+  orgs_aggregate?: InputMaybe<Org_Aggregate_Order_By>;
+  value?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: org_type */
@@ -1091,8 +1092,8 @@ export enum Org_Type_Select_Column {
 
 /** input type for updating data in table "org_type" */
 export type Org_Type_Set_Input = {
-  comment?: Maybe<Scalars['String']>;
-  value?: Maybe<Scalars['String']>;
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
 };
 
 /** update columns of table "org_type" */
@@ -1129,7 +1130,7 @@ export type Org_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "org" */
 export type Org_Var_Pop_Order_By = {
-  id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -1140,7 +1141,7 @@ export type Org_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "org" */
 export type Org_Var_Samp_Order_By = {
-  id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -1151,7 +1152,7 @@ export type Org_Variance_Fields = {
 
 /** order by variance() on columns of table "org" */
 export type Org_Variance_Order_By = {
-  id?: Maybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 export type Query_Root = {
@@ -1209,19 +1210,19 @@ export type Query_Root = {
 };
 
 export type Query_RootMigrationsArgs = {
-  distinct_on?: Maybe<Array<Migrations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Migrations_Order_By>>;
-  where?: Maybe<Migrations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Migrations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Migrations_Order_By>>;
+  where?: InputMaybe<Migrations_Bool_Exp>;
 };
 
 export type Query_RootMigrations_AggregateArgs = {
-  distinct_on?: Maybe<Array<Migrations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Migrations_Order_By>>;
-  where?: Maybe<Migrations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Migrations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Migrations_Order_By>>;
+  where?: InputMaybe<Migrations_Bool_Exp>;
 };
 
 export type Query_RootMigrations_By_PkArgs = {
@@ -1229,19 +1230,19 @@ export type Query_RootMigrations_By_PkArgs = {
 };
 
 export type Query_RootOrgArgs = {
-  distinct_on?: Maybe<Array<Org_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Order_By>>;
-  where?: Maybe<Org_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Order_By>>;
+  where?: InputMaybe<Org_Bool_Exp>;
 };
 
 export type Query_RootOrg_AggregateArgs = {
-  distinct_on?: Maybe<Array<Org_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Order_By>>;
-  where?: Maybe<Org_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Order_By>>;
+  where?: InputMaybe<Org_Bool_Exp>;
 };
 
 export type Query_RootOrg_By_PkArgs = {
@@ -1249,19 +1250,19 @@ export type Query_RootOrg_By_PkArgs = {
 };
 
 export type Query_RootOrg_TypeArgs = {
-  distinct_on?: Maybe<Array<Org_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Type_Order_By>>;
-  where?: Maybe<Org_Type_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Type_Order_By>>;
+  where?: InputMaybe<Org_Type_Bool_Exp>;
 };
 
 export type Query_RootOrg_Type_AggregateArgs = {
-  distinct_on?: Maybe<Array<Org_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Type_Order_By>>;
-  where?: Maybe<Org_Type_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Type_Order_By>>;
+  where?: InputMaybe<Org_Type_Bool_Exp>;
 };
 
 export type Query_RootOrg_Type_By_PkArgs = {
@@ -1269,19 +1270,19 @@ export type Query_RootOrg_Type_By_PkArgs = {
 };
 
 export type Query_RootSec_CompanyArgs = {
-  distinct_on?: Maybe<Array<Sec_Company_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Company_Order_By>>;
-  where?: Maybe<Sec_Company_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Company_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Company_Order_By>>;
+  where?: InputMaybe<Sec_Company_Bool_Exp>;
 };
 
 export type Query_RootSec_Company_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Company_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Company_Order_By>>;
-  where?: Maybe<Sec_Company_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Company_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Company_Order_By>>;
+  where?: InputMaybe<Sec_Company_Bool_Exp>;
 };
 
 export type Query_RootSec_Company_By_PkArgs = {
@@ -1289,51 +1290,51 @@ export type Query_RootSec_Company_By_PkArgs = {
 };
 
 export type Query_RootSec_ContractArgs = {
-  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
-  where?: Maybe<Sec_Contract_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Contract_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Contract_Order_By>>;
+  where?: InputMaybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Query_RootSec_Contract_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
-  where?: Maybe<Sec_Contract_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Contract_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Contract_Order_By>>;
+  where?: InputMaybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Query_RootSec_FilingArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
-  where?: Maybe<Sec_Filing_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Bool_Exp>;
 };
 
 export type Query_RootSec_Filing_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
-  where?: Maybe<Sec_Filing_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Bool_Exp>;
 };
 
 export type Query_RootSec_Filing_AttachmentArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 export type Query_RootSec_Filing_Attachment_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 export type Query_RootSec_Filing_Attachment_By_PkArgs = {
@@ -1347,36 +1348,36 @@ export type Query_RootSec_Filing_By_PkArgs = {
 
 export type Query_RootSec_SearchArgs = {
   args: Sec_Search_Args;
-  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
-  where?: Maybe<Sec_Contract_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Contract_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Contract_Order_By>>;
+  where?: InputMaybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Query_RootSec_Search_AggregateArgs = {
   args: Sec_Search_Args;
-  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
-  where?: Maybe<Sec_Contract_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Contract_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Contract_Order_By>>;
+  where?: InputMaybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Query_RootUserArgs = {
-  distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Order_By>>;
-  where?: Maybe<User_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Order_By>>;
+  where?: InputMaybe<User_Bool_Exp>;
 };
 
 export type Query_RootUser_AggregateArgs = {
-  distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Order_By>>;
-  where?: Maybe<User_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Order_By>>;
+  where?: InputMaybe<User_Bool_Exp>;
 };
 
 export type Query_RootUser_By_PkArgs = {
@@ -1405,38 +1406,38 @@ export type Sec_Company = {
 
 /** columns and relationships of "sec_company" */
 export type Sec_CompanySec_Filing_AttachmentsArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 /** columns and relationships of "sec_company" */
 export type Sec_CompanySec_Filing_Attachments_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 /** columns and relationships of "sec_company" */
 export type Sec_CompanySec_FilingsArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
-  where?: Maybe<Sec_Filing_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Bool_Exp>;
 };
 
 /** columns and relationships of "sec_company" */
 export type Sec_CompanySec_Filings_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
-  where?: Maybe<Sec_Filing_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Bool_Exp>;
 };
 
 /** aggregated selection of "sec_company" */
@@ -1456,24 +1457,24 @@ export type Sec_Company_Aggregate_Fields = {
 
 /** aggregate fields of "sec_company" */
 export type Sec_Company_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Sec_Company_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Sec_Company_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Boolean expression to filter rows from the table "sec_company". All fields are combined with a logical 'AND'. */
 export type Sec_Company_Bool_Exp = {
-  _and?: Maybe<Array<Sec_Company_Bool_Exp>>;
-  _not?: Maybe<Sec_Company_Bool_Exp>;
-  _or?: Maybe<Array<Sec_Company_Bool_Exp>>;
-  cik?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  geo?: Maybe<String_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  sec_filing_attachments?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
-  sec_filings?: Maybe<Sec_Filing_Bool_Exp>;
-  sic?: Maybe<String_Comparison_Exp>;
-  sic_name?: Maybe<String_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  _and?: InputMaybe<Array<Sec_Company_Bool_Exp>>;
+  _not?: InputMaybe<Sec_Company_Bool_Exp>;
+  _or?: InputMaybe<Array<Sec_Company_Bool_Exp>>;
+  cik?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  geo?: InputMaybe<String_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  sec_filing_attachments?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
+  sec_filings?: InputMaybe<Sec_Filing_Bool_Exp>;
+  sic?: InputMaybe<String_Comparison_Exp>;
+  sic_name?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "sec_company" */
@@ -1484,15 +1485,15 @@ export enum Sec_Company_Constraint {
 
 /** input type for inserting data into table "sec_company" */
 export type Sec_Company_Insert_Input = {
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  geo?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  sec_filing_attachments?: Maybe<Sec_Filing_Attachment_Arr_Rel_Insert_Input>;
-  sec_filings?: Maybe<Sec_Filing_Arr_Rel_Insert_Input>;
-  sic?: Maybe<Scalars['String']>;
-  sic_name?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  cik?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  geo?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  sec_filing_attachments?: InputMaybe<Sec_Filing_Attachment_Arr_Rel_Insert_Input>;
+  sec_filings?: InputMaybe<Sec_Filing_Arr_Rel_Insert_Input>;
+  sic?: InputMaybe<Scalars['String']>;
+  sic_name?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
@@ -1532,27 +1533,27 @@ export type Sec_Company_Mutation_Response = {
 export type Sec_Company_Obj_Rel_Insert_Input = {
   data: Sec_Company_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Sec_Company_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Company_On_Conflict>;
 };
 
 /** on conflict condition type for table "sec_company" */
 export type Sec_Company_On_Conflict = {
   constraint: Sec_Company_Constraint;
   update_columns?: Array<Sec_Company_Update_Column>;
-  where?: Maybe<Sec_Company_Bool_Exp>;
+  where?: InputMaybe<Sec_Company_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "sec_company". */
 export type Sec_Company_Order_By = {
-  cik?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  geo?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  sec_filing_attachments_aggregate?: Maybe<Sec_Filing_Attachment_Aggregate_Order_By>;
-  sec_filings_aggregate?: Maybe<Sec_Filing_Aggregate_Order_By>;
-  sic?: Maybe<Order_By>;
-  sic_name?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  cik?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  geo?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  sec_filing_attachments_aggregate?: InputMaybe<Sec_Filing_Attachment_Aggregate_Order_By>;
+  sec_filings_aggregate?: InputMaybe<Sec_Filing_Aggregate_Order_By>;
+  sic?: InputMaybe<Order_By>;
+  sic_name?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: sec_company */
@@ -1580,13 +1581,13 @@ export enum Sec_Company_Select_Column {
 
 /** input type for updating data in table "sec_company" */
 export type Sec_Company_Set_Input = {
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  geo?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  sic?: Maybe<Scalars['String']>;
-  sic_name?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  cik?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  geo?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  sic?: InputMaybe<Scalars['String']>;
+  sic_name?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** update columns of table "sec_company" */
@@ -1660,8 +1661,8 @@ export type Sec_Contract_Aggregate_Fields = {
 
 /** aggregate fields of "sec_contract" */
 export type Sec_Contract_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Sec_Contract_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Sec_Contract_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
@@ -1673,28 +1674,28 @@ export type Sec_Contract_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "sec_contract". All fields are combined with a logical 'AND'. */
 export type Sec_Contract_Bool_Exp = {
-  _and?: Maybe<Array<Sec_Contract_Bool_Exp>>;
-  _not?: Maybe<Sec_Contract_Bool_Exp>;
-  _or?: Maybe<Array<Sec_Contract_Bool_Exp>>;
-  accession_number?: Maybe<String_Comparison_Exp>;
-  attachment_type?: Maybe<String_Comparison_Exp>;
-  company_cik?: Maybe<String_Comparison_Exp>;
-  company_geo?: Maybe<String_Comparison_Exp>;
-  company_name?: Maybe<String_Comparison_Exp>;
-  company_sic?: Maybe<String_Comparison_Exp>;
-  company_sic_name?: Maybe<String_Comparison_Exp>;
-  contract_type?: Maybe<String_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  filing_date?: Maybe<Date_Comparison_Exp>;
-  filing_header?: Maybe<String_Comparison_Exp>;
-  filing_type?: Maybe<String_Comparison_Exp>;
-  relevance?: Maybe<Float_Comparison_Exp>;
-  sec_company?: Maybe<Sec_Company_Bool_Exp>;
-  sec_filing?: Maybe<Sec_Filing_Bool_Exp>;
-  sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
-  sequence?: Maybe<Int_Comparison_Exp>;
-  tsv_search_text?: Maybe<Tsvector_Comparison_Exp>;
-  uid?: Maybe<String_Comparison_Exp>;
+  _and?: InputMaybe<Array<Sec_Contract_Bool_Exp>>;
+  _not?: InputMaybe<Sec_Contract_Bool_Exp>;
+  _or?: InputMaybe<Array<Sec_Contract_Bool_Exp>>;
+  accession_number?: InputMaybe<String_Comparison_Exp>;
+  attachment_type?: InputMaybe<String_Comparison_Exp>;
+  company_cik?: InputMaybe<String_Comparison_Exp>;
+  company_geo?: InputMaybe<String_Comparison_Exp>;
+  company_name?: InputMaybe<String_Comparison_Exp>;
+  company_sic?: InputMaybe<String_Comparison_Exp>;
+  company_sic_name?: InputMaybe<String_Comparison_Exp>;
+  contract_type?: InputMaybe<String_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  filing_date?: InputMaybe<Date_Comparison_Exp>;
+  filing_header?: InputMaybe<String_Comparison_Exp>;
+  filing_type?: InputMaybe<String_Comparison_Exp>;
+  relevance?: InputMaybe<Float_Comparison_Exp>;
+  sec_company?: InputMaybe<Sec_Company_Bool_Exp>;
+  sec_filing?: InputMaybe<Sec_Filing_Bool_Exp>;
+  sec_filing_attachment?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
+  sequence?: InputMaybe<Int_Comparison_Exp>;
+  tsv_search_text?: InputMaybe<Tsvector_Comparison_Exp>;
+  uid?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** aggregate max on columns */
@@ -1737,25 +1738,25 @@ export type Sec_Contract_Min_Fields = {
 
 /** Ordering options when selecting data from "sec_contract". */
 export type Sec_Contract_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  attachment_type?: Maybe<Order_By>;
-  company_cik?: Maybe<Order_By>;
-  company_geo?: Maybe<Order_By>;
-  company_name?: Maybe<Order_By>;
-  company_sic?: Maybe<Order_By>;
-  company_sic_name?: Maybe<Order_By>;
-  contract_type?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  filing_date?: Maybe<Order_By>;
-  filing_header?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  relevance?: Maybe<Order_By>;
-  sec_company?: Maybe<Sec_Company_Order_By>;
-  sec_filing?: Maybe<Sec_Filing_Order_By>;
-  sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Order_By>;
-  sequence?: Maybe<Order_By>;
-  tsv_search_text?: Maybe<Order_By>;
-  uid?: Maybe<Order_By>;
+  accession_number?: InputMaybe<Order_By>;
+  attachment_type?: InputMaybe<Order_By>;
+  company_cik?: InputMaybe<Order_By>;
+  company_geo?: InputMaybe<Order_By>;
+  company_name?: InputMaybe<Order_By>;
+  company_sic?: InputMaybe<Order_By>;
+  company_sic_name?: InputMaybe<Order_By>;
+  contract_type?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  filing_date?: InputMaybe<Order_By>;
+  filing_header?: InputMaybe<Order_By>;
+  filing_type?: InputMaybe<Order_By>;
+  relevance?: InputMaybe<Order_By>;
+  sec_company?: InputMaybe<Sec_Company_Order_By>;
+  sec_filing?: InputMaybe<Sec_Filing_Order_By>;
+  sec_filing_attachment?: InputMaybe<Sec_Filing_Attachment_Order_By>;
+  sequence?: InputMaybe<Order_By>;
+  tsv_search_text?: InputMaybe<Order_By>;
+  uid?: InputMaybe<Order_By>;
 };
 
 /** select columns of table "sec_contract" */
@@ -1861,20 +1862,20 @@ export type Sec_Filing = {
 
 /** columns and relationships of "sec_filing" */
 export type Sec_FilingSec_Filing_AttachmentArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 /** columns and relationships of "sec_filing" */
 export type Sec_FilingSec_Filing_Attachment_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 /** aggregated selection of "sec_filing" */
@@ -1894,22 +1895,22 @@ export type Sec_Filing_Aggregate_Fields = {
 
 /** aggregate fields of "sec_filing" */
 export type Sec_Filing_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Sec_Filing_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Sec_Filing_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "sec_filing" */
 export type Sec_Filing_Aggregate_Order_By = {
-  count?: Maybe<Order_By>;
-  max?: Maybe<Sec_Filing_Max_Order_By>;
-  min?: Maybe<Sec_Filing_Min_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Sec_Filing_Max_Order_By>;
+  min?: InputMaybe<Sec_Filing_Min_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "sec_filing" */
 export type Sec_Filing_Arr_Rel_Insert_Input = {
   data: Array<Sec_Filing_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Sec_Filing_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Filing_On_Conflict>;
 };
 
 /** columns and relationships of "sec_filing_attachment" */
@@ -1958,30 +1959,30 @@ export type Sec_Filing_Attachment_Aggregate_Fields = {
 
 /** aggregate fields of "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Aggregate_Order_By = {
-  avg?: Maybe<Sec_Filing_Attachment_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Sec_Filing_Attachment_Max_Order_By>;
-  min?: Maybe<Sec_Filing_Attachment_Min_Order_By>;
-  stddev?: Maybe<Sec_Filing_Attachment_Stddev_Order_By>;
-  stddev_pop?: Maybe<Sec_Filing_Attachment_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Sec_Filing_Attachment_Stddev_Samp_Order_By>;
-  sum?: Maybe<Sec_Filing_Attachment_Sum_Order_By>;
-  var_pop?: Maybe<Sec_Filing_Attachment_Var_Pop_Order_By>;
-  var_samp?: Maybe<Sec_Filing_Attachment_Var_Samp_Order_By>;
-  variance?: Maybe<Sec_Filing_Attachment_Variance_Order_By>;
+  avg?: InputMaybe<Sec_Filing_Attachment_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Sec_Filing_Attachment_Max_Order_By>;
+  min?: InputMaybe<Sec_Filing_Attachment_Min_Order_By>;
+  stddev?: InputMaybe<Sec_Filing_Attachment_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Sec_Filing_Attachment_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Sec_Filing_Attachment_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Sec_Filing_Attachment_Sum_Order_By>;
+  var_pop?: InputMaybe<Sec_Filing_Attachment_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Sec_Filing_Attachment_Var_Samp_Order_By>;
+  variance?: InputMaybe<Sec_Filing_Attachment_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Arr_Rel_Insert_Input = {
   data: Array<Sec_Filing_Attachment_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<Sec_Filing_Attachment_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Filing_Attachment_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -1992,28 +1993,28 @@ export type Sec_Filing_Attachment_Avg_Fields = {
 
 /** order by avg() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Avg_Order_By = {
-  sequence?: Maybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "sec_filing_attachment". All fields are combined with a logical 'AND'. */
 export type Sec_Filing_Attachment_Bool_Exp = {
-  _and?: Maybe<Array<Sec_Filing_Attachment_Bool_Exp>>;
-  _not?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
-  _or?: Maybe<Array<Sec_Filing_Attachment_Bool_Exp>>;
-  accession_number?: Maybe<String_Comparison_Exp>;
-  attachment_type?: Maybe<String_Comparison_Exp>;
-  cik?: Maybe<String_Comparison_Exp>;
-  contents?: Maybe<String_Comparison_Exp>;
-  contract_type?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  filename?: Maybe<String_Comparison_Exp>;
-  sec_company?: Maybe<Sec_Company_Bool_Exp>;
-  sec_filing?: Maybe<Sec_Filing_Bool_Exp>;
-  sequence?: Maybe<Int_Comparison_Exp>;
-  text?: Maybe<String_Comparison_Exp>;
-  tsv_search_text?: Maybe<Tsvector_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  _and?: InputMaybe<Array<Sec_Filing_Attachment_Bool_Exp>>;
+  _not?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
+  _or?: InputMaybe<Array<Sec_Filing_Attachment_Bool_Exp>>;
+  accession_number?: InputMaybe<String_Comparison_Exp>;
+  attachment_type?: InputMaybe<String_Comparison_Exp>;
+  cik?: InputMaybe<String_Comparison_Exp>;
+  contents?: InputMaybe<String_Comparison_Exp>;
+  contract_type?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
+  filename?: InputMaybe<String_Comparison_Exp>;
+  sec_company?: InputMaybe<Sec_Company_Bool_Exp>;
+  sec_filing?: InputMaybe<Sec_Filing_Bool_Exp>;
+  sequence?: InputMaybe<Int_Comparison_Exp>;
+  text?: InputMaybe<String_Comparison_Exp>;
+  tsv_search_text?: InputMaybe<Tsvector_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "sec_filing_attachment" */
@@ -2026,25 +2027,25 @@ export enum Sec_Filing_Attachment_Constraint {
 
 /** input type for incrementing numeric columns in table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Inc_Input = {
-  sequence?: Maybe<Scalars['Int']>;
+  sequence?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Insert_Input = {
-  accession_number?: Maybe<Scalars['String']>;
-  attachment_type?: Maybe<Scalars['String']>;
-  cik?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
-  contract_type?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  filename?: Maybe<Scalars['String']>;
-  sec_company?: Maybe<Sec_Company_Obj_Rel_Insert_Input>;
-  sec_filing?: Maybe<Sec_Filing_Obj_Rel_Insert_Input>;
-  sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  tsv_search_text?: Maybe<Scalars['tsvector']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  accession_number?: InputMaybe<Scalars['String']>;
+  attachment_type?: InputMaybe<Scalars['String']>;
+  cik?: InputMaybe<Scalars['String']>;
+  contents?: InputMaybe<Scalars['String']>;
+  contract_type?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  filename?: InputMaybe<Scalars['String']>;
+  sec_company?: InputMaybe<Sec_Company_Obj_Rel_Insert_Input>;
+  sec_filing?: InputMaybe<Sec_Filing_Obj_Rel_Insert_Input>;
+  sequence?: InputMaybe<Scalars['Int']>;
+  text?: InputMaybe<Scalars['String']>;
+  tsv_search_text?: InputMaybe<Scalars['tsvector']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
@@ -2065,17 +2066,17 @@ export type Sec_Filing_Attachment_Max_Fields = {
 
 /** order by max() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Max_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  attachment_type?: Maybe<Order_By>;
-  cik?: Maybe<Order_By>;
-  contents?: Maybe<Order_By>;
-  contract_type?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  filename?: Maybe<Order_By>;
-  sequence?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  accession_number?: InputMaybe<Order_By>;
+  attachment_type?: InputMaybe<Order_By>;
+  cik?: InputMaybe<Order_By>;
+  contents?: InputMaybe<Order_By>;
+  contract_type?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  filename?: InputMaybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -2096,17 +2097,17 @@ export type Sec_Filing_Attachment_Min_Fields = {
 
 /** order by min() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Min_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  attachment_type?: Maybe<Order_By>;
-  cik?: Maybe<Order_By>;
-  contents?: Maybe<Order_By>;
-  contract_type?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  filename?: Maybe<Order_By>;
-  sequence?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  accession_number?: InputMaybe<Order_By>;
+  attachment_type?: InputMaybe<Order_By>;
+  cik?: InputMaybe<Order_By>;
+  contents?: InputMaybe<Order_By>;
+  contract_type?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  filename?: InputMaybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "sec_filing_attachment" */
@@ -2122,25 +2123,25 @@ export type Sec_Filing_Attachment_Mutation_Response = {
 export type Sec_Filing_Attachment_On_Conflict = {
   constraint: Sec_Filing_Attachment_Constraint;
   update_columns?: Array<Sec_Filing_Attachment_Update_Column>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  where?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "sec_filing_attachment". */
 export type Sec_Filing_Attachment_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  attachment_type?: Maybe<Order_By>;
-  cik?: Maybe<Order_By>;
-  contents?: Maybe<Order_By>;
-  contract_type?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  filename?: Maybe<Order_By>;
-  sec_company?: Maybe<Sec_Company_Order_By>;
-  sec_filing?: Maybe<Sec_Filing_Order_By>;
-  sequence?: Maybe<Order_By>;
-  text?: Maybe<Order_By>;
-  tsv_search_text?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  accession_number?: InputMaybe<Order_By>;
+  attachment_type?: InputMaybe<Order_By>;
+  cik?: InputMaybe<Order_By>;
+  contents?: InputMaybe<Order_By>;
+  contract_type?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  filename?: InputMaybe<Order_By>;
+  sec_company?: InputMaybe<Sec_Company_Order_By>;
+  sec_filing?: InputMaybe<Sec_Filing_Order_By>;
+  sequence?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
+  tsv_search_text?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: sec_filing_attachment */
@@ -2179,18 +2180,18 @@ export enum Sec_Filing_Attachment_Select_Column {
 
 /** input type for updating data in table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Set_Input = {
-  accession_number?: Maybe<Scalars['String']>;
-  attachment_type?: Maybe<Scalars['String']>;
-  cik?: Maybe<Scalars['String']>;
-  contents?: Maybe<Scalars['String']>;
-  contract_type?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  filename?: Maybe<Scalars['String']>;
-  sequence?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  tsv_search_text?: Maybe<Scalars['tsvector']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  accession_number?: InputMaybe<Scalars['String']>;
+  attachment_type?: InputMaybe<Scalars['String']>;
+  cik?: InputMaybe<Scalars['String']>;
+  contents?: InputMaybe<Scalars['String']>;
+  contract_type?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
+  filename?: InputMaybe<Scalars['String']>;
+  sequence?: InputMaybe<Scalars['Int']>;
+  text?: InputMaybe<Scalars['String']>;
+  tsv_search_text?: InputMaybe<Scalars['tsvector']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate stddev on columns */
@@ -2201,7 +2202,7 @@ export type Sec_Filing_Attachment_Stddev_Fields = {
 
 /** order by stddev() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Stddev_Order_By = {
-  sequence?: Maybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -2212,7 +2213,7 @@ export type Sec_Filing_Attachment_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Stddev_Pop_Order_By = {
-  sequence?: Maybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -2223,7 +2224,7 @@ export type Sec_Filing_Attachment_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Stddev_Samp_Order_By = {
-  sequence?: Maybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -2234,7 +2235,7 @@ export type Sec_Filing_Attachment_Sum_Fields = {
 
 /** order by sum() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Sum_Order_By = {
-  sequence?: Maybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "sec_filing_attachment" */
@@ -2273,7 +2274,7 @@ export type Sec_Filing_Attachment_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Var_Pop_Order_By = {
-  sequence?: Maybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -2284,7 +2285,7 @@ export type Sec_Filing_Attachment_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Var_Samp_Order_By = {
-  sequence?: Maybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -2295,23 +2296,23 @@ export type Sec_Filing_Attachment_Variance_Fields = {
 
 /** order by variance() on columns of table "sec_filing_attachment" */
 export type Sec_Filing_Attachment_Variance_Order_By = {
-  sequence?: Maybe<Order_By>;
+  sequence?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "sec_filing". All fields are combined with a logical 'AND'. */
 export type Sec_Filing_Bool_Exp = {
-  _and?: Maybe<Array<Sec_Filing_Bool_Exp>>;
-  _not?: Maybe<Sec_Filing_Bool_Exp>;
-  _or?: Maybe<Array<Sec_Filing_Bool_Exp>>;
-  accession_number?: Maybe<String_Comparison_Exp>;
-  cik?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  filing_date?: Maybe<Date_Comparison_Exp>;
-  filing_type?: Maybe<String_Comparison_Exp>;
-  header?: Maybe<String_Comparison_Exp>;
-  sec_company?: Maybe<Sec_Company_Bool_Exp>;
-  sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  _and?: InputMaybe<Array<Sec_Filing_Bool_Exp>>;
+  _not?: InputMaybe<Sec_Filing_Bool_Exp>;
+  _or?: InputMaybe<Array<Sec_Filing_Bool_Exp>>;
+  accession_number?: InputMaybe<String_Comparison_Exp>;
+  cik?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  filing_date?: InputMaybe<Date_Comparison_Exp>;
+  filing_type?: InputMaybe<String_Comparison_Exp>;
+  header?: InputMaybe<String_Comparison_Exp>;
+  sec_company?: InputMaybe<Sec_Company_Bool_Exp>;
+  sec_filing_attachment?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "sec_filing" */
@@ -2322,15 +2323,15 @@ export enum Sec_Filing_Constraint {
 
 /** input type for inserting data into table "sec_filing" */
 export type Sec_Filing_Insert_Input = {
-  accession_number?: Maybe<Scalars['String']>;
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  filing_date?: Maybe<Scalars['date']>;
-  filing_type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  sec_company?: Maybe<Sec_Company_Obj_Rel_Insert_Input>;
-  sec_filing_attachment?: Maybe<Sec_Filing_Attachment_Arr_Rel_Insert_Input>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  accession_number?: InputMaybe<Scalars['String']>;
+  cik?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  filing_date?: InputMaybe<Scalars['date']>;
+  filing_type?: InputMaybe<Scalars['String']>;
+  header?: InputMaybe<Scalars['String']>;
+  sec_company?: InputMaybe<Sec_Company_Obj_Rel_Insert_Input>;
+  sec_filing_attachment?: InputMaybe<Sec_Filing_Attachment_Arr_Rel_Insert_Input>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
@@ -2347,13 +2348,13 @@ export type Sec_Filing_Max_Fields = {
 
 /** order by max() on columns of table "sec_filing" */
 export type Sec_Filing_Max_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  cik?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  filing_date?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  header?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  accession_number?: InputMaybe<Order_By>;
+  cik?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  filing_date?: InputMaybe<Order_By>;
+  filing_type?: InputMaybe<Order_By>;
+  header?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -2370,13 +2371,13 @@ export type Sec_Filing_Min_Fields = {
 
 /** order by min() on columns of table "sec_filing" */
 export type Sec_Filing_Min_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  cik?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  filing_date?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  header?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  accession_number?: InputMaybe<Order_By>;
+  cik?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  filing_date?: InputMaybe<Order_By>;
+  filing_type?: InputMaybe<Order_By>;
+  header?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "sec_filing" */
@@ -2392,27 +2393,27 @@ export type Sec_Filing_Mutation_Response = {
 export type Sec_Filing_Obj_Rel_Insert_Input = {
   data: Sec_Filing_Insert_Input;
   /** on conflict condition */
-  on_conflict?: Maybe<Sec_Filing_On_Conflict>;
+  on_conflict?: InputMaybe<Sec_Filing_On_Conflict>;
 };
 
 /** on conflict condition type for table "sec_filing" */
 export type Sec_Filing_On_Conflict = {
   constraint: Sec_Filing_Constraint;
   update_columns?: Array<Sec_Filing_Update_Column>;
-  where?: Maybe<Sec_Filing_Bool_Exp>;
+  where?: InputMaybe<Sec_Filing_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "sec_filing". */
 export type Sec_Filing_Order_By = {
-  accession_number?: Maybe<Order_By>;
-  cik?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  filing_date?: Maybe<Order_By>;
-  filing_type?: Maybe<Order_By>;
-  header?: Maybe<Order_By>;
-  sec_company?: Maybe<Sec_Company_Order_By>;
-  sec_filing_attachment_aggregate?: Maybe<Sec_Filing_Attachment_Aggregate_Order_By>;
-  updated_at?: Maybe<Order_By>;
+  accession_number?: InputMaybe<Order_By>;
+  cik?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  filing_date?: InputMaybe<Order_By>;
+  filing_type?: InputMaybe<Order_By>;
+  header?: InputMaybe<Order_By>;
+  sec_company?: InputMaybe<Sec_Company_Order_By>;
+  sec_filing_attachment_aggregate?: InputMaybe<Sec_Filing_Attachment_Aggregate_Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: sec_filing */
@@ -2440,13 +2441,13 @@ export enum Sec_Filing_Select_Column {
 
 /** input type for updating data in table "sec_filing" */
 export type Sec_Filing_Set_Input = {
-  accession_number?: Maybe<Scalars['String']>;
-  cik?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  filing_date?: Maybe<Scalars['date']>;
-  filing_type?: Maybe<Scalars['String']>;
-  header?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  accession_number?: InputMaybe<Scalars['String']>;
+  cik?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  filing_date?: InputMaybe<Scalars['date']>;
+  filing_type?: InputMaybe<Scalars['String']>;
+  header?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** update columns of table "sec_filing" */
@@ -2468,15 +2469,15 @@ export enum Sec_Filing_Update_Column {
 }
 
 export type Sec_Search_Args = {
-  company_cik_eq?: Maybe<Scalars['String']>;
-  company_name_excludes?: Maybe<Scalars['String']>;
-  company_name_includes?: Maybe<Scalars['String']>;
-  contract_type_eq?: Maybe<Scalars['String']>;
-  description_excludes?: Maybe<Scalars['String']>;
-  description_includes?: Maybe<Scalars['String']>;
-  filing_date_gt?: Maybe<Scalars['date']>;
-  filing_date_lt?: Maybe<Scalars['date']>;
-  search?: Maybe<Scalars['String']>;
+  company_cik_eq?: InputMaybe<Scalars['String']>;
+  company_name_excludes?: InputMaybe<Scalars['String']>;
+  company_name_includes?: InputMaybe<Scalars['String']>;
+  contract_type_eq?: InputMaybe<Scalars['String']>;
+  description_excludes?: InputMaybe<Scalars['String']>;
+  description_includes?: InputMaybe<Scalars['String']>;
+  filing_date_gt?: InputMaybe<Scalars['date']>;
+  filing_date_lt?: InputMaybe<Scalars['date']>;
+  search?: InputMaybe<Scalars['String']>;
 };
 
 export type Subscription_Root = {
@@ -2534,19 +2535,19 @@ export type Subscription_Root = {
 };
 
 export type Subscription_RootMigrationsArgs = {
-  distinct_on?: Maybe<Array<Migrations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Migrations_Order_By>>;
-  where?: Maybe<Migrations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Migrations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Migrations_Order_By>>;
+  where?: InputMaybe<Migrations_Bool_Exp>;
 };
 
 export type Subscription_RootMigrations_AggregateArgs = {
-  distinct_on?: Maybe<Array<Migrations_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Migrations_Order_By>>;
-  where?: Maybe<Migrations_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Migrations_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Migrations_Order_By>>;
+  where?: InputMaybe<Migrations_Bool_Exp>;
 };
 
 export type Subscription_RootMigrations_By_PkArgs = {
@@ -2554,19 +2555,19 @@ export type Subscription_RootMigrations_By_PkArgs = {
 };
 
 export type Subscription_RootOrgArgs = {
-  distinct_on?: Maybe<Array<Org_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Order_By>>;
-  where?: Maybe<Org_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Order_By>>;
+  where?: InputMaybe<Org_Bool_Exp>;
 };
 
 export type Subscription_RootOrg_AggregateArgs = {
-  distinct_on?: Maybe<Array<Org_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Order_By>>;
-  where?: Maybe<Org_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Order_By>>;
+  where?: InputMaybe<Org_Bool_Exp>;
 };
 
 export type Subscription_RootOrg_By_PkArgs = {
@@ -2574,19 +2575,19 @@ export type Subscription_RootOrg_By_PkArgs = {
 };
 
 export type Subscription_RootOrg_TypeArgs = {
-  distinct_on?: Maybe<Array<Org_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Type_Order_By>>;
-  where?: Maybe<Org_Type_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Type_Order_By>>;
+  where?: InputMaybe<Org_Type_Bool_Exp>;
 };
 
 export type Subscription_RootOrg_Type_AggregateArgs = {
-  distinct_on?: Maybe<Array<Org_Type_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Org_Type_Order_By>>;
-  where?: Maybe<Org_Type_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Org_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Org_Type_Order_By>>;
+  where?: InputMaybe<Org_Type_Bool_Exp>;
 };
 
 export type Subscription_RootOrg_Type_By_PkArgs = {
@@ -2594,19 +2595,19 @@ export type Subscription_RootOrg_Type_By_PkArgs = {
 };
 
 export type Subscription_RootSec_CompanyArgs = {
-  distinct_on?: Maybe<Array<Sec_Company_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Company_Order_By>>;
-  where?: Maybe<Sec_Company_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Company_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Company_Order_By>>;
+  where?: InputMaybe<Sec_Company_Bool_Exp>;
 };
 
 export type Subscription_RootSec_Company_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Company_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Company_Order_By>>;
-  where?: Maybe<Sec_Company_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Company_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Company_Order_By>>;
+  where?: InputMaybe<Sec_Company_Bool_Exp>;
 };
 
 export type Subscription_RootSec_Company_By_PkArgs = {
@@ -2614,51 +2615,51 @@ export type Subscription_RootSec_Company_By_PkArgs = {
 };
 
 export type Subscription_RootSec_ContractArgs = {
-  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
-  where?: Maybe<Sec_Contract_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Contract_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Contract_Order_By>>;
+  where?: InputMaybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Subscription_RootSec_Contract_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
-  where?: Maybe<Sec_Contract_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Contract_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Contract_Order_By>>;
+  where?: InputMaybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Subscription_RootSec_FilingArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
-  where?: Maybe<Sec_Filing_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Bool_Exp>;
 };
 
 export type Subscription_RootSec_Filing_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Order_By>>;
-  where?: Maybe<Sec_Filing_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Bool_Exp>;
 };
 
 export type Subscription_RootSec_Filing_AttachmentArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 export type Subscription_RootSec_Filing_Attachment_AggregateArgs = {
-  distinct_on?: Maybe<Array<Sec_Filing_Attachment_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Filing_Attachment_Order_By>>;
-  where?: Maybe<Sec_Filing_Attachment_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Filing_Attachment_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Filing_Attachment_Order_By>>;
+  where?: InputMaybe<Sec_Filing_Attachment_Bool_Exp>;
 };
 
 export type Subscription_RootSec_Filing_Attachment_By_PkArgs = {
@@ -2672,36 +2673,36 @@ export type Subscription_RootSec_Filing_By_PkArgs = {
 
 export type Subscription_RootSec_SearchArgs = {
   args: Sec_Search_Args;
-  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
-  where?: Maybe<Sec_Contract_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Contract_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Contract_Order_By>>;
+  where?: InputMaybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Subscription_RootSec_Search_AggregateArgs = {
   args: Sec_Search_Args;
-  distinct_on?: Maybe<Array<Sec_Contract_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Sec_Contract_Order_By>>;
-  where?: Maybe<Sec_Contract_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<Sec_Contract_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Sec_Contract_Order_By>>;
+  where?: InputMaybe<Sec_Contract_Bool_Exp>;
 };
 
 export type Subscription_RootUserArgs = {
-  distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Order_By>>;
-  where?: Maybe<User_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Order_By>>;
+  where?: InputMaybe<User_Bool_Exp>;
 };
 
 export type Subscription_RootUser_AggregateArgs = {
-  distinct_on?: Maybe<Array<User_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<User_Order_By>>;
-  where?: Maybe<User_Bool_Exp>;
+  distinct_on?: InputMaybe<Array<User_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<User_Order_By>>;
+  where?: InputMaybe<User_Bool_Exp>;
 };
 
 export type Subscription_RootUser_By_PkArgs = {
@@ -2710,41 +2711,41 @@ export type Subscription_RootUser_By_PkArgs = {
 
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
 export type Timestamp_Comparison_Exp = {
-  _eq?: Maybe<Scalars['timestamp']>;
-  _gt?: Maybe<Scalars['timestamp']>;
-  _gte?: Maybe<Scalars['timestamp']>;
-  _in?: Maybe<Array<Scalars['timestamp']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['timestamp']>;
-  _lte?: Maybe<Scalars['timestamp']>;
-  _neq?: Maybe<Scalars['timestamp']>;
-  _nin?: Maybe<Array<Scalars['timestamp']>>;
+  _eq?: InputMaybe<Scalars['timestamp']>;
+  _gt?: InputMaybe<Scalars['timestamp']>;
+  _gte?: InputMaybe<Scalars['timestamp']>;
+  _in?: InputMaybe<Array<Scalars['timestamp']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['timestamp']>;
+  _lte?: InputMaybe<Scalars['timestamp']>;
+  _neq?: InputMaybe<Scalars['timestamp']>;
+  _nin?: InputMaybe<Array<Scalars['timestamp']>>;
 };
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
-  _eq?: Maybe<Scalars['timestamptz']>;
-  _gt?: Maybe<Scalars['timestamptz']>;
-  _gte?: Maybe<Scalars['timestamptz']>;
-  _in?: Maybe<Array<Scalars['timestamptz']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['timestamptz']>;
-  _lte?: Maybe<Scalars['timestamptz']>;
-  _neq?: Maybe<Scalars['timestamptz']>;
-  _nin?: Maybe<Array<Scalars['timestamptz']>>;
+  _eq?: InputMaybe<Scalars['timestamptz']>;
+  _gt?: InputMaybe<Scalars['timestamptz']>;
+  _gte?: InputMaybe<Scalars['timestamptz']>;
+  _in?: InputMaybe<Array<Scalars['timestamptz']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['timestamptz']>;
+  _lte?: InputMaybe<Scalars['timestamptz']>;
+  _neq?: InputMaybe<Scalars['timestamptz']>;
+  _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
 /** Boolean expression to compare columns of type "tsvector". All fields are combined with logical 'AND'. */
 export type Tsvector_Comparison_Exp = {
-  _eq?: Maybe<Scalars['tsvector']>;
-  _gt?: Maybe<Scalars['tsvector']>;
-  _gte?: Maybe<Scalars['tsvector']>;
-  _in?: Maybe<Array<Scalars['tsvector']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['tsvector']>;
-  _lte?: Maybe<Scalars['tsvector']>;
-  _neq?: Maybe<Scalars['tsvector']>;
-  _nin?: Maybe<Array<Scalars['tsvector']>>;
+  _eq?: InputMaybe<Scalars['tsvector']>;
+  _gt?: InputMaybe<Scalars['tsvector']>;
+  _gte?: InputMaybe<Scalars['tsvector']>;
+  _in?: InputMaybe<Array<Scalars['tsvector']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['tsvector']>;
+  _lte?: InputMaybe<Scalars['tsvector']>;
+  _neq?: InputMaybe<Scalars['tsvector']>;
+  _nin?: InputMaybe<Array<Scalars['tsvector']>>;
 };
 
 /** columns and relationships of "user" */
@@ -2790,30 +2791,30 @@ export type User_Aggregate_Fields = {
 
 /** aggregate fields of "user" */
 export type User_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<User_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
+  columns?: InputMaybe<Array<User_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** order by aggregate values of table "user" */
 export type User_Aggregate_Order_By = {
-  avg?: Maybe<User_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<User_Max_Order_By>;
-  min?: Maybe<User_Min_Order_By>;
-  stddev?: Maybe<User_Stddev_Order_By>;
-  stddev_pop?: Maybe<User_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<User_Stddev_Samp_Order_By>;
-  sum?: Maybe<User_Sum_Order_By>;
-  var_pop?: Maybe<User_Var_Pop_Order_By>;
-  var_samp?: Maybe<User_Var_Samp_Order_By>;
-  variance?: Maybe<User_Variance_Order_By>;
+  avg?: InputMaybe<User_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<User_Max_Order_By>;
+  min?: InputMaybe<User_Min_Order_By>;
+  stddev?: InputMaybe<User_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<User_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<User_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<User_Sum_Order_By>;
+  var_pop?: InputMaybe<User_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<User_Var_Samp_Order_By>;
+  variance?: InputMaybe<User_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "user" */
 export type User_Arr_Rel_Insert_Input = {
   data: Array<User_Insert_Input>;
   /** on conflict condition */
-  on_conflict?: Maybe<User_On_Conflict>;
+  on_conflict?: InputMaybe<User_On_Conflict>;
 };
 
 /** aggregate avg on columns */
@@ -2825,27 +2826,27 @@ export type User_Avg_Fields = {
 
 /** order by avg() on columns of table "user" */
 export type User_Avg_Order_By = {
-  default_org_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'. */
 export type User_Bool_Exp = {
-  _and?: Maybe<Array<User_Bool_Exp>>;
-  _not?: Maybe<User_Bool_Exp>;
-  _or?: Maybe<Array<User_Bool_Exp>>;
-  auth0_id?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  default_org?: Maybe<Org_Bool_Exp>;
-  default_org_id?: Maybe<Int_Comparison_Exp>;
-  email?: Maybe<String_Comparison_Exp>;
-  family_name?: Maybe<String_Comparison_Exp>;
-  given_name?: Maybe<String_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  nickname?: Maybe<String_Comparison_Exp>;
-  photo_url?: Maybe<String_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  _and?: InputMaybe<Array<User_Bool_Exp>>;
+  _not?: InputMaybe<User_Bool_Exp>;
+  _or?: InputMaybe<Array<User_Bool_Exp>>;
+  auth0_id?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  default_org?: InputMaybe<Org_Bool_Exp>;
+  default_org_id?: InputMaybe<Int_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  family_name?: InputMaybe<String_Comparison_Exp>;
+  given_name?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  nickname?: InputMaybe<String_Comparison_Exp>;
+  photo_url?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "user" */
@@ -2862,24 +2863,24 @@ export enum User_Constraint {
 
 /** input type for incrementing numeric columns in table "user" */
 export type User_Inc_Input = {
-  default_org_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
+  default_org_id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "user" */
 export type User_Insert_Input = {
-  auth0_id?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  default_org?: Maybe<Org_Obj_Rel_Insert_Input>;
-  default_org_id?: Maybe<Scalars['Int']>;
-  email?: Maybe<Scalars['String']>;
-  family_name?: Maybe<Scalars['String']>;
-  given_name?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  nickname?: Maybe<Scalars['String']>;
-  photo_url?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  auth0_id?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  default_org?: InputMaybe<Org_Obj_Rel_Insert_Input>;
+  default_org_id?: InputMaybe<Scalars['Int']>;
+  email?: InputMaybe<Scalars['String']>;
+  family_name?: InputMaybe<Scalars['String']>;
+  given_name?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  nickname?: InputMaybe<Scalars['String']>;
+  photo_url?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate max on columns */
@@ -2900,17 +2901,17 @@ export type User_Max_Fields = {
 
 /** order by max() on columns of table "user" */
 export type User_Max_Order_By = {
-  auth0_id?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  default_org_id?: Maybe<Order_By>;
-  email?: Maybe<Order_By>;
-  family_name?: Maybe<Order_By>;
-  given_name?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  nickname?: Maybe<Order_By>;
-  photo_url?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  auth0_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  family_name?: InputMaybe<Order_By>;
+  given_name?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  nickname?: InputMaybe<Order_By>;
+  photo_url?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -2931,17 +2932,17 @@ export type User_Min_Fields = {
 
 /** order by min() on columns of table "user" */
 export type User_Min_Order_By = {
-  auth0_id?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  default_org_id?: Maybe<Order_By>;
-  email?: Maybe<Order_By>;
-  family_name?: Maybe<Order_By>;
-  given_name?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  nickname?: Maybe<Order_By>;
-  photo_url?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  auth0_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  family_name?: InputMaybe<Order_By>;
+  given_name?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  nickname?: InputMaybe<Order_By>;
+  photo_url?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "user" */
@@ -2957,23 +2958,23 @@ export type User_Mutation_Response = {
 export type User_On_Conflict = {
   constraint: User_Constraint;
   update_columns?: Array<User_Update_Column>;
-  where?: Maybe<User_Bool_Exp>;
+  where?: InputMaybe<User_Bool_Exp>;
 };
 
 /** Ordering options when selecting data from "user". */
 export type User_Order_By = {
-  auth0_id?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  default_org?: Maybe<Org_Order_By>;
-  default_org_id?: Maybe<Order_By>;
-  email?: Maybe<Order_By>;
-  family_name?: Maybe<Order_By>;
-  given_name?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  nickname?: Maybe<Order_By>;
-  photo_url?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  auth0_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  default_org?: InputMaybe<Org_Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  family_name?: InputMaybe<Order_By>;
+  given_name?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  nickname?: InputMaybe<Order_By>;
+  photo_url?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: user */
@@ -3009,17 +3010,17 @@ export enum User_Select_Column {
 
 /** input type for updating data in table "user" */
 export type User_Set_Input = {
-  auth0_id?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  default_org_id?: Maybe<Scalars['Int']>;
-  email?: Maybe<Scalars['String']>;
-  family_name?: Maybe<Scalars['String']>;
-  given_name?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  nickname?: Maybe<Scalars['String']>;
-  photo_url?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  auth0_id?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  default_org_id?: InputMaybe<Scalars['Int']>;
+  email?: InputMaybe<Scalars['String']>;
+  family_name?: InputMaybe<Scalars['String']>;
+  given_name?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  name?: InputMaybe<Scalars['String']>;
+  nickname?: InputMaybe<Scalars['String']>;
+  photo_url?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
 /** aggregate stddev on columns */
@@ -3031,8 +3032,8 @@ export type User_Stddev_Fields = {
 
 /** order by stddev() on columns of table "user" */
 export type User_Stddev_Order_By = {
-  default_org_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -3044,8 +3045,8 @@ export type User_Stddev_Pop_Fields = {
 
 /** order by stddev_pop() on columns of table "user" */
 export type User_Stddev_Pop_Order_By = {
-  default_org_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -3057,8 +3058,8 @@ export type User_Stddev_Samp_Fields = {
 
 /** order by stddev_samp() on columns of table "user" */
 export type User_Stddev_Samp_Order_By = {
-  default_org_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -3070,8 +3071,8 @@ export type User_Sum_Fields = {
 
 /** order by sum() on columns of table "user" */
 export type User_Sum_Order_By = {
-  default_org_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "user" */
@@ -3109,8 +3110,8 @@ export type User_Var_Pop_Fields = {
 
 /** order by var_pop() on columns of table "user" */
 export type User_Var_Pop_Order_By = {
-  default_org_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -3122,8 +3123,8 @@ export type User_Var_Samp_Fields = {
 
 /** order by var_samp() on columns of table "user" */
 export type User_Var_Samp_Order_By = {
-  default_org_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -3135,8 +3136,8 @@ export type User_Variance_Fields = {
 
 /** order by variance() on columns of table "user" */
 export type User_Variance_Order_By = {
-  default_org_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+  default_org_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
 };
 
 export type SearchResultFragment = {
@@ -3156,13 +3157,13 @@ export type SearchResultFragment = {
 
 export type SearchSecContractsQueryVariables = Exact<{
   search: Scalars['String'];
-  minDate?: Maybe<Scalars['date']>;
-  maxDate?: Maybe<Scalars['date']>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  uidsOnly?: Maybe<Scalars['Boolean']>;
-  contractType?: Maybe<Scalars['String']>;
-  companyCiks?: Maybe<Scalars['String']>;
+  minDate?: InputMaybe<Scalars['date']>;
+  maxDate?: InputMaybe<Scalars['date']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  uidsOnly?: InputMaybe<Scalars['Boolean']>;
+  contractType?: InputMaybe<Scalars['String']>;
+  companyCiks?: InputMaybe<Scalars['String']>;
 }>;
 
 export type SearchSecContractsQuery = {
@@ -3320,10 +3321,10 @@ export type SyncUserMutationVariables = Exact<{
   auth0_id: Scalars['String'];
   email: Scalars['String'];
   name: Scalars['String'];
-  nickname?: Maybe<Scalars['String']>;
-  given_name?: Maybe<Scalars['String']>;
-  family_name?: Maybe<Scalars['String']>;
-  photo_url?: Maybe<Scalars['String']>;
+  nickname?: InputMaybe<Scalars['String']>;
+  given_name?: InputMaybe<Scalars['String']>;
+  family_name?: InputMaybe<Scalars['String']>;
+  photo_url?: InputMaybe<Scalars['String']>;
   org: Org_Insert_Input;
 }>;
 
