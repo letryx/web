@@ -101,7 +101,7 @@ const AboutPage: FC = () => {
             <SimpleGrid
               py="6"
               spacing={4}
-              columns={2}
+              columns={[1, 1, 2]}
               // direction={['column', 'column', 'column', 'row']}
             >
               <Profile
