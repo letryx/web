@@ -6,6 +6,7 @@ import {
   Heading,
   List,
   ListItem,
+  SimpleGrid,
   Stack,
   Text,
   useColorModeValue,
@@ -30,7 +31,7 @@ const Profile: FC<ProfileProps> = ({
 }) => (
   <Center>
     <Box
-      w="300px"
+      w="350px"
       bg={useColorModeValue('white', 'gray.900')}
       boxShadow="2xl"
       rounded="lg"
@@ -97,10 +98,11 @@ const AboutPage: FC = () => {
             Meet the Team
           </Heading>
           <Center>
-            <Stack
+            <SimpleGrid
               py="6"
               spacing={4}
-              direction={['column', 'column', 'column', 'row']}
+              columns={2}
+              // direction={['column', 'column', 'column', 'row']}
             >
               <Profile
                 name="Vlad Kobzar"
@@ -124,8 +126,33 @@ const AboutPage: FC = () => {
                 </List>
               </Profile>
               <Profile
-                name="Clifton King"
+                name="Daniel Salinas"
                 title="CTO"
+                photo_url="/img/marketing/daniel.png"
+                socialLinks={
+                  <SocialLinks
+                    socialLinks={[
+                      {
+                        social: 'linkedin',
+                        href: 'https://www.linkedin.com/in/daniel-salinas-95a75a123',
+                      },
+                      {
+                        social: 'github',
+                        href: 'https://github.com/zzorba',
+                      },
+                    ]}
+                  />
+                }
+              >
+                <List spacing={1}>
+                  <ListItem>Sr Director of Engineering, Foursquare</ListItem>
+                  <ListItem>Sr Software Engineer, Roblox</ListItem>
+                  <ListItem>GPU Architect, Nvidia</ListItem>
+                </List>
+              </Profile>
+              <Profile
+                name="Clifton King"
+                title="COO"
                 photo_url="/img/marketing/clifton.jpeg"
                 socialLinks={
                   <SocialLinks
@@ -169,7 +196,7 @@ const AboutPage: FC = () => {
                   <ListItem>&nbsp;</ListItem>
                 </List>
               </Profile>
-            </Stack>
+            </SimpleGrid>
           </Center>
         </Box>
       </Stack>
