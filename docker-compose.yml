@@ -76,7 +76,7 @@ services:
 
   graphql-engine:
     # v2.0.10.cli-migrations-v3
-    image: ${HASURA_IMAGE}:v2.0.10
+    image: ${HASURA_IMAGE}:v2.1.1
     restart: unless-stopped
     volumes:
       - ./hasura/metadata:/hasura-metadata
