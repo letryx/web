@@ -1,36 +1,12 @@
 import { Box, useBreakpointValue, useColorModeValue } from '@chakra-ui/react';
-import createDOMPurify from 'dompurify';
 import parse from 'html-react-parser';
 import { SearchResultFragment } from 'lib/generated/graphql/apollo-schema';
+import { sanitizeHtml } from 'lib/sanitize';
 import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { RemoveScroll } from 'react-remove-scroll';
 
 const SEC_BASE_URL = 'https://www.sec.gov/Archives/edgar/data';
-
-const isSSR = typeof window === 'undefined';
-let domPurify: createDOMPurify.DOMPurifyI | null;
-
-if (!isSSR) {
-  domPurify = createDOMPurify(window);
-  domPurify.addHook('afterSanitizeAttributes', (node) => {
-    // remove negative margins
-    const style = node.getAttribute('style') || '';
-    const negMarginsRegex = /(margin-\w+)\s*:\s*-[\d.]*\s*\w*/gim;
-    node.setAttribute('style', style.replaceAll(negMarginsRegex, '$1: 4'));
-    if (node.tagName === 'DIV') {
-      if (node.getAttribute('align')?.toLowerCase() === 'justify') {
-        const alignCenterRegex = /(.*)text-align\w*:\s*center\s*;?(.*)/gim;
-        node.setAttribute(
-          'style',
-          node.getAttribute('style')?.replaceAll(alignCenterRegex, '$1 $2') ||
-            ''
-        );
-      }
-      // node.getAttribute
-    }
-  });
-}
 
 interface IFrameProps extends HTMLAttributes<HTMLElement> {
   allow?: string;
@@ -50,6 +26,14 @@ interface IFrameProps extends HTMLAttributes<HTMLElement> {
   propagationTargetId?: string;
   baseUrl?: string;
 }
+
+const stringToDOM = (rawHtml: string | undefined): JSX.Element[] => {
+  const html = sanitizeHtml(rawHtml);
+  const parsedHtml = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
+  return (Array.isArray(parsedHtml) ? parsedHtml : [parsedHtml]).map((el) =>
+    typeof el === 'string' && el.trim() ? <pre>{el}</pre> : <>{el}</>
+  );
+};
 
 export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   children,
@@ -140,18 +124,6 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   );
 };
 
-const stringToDOM = (rawHtml: string | undefined): JSX.Element[] => {
-  if (!domPurify || !rawHtml) return [];
-
-  const html = domPurify.sanitize(rawHtml, {
-    // KEEP_CONTENT: false,
-    IN_PLACE: true,
-  });
-  const parsedHtml = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
-  return (Array.isArray(parsedHtml) ? parsedHtml : [parsedHtml]).map((el) =>
-    typeof el === 'string' && el.trim() ? <pre>{el}</pre> : <>{el}</>
-  );
-};
 
 interface ContractIFrameProps extends SearchResultFragment {
   htmlString: string;
