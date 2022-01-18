@@ -1,9 +1,6 @@
-import createDOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
+import DOMPurify from 'isomorphic-dompurify';
 
-const theWindow = typeof window === 'undefined' ? new JSDOM('').window : window;
-const domPurify: createDOMPurify.DOMPurifyI = createDOMPurify(theWindow);
-domPurify.addHook('afterSanitizeAttributes', (node) => {
+DOMPurify.addHook('afterSanitizeAttributes', (node) => {
   // remove negative margins
   const style = node.getAttribute('style') || '';
   const negMarginsRegex = /(margin-\w+)\s*:\s*-[\d.]*\s*\w*/gim;
@@ -20,11 +17,11 @@ domPurify.addHook('afterSanitizeAttributes', (node) => {
 });
 
 export function sanitizeHtml(rawHtml: string | undefined): string {
-  if (!domPurify || !rawHtml) {
+  if (!DOMPurify || !rawHtml) {
     return '';
   }
 
-  return domPurify.sanitize(rawHtml, {
+  return DOMPurify.sanitize(rawHtml, {
     // KEEP_CONTENT: false,
     IN_PLACE: true,
   });
