@@ -2,7 +2,10 @@ import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-const theWindow = typeof window === 'undefined' ? new JSDOM('').window : window;
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const theWindow =
+  typeof window === 'undefined' ? (new JSDOM('').window as any) : window;
+// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 const domPurify: createDOMPurify.DOMPurifyI = createDOMPurify(theWindow);
 domPurify.addHook('afterSanitizeAttributes', (node) => {
   // remove negative margins
