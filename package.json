@@ -17,7 +17,6 @@
     "dev": "next",
     "lint-fix": "eslint components pages lib styles test --fix",
     "lint": "eslint components pages lib styles test",
-    "postinstall": "patch-package",
     "schema": "eval $(egrep '^HASURA_GRAPHQL_ADMIN_SECRET=' .env | xargs) gq http://localhost:6060/v1/graphql -H \\'X-Hasura-Admin-Secret: $HASURA_GRAPHQL_ADMIN_SECRET\\' --introspect > lib/generated/graphql/schema.graphql",
     "start": "next start",
     "test": "jest",
@@ -117,7 +116,6 @@
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.4.4",
-    "patch-package": "^6.4.7",
     "prettier-plugin-organize-imports": "^2.3.4",
     "ts-jest": "^27.1.1"
   }
