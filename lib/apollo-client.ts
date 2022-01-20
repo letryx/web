@@ -60,10 +60,13 @@ const requestAccessToken = async () => {
     // request is already in flight, so just wait for it to finish
     await accessTokenP;
   } else {
-    // Need to make our own request for a new one.
-    accessTokenP = requestNewAccessToken();
-    await accessTokenP;
-    accessTokenP = null;
+    try {
+      // Need to make our own request for a new one.
+      accessTokenP = requestNewAccessToken();
+      await accessTokenP;
+    } finally {
+      accessTokenP = null;
+    }
   }
 };
 
