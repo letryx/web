@@ -5,5 +5,8 @@ export const auth0 = initAuth0();
 
 export const jwtDecode = (jwt: string): JwtPayload => decode<JwtPayload>(jwt);
 
-export const isExpired = (jwt: string): boolean =>
-  (jwtDecode(jwt).exp || 0) * 1000 < Date.now();
+const PADDING_SECONDS = 600;
+export const isExpired = (jwt: string): boolean => {
+  const expiration = (jwtDecode(jwt).exp || 0) * 1000;
+  return expiration < Date.now() + PADDING_SECONDS * 1000;
+};
