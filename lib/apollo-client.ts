@@ -40,17 +40,33 @@ const HTTP_URL = ssrMode
 
 const WS_URL = HTTP_URL.replace(/^http/i, 'ws');
 
-const requestAccessToken = async () => {
-  if (accessToken && !isExpired(accessToken)) {
-    return;
-  }
+let accessTokenP: Promise<void> | null = null;
 
+async function requestNewAccessToken(): Promise<void> {
   const res = await fetch('/api/session');
   if (res.ok) {
     const json = (await res.json()) as Record<string, string>;
     accessToken = json?.accessToken || null;
   } else {
-    accessToken = null;
+    // TODO: log that we couldn't get an access token, probably very bad.
+  }
+}
+
+const requestAccessToken = async () => {
+  if (accessToken && !isExpired(accessToken)) {
+    return;
+  }
+  if (accessTokenP) {
+    // request is already in flight, so just wait for it to finish
+    await accessTokenP;
+  } else {
+    try {
+      // Need to make our own request for a new one.
+      accessTokenP = requestNewAccessToken();
+      await accessTokenP;
+    } finally {
+      accessTokenP = null;
+    }
   }
 };
 
