@@ -1,9 +1,11 @@
 import { base58 } from '@scure/base';
 import { ContractContent } from 'components/contract/content';
+import { Layout } from 'components/layout';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 
-export default function Contract() {
+const ContractShowPage: NextPage = () => {
   const router = useRouter();
   const { slug } = router.query;
   const parsed = useMemo(() => {
@@ -26,5 +28,11 @@ export default function Contract() {
     await router.replace('/contracts');
   }, [router]);
 
-  return <ContractContent contract={parsed} isOpen onClose={onClose} />;
-}
+  return (
+    <Layout title="Contracts" showMatterNumber>
+      <ContractContent contract={parsed} isOpen onClose={onClose} />
+    </Layout>
+  );
+};
+
+export default ContractShowPage;

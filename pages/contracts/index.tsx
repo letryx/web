@@ -15,9 +15,10 @@ import {
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
 import { flatMap, map } from 'lodash';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { NextPage } from 'next';
+import { useEffect, useMemo, useState } from 'react';
 
-const ContractsPage: FC = () => {
+const ContractsPage: NextPage = () => {
   const [search, setSearch] = useState('');
   const now = new Date();
   const [minDate, setMinDate] = useState(new Date(1990, 0, 1));
