@@ -124,7 +124,11 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   );
 };
 
-interface ContractIFrameProps extends SearchResultFragment {
+interface ContractIFrameProps
+  extends Pick<
+    SearchResultFragment,
+    'company_cik' | 'accession_number' | 'sequence'
+  > {
   htmlString: string;
 }
 
