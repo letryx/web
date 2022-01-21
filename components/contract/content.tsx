@@ -13,8 +13,9 @@ interface Props {
   >;
   isOpen: boolean;
   onClose: () => void;
+  removeScroll?: boolean;
 }
-export const ContractContent: FC<Props> = ({ contract }) => {
+export const ContractContent: FC<Props> = ({ contract, removeScroll }) => {
   const { data, loading } = useGetSecContractQuery({
     variables: {
       accession_number: contract?.accession_number || '',
@@ -27,7 +28,9 @@ export const ContractContent: FC<Props> = ({ contract }) => {
 
   return (
     <SkeletonText isLoaded={!loading} noOfLines={30}>
-      {!!contract && <ContractIFrame {...{ htmlString, ...contract }} />}
+      {!!contract && (
+        <ContractIFrame {...{ htmlString, removeScroll, ...contract }} />
+      )}
     </SkeletonText>
   );
 };

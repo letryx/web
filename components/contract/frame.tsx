@@ -130,6 +130,7 @@ interface ContractIFrameProps
     'company_cik' | 'accession_number' | 'sequence'
   > {
   htmlString: string;
+  removeScroll?: boolean;
 }
 
 export const ContractIFrame: FC<ContractIFrameProps> = ({
@@ -137,6 +138,7 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
   company_cik,
   accession_number,
   sequence,
+  removeScroll = false,
 }) => {
   const fontSize =
     useBreakpointValue(['90%', '100%', '110%', '120%']) || '100%';
@@ -152,6 +154,12 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
     // requires trailing /
   ].join('/')}/`;
 
+  const iframeContent = (
+    <Box className="iframe-contents" style={{ color, fontSize }}>
+      {dom}
+    </Box>
+  );
+
   return (
     <FunctionalIFrameComponent
       title={`contract-${accession_number}-${sequence}`}
@@ -159,13 +167,13 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
       width="100%"
       propagationTargetId={`contract-modal-${accession_number}-${sequence}`}
     >
-      <RemoveScroll forwardProps noIsolation>
-        <>
-          <Box className="iframe-contents" style={{ color, fontSize }}>
-            {dom}
-          </Box>
-        </>
-      </RemoveScroll>
+      {removeScroll ? (
+        <RemoveScroll forwardProps noIsolation>
+          {iframeContent}
+        </RemoveScroll>
+      ) : (
+        iframeContent
+      )}
     </FunctionalIFrameComponent>
   );
 };

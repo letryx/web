@@ -86,6 +86,7 @@ export const ContractModal: FC<SearchResultFragment> = (contract) => {
               contract={contract}
               isOpen={isOpen}
               onClose={onClose}
+              removeScroll
             />
           </ModalBody>
           <ModalFooter>
