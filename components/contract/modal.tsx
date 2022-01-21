@@ -17,23 +17,26 @@ import {
   SearchResultFragment,
   useGetSecContractQuery,
 } from 'lib/generated/graphql/apollo-schema';
+import { useRouter } from 'next/router';
 import { FC, useCallback, useRef } from 'react';
 import { ContractContent } from './content';
 
 export const ContractModal: FC<SearchResultFragment> = (contract) => {
   const { accession_number, sequence, company_cik } = contract;
-  const pushed = useRef(false);
+  const router = useRouter();
+  const prevPathname = useRef<undefined | string>();
   const onOpenHistory = useCallback(() => {
-    pushed.current = true;
+    prevPathname.current = router.pathname;
     const slug = base58.encode(
       Buffer.from(`${accession_number}*${sequence}*${company_cik}`, 'utf8')
     );
-    window.history.pushState(null, 'Contract', `/contracts/${slug}`);
+    window.history.replaceState(null, document.title, `/contracts/${slug}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accession_number, sequence, company_cik]);
   const onCloseHistory = useCallback(() => {
-    if (pushed.current) {
-      window.history.back();
-      pushed.current = false;
+    if (prevPathname) {
+      window.history.replaceState(null, document.title, prevPathname.current);
+      prevPathname.current = undefined;
     }
   }, []);
   const { isOpen, onOpen, onClose } = useDisclosure({
