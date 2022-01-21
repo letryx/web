@@ -43,7 +43,7 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   ...props
 }) => {
   const [contentRef, setContentRef] = useState<HTMLIFrameElement | null>(null);
-  const [height, setHeight] = useState(500);
+  const [height, setHeight] = useState(1000);
   const contentWindow = contentRef?.contentWindow;
   const domBody = contentWindow?.document?.body;
   const domHead = contentWindow?.document?.head;
