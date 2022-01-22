@@ -27,6 +27,8 @@ module.exports = async (schemaString, config) => {
           attachment_type: String!
           tsv_search_text: String!
           relevance: Float!
+          contract_type: String!
+          uid: String!
         }
       `,
       hasuraSchema,

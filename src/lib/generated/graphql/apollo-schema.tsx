@@ -19,6 +19,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  _text: String;
   date: Date;
   timestamp: Date;
   timestamptz: Date;
@@ -435,8 +436,7 @@ export type Mutation_RootDelete_Sec_Filing_AttachmentArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Sec_Filing_Attachment_By_PkArgs = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 };
 
 /** mutation root */
@@ -1338,8 +1338,7 @@ export type Query_RootSec_Filing_Attachment_AggregateArgs = {
 };
 
 export type Query_RootSec_Filing_Attachment_By_PkArgs = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 };
 
 export type Query_RootSec_Filing_By_PkArgs = {
@@ -1618,7 +1617,7 @@ export type Sec_Contract = {
   company_name: Scalars['String'];
   company_sic: Scalars['String'];
   company_sic_name: Scalars['String'];
-  contract_type?: Maybe<Scalars['String']>;
+  contract_type: Scalars['String'];
   description: Scalars['String'];
   filing_date: Scalars['String'];
   filing_header: Scalars['String'];
@@ -1632,8 +1631,7 @@ export type Sec_Contract = {
   sec_filing_attachment?: Maybe<Sec_Filing_Attachment>;
   sequence: Scalars['Int'];
   tsv_search_text: Scalars['String'];
-  /** A computed field, executes function "sec_contract_uid" */
-  uid?: Maybe<Scalars['String']>;
+  uid: Scalars['String'];
 };
 
 /** aggregated selection of "sec_contract" */
@@ -1715,6 +1713,7 @@ export type Sec_Contract_Max_Fields = {
   filing_type?: Maybe<Scalars['String']>;
   relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Int']>;
+  uid?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
@@ -1734,6 +1733,7 @@ export type Sec_Contract_Min_Fields = {
   filing_type?: Maybe<Scalars['String']>;
   relevance?: Maybe<Scalars['Float']>;
   sequence?: Maybe<Scalars['Int']>;
+  uid?: Maybe<Scalars['String']>;
 };
 
 /** Ordering options when selecting data from "sec_contract". */
@@ -1791,6 +1791,8 @@ export enum Sec_Contract_Select_Column {
   Sequence = 'sequence',
   /** column name */
   TsvSearchText = 'tsv_search_text',
+  /** column name */
+  Uid = 'uid',
 }
 
 /** aggregate stddev on columns */
@@ -1931,6 +1933,7 @@ export type Sec_Filing_Attachment = {
   sequence: Scalars['Int'];
   text?: Maybe<Scalars['String']>;
   tsv_search_text?: Maybe<Scalars['tsvector']>;
+  uid: Scalars['String'];
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -2014,15 +2017,20 @@ export type Sec_Filing_Attachment_Bool_Exp = {
   sequence?: InputMaybe<Int_Comparison_Exp>;
   text?: InputMaybe<String_Comparison_Exp>;
   tsv_search_text?: InputMaybe<Tsvector_Comparison_Exp>;
+  uid?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "sec_filing_attachment" */
 export enum Sec_Filing_Attachment_Constraint {
   /** unique or primary key constraint */
+  IdxSecFilingAttachmentUid = 'idx_sec_filing_attachment_uid',
+  /** unique or primary key constraint */
   SecFilingAttachmentAccessionNumberSequenceKey = 'sec_filing_attachment_accession_number_sequence_key',
   /** unique or primary key constraint */
   SecFilingAttachmentPkey = 'sec_filing_attachment_pkey',
+  /** unique or primary key constraint */
+  SecFilingAttachmentUidKey = 'sec_filing_attachment_uid_key',
 }
 
 /** input type for incrementing numeric columns in table "sec_filing_attachment" */
@@ -2045,6 +2053,7 @@ export type Sec_Filing_Attachment_Insert_Input = {
   sequence?: InputMaybe<Scalars['Int']>;
   text?: InputMaybe<Scalars['String']>;
   tsv_search_text?: InputMaybe<Scalars['tsvector']>;
+  uid?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -2061,6 +2070,7 @@ export type Sec_Filing_Attachment_Max_Fields = {
   filename?: Maybe<Scalars['String']>;
   sequence?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
+  uid?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -2076,6 +2086,7 @@ export type Sec_Filing_Attachment_Max_Order_By = {
   filename?: InputMaybe<Order_By>;
   sequence?: InputMaybe<Order_By>;
   text?: InputMaybe<Order_By>;
+  uid?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -2092,6 +2103,7 @@ export type Sec_Filing_Attachment_Min_Fields = {
   filename?: Maybe<Scalars['String']>;
   sequence?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
+  uid?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -2107,6 +2119,7 @@ export type Sec_Filing_Attachment_Min_Order_By = {
   filename?: InputMaybe<Order_By>;
   sequence?: InputMaybe<Order_By>;
   text?: InputMaybe<Order_By>;
+  uid?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -2141,13 +2154,13 @@ export type Sec_Filing_Attachment_Order_By = {
   sequence?: InputMaybe<Order_By>;
   text?: InputMaybe<Order_By>;
   tsv_search_text?: InputMaybe<Order_By>;
+  uid?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: sec_filing_attachment */
 export type Sec_Filing_Attachment_Pk_Columns_Input = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 };
 
 /** select columns of table "sec_filing_attachment" */
@@ -2175,6 +2188,8 @@ export enum Sec_Filing_Attachment_Select_Column {
   /** column name */
   TsvSearchText = 'tsv_search_text',
   /** column name */
+  Uid = 'uid',
+  /** column name */
   UpdatedAt = 'updated_at',
 }
 
@@ -2191,6 +2206,7 @@ export type Sec_Filing_Attachment_Set_Input = {
   sequence?: InputMaybe<Scalars['Int']>;
   text?: InputMaybe<Scalars['String']>;
   tsv_search_text?: InputMaybe<Scalars['tsvector']>;
+  uid?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -2262,6 +2278,8 @@ export enum Sec_Filing_Attachment_Update_Column {
   Text = 'text',
   /** column name */
   TsvSearchText = 'tsv_search_text',
+  /** column name */
+  Uid = 'uid',
   /** column name */
   UpdatedAt = 'updated_at',
 }
@@ -2469,7 +2487,7 @@ export enum Sec_Filing_Update_Column {
 }
 
 export type Sec_Search_Args = {
-  company_cik_eq?: InputMaybe<Scalars['String']>;
+  company_cik_eq?: InputMaybe<Scalars['_text']>;
   company_name_excludes?: InputMaybe<Scalars['String']>;
   company_name_includes?: InputMaybe<Scalars['String']>;
   contract_type_eq?: InputMaybe<Scalars['String']>;
@@ -2663,8 +2681,7 @@ export type Subscription_RootSec_Filing_Attachment_AggregateArgs = {
 };
 
 export type Subscription_RootSec_Filing_Attachment_By_PkArgs = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 };
 
 export type Subscription_RootSec_Filing_By_PkArgs = {
@@ -3142,7 +3159,7 @@ export type User_Variance_Order_By = {
 
 export type SearchResultFragment = {
   __typename?: 'sec_contract';
-  uid?: string | null | undefined;
+  uid: string;
   accession_number: string;
   sequence: number;
   company_name: string;
@@ -3152,7 +3169,7 @@ export type SearchResultFragment = {
   filing_date: string;
   description: string;
   attachment_type: string;
-  contract_type?: string | null | undefined;
+  contract_type: string;
 };
 
 export type SearchSecContractsQueryVariables = Exact<{
@@ -3163,17 +3180,14 @@ export type SearchSecContractsQueryVariables = Exact<{
   offset?: InputMaybe<Scalars['Int']>;
   uidsOnly?: InputMaybe<Scalars['Boolean']>;
   contractType?: InputMaybe<Scalars['String']>;
-  companyCiks?: InputMaybe<Scalars['String']>;
+  companyCiks?: InputMaybe<Scalars['_text']>;
 }>;
 
 export type SearchSecContractsQuery = {
   __typename?: 'query_root';
   sec_search_aggregate: {
     __typename?: 'sec_contract_aggregate';
-    nodes?: Array<{
-      __typename?: 'sec_contract';
-      uid?: string | null | undefined;
-    }>;
+    nodes?: Array<{ __typename?: 'sec_contract'; uid: string }>;
     aggregate?:
       | {
           __typename?: 'sec_contract_aggregate_fields';
@@ -3186,7 +3200,7 @@ export type SearchSecContractsQuery = {
   };
   sec_search?: Array<{
     __typename?: 'sec_contract';
-    uid?: string | null | undefined;
+    uid: string;
     accession_number: string;
     sequence: number;
     company_name: string;
@@ -3196,17 +3210,15 @@ export type SearchSecContractsQuery = {
     filing_date: string;
     description: string;
     attachment_type: string;
-    contract_type?: string | null | undefined;
+    contract_type: string;
   }>;
   companies: Array<{ __typename?: 'sec_contract'; company_cik: string }>;
-  contract_types: Array<{
-    __typename?: 'sec_contract';
-    contract_type?: string | null | undefined;
-  }>;
+  contract_types: Array<{ __typename?: 'sec_contract'; contract_type: string }>;
 };
 
 export type SecContractFragment = {
   __typename?: 'sec_filing_attachment';
+  uid: string;
   sequence: number;
   attachment_type: string;
   description?: string | null | undefined;
@@ -3218,6 +3230,7 @@ export type SecContractFragment = {
     filing_type: string;
     sec_company: {
       __typename?: 'sec_company';
+      cik: string;
       name: string;
       sic: string;
       sic_name: string;
@@ -3247,8 +3260,7 @@ export type GetSecContractCompaniesQuery = {
 };
 
 export type GetSecContractQueryVariables = Exact<{
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 }>;
 
 export type GetSecContractQuery = {
@@ -3256,6 +3268,7 @@ export type GetSecContractQuery = {
   sec_filing_attachment_by_pk?:
     | {
         __typename?: 'sec_filing_attachment';
+        uid: string;
         sequence: number;
         attachment_type: string;
         description?: string | null | undefined;
@@ -3267,6 +3280,7 @@ export type GetSecContractQuery = {
           filing_type: string;
           sec_company: {
             __typename?: 'sec_company';
+            cik: string;
             name: string;
             sic: string;
             sic_name: string;
@@ -3360,12 +3374,14 @@ export const SearchResultFragmentDoc = gql`
 `;
 export const SecContractFragmentDoc = gql`
   fragment SECContract on sec_filing_attachment {
+    uid
     sequence
     sec_filing {
       accession_number
       filing_date
       filing_type
       sec_company {
+        cik
         name
         sic
         sic_name
@@ -3409,7 +3425,7 @@ export const SearchSecContractsDocument = gql`
     $offset: Int = 0
     $uidsOnly: Boolean = false
     $contractType: String
-    $companyCiks: String
+    $companyCiks: _text
   ) {
     sec_search_aggregate(
       args: {
@@ -3583,11 +3599,8 @@ export type GetSecContractCompaniesQueryResult = Apollo.QueryResult<
   GetSecContractCompaniesQueryVariables
 >;
 export const GetSecContractDocument = gql`
-  query GetSECContract($accession_number: String!, $sequence: Int!) {
-    sec_filing_attachment_by_pk(
-      accession_number: $accession_number
-      sequence: $sequence
-    ) {
+  query GetSECContract($uid: String!) {
+    sec_filing_attachment_by_pk(uid: $uid) {
       ...SECContract
     }
   }
@@ -3606,8 +3619,7 @@ export const GetSecContractDocument = gql`
  * @example
  * const { data, loading, error } = useGetSecContractQuery({
  *   variables: {
- *      accession_number: // value for 'accession_number'
- *      sequence: // value for 'sequence'
+ *      uid: // value for 'uid'
  *   },
  * });
  */

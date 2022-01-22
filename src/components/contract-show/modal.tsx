@@ -8,11 +8,10 @@ import {
   ModalHeader,
   ModalOverlay,
   Skeleton,
+  SkeletonText,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { base58 } from '@scure/base';
-import { ContractContent } from 'components/contract-show/content';
 import { ShowDate } from 'components/date';
 import {
   SearchResultFragment,
@@ -20,17 +19,15 @@ import {
 } from 'lib/generated/graphql/apollo-schema';
 import { useRouter } from 'next/router';
 import { FC, useCallback, useRef } from 'react';
+import { ContractIFrame } from './frame';
 
 export const ContractModal: FC<SearchResultFragment> = (contract) => {
-  const { accession_number, sequence, company_cik } = contract;
-  const router = useRouter();
+  const { accession_number, sequence, company_cik, uid } = contract;
+  const { pathname } = useRouter();
   const prevPathname = useRef<undefined | string>();
   const onOpenHistory = useCallback(() => {
-    prevPathname.current = router.pathname;
-    const slug = base58.encode(
-      Buffer.from(`${accession_number}*${sequence}*${company_cik}`, 'utf8')
-    );
-    window.history.replaceState(null, document.title, `/contracts/${slug}`);
+    prevPathname.current = pathname;
+    window.history.replaceState(null, document.title, `/contracts/${uid}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accession_number, sequence, company_cik]);
   const onCloseHistory = useCallback(() => {
@@ -46,8 +43,7 @@ export const ContractModal: FC<SearchResultFragment> = (contract) => {
 
   const { data, loading } = useGetSecContractQuery({
     variables: {
-      accession_number,
-      sequence,
+      uid,
     },
     skip: !isOpen || !contract,
   });
@@ -55,6 +51,7 @@ export const ContractModal: FC<SearchResultFragment> = (contract) => {
     data?.sec_filing_attachment_by_pk || {};
   const { filing_date, filing_type, sec_company } = sec_filing || {};
   const { name: companyName } = sec_company || {};
+  const contraceWithContents = data?.sec_filing_attachment_by_pk;
   return (
     <>
       <Button onClick={onOpen}>View</Button>
@@ -81,16 +78,12 @@ export const ContractModal: FC<SearchResultFragment> = (contract) => {
           </ModalHeader>
 
           <ModalCloseButton />
-          <ModalBody
-            px={[2, 4, 6]}
-            id={`contract-modal-${accession_number}-${sequence}`}
-          >
-            <ContractContent
-              contract={contract}
-              isOpen={isOpen}
-              onClose={onClose}
-              removeScroll
-            />
+          <ModalBody px={[2, 4, 6]} id={`contract-modal-${uid}`}>
+            <SkeletonText isLoaded={!loading} noOfLines={30}>
+              {contraceWithContents && (
+                <ContractIFrame removeScroll {...contraceWithContents} />
+              )}
+            </SkeletonText>
           </ModalBody>
           <ModalFooter>
             <Button mr={3} onClick={onClose}>
