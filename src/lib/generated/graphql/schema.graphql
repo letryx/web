@@ -96,6 +96,8 @@ input String_comparison_exp {
   _similar: String
 }
 
+scalar _text
+
 scalar date
 
 """
@@ -1686,7 +1688,7 @@ type query_root {
   """
   sec_search_aggregate(
     """
-    input parameters for function "sec_search"
+    input parameters for function "sec_search_aggregate"
     """
     args: sec_search_args!
 
@@ -2056,10 +2058,6 @@ type sec_contract {
   sec_filing_attachment: sec_filing_attachment
   sequence: Int
   tsv_search_text: tsvector
-
-  """
-  A computed field, executes function "sec_contract_uid"
-  """
   uid: String
 }
 
@@ -2138,6 +2136,7 @@ type sec_contract_max_fields {
   filing_type: String
   relevance: Float
   sequence: Int
+  uid: String
 }
 
 """aggregate min on columns"""
@@ -2156,6 +2155,7 @@ type sec_contract_min_fields {
   filing_type: String
   relevance: Float
   sequence: Int
+  uid: String
 }
 
 """Ordering options when selecting data from "sec_contract"."""
@@ -2229,6 +2229,9 @@ enum sec_contract_select_column {
 
   """column name"""
   tsv_search_text
+
+  """column name"""
+  uid
 }
 
 """aggregate stddev on columns"""
@@ -2382,6 +2385,7 @@ type sec_filing_attachment {
   sequence: Int!
   text: String
   tsv_search_text: tsvector
+  uid: String!
   updated_at: timestamptz
 }
 
@@ -2469,6 +2473,7 @@ input sec_filing_attachment_bool_exp {
   sequence: Int_comparison_exp
   text: String_comparison_exp
   tsv_search_text: tsvector_comparison_exp
+  uid: String_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
 
@@ -2477,10 +2482,16 @@ unique or primary key constraints on table "sec_filing_attachment"
 """
 enum sec_filing_attachment_constraint {
   """unique or primary key constraint"""
+  idx_sec_filing_attachment_uid
+
+  """unique or primary key constraint"""
   sec_filing_attachment_accession_number_sequence_key
 
   """unique or primary key constraint"""
   sec_filing_attachment_pkey
+
+  """unique or primary key constraint"""
+  sec_filing_attachment_uid_key
 }
 
 """
@@ -2507,6 +2518,7 @@ input sec_filing_attachment_insert_input {
   sequence: Int
   text: String
   tsv_search_text: tsvector
+  uid: String
   updated_at: timestamptz
 }
 
@@ -2522,6 +2534,7 @@ type sec_filing_attachment_max_fields {
   filename: String
   sequence: Int
   text: String
+  uid: String
   updated_at: timestamptz
 }
 
@@ -2539,6 +2552,7 @@ input sec_filing_attachment_max_order_by {
   filename: order_by
   sequence: order_by
   text: order_by
+  uid: order_by
   updated_at: order_by
 }
 
@@ -2554,6 +2568,7 @@ type sec_filing_attachment_min_fields {
   filename: String
   sequence: Int
   text: String
+  uid: String
   updated_at: timestamptz
 }
 
@@ -2571,6 +2586,7 @@ input sec_filing_attachment_min_order_by {
   filename: order_by
   sequence: order_by
   text: order_by
+  uid: order_by
   updated_at: order_by
 }
 
@@ -2609,6 +2625,7 @@ input sec_filing_attachment_order_by {
   sequence: order_by
   text: order_by
   tsv_search_text: order_by
+  uid: order_by
   updated_at: order_by
 }
 
@@ -2656,6 +2673,9 @@ enum sec_filing_attachment_select_column {
   tsv_search_text
 
   """column name"""
+  uid
+
+  """column name"""
   updated_at
 }
 
@@ -2674,6 +2694,7 @@ input sec_filing_attachment_set_input {
   sequence: Int
   text: String
   tsv_search_text: tsvector
+  uid: String
   updated_at: timestamptz
 }
 
@@ -2761,6 +2782,9 @@ enum sec_filing_attachment_update_column {
 
   """column name"""
   tsv_search_text
+
+  """column name"""
+  uid
 
   """column name"""
   updated_at
@@ -3005,7 +3029,7 @@ enum sec_filing_update_column {
 }
 
 input sec_search_args {
-  company_cik_eq: String
+  company_cik_eq: _text
   company_name_excludes: String
   company_name_includes: String
   contract_type_eq: String
@@ -3343,7 +3367,7 @@ type subscription_root {
   """
   sec_search_aggregate(
     """
-    input parameters for function "sec_search"
+    input parameters for function "sec_search_aggregate"
     """
     args: sec_search_args!
 

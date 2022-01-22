@@ -703,6 +703,7 @@ export type sec_contract_max_fieldsKeySpecifier = (
   | 'filing_type'
   | 'relevance'
   | 'sequence'
+  | 'uid'
   | sec_contract_max_fieldsKeySpecifier
 )[];
 export type sec_contract_max_fieldsFieldPolicy = {
@@ -720,6 +721,7 @@ export type sec_contract_max_fieldsFieldPolicy = {
   filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
   relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+  uid?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_min_fieldsKeySpecifier = (
   | 'accession_number'
@@ -736,6 +738,7 @@ export type sec_contract_min_fieldsKeySpecifier = (
   | 'filing_type'
   | 'relevance'
   | 'sequence'
+  | 'uid'
   | sec_contract_min_fieldsKeySpecifier
 )[];
 export type sec_contract_min_fieldsFieldPolicy = {
@@ -753,6 +756,7 @@ export type sec_contract_min_fieldsFieldPolicy = {
   filing_type?: FieldPolicy<any> | FieldReadFunction<any>;
   relevance?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
+  uid?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_contract_stddev_fieldsKeySpecifier = (
   | 'relevance'
@@ -876,6 +880,7 @@ export type sec_filing_attachmentKeySpecifier = (
   | 'sequence'
   | 'text'
   | 'tsv_search_text'
+  | 'uid'
   | 'updated_at'
   | sec_filing_attachmentKeySpecifier
 )[];
@@ -893,6 +898,7 @@ export type sec_filing_attachmentFieldPolicy = {
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
   text?: FieldPolicy<any> | FieldReadFunction<any>;
   tsv_search_text?: FieldPolicy<any> | FieldReadFunction<any>;
+  uid?: FieldPolicy<any> | FieldReadFunction<any>;
   updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_filing_attachment_aggregateKeySpecifier = (
@@ -949,6 +955,7 @@ export type sec_filing_attachment_max_fieldsKeySpecifier = (
   | 'filename'
   | 'sequence'
   | 'text'
+  | 'uid'
   | 'updated_at'
   | sec_filing_attachment_max_fieldsKeySpecifier
 )[];
@@ -963,6 +970,7 @@ export type sec_filing_attachment_max_fieldsFieldPolicy = {
   filename?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
   text?: FieldPolicy<any> | FieldReadFunction<any>;
+  uid?: FieldPolicy<any> | FieldReadFunction<any>;
   updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_filing_attachment_min_fieldsKeySpecifier = (
@@ -976,6 +984,7 @@ export type sec_filing_attachment_min_fieldsKeySpecifier = (
   | 'filename'
   | 'sequence'
   | 'text'
+  | 'uid'
   | 'updated_at'
   | sec_filing_attachment_min_fieldsKeySpecifier
 )[];
@@ -990,6 +999,7 @@ export type sec_filing_attachment_min_fieldsFieldPolicy = {
   filename?: FieldPolicy<any> | FieldReadFunction<any>;
   sequence?: FieldPolicy<any> | FieldReadFunction<any>;
   text?: FieldPolicy<any> | FieldReadFunction<any>;
+  uid?: FieldPolicy<any> | FieldReadFunction<any>;
   updated_at?: FieldPolicy<any> | FieldReadFunction<any>;
 };
 export type sec_filing_attachment_mutation_responseKeySpecifier = (
