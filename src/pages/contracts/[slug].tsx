@@ -1,38 +1,38 @@
-import { base58 } from '@scure/base';
-import { ContractContent } from 'components/contract-show/content';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { SkeletonText } from '@chakra-ui/react';
+import { ContractIFrame } from 'components/contract-show/frame';
 import { Layout } from 'components/layout';
+import { useGetSecContractQuery } from 'lib/generated/graphql/apollo-schema';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useCallback, useMemo } from 'react';
 
 const ContractShowPage: NextPage = () => {
   const router = useRouter();
   const { slug } = router.query;
-  const parsed = useMemo(() => {
-    if (!slug || typeof slug !== 'string') {
-      return undefined;
-    }
-    const encoding = Buffer.from(base58.decode(slug)).toString('utf8');
-    if (encoding.indexOf('*') === -1) {
-      return undefined;
-    }
-    const [accession_number, sequence, company_cik] = encoding.split('*');
-    return {
-      accession_number,
-      sequence: parseInt(sequence, 10),
-      company_cik,
-    };
-  }, [slug]);
+  const uid = ((slug as string) || '').split('-')[0];
+  if (!uid) {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    router.push('/404');
+  }
 
-  const onClose = useCallback(async () => {
-    await router.replace('/contracts');
-  }, [router]);
+  const { data, loading } = useGetSecContractQuery({
+    variables: {
+      uid,
+    },
+    skip: !uid,
+  });
+
+  const contract = data?.sec_filing_attachment_by_pk;
 
   return (
     <Layout title="Contracts" showMatterNumber>
-      <ContractContent contract={parsed} isOpen onClose={onClose} />
+      <SkeletonText isLoaded={!loading} noOfLines={30}>
+        {contract && <ContractIFrame {...contract} />}
+      </SkeletonText>
     </Layout>
   );
 };
+
+export const getServerSideProps = withPageAuthRequired();
 
 export default ContractShowPage;

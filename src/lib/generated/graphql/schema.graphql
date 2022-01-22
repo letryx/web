@@ -397,7 +397,7 @@ type mutation_root {
   """
   delete single row from the table: "sec_filing_attachment"
   """
-  delete_sec_filing_attachment_by_pk(accession_number: String!, sequence: Int!): sec_filing_attachment
+  delete_sec_filing_attachment_by_pk(uid: String!): sec_filing_attachment
 
   """
   delete single row from the table: "sec_filing"
@@ -1653,7 +1653,7 @@ type query_root {
   """
   fetch data from the table: "sec_filing_attachment" using primary key columns
   """
-  sec_filing_attachment_by_pk(accession_number: String!, sequence: Int!): sec_filing_attachment
+  sec_filing_attachment_by_pk(uid: String!): sec_filing_attachment
 
   """fetch data from the table: "sec_filing" using primary key columns"""
   sec_filing_by_pk(accession_number: String!): sec_filing
@@ -2631,8 +2631,7 @@ input sec_filing_attachment_order_by {
 
 """primary key columns input for table: sec_filing_attachment"""
 input sec_filing_attachment_pk_columns_input {
-  accession_number: String!
-  sequence: Int!
+  uid: String!
 }
 
 """
@@ -3332,7 +3331,7 @@ type subscription_root {
   """
   fetch data from the table: "sec_filing_attachment" using primary key columns
   """
-  sec_filing_attachment_by_pk(accession_number: String!, sequence: Int!): sec_filing_attachment
+  sec_filing_attachment_by_pk(uid: String!): sec_filing_attachment
 
   """fetch data from the table: "sec_filing" using primary key columns"""
   sec_filing_by_pk(accession_number: String!): sec_filing

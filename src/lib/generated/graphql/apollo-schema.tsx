@@ -436,8 +436,7 @@ export type Mutation_RootDelete_Sec_Filing_AttachmentArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Sec_Filing_Attachment_By_PkArgs = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 };
 
 /** mutation root */
@@ -1339,8 +1338,7 @@ export type Query_RootSec_Filing_Attachment_AggregateArgs = {
 };
 
 export type Query_RootSec_Filing_Attachment_By_PkArgs = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 };
 
 export type Query_RootSec_Filing_By_PkArgs = {
@@ -1619,7 +1617,7 @@ export type Sec_Contract = {
   company_name: Scalars['String'];
   company_sic: Scalars['String'];
   company_sic_name: Scalars['String'];
-  contract_type?: Maybe<Scalars['String']>;
+  contract_type: Scalars['String'];
   description: Scalars['String'];
   filing_date: Scalars['String'];
   filing_header: Scalars['String'];
@@ -2162,8 +2160,7 @@ export type Sec_Filing_Attachment_Order_By = {
 
 /** primary key columns input for table: sec_filing_attachment */
 export type Sec_Filing_Attachment_Pk_Columns_Input = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 };
 
 /** select columns of table "sec_filing_attachment" */
@@ -2684,8 +2681,7 @@ export type Subscription_RootSec_Filing_Attachment_AggregateArgs = {
 };
 
 export type Subscription_RootSec_Filing_Attachment_By_PkArgs = {
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 };
 
 export type Subscription_RootSec_Filing_By_PkArgs = {
@@ -3173,7 +3169,7 @@ export type SearchResultFragment = {
   filing_date: string;
   description: string;
   attachment_type: string;
-  contract_type?: string | null | undefined;
+  contract_type: string;
 };
 
 export type SearchSecContractsQueryVariables = Exact<{
@@ -3214,17 +3210,15 @@ export type SearchSecContractsQuery = {
     filing_date: string;
     description: string;
     attachment_type: string;
-    contract_type?: string | null | undefined;
+    contract_type: string;
   }>;
   companies: Array<{ __typename?: 'sec_contract'; company_cik: string }>;
-  contract_types: Array<{
-    __typename?: 'sec_contract';
-    contract_type?: string | null | undefined;
-  }>;
+  contract_types: Array<{ __typename?: 'sec_contract'; contract_type: string }>;
 };
 
 export type SecContractFragment = {
   __typename?: 'sec_filing_attachment';
+  uid: string;
   sequence: number;
   attachment_type: string;
   description?: string | null | undefined;
@@ -3236,6 +3230,7 @@ export type SecContractFragment = {
     filing_type: string;
     sec_company: {
       __typename?: 'sec_company';
+      cik: string;
       name: string;
       sic: string;
       sic_name: string;
@@ -3265,8 +3260,7 @@ export type GetSecContractCompaniesQuery = {
 };
 
 export type GetSecContractQueryVariables = Exact<{
-  accession_number: Scalars['String'];
-  sequence: Scalars['Int'];
+  uid: Scalars['String'];
 }>;
 
 export type GetSecContractQuery = {
@@ -3274,6 +3268,7 @@ export type GetSecContractQuery = {
   sec_filing_attachment_by_pk?:
     | {
         __typename?: 'sec_filing_attachment';
+        uid: string;
         sequence: number;
         attachment_type: string;
         description?: string | null | undefined;
@@ -3285,6 +3280,7 @@ export type GetSecContractQuery = {
           filing_type: string;
           sec_company: {
             __typename?: 'sec_company';
+            cik: string;
             name: string;
             sic: string;
             sic_name: string;
@@ -3378,12 +3374,14 @@ export const SearchResultFragmentDoc = gql`
 `;
 export const SecContractFragmentDoc = gql`
   fragment SECContract on sec_filing_attachment {
+    uid
     sequence
     sec_filing {
       accession_number
       filing_date
       filing_type
       sec_company {
+        cik
         name
         sic
         sic_name
@@ -3601,11 +3599,8 @@ export type GetSecContractCompaniesQueryResult = Apollo.QueryResult<
   GetSecContractCompaniesQueryVariables
 >;
 export const GetSecContractDocument = gql`
-  query GetSECContract($accession_number: String!, $sequence: Int!) {
-    sec_filing_attachment_by_pk(
-      accession_number: $accession_number
-      sequence: $sequence
-    ) {
+  query GetSECContract($uid: String!) {
+    sec_filing_attachment_by_pk(uid: $uid) {
       ...SECContract
     }
   }
@@ -3624,8 +3619,7 @@ export const GetSecContractDocument = gql`
  * @example
  * const { data, loading, error } = useGetSecContractQuery({
  *   variables: {
- *      accession_number: // value for 'accession_number'
- *      sequence: // value for 'sequence'
+ *      uid: // value for 'uid'
  *   },
  * });
  */

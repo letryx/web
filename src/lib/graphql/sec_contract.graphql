@@ -86,12 +86,14 @@ query SearchSECContracts(
 }
 
 fragment SECContract on sec_filing_attachment {
+  uid
   sequence
   sec_filing {
     accession_number
     filing_date
     filing_type
     sec_company {
+      cik
       name
       sic
       sic_name
@@ -113,11 +115,8 @@ query GetSECContractCompanies {
   }
 }
 
-query GetSECContract($accession_number: String!, $sequence: Int!) {
-  sec_filing_attachment_by_pk(
-    accession_number: $accession_number
-    sequence: $sequence
-  ) {
+query GetSECContract($uid: String!) {
+  sec_filing_attachment_by_pk(uid: $uid) {
     ...SECContract
   }
 }
