@@ -12,6 +12,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { base58 } from '@scure/base';
+import { ContractContent } from 'components/contract-show/content';
 import { ShowDate } from 'components/date';
 import {
   SearchResultFragment,
@@ -19,7 +20,6 @@ import {
 } from 'lib/generated/graphql/apollo-schema';
 import { useRouter } from 'next/router';
 import { FC, useCallback, useRef } from 'react';
-import { ContractContent } from './content';
 
 export const ContractModal: FC<SearchResultFragment> = (contract) => {
   const { accession_number, sequence, company_cik } = contract;

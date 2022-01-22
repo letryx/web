@@ -12,7 +12,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
-import { SocialLinks } from 'components/social-links';
+import { SocialLinks } from 'components/marketing/social-links';
 import { FC, ReactElement } from 'react';
 
 interface ProfileProps {

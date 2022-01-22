@@ -9,8 +9,8 @@ import {
   usePagination,
 } from '@ajna/pagination';
 import { useColorModeValue } from '@chakra-ui/react';
+import { PAGE_SIZE } from 'components/contract-search/table';
 import { FC, useEffect, useMemo } from 'react';
-import { PAGE_SIZE } from './contract/table';
 
 export function useFixedPagination<T>(
   items: T[],

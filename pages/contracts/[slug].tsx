@@ -1,5 +1,5 @@
 import { base58 } from '@scure/base';
-import { ContractContent } from 'components/contract/content';
+import { ContractContent } from 'components/contract-show/content';
 import { Layout } from 'components/layout';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';

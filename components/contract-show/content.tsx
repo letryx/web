@@ -1,5 +1,5 @@
 import { SkeletonText } from '@chakra-ui/react';
-import { ContractIFrame } from 'components/contract/frame';
+import { ContractIFrame } from 'components/contract-show/frame';
 import {
   SearchResultFragment,
   useGetSecContractQuery,
