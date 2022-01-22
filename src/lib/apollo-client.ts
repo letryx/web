@@ -12,8 +12,8 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { isEmpty } from '@chakra-ui/utils';
 import fetch from 'isomorphic-unfetch';
+import { isExpired } from 'lib/auth0';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
-import { isExpired } from './auth0';
 
 let accessToken: string | null = null;
 

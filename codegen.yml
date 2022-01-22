@@ -6,13 +6,13 @@ schema:
         x-hasura-admin-secret: '${HASURA_GRAPHQL_ADMIN_SECRET}'
       loader: ./schema-loader.js
 documents:
-  - '{components,pages}/**/*.{ts,tsx,graphql}'
-  - 'lib/!(generated)/**/*.{ts,tsx,graphql}'
+  - 'src/{components,pages}/**/*.{ts,tsx,graphql}'
+  - 'src/lib/!(generated)/**/*.{ts,tsx,graphql}'
 generates:
-  lib/generated/graphql/apollo-helpers.tsx:
+  src/lib/generated/graphql/apollo-helpers.tsx:
     plugins:
       - typescript-apollo-client-helpers
-  lib/generated/graphql/apollo-schema.tsx:
+  src/lib/generated/graphql/apollo-schema.tsx:
     plugins:
       - 'typescript'
       - 'typescript-operations'

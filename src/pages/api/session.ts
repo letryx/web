@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { AccessTokenError } from '@auth0/nextjs-auth0/src/utils/errors';
+import { AccessTokenError } from '@auth0/nextjs-auth0';
 import { auth0 } from 'lib/auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -11,6 +11,7 @@ export default async function session(
     const { accessToken } = await auth0.getAccessToken(req, res);
     res.status(200).json({ accessToken });
   } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { message, code } = error as AccessTokenError;
     console.error(message, code);
     res.status(500).json(
