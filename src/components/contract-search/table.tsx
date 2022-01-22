@@ -11,7 +11,7 @@ import {
   Tr,
   useColorModeValue as mode,
 } from '@chakra-ui/react';
-import { ContractModal } from 'components/contract/modal';
+import { ContractModal } from 'components/contract-show/modal';
 import { ShowDate } from 'components/date';
 import { SearchResultFragment } from 'lib/generated/graphql/apollo-schema';
 import { FC } from 'react';

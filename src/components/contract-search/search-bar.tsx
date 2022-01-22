@@ -16,7 +16,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
-import { QueryModal } from 'components/contract/query-modal';
+import { QueryModal } from 'components/contract-search/query-modal';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { FaPlusCircle } from 'react-icons/fa';
 import { GrChat, GrClear } from 'react-icons/gr';

@@ -8,32 +8,53 @@ import {
   ModalHeader,
   ModalOverlay,
   Skeleton,
-  SkeletonText,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { ContractIFrame } from 'components/contract/frame';
+import { base58 } from '@scure/base';
+import { ContractContent } from 'components/contract-show/content';
 import { ShowDate } from 'components/date';
 import {
   SearchResultFragment,
   useGetSecContractQuery,
 } from 'lib/generated/graphql/apollo-schema';
-import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { FC, useCallback, useRef } from 'react';
 
 export const ContractModal: FC<SearchResultFragment> = (contract) => {
-  const { accession_number, sequence } = contract;
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, loading } = useGetSecContractQuery({
-    variables: { accession_number, sequence },
-    skip: !isOpen,
+  const { accession_number, sequence, company_cik } = contract;
+  const router = useRouter();
+  const prevPathname = useRef<undefined | string>();
+  const onOpenHistory = useCallback(() => {
+    prevPathname.current = router.pathname;
+    const slug = base58.encode(
+      Buffer.from(`${accession_number}*${sequence}*${company_cik}`, 'utf8')
+    );
+    window.history.replaceState(null, document.title, `/contracts/${slug}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accession_number, sequence, company_cik]);
+  const onCloseHistory = useCallback(() => {
+    if (prevPathname) {
+      window.history.replaceState(null, document.title, prevPathname.current);
+      prevPathname.current = undefined;
+    }
+  }, []);
+  const { isOpen, onOpen, onClose } = useDisclosure({
+    onOpen: onOpenHistory,
+    onClose: onCloseHistory,
   });
 
+  const { data, loading } = useGetSecContractQuery({
+    variables: {
+      accession_number,
+      sequence,
+    },
+    skip: !isOpen || !contract,
+  });
   const { description, sec_filing, attachment_type } =
     data?.sec_filing_attachment_by_pk || {};
   const { filing_date, filing_type, sec_company } = sec_filing || {};
   const { name: companyName } = sec_company || {};
-  const htmlString = data?.sec_filing_attachment_by_pk?.contents || '';
-
   return (
     <>
       <Button onClick={onOpen}>View</Button>
@@ -41,7 +62,7 @@ export const ContractModal: FC<SearchResultFragment> = (contract) => {
         <ModalOverlay />
         <ModalContent width="95vw" maxWidth="900px">
           <ModalHeader>
-            {loading ? (
+            {loading || !contract ? (
               <Skeleton>{'x'.repeat(20)}</Skeleton>
             ) : (
               <>
@@ -58,14 +79,18 @@ export const ContractModal: FC<SearchResultFragment> = (contract) => {
               </>
             )}
           </ModalHeader>
+
           <ModalCloseButton />
           <ModalBody
             px={[2, 4, 6]}
             id={`contract-modal-${accession_number}-${sequence}`}
           >
-            <SkeletonText isLoaded={!loading} noOfLines={30}>
-              <ContractIFrame {...{ htmlString, ...contract }} />
-            </SkeletonText>
+            <ContractContent
+              contract={contract}
+              isOpen={isOpen}
+              onClose={onClose}
+              removeScroll
+            />
           </ModalBody>
           <ModalFooter>
             <Button mr={3} onClick={onClose}>

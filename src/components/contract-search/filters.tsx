@@ -31,6 +31,7 @@ import {
   Tr,
   useColorModeValue as mode,
 } from '@chakra-ui/react';
+import { PAGE_SIZE } from 'components/contract-search/table';
 import { SingleDatepicker } from 'components/date-picker';
 import { Paginator, useFixedPagination } from 'components/paginator';
 import Fuse from 'fuse.js';
@@ -52,7 +53,6 @@ import {
 import { FC, useEffect, useMemo, useState } from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { MdFilterList, MdSearch } from 'react-icons/md';
-import { PAGE_SIZE } from './table';
 
 interface CompanyRowProps {
   company: CompanyFragment;

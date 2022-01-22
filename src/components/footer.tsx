@@ -11,8 +11,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Logo } from 'components/logo';
+import { SocialLinks } from 'components/marketing/social-links';
 import { NextChakraLink } from 'components/next-chakra-link';
-import { SocialLinks } from 'components/social-links';
 import { FC } from 'react';
 
 export const FooterHeading: FC<HeadingProps> = (props) => (

@@ -2,9 +2,9 @@ import { usePagination } from '@ajna/pagination';
 import { useApolloClient } from '@apollo/client';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Box, Stack, VStack } from '@chakra-ui/react';
-import { ContractFilters } from 'components/contract/filters';
-import { SearchBar } from 'components/contract/search-bar';
-import { PAGE_SIZE, TableContent } from 'components/contract/table';
+import { ContractFilters } from 'components/contract-search/filters';
+import { SearchBar } from 'components/contract-search/search-bar';
+import { PAGE_SIZE, TableContent } from 'components/contract-search/table';
 import { Layout } from 'components/layout';
 import { Paginator } from 'components/paginator';
 import {
@@ -15,9 +15,10 @@ import {
   useSearchSecContractsQuery,
 } from 'lib/generated/graphql/apollo-schema';
 import { flatMap, map } from 'lodash';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { NextPage } from 'next';
+import { useEffect, useMemo, useState } from 'react';
 
-const ContractsPage: FC = () => {
+const ContractsPage: NextPage = () => {
   const [search, setSearch] = useState('');
   const now = new Date();
   const [minDate, setMinDate] = useState(new Date(1990, 0, 1));

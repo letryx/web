@@ -9,7 +9,7 @@ module.exports = {
     'next.config.js',
     'jest.config.js',
     'apollo.config.js',
-    'lib/generated/**/*',
+    'src/lib/generated/**/*',
     'schema-loader.js',
     'auth0/*',
   ],
