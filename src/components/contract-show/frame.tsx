@@ -1,6 +1,6 @@
 import { Box, useBreakpointValue, useColorModeValue } from '@chakra-ui/react';
 import parse from 'html-react-parser';
-import { SearchResultFragment } from 'lib/generated/graphql/apollo-schema';
+import { SecContractFragment } from 'lib/generated/graphql/apollo-schema';
 import { sanitizeHtml } from 'lib/sanitize';
 import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -124,31 +124,27 @@ export const FunctionalIFrameComponent: FC<IFrameProps> = ({
   );
 };
 
-interface ContractIFrameProps
-  extends Pick<
-    SearchResultFragment,
-    'company_cik' | 'accession_number' | 'sequence'
-  > {
-  htmlString: string;
+interface ContractIFrameProps extends SecContractFragment {
   removeScroll?: boolean;
 }
 
 export const ContractIFrame: FC<ContractIFrameProps> = ({
-  htmlString,
-  company_cik,
-  accession_number,
-  sequence,
+  contents,
+  uid,
+  sec_filing,
   removeScroll = false,
 }) => {
   const fontSize =
     useBreakpointValue(['90%', '100%', '110%', '120%']) || '100%';
   const color = useColorModeValue('black', 'white');
-  const dom = stringToDOM(htmlString);
+  const dom = stringToDOM(contents);
+
+  const { sec_company, accession_number } = sec_filing || {};
 
   const baseUrl = `${[
     SEC_BASE_URL,
     // remove leading 0's
-    Number(company_cik).toString(),
+    Number(sec_company.cik).toString(),
     // strip out hyphens
     accession_number.replace(/[^\d]/g, ''),
     // requires trailing /
@@ -162,10 +158,10 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
 
   return (
     <FunctionalIFrameComponent
-      title={`contract-${accession_number}-${sequence}`}
+      title={`contract-${uid}`}
       baseUrl={baseUrl}
       width="100%"
-      propagationTargetId={`contract-modal-${accession_number}-${sequence}`}
+      propagationTargetId={`contract-modal-${uid}`}
     >
       {removeScroll ? (
         <RemoveScroll forwardProps noIsolation>
