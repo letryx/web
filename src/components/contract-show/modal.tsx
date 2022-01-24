@@ -22,14 +22,13 @@ import { FC, useCallback, useRef } from 'react';
 import { ContractIFrame } from './frame';
 
 export const ContractModal: FC<SearchResultFragment> = (contract) => {
-  const { accession_number, sequence, company_cik, uid } = contract;
+  const { uid } = contract;
   const { pathname } = useRouter();
   const prevPathname = useRef<undefined | string>();
   const onOpenHistory = useCallback(() => {
     prevPathname.current = pathname;
     window.history.replaceState(null, document.title, `/contracts/${uid}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accession_number, sequence, company_cik]);
+  }, [pathname, uid]);
   const onCloseHistory = useCallback(() => {
     if (prevPathname) {
       window.history.replaceState(null, document.title, prevPathname.current);
