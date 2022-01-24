@@ -163,13 +163,7 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
       width="100%"
       propagationTargetId={`contract-modal-${uid}`}
     >
-      {removeScroll ? (
-        <ScrollLock>
-          {iframeContent}
-        </ScrollLock>
-      ) : (
-        iframeContent
-      )}
+      <ScrollLock isActive={removeScroll}>{iframeContent}</ScrollLock>
     </FunctionalIFrameComponent>
   );
 };
