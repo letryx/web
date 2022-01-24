@@ -5,15 +5,20 @@ import { Layout } from 'components/layout';
 import { useGetSecContractQuery } from 'lib/generated/graphql/apollo-schema';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const ContractShowPage: NextPage = () => {
   const router = useRouter();
   const { slug } = router.query;
   const uid = ((slug as string) || '').split('-')[0];
-  if (!uid) {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    router.push('/404');
-  }
+  useEffect(() => {
+    if (!uid) {
+      // No slug in the url, shouldn't happen since we have a root
+      // contracts page as well which gets 'undefined' entries
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      router.push('/404');
+    }
+  }, [uid, router]);
 
   const { data, loading } = useGetSecContractQuery({
     variables: {
@@ -23,6 +28,14 @@ const ContractShowPage: NextPage = () => {
   });
 
   const contract = data?.sec_filing_attachment_by_pk;
+
+  useEffect(() => {
+    if (!loading && !data?.sec_filing_attachment_by_pk) {
+      // Bad slug, send to a 404 page.
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      router.push('/404');
+    }
+  }, [data, loading, router]);
 
   return (
     <Layout title="Contracts" showMatterNumber>
