@@ -1,10 +1,12 @@
 import { Box, useBreakpointValue, useColorModeValue } from '@chakra-ui/react';
 import parse from 'html-react-parser';
+import disableScroll from 'disable-scroll';
 import { SecContractFragment } from 'lib/generated/graphql/apollo-schema';
 import { sanitizeHtml } from 'lib/sanitize';
 import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { RemoveScroll } from 'react-remove-scroll';
+import ScrollLock from 'react-scrolllock';
 
 const SEC_BASE_URL = 'https://www.sec.gov/Archives/edgar/data';
 
@@ -164,9 +166,9 @@ export const ContractIFrame: FC<ContractIFrameProps> = ({
       propagationTargetId={`contract-modal-${uid}`}
     >
       {removeScroll ? (
-        <RemoveScroll forwardProps noIsolation>
+        <ScrollLock>
           {iframeContent}
-        </RemoveScroll>
+        </ScrollLock>
       ) : (
         iframeContent
       )}
