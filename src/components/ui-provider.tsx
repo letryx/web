@@ -1,8 +1,6 @@
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import { FC } from 'react';
-import myTheme from 'styles/theme';
-
-const theme = extendTheme(myTheme);
+import { theme } from 'styles/theme';
 
 const UIProvider: FC = ({ children }) => (
   <ChakraProvider theme={theme} resetCSS>

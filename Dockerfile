@@ -1,4 +1,4 @@
-FROM node:16.12-buster AS builder
+FROM node:16-buster AS builder
 WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 RUN yarn install --production
@@ -12,7 +12,7 @@ ARG GRAPHQL_API_URL
 ARG GRAPHQL_API_SSR_URL
 RUN yarn build
 
-FROM node:16.12-buster-slim
+FROM node:16-buster-slim
 ENV NODE_ENV production
 USER node
 EXPOSE 3000

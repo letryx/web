@@ -9,6 +9,7 @@ import NextDocument, {
   NextScript,
 } from 'next/document';
 import globalStyles from 'styles/global-styles';
+import { config } from 'styles/theme';
 
 export default class Document extends NextDocument {
   static getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
@@ -17,12 +18,12 @@ export default class Document extends NextDocument {
 
   render(): JSX.Element {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <Global styles={globalStyles} />
         </Head>
         <body>
-          <ColorModeScript />
+          <ColorModeScript initialColorMode={config.initialColorMode} />
           <Main />
           <NextScript />
         </body>
