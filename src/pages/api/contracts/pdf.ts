@@ -40,12 +40,23 @@ export default async (
     query: GetSecContractDocument,
     variables: { uid },
   });
-  const contents = contract.data.sec_filing_attachment_by_pk?.contents;
-  if (!contents) {
+
+  if (!contract.data.sec_filing_attachment_by_pk) {
     res.status(404);
     res.end();
     return;
   }
+
+  const { contents, description, attachment_type, sec_filing } =
+    contract.data.sec_filing_attachment_by_pk;
+  const exportFilename = [
+    sec_filing.sec_company.name,
+    description || attachment_type,
+  ]
+    .join('--')
+    .replaceAll(/(\s)+/g, '-')
+    .replaceAll(/[^\w-]/g, '')
+    .substring(0, 80);
 
   const pdfRes = await fetch(process.env.EXPORT_PDF_LAMBDA_URL, {
     method: 'POST',
@@ -61,7 +72,10 @@ export default async (
   if (!pdfBody) throw new Error('empty response body');
 
   res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename=export.pdf');
+  res.setHeader(
+    'Content-Disposition',
+    `attachment; filename=${exportFilename}.pdf`
+  );
   res.status(200);
 
   await new Promise<void>((resolve, reject) => {
