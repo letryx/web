@@ -50,6 +50,12 @@ const ContractShowPage: FC<ContractShowPageProps> = ({ uid }) => {
 
 // auth0 wrapper:
 // https://community.auth0.com/t/accessing-user-data-inside-withpageauthrequired/65148
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired({
+  // eslint-disable-next-line @typescript-eslint/require-await
+  getServerSideProps: async ({ query }) => {
+    const uid = typeof query.slug === 'object' ? query.slug[0] : query.slug;
+    return { props: { uid } };
+  },
+});
 
 export default ContractShowPage;
