@@ -27,7 +27,7 @@ interface IFrameProps extends HTMLAttributes<HTMLElement> {
   baseUrl?: string;
 }
 
-const stringToDOM = (rawHtml: string | undefined): JSX.Element[] => {
+export const stringToDOM = (rawHtml: string | undefined): JSX.Element[] => {
   const html = sanitizeHtml(rawHtml);
   const parsedHtml = parse(html.replaceAll(/\bPAGEBREAK\b/gi, ''));
   return (Array.isArray(parsedHtml) ? parsedHtml : [parsedHtml]).map((el) =>

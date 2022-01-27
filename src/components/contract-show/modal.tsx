@@ -1,14 +1,19 @@
+import { CloseIcon, DownloadIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import {
+  Box,
   Button,
+  Center,
+  Flex,
+  IconButton,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
   Skeleton,
   SkeletonText,
+  Spacer,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -61,22 +66,54 @@ export const ContractModal: FC<SearchResultFragment> = (contract) => {
             {loading || !contract ? (
               <Skeleton>{'x'.repeat(20)}</Skeleton>
             ) : (
-              <>
-                <Text as="span" mr={3}>
-                  {description || attachment_type}
-                </Text>
-                <Text as="span" fontSize="80%" fontWeight="normal">
-                  {filing_type} {description && `, ${attachment_type || ''}`}
-                </Text>
-                <Text fontSize="80%" fontWeight="normal">
-                  Filed by {companyName} on{' '}
-                  <ShowDate kind="long" date={filing_date || ''} />
-                </Text>
-              </>
+              <Flex>
+                <Center>
+                  <Box>
+                    <Text as="span" mr={3}>
+                      {description || attachment_type}
+                    </Text>
+                    <Text as="span" fontSize="80%" fontWeight="normal">
+                      {filing_type}{' '}
+                      {description && `, ${attachment_type || ''}`}
+                    </Text>
+                    <Text fontSize="80%" fontWeight="normal">
+                      Filed by {companyName} on{' '}
+                      <ShowDate kind="long" date={filing_date || ''} />
+                    </Text>
+                  </Box>
+                </Center>
+                <Spacer />
+                <Center>
+                  <IconButton
+                    as="a"
+                    aria-label="download pdf"
+                    variant="ghost"
+                    size="sm"
+                    icon={<DownloadIcon />}
+                    href={`/api/contracts/pdf?uid=${uid}`}
+                  />
+                  <IconButton
+                    as="a"
+                    aria-label="open in new window"
+                    variant="ghost"
+                    size="sm"
+                    icon={<ExternalLinkIcon />}
+                    href={`/contracts/${uid}`}
+                    target="_blank"
+                    mr={4}
+                  />
+                  <IconButton
+                    size="sm"
+                    aria-label="close contract"
+                    variant="ghost"
+                    onClick={onClose}
+                    icon={<CloseIcon />}
+                  />
+                </Center>
+              </Flex>
             )}
           </ModalHeader>
 
-          <ModalCloseButton />
           <ModalBody px={[2, 4, 6]} id={`contract-modal-${uid}`}>
             <SkeletonText isLoaded={!loading} noOfLines={30}>
               {contraceWithContents && (
