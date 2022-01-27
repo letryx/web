@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { getAccessToken } from '@auth0/nextjs-auth0';
 import { createApiApolloClient } from 'lib/apollo-client';
 import {
   GetSecContractDocument,
@@ -8,15 +9,16 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'node-fetch';
 
 export default async (
-  { query, method }: NextApiRequest,
+  req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  const { method, query } = req;
   if (method !== 'GET') throw new Error('only accepts GET');
 
   const accessToken =
     typeof query.accessToken === 'object'
       ? query.accessToken[0]
-      : query.accessToken;
+      : query.accessToken || (await getAccessToken(req, res)).accessToken;
 
   if (!accessToken) {
     res.status(401);
