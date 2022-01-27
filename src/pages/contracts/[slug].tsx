@@ -1,16 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { SkeletonText } from '@chakra-ui/react';
 import { ContractIFrame } from 'components/contract-show/frame';
 import { Layout } from 'components/layout';
 import { useGetSecContractQuery } from 'lib/generated/graphql/apollo-schema';
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 
-const ContractShowPage: NextPage = () => {
+interface ContractShowPageProps {
+  uid: string;
+}
+
+const ContractShowPage: FC<ContractShowPageProps> = ({ uid }) => {
   const router = useRouter();
-  const { slug } = router.query;
-  const uid = ((slug as string) || '').split('-')[0];
   useEffect(() => {
     if (!uid) {
       // No slug in the url, shouldn't happen since we have a root
@@ -46,6 +48,8 @@ const ContractShowPage: NextPage = () => {
   );
 };
 
+// auth0 wrapper:
+// https://community.auth0.com/t/accessing-user-data-inside-withpageauthrequired/65148
 export const getServerSideProps = withPageAuthRequired();
 
 export default ContractShowPage;

@@ -1,0 +1,21 @@
+POST /default/pdf-generator HTTP/1.1
+User-Agent: HTTPie/2.4.0
+Accept-Encoding: gzip, deflate
+Accept: application/pdf
+Connection: keep-alive
+Content-Type: application/json
+Content-Length: 42
+Host: jlz07dc00a.execute-api.us-east-1.amazonaws.com
+
+{"html": "<html><body>asdf</body></html>"}
+
+HTTP/1.1 502 Bad Gateway
+Date: Thu, 27 Jan 2022 00:34:47 GMT
+Content-Type: application/json
+Content-Length: 36
+Connection: keep-alive
+x-amzn-RequestId: ece465fc-57ca-4bba-ab4d-b65d0a9ee962
+x-amzn-ErrorType: InternalServerErrorException
+x-amz-apigw-id: MlFKOFYxIAMFSFw=
+
+{"message": "Internal server error"}

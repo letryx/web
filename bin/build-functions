@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Building image..."
+
+docker build -t pdf-generator cloud-functions/pdf-generator
+
+echo
+echo "Authenticating..."
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 483710137176.dkr.ecr.us-east-1.amazonaws.com
+
+echo
+echo "Pushing image to ECS..."
+docker tag pdf-generator:latest 483710137176.dkr.ecr.us-east-1.amazonaws.com/pdf-generator:latest
+docker push 483710137176.dkr.ecr.us-east-1.amazonaws.com/pdf-generator:latest
+
+echo
+echo "Update lambda image..."
+aws lambda update-function-code --function-name pdf-generator --image-uri 483710137176.dkr.ecr.us-east-1.amazonaws.com/pdf-generator:latest
