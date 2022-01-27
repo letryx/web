@@ -10,7 +10,8 @@ module.exports.generate_pdf = async (event) => {
       return;
     }
     const chunks = [];
-    wkhtmltopdf(html, {}, (err, stream) => {
+    // minimumFontSize is in pixels relative to page dpi
+    wkhtmltopdf(html, { minimumFontSize: 24 }, (err, stream) => {
       if (err) {
         reject(`wkhtmltopdf error: ${err.message}`);
       }

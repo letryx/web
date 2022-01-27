@@ -1,4 +1,5 @@
 import { getAccessToken } from '@auth0/nextjs-auth0';
+import { stringToDOM } from 'components/contract-show/frame';
 import { createApiApolloClient } from 'lib/apollo-client';
 import {
   GetSecContractDocument,
@@ -6,6 +7,9 @@ import {
 } from 'lib/generated/graphql/apollo-schema';
 import { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'node-fetch';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { pdfCss, pdfMonoFontUrl } from 'styles/pdf';
 
 export default async (
   req: NextApiRequest,
@@ -36,19 +40,20 @@ export default async (
   }
 
   const client = createApiApolloClient(accessToken);
-  const contract = await client.query<GetSecContractQuery>({
+  const contractQueryResult = await client.query<GetSecContractQuery>({
     query: GetSecContractDocument,
     variables: { uid },
   });
 
-  if (!contract.data.sec_filing_attachment_by_pk) {
+  if (!contractQueryResult.data.sec_filing_attachment_by_pk) {
     res.status(404);
     res.end();
     return;
   }
 
-  const { contents, description, attachment_type, sec_filing } =
-    contract.data.sec_filing_attachment_by_pk;
+  const contract = contractQueryResult.data.sec_filing_attachment_by_pk;
+
+  const { contents, description, attachment_type, sec_filing } = contract;
   const exportFilename = [
     sec_filing.sec_company.name,
     description || attachment_type,
@@ -58,13 +63,30 @@ export default async (
     .replaceAll(/[^\w-]/g, '')
     .substring(0, 80);
 
+  // add lambda-compatible defaults for plain-text contracts
+  const domString = ReactDOMServer.renderToString(
+    React.createElement('div', {}, [
+      React.createElement('link', {
+        type: 'text/css',
+        href: pdfMonoFontUrl,
+      }),
+      React.createElement('style', {
+        type: 'text/css',
+        dangerouslySetInnerHTML: {
+          __html: pdfCss,
+        },
+      }),
+      ...stringToDOM(contents),
+    ])
+  );
+
   const pdfRes = await fetch(process.env.EXPORT_PDF_LAMBDA_URL, {
     method: 'POST',
     headers: {
       Accept: 'application/pdf',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ html: contents }),
+    body: JSON.stringify({ html: domString }),
   });
 
   const { body: pdfBody } = pdfRes;

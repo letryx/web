@@ -1,7 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { SkeletonText } from '@chakra-ui/react';
+import { DownloadIcon } from '@chakra-ui/icons';
+import {
+  Box,
+  Center,
+  Flex,
+  IconButton,
+  SkeletonText,
+  Spacer,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import { ContractIFrame } from 'components/contract-show/frame';
+import { ShowDate } from 'components/date';
 import { Layout } from 'components/layout';
 import { useGetSecContractQuery } from 'lib/generated/graphql/apollo-schema';
 import { useRouter } from 'next/router';
@@ -42,7 +53,42 @@ const ContractShowPage: FC<ContractShowPageProps> = ({ uid }) => {
   return (
     <Layout title="Contracts" showMatterNumber>
       <SkeletonText isLoaded={!loading} noOfLines={30}>
-        {contract && <ContractIFrame {...contract} />}
+        {contract && (
+          <Stack maxWidth="800px">
+            <Flex fontSize="1.2rem">
+              <Center>
+                <Box>
+                  <Text as="span" mr={3}>
+                    {contract.description || contract.attachment_type}
+                  </Text>
+                  <Text as="span" fontSize="80%" fontWeight="normal">
+                    {contract.sec_filing.filing_type}{' '}
+                    {contract.description &&
+                      `, ${contract.attachment_type || ''}`}
+                  </Text>
+                  <Text fontSize="80%" fontWeight="normal">
+                    Filed by {contract.sec_filing.sec_company.name} on{' '}
+                    <ShowDate
+                      kind="long"
+                      date={contract.sec_filing.filing_date || ''}
+                    />
+                  </Text>
+                </Box>
+              </Center>
+              <Spacer />
+              <Center>
+                <IconButton
+                  as="a"
+                  variant="ghost"
+                  aria-label="export pdf"
+                  icon={<DownloadIcon />}
+                  href={`/api/contracts/pdf?uid=${uid}`}
+                />
+              </Center>
+            </Flex>
+            <ContractIFrame {...contract} />
+          </Stack>
+        )}
       </SkeletonText>
     </Layout>
   );
