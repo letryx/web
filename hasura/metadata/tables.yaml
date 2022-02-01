@@ -125,6 +125,18 @@
 - table:
     schema: public
     name: sec_contract_type
+  object_relationships:
+  - name: parent_type
+    using:
+      foreign_key_constraint_on: parent_id
+  array_relationships:
+  - name: sub_types
+    using:
+      foreign_key_constraint_on:
+        column: parent_id
+        table:
+          schema: public
+          name: sec_contract_type
 - table:
     schema: public
     name: sec_filing
