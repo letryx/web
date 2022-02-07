@@ -1,3 +1,4 @@
+
 UPDATE public.sec_filing_attachment SET contract_type_id = 1 WHERE contract_type = 'purchase and sale agreement';
 UPDATE public.sec_filing_attachment SET contract_type_id = 2 WHERE contract_type = 'energy assets';
 UPDATE public.sec_filing_attachment SET contract_type_id = 3 WHERE contract_type = 'gas purchase contract';
@@ -94,3 +95,257 @@ UPDATE public.sec_filing_attachment SET contract_type_id = 93 WHERE contract_typ
 UPDATE public.sec_filing_attachment SET contract_type_id = 94 WHERE contract_type = 'securities';
 UPDATE public.sec_filing_attachment SET contract_type_id = 95 WHERE contract_type = 'contribution, conveyance and assumption agreement';
 UPDATE public.sec_filing_attachment SET contract_type_id = 96 WHERE contract_type = 'mortgage, assignment of production';
+
+CREATE OR REPLACE VIEW "public"."sec_contract" AS 
+ SELECT attachment.accession_number,
+    attachment.sequence,
+    company.name AS company_name,
+    company.cik AS company_cik,
+    company.geo AS company_geo,
+    company.sic AS company_sic,
+    company.sic_name AS company_sic_name,
+    filing.filing_type,
+    filing.header AS filing_header,
+    filing.filing_date,
+    attachment.description,
+    attachment.attachment_type,
+    attachment.tsv_search_text,
+    (0.0)::real AS relevance,
+    attachment.contract_type,
+    attachment.uid,
+    attachment.contract_type_id
+   FROM ((sec_company company
+     JOIN sec_filing filing ON ((filing.cik = company.cik)))
+     JOIN sec_filing_attachment attachment ON ((attachment.accession_number = filing.accession_number)));
+
+DROP FUNCTION public.sec_search;
+CREATE OR REPLACE FUNCTION public.sec_search(search text DEFAULT NULL::text, filing_date_lt date DEFAULT NULL::date, filing_date_gt date DEFAULT NULL::date, description_includes text DEFAULT NULL::text, description_excludes text DEFAULT NULL::text, company_name_includes text DEFAULT NULL::text, company_name_excludes text DEFAULT NULL::text, contract_type_id_eq integer[] DEFAULT NULL::integer[], company_cik_eq text[] DEFAULT NULL::text[])
+ RETURNS SETOF sec_contract
+ LANGUAGE sql
+ STABLE
+AS $function$
+SELECT
+  a.accession_number,
+  a.sequence,
+  a.company_name,
+  a.company_cik,
+  a.company_geo,
+  a.company_sic,
+  a.company_sic_name,
+  a.filing_type,
+  a.filing_header,
+  a.filing_date,
+  a.description,
+  a.attachment_type,
+  a.tsv_search_text,
+  ts_rank(tsv_search_text, q) AS relevance,
+  a.contract_type,
+  a.uid,
+  a.contract_type_id
+FROM
+  sec_contract AS a,
+  plainto_tsquery(search) AS q
+WHERE
+  (
+    search is null
+    or search = ''
+    or q @@ tsv_search_text
+  )
+  and (
+    filing_date_lt is null
+    or filing_date <= filing_date_lt
+  )
+  and (
+    filing_date_gt is null
+    or filing_date >= filing_date_gt
+  )
+  and (
+    description_includes is null
+    or description ilike concat('%', trim(description_includes), '%')
+  )
+  and (
+    description_excludes is null
+    or description not ilike concat('%', trim(description_excludes), '%')
+  )
+  and (
+    company_name_includes is null
+    or company_name ilike concat('%', trim(company_name_includes), '%')
+  )
+  and (
+    description_excludes is null
+    or company_name not ilike concat('%', trim(description_excludes), '%')
+  )
+  and (
+    contract_type_id_eq is null
+    or a.contract_type_id = ANY(contract_type_id_eq)
+  )
+  and (
+    company_cik_eq is null
+    or a.company_cik = ANY(company_cik_eq)
+  )
+ORDER BY
+  relevance desc
+$function$;
+
+DROP FUNCTION "public"."sec_search";
+DROP VIEW "public"."sec_contract";
+
+CREATE OR REPLACE VIEW "public"."sec_contract" AS 
+ SELECT attachment.accession_number,
+    attachment.sequence,
+    company.name AS company_name,
+    company.cik AS company_cik,
+    company.geo AS company_geo,
+    company.sic AS company_sic,
+    company.sic_name AS company_sic_name,
+    filing.filing_type,
+    filing.header AS filing_header,
+    filing.filing_date,
+    attachment.description,
+    attachment.attachment_type,
+    attachment.tsv_search_text,
+    (0.0)::real AS relevance,
+    attachment.contract_type_id,
+    attachment.uid
+   FROM ((sec_company company
+     JOIN sec_filing filing ON ((filing.cik = company.cik)))
+     JOIN sec_filing_attachment attachment ON ((attachment.accession_number = filing.accession_number)));
+
+CREATE OR REPLACE FUNCTION public.sec_search(search text DEFAULT NULL::text, filing_date_lt date DEFAULT NULL::date, filing_date_gt date DEFAULT NULL::date, description_includes text DEFAULT NULL::text, description_excludes text DEFAULT NULL::text, company_name_includes text DEFAULT NULL::text, company_name_excludes text DEFAULT NULL::text, contract_type_id_eq integer[] DEFAULT NULL::integer[], company_cik_eq text[] DEFAULT NULL::text[])
+ RETURNS SETOF sec_contract
+ LANGUAGE sql
+ STABLE
+AS $function$
+SELECT
+  a.accession_number,
+  a.sequence,
+  a.company_name,
+  a.company_cik,
+  a.company_geo,
+  a.company_sic,
+  a.company_sic_name,
+  a.filing_type,
+  a.filing_header,
+  a.filing_date,
+  a.description,
+  a.attachment_type,
+  a.tsv_search_text,
+  ts_rank(tsv_search_text, q) AS relevance,
+  a.contract_type_id,
+  a.uid
+FROM
+  sec_contract AS a,
+  plainto_tsquery(search) AS q
+WHERE
+  (
+    search is null
+    or search = ''
+    or q @@ tsv_search_text
+  )
+  and (
+    filing_date_lt is null
+    or filing_date <= filing_date_lt
+  )
+  and (
+    filing_date_gt is null
+    or filing_date >= filing_date_gt
+  )
+  and (
+    description_includes is null
+    or description ilike concat('%', trim(description_includes), '%')
+  )
+  and (
+    description_excludes is null
+    or description not ilike concat('%', trim(description_excludes), '%')
+  )
+  and (
+    company_name_includes is null
+    or company_name ilike concat('%', trim(company_name_includes), '%')
+  )
+  and (
+    description_excludes is null
+    or company_name not ilike concat('%', trim(description_excludes), '%')
+  )
+  and (
+    contract_type_id_eq is null
+    or a.contract_type_id = ANY(contract_type_id_eq)
+  )
+  and (
+    company_cik_eq is null
+    or a.company_cik = ANY(company_cik_eq)
+  )
+ORDER BY
+  relevance desc
+$function$;
+
+DROP INDEX IF EXISTS "public"."contract_type_idx";
+
+alter table "public"."sec_filing_attachment" drop column "contract_type" cascade;
+
+DROP FUNCTION public.sec_search;
+CREATE OR REPLACE FUNCTION public.sec_search(search text DEFAULT NULL::text, filing_date_lt date DEFAULT NULL::date, filing_date_gt date DEFAULT NULL::date, description_includes text DEFAULT NULL::text, description_excludes text DEFAULT NULL::text, company_name_includes text DEFAULT NULL::text, company_name_excludes text DEFAULT NULL::text, contract_type_id_eq text[] DEFAULT NULL::text[], company_cik_eq text[] DEFAULT NULL::text[])
+ RETURNS SETOF sec_contract
+ LANGUAGE sql
+ STABLE
+AS $function$
+SELECT
+  a.accession_number,
+  a.sequence,
+  a.company_name,
+  a.company_cik,
+  a.company_geo,
+  a.company_sic,
+  a.company_sic_name,
+  a.filing_type,
+  a.filing_header,
+  a.filing_date,
+  a.description,
+  a.attachment_type,
+  a.tsv_search_text,
+  ts_rank(tsv_search_text, q) AS relevance,
+  a.contract_type_id,
+  a.uid
+FROM
+  sec_contract AS a,
+  plainto_tsquery(search) AS q
+WHERE
+  (
+    search is null
+    or search = ''
+    or q @@ tsv_search_text
+  )
+  and (
+    filing_date_lt is null
+    or filing_date <= filing_date_lt
+  )
+  and (
+    filing_date_gt is null
+    or filing_date >= filing_date_gt
+  )
+  and (
+    description_includes is null
+    or description ilike concat('%', trim(description_includes), '%')
+  )
+  and (
+    description_excludes is null
+    or description not ilike concat('%', trim(description_excludes), '%')
+  )
+  and (
+    company_name_includes is null
+    or company_name ilike concat('%', trim(company_name_includes), '%')
+  )
+  and (
+    description_excludes is null
+    or company_name not ilike concat('%', trim(description_excludes), '%')
+  )
+  and (
+    contract_type_id_eq is null
+    or a.contract_type_id::text = ANY(contract_type_id_eq)
+  )
+  and (
+    company_cik_eq is null
+    or a.company_cik = ANY(company_cik_eq)
+  )
+ORDER BY
+  relevance desc
+$function$;

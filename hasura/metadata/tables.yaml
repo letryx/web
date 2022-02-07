@@ -71,39 +71,14 @@
 - table:
     schema: public
     name: sec_contract
-  object_relationships:
-  - name: sec_company
-    using:
-      manual_configuration:
-        remote_table:
-          schema: public
-          name: sec_company
-        insertion_order: null
-        column_mapping:
-          company_cik: cik
-  - name: sec_filing
-    using:
-      manual_configuration:
-        remote_table:
-          schema: public
-          name: sec_filing
-        insertion_order: null
-        column_mapping:
-          accession_number: accession_number
-  - name: sec_filing_attachment
-    using:
-      manual_configuration:
-        remote_table:
-          schema: public
-          name: sec_filing_attachment
-        insertion_order: null
-        column_mapping:
-          accession_number: accession_number
-          sequence: sequence
   select_permissions:
   - role: user
     permission:
       columns:
+      - filing_date
+      - contract_type_id
+      - sequence
+      - relevance
       - accession_number
       - attachment_type
       - company_cik
@@ -111,15 +86,11 @@
       - company_name
       - company_sic
       - company_sic_name
-      - contract_type
       - description
-      - filing_date
       - filing_header
       - filing_type
-      - relevance
-      - sequence
-      - tsv_search_text
       - uid
+      - tsv_search_text
       filter: {}
       allow_aggregations: true
 - table:
@@ -137,6 +108,15 @@
         table:
           schema: public
           name: sec_contract_type
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - parent_id
+      filter: {}
+      allow_aggregations: true
 - table:
     schema: public
     name: sec_filing
@@ -170,6 +150,9 @@
   - name: sec_company
     using:
       foreign_key_constraint_on: cik
+  - name: sec_contract_type
+    using:
+      foreign_key_constraint_on: contract_type_id
   - name: sec_filing
     using:
       foreign_key_constraint_on: accession_number
@@ -181,7 +164,7 @@
       - attachment_type
       - cik
       - contents
-      - contract_type
+      - contract_type_id
       - description
       - filename
       - sequence

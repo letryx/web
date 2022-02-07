@@ -11,18 +11,18 @@ fragment SearchResult on sec_contract {
   filing_date
   description
   attachment_type
-  contract_type
+  contract_type_id
 }
 
 # description: { _ilike: "%purchase and sale%", _nilike: "%amendment%" }
 query SearchSECContracts(
-  $search: String!
-  $minDate: date
-  $maxDate: date
-  $limit: Int = 20
-  $offset: Int = 0
-  $uidsOnly: Boolean = false
-  $contractType: String
+  $search: String!,
+  $minDate: date,
+  $maxDate: date,
+  $limit: Int = 20,
+  $offset: Int = 0,
+  $uidsOnly: Boolean = false,
+  $contractTypes: _text,
   $companyCiks: _text
 ) {
   sec_search_aggregate(
@@ -30,7 +30,7 @@ query SearchSECContracts(
       search: $search
       filing_date_gt: $minDate
       filing_date_lt: $maxDate
-      contract_type_eq: $contractType
+      contract_type_id_eq: $contractTypes
       company_cik_eq: $companyCiks
     }
   ) {
@@ -48,7 +48,7 @@ query SearchSECContracts(
       search: $search
       filing_date_gt: $minDate
       filing_date_lt: $maxDate
-      contract_type_eq: $contractType
+      contract_type_id_eq: $contractTypes
       company_cik_eq: $companyCiks
     }
     order_by: { relevance: desc }
@@ -64,7 +64,7 @@ query SearchSECContracts(
       # search: $search
       filing_date_gt: $minDate
       filing_date_lt: $maxDate
-      contract_type_eq: $contractType
+      contract_type_id_eq: $contractTypes
     }
     distinct_on: [company_cik]
   ) {
@@ -79,9 +79,9 @@ query SearchSECContracts(
       filing_date_lt: $maxDate
       company_cik_eq: $companyCiks
     }
-    distinct_on: [contract_type]
+    distinct_on: [contract_type_id]
   ) {
-    contract_type
+    contract_type_id
   }
 }
 
@@ -121,16 +121,14 @@ query GetSECContract($uid: String!) {
   }
 }
 
-fragment ContractTypeFragment on sec_filing_attachment {
-  contract_type
+fragment SECContractType on sec_contract_type {
+  id
+  name
+  parent_id
 }
 
 query GetContractTypes {
-  sec_filing_attachment(
-    distinct_on: [contract_type]
-    # discard null
-    where: { contract_type: { _like: "%" } }
-  ) {
-    ...ContractTypeFragment
+  sec_contract_type {
+    ...SECContractType
   }
 }
