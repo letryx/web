@@ -27,9 +27,5 @@ generates:
         _text: String
       namingConvention: change-case-all#pascalCase
       strictScalars: true
-      useExplicitTyping: true
       apolloClientVersion: 3
       reactApolloVersion: 3
-hooks:
-  afterAllFileWrite:
-    - prettier --write

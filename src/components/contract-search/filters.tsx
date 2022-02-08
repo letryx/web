@@ -17,7 +17,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Skeleton,
   Spacer,
   Stack,
@@ -37,9 +36,9 @@ import { Paginator, useFixedPagination } from 'components/paginator';
 import Fuse from 'fuse.js';
 import {
   CompanyFragment,
-  useGetContractTypesQuery,
   useGetSecContractCompaniesQuery,
 } from 'lib/generated/graphql/apollo-schema';
+import { FuseHighlight } from 'lib/search/FuseHighlight';
 import {
   difference,
   filter,
@@ -49,10 +48,14 @@ import {
   map,
   take,
   uniq,
+  partition,
+  every,
+  find,
 } from 'lodash';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { FaMinus, FaPlus } from 'react-icons/fa';
+import { FaMinus, FaPlus, FaCaretUp, FaCaretDown, FaCheck, FaCaretRight } from 'react-icons/fa';
 import { MdFilterList, MdSearch } from 'react-icons/md';
+import { ContractTypeHierarchy, ContractTypeNames } from './hooks';
 
 interface CompanyRowProps {
   company: CompanyFragment;
@@ -392,6 +395,472 @@ const CompanyFilterModal: FC<CompanyFilterModalProps> = ({
   );
 };
 
+
+type TriState = 'selected' | 'unselected' | 'mixed';
+
+function triStateColor(state: TriState): string {
+  switch (state) {
+    case 'selected': return 'red';
+    case 'unselected': return 'messenger';
+    case 'mixed': return 'yellow';
+  }
+}
+
+function TriStateIcon({ state}: { state: TriState }) {
+  switch (state) {
+    case 'selected': return <FaCheck />;
+    case 'unselected':  return <Box pl={3} />;
+    case 'mixed': return <FaMinus />;
+  }
+}
+
+
+const TriStateButton = ({
+  state,
+  onSelect,
+}: {
+  state: TriState;
+  onSelect: (select: boolean) => void;
+}) => {
+  return (
+    <Button
+      variant="outline"
+      colorScheme={triStateColor(state)}
+      onClick={() => onSelect(state !== 'selected')}
+      size="xs"
+    >
+      <TriStateIcon state={state} />
+    </Button>
+  )
+};
+
+
+interface ContractTypeSearchHits {
+  [key: number]: Fuse.FuseResult<{
+    id: number;
+    name: string;
+  }> | undefined;
+}
+
+interface ContractTypeRowProps {
+  contractType: ContractTypeHierarchy;
+  selection: Set<number>;
+  toggleSelection: (ids: number[], selected: boolean) => void;
+  level?: number;
+  hidePlaceholder?: boolean;
+  searchHits?: ContractTypeSearchHits;
+}
+
+const ContractTypeRow: FC<ContractTypeRowProps> = ({
+  contractType: { id, name, children },
+  selection,
+  toggleSelection,
+  level,
+  hidePlaceholder,
+  searchHits,
+}) => {
+  const [open, setOpen] = useState(false);
+  const searchOpen = useMemo(() => !!children && !!searchHits && !!find(flattenContracts(children), ct => !!searchHits?.[ct.id]), [children, searchHits]);
+  const [selectionState, ids] = useMemo((): [TriState, number[]] => {
+    if (!children?.length) {
+      return [selection.has(id) ? 'selected' : 'unselected', [id]];
+    }
+    const ids = [
+      id,
+      ...map(flattenContracts(children), ct => ct.id),
+    ];
+    const [present, absent] = partition(ids, ctid => selection.has(ctid));
+    if (present.length && absent.length) {
+      return ['mixed', ids];
+    }
+    if (present.length) {
+      return ['selected', ids];
+    }
+    return ['unselected', ids];
+  }, [selection, id, children]);
+  const hideChildPlacehoders = every(children, c => !c.children?.length);
+  const hit = searchHits?.[id];
+  return (
+    <>
+      <Tr key={`row-${id}`}>
+        <Td>
+          <Flex dir='row' ml={(level || 0) * 8}>
+            { (children?.length || 0) > 0 ? (
+              <Button
+                variant="ghost"
+                colorScheme="black"
+                onClick={() => setOpen(!open)}
+                disabled={searchOpen}
+                size="xs"
+                mr="4"
+              >
+                {open || searchOpen ? <FaCaretDown /> : <FaCaretUp />}
+              </Button>
+            ) : (
+              (!hidePlaceholder ? <Button
+                variant="ghost"
+                colorScheme="black"
+                disabled
+                size="xs"
+                mr="4"
+              >
+                <FaCaretRight />
+              </Button> : <Box size="xs" mr="4" />)
+            ) }
+            <Text fontWeight="semibold" casing={hit ? undefined : 'capitalize'}>
+              {hit ? <FuseHighlight hit={hit} attribute="name" /> : name.toLowerCase()}
+            </Text>
+          </Flex>
+        </Td>
+        <Td isNumeric>
+          <TriStateButton state={selectionState} onSelect={(selected: boolean) => toggleSelection(ids, selected)} />
+        </Td>
+      </Tr>
+      { (open || searchOpen) && (
+        map(children, ct => (
+          <ContractTypeRow
+            key={ct.id}
+            contractType={ct}
+            selection={selection}
+            toggleSelection={toggleSelection}
+            level={(level || 0) + 1}
+            hidePlaceholder={hideChildPlacehoders}
+            searchHits={searchHits}
+          />
+        ))
+      ) }
+    </>
+  );
+};
+
+interface ContractTypeTableProps {
+  contractTypes: ContractTypeHierarchy[];
+  isLoading: boolean;
+  selectedContractTypes: number[] | undefined;
+  toggleSelection: (ctid: number, selected: boolean) => void;
+  selectAll: (ctid: number[], selected: boolean) => void;
+  searchHits?: ContractTypeSearchHits
+}
+
+const ContractTypeTable: FC<ContractTypeTableProps> = ({
+  contractTypes,
+  isLoading,
+  selectedContractTypes,
+  selectAll,
+  searchHits,
+}) => {
+  const [allOption, setAllOption] = useState(false);
+  const flatContractTypes = useMemo(() => flattenContracts(contractTypes), [contractTypes]);
+
+  const onToggleAllClicked = () => {
+    selectAll(
+      map(flatContractTypes, (c) => c.id),
+      allOption
+    );
+    setAllOption(!allOption);
+  };
+  const selection = useMemo(
+    () => new Set(selectedContractTypes || []),
+    [selectedContractTypes]
+  );
+  useEffect(() => {
+    if (
+      intersection(
+        selectedContractTypes || [],
+        map(flatContractTypes, c => c.id)
+      ).length === 0
+    ) {
+      setAllOption(true);
+    }
+  }, [selectedContractTypes, flatContractTypes, setAllOption]);
+  const actionCount = useMemo(() => {
+    const ctids = map(flatContractTypes, (c) => c.id);
+    const overlap = allOption
+      ? difference(ctids, selectedContractTypes || [])
+      : intersection(ctids, selectedContractTypes || []);
+    return overlap.length;
+  }, [selectedContractTypes, flatContractTypes, allOption]);
+  return (
+    <>
+      <Table variant="simple" borderWidth="1px" fontSize="0.9rem" mb={1}>
+        <Thead bg={mode('gray.50', 'gray.800')}>
+          <Tr>
+            <Th>Contract Type</Th>
+            <Th isNumeric>
+              {allOption ? 'Select' : 'Clear'} ({actionCount})
+              <Button
+                variant="outline"
+                colorScheme={allOption ? 'messenger' : 'red'}
+                onClick={onToggleAllClicked}
+                size="xs"
+                ml={2}
+              >
+                {allOption ? <FaPlus /> : <FaMinus />}
+              </Button>
+            </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {isLoading
+            ? [...Array(PAGE_SIZE).keys()].map((page) => (
+                <Tr key={page}>
+                  <Td colSpan={4}>
+                    <Skeleton width="100%" height="43px" />
+                  </Td>
+                </Tr>
+              ))
+            : contractTypes.map(ct => (
+              <ContractTypeRow
+                key={ct.id}
+                contractType={ct}
+                selection={selection}
+                toggleSelection={selectAll}
+                searchHits={searchHits}
+              />
+            ))}
+        </Tbody>
+      </Table>
+    </>
+  );
+};
+
+function filterContracts(
+  contractTypeHierarchy: ContractTypeHierarchy[],
+  predicate: (id: number) => boolean
+): ContractTypeHierarchy[] {
+  return flatMap(contractTypeHierarchy, ct => {
+    if (predicate(ct.id)) {
+      return [ct];
+    }
+    if (ct.children) {
+      const children = filterContracts(ct.children, predicate);
+      if (children.length) {
+        return [
+          {
+            ...ct,
+            children,
+          },
+        ];
+      }
+    }
+    return [];
+  });
+}
+
+function flattenContracts(contractTypeHierarchy: ContractTypeHierarchy[]): { id: number; name: string }[] {
+  return flatMap(contractTypeHierarchy, ct => {
+    return [
+      {
+        id: ct.id,
+        name: ct.name,
+      },
+      ...(ct.children ? flattenContracts(ct.children) : []),
+    ];
+  });
+}
+
+const MAX_CONTRACT_TYPES_TO_SHOW = 6;
+
+interface ContractTypeFilterModalProps {
+  selectedContractTypes: number[] | undefined;
+  setSelectedContractTypes: (ids: number[] | undefined) => void;
+  contractTypeHierarchy: ContractTypeHierarchy[];
+  contractTypeNames: ContractTypeNames;
+  searchContractTypes: number[] | undefined;
+  isLoading?: boolean;
+}
+
+const capitalize = (str: string, lower = false) =>
+  (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
+
+
+const ContractTypeFilterModal: FC<ContractTypeFilterModalProps> = ({
+  setSelectedContractTypes,
+  selectedContractTypes,
+  contractTypeHierarchy,
+  searchContractTypes,
+  contractTypeNames,
+  isLoading,
+}) => {
+  const [open, setOpen] = useState(false);
+  const [liveSelectedContractTypes, setLiveSelectedContractTypes] = useState<number[]>(
+    selectedContractTypes || []
+  );
+  const [allContractTypes, flatContractTypes, loading] = useMemo(() => {
+    if (!contractTypeHierarchy || !contractTypeHierarchy.length) {
+      return [[], [], true];
+    }
+    const searchIds = new Set(searchContractTypes);
+    const filtered = filterContracts(contractTypeHierarchy, id => searchIds.has(id));
+    return [
+      filtered,
+      flattenContracts(filtered),
+      false,
+    ];
+  }, [searchContractTypes, contractTypeHierarchy]);
+  const fuse = useMemo(() => new Fuse(map(flatContractTypes, ct => {
+    return {
+      ...ct,
+      name: capitalize(ct.name),
+    };
+  }), {
+      keys: ['name'],
+      includeScore: true,
+      includeMatches: true,
+      minMatchCharLength: 2,
+    }),
+    [flatContractTypes]
+  );
+  const [search, setSearch] = useState('');
+  const onOpen = () => {
+    setLiveSelectedContractTypes(selectedContractTypes || []);
+    setOpen(true);
+  };
+  const onClose = () => {
+    setSelectedContractTypes(
+      liveSelectedContractTypes?.length ? liveSelectedContractTypes : undefined
+    );
+    setOpen(false);
+  };
+
+  const onSelectAll = (ctids: number[], select: boolean) => {
+    setLiveSelectedContractTypes(
+      select
+        ? uniq([...liveSelectedContractTypes, ...ctids])
+        : difference(liveSelectedContractTypes, ctids)
+    );
+  };
+  const onSelect = (ctid: number, select: boolean) => {
+    onSelectAll([ctid], select);
+  };
+  const onRemove = (ctid: number) => {
+    onSelectAll([ctid], false);
+  };
+
+  const [contractTypes, searchHits] = useMemo(() => {
+    if (!search) {
+      return [allContractTypes, undefined];
+    }
+    const searchHits: { [key: number]: Fuse.FuseResult<{ id: number; name: string }> | undefined} = {};
+    forEach(fuse.search(search), (x) => {
+      if ((x?.score || 0) >= 0.30) {
+        return;
+      }
+      searchHits[x.item.id] = x;
+    });
+    return [filterContracts(allContractTypes, id => !!searchHits[id]), searchHits];
+  }, [allContractTypes, search, fuse]);
+  return (
+    <>
+      <Flex pb={1}>
+        <Text
+          fontSize="1.2rem"
+          height="100%"
+          as="span"
+          suppressHydrationWarning
+        >
+          Contract Types
+        </Text>
+        <Spacer />
+        <Tooltip label="Filter contracts by type">
+          <IconButton
+            mt={1}
+            onClick={onOpen}
+            variant="outline"
+            size="xs"
+            aria-label="Search contract types"
+            icon={<MdFilterList />}
+          />
+        </Tooltip>
+      </Flex>
+      <Flex pb={1} direction="column">
+        {flatMap(
+          take(
+            selectedContractTypes || [],
+            (selectedContractTypes?.length || 0) > MAX_CONTRACT_TYPES_TO_SHOW + 1
+              ? MAX_CONTRACT_TYPES_TO_SHOW
+              : MAX_CONTRACT_TYPES_TO_SHOW + 1
+          ),
+          (ctid) => {
+            const contractName = contractTypeNames[ctid];
+            if (!contractName) {
+              return null;
+            }
+            return (
+              <Flex direction="row" key={ctid}>
+                <Button
+                  variant="outline"
+                  colorScheme="red"
+                  onClick={() => onRemove(ctid)}
+                  size="xs"
+                  mr={2}
+                >
+                  <FaMinus />
+                </Button>
+                <Text fontSize="1rem" as="span" casing="capitalize" suppressHydrationWarning pl={1}>
+                  {contractName}
+                </Text>
+              </Flex>
+            );
+          }
+        )}
+        {(selectedContractTypes?.length || 0) > MAX_CONTRACT_TYPES_TO_SHOW + 1 && (
+          <Button variant="outline" onClick={onOpen} size="xs" mt={1} mb={1}>
+            + {(selectedContractTypes?.length || 0) - (MAX_CONTRACT_TYPES_TO_SHOW + 1)}{' '}
+            more contract types
+          </Button>
+        )}
+      </Flex>
+      <Modal isOpen={open} onClose={onClose} blockScrollOnMount>
+        <ModalOverlay />
+          <ModalContent width="95vw" maxWidth="900px">
+            <ModalHeader>
+              <Text as="span" mr={3}>
+                Filter by contract type
+                {liveSelectedContractTypes.length
+                  ? ` (${liveSelectedContractTypes.length} selected)`
+                  : ''}
+              </Text>
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <InputGroup mb={2}>
+                <InputLeftElement>
+                  <MdSearch fontSize="1.5rem" />
+                </InputLeftElement>
+                <Input
+                  type="text"
+                  autoFocus
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  autoComplete="off"
+                  placeholder="Search by contract type"
+                  aria-label="Search by contract type"
+                  _placeholder={{ color: mode('gray.600', 'gray.200') }}
+                  onChange={(e) => setSearch(e.target.value)}
+                  value={search}
+                />
+              </InputGroup>
+              <ContractTypeTable
+                contractTypes={contractTypes}
+                isLoading={isLoading || loading}
+                toggleSelection={onSelect}
+                selectedContractTypes={liveSelectedContractTypes}
+                selectAll={onSelectAll}
+                searchHits={searchHits}
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button mr={3} onClick={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
 type FilterProps = BoxProps & {
   companyCount?: number;
   minDate: Date;
@@ -399,12 +868,14 @@ type FilterProps = BoxProps & {
   setMinDate: (date: Date) => void;
   setMaxDate: (date: Date) => void;
   isLoading: boolean;
-  selectedContractType: string | undefined;
-  setSelectedContractType: (ct: string | undefined) => void;
+  selectedContractTypes: number[] | undefined;
+  setSelectedContractTypes: (ct: number[] | undefined) => void;
   selectedCompanies: string[] | undefined;
   setSelectedCompanies: (sc: string[] | undefined) => void;
   searchCompanies: string[] | undefined;
-  searchContractTypes: string[] | undefined;
+  searchContractTypes: number[] | undefined;
+  contractTypeHierarchy: ContractTypeHierarchy[];
+  contractTypeNames: ContractTypeNames;
 };
 
 export const ContractFilters: FC<FilterProps> = ({
@@ -414,24 +885,16 @@ export const ContractFilters: FC<FilterProps> = ({
   maxDate,
   setMaxDate,
   isLoading,
-  selectedContractType,
-  setSelectedContractType,
+  selectedContractTypes,
+  setSelectedContractTypes,
   selectedCompanies,
   setSelectedCompanies,
   searchCompanies,
   searchContractTypes,
+  contractTypeNames,
+  contractTypeHierarchy,
   ...props
 }) => {
-  const { data: contractTypeData } = useGetContractTypesQuery();
-
-  const contractTypes = useMemo(() => {
-    const contractTypeSet = new Set(searchContractTypes || []);
-    return filter(
-      contractTypeData?.sec_filing_attachment || [],
-      (ct) => !!ct.contract_type && contractTypeSet.has(ct.contract_type)
-    );
-  }, [contractTypeData, searchContractTypes]);
-
   // const {isOpen, onOpen, onClose} = useDisclosure();
   return (
     <Box {...props}>
@@ -486,22 +949,24 @@ export const ContractFilters: FC<FilterProps> = ({
                 </Text>
               </Flex>
             </FormLabel>
-            <Select
-              placeholder="All"
-              maxWidth={['100%', '100%', '250px']}
-              fontSize="sm"
-              value={selectedContractType}
-              onChange={(e) =>
-                setSelectedContractType(e.target.value || undefined)
-              }
-              style={{ textTransform: 'capitalize' }}
-            >
-              {contractTypes.map(({ contract_type }) => (
-                <option value={contract_type || undefined} key={contract_type}>
-                  {contract_type?.toLowerCase()}
-                </option>
-              ))}
-            </Select>
+          </FormControl>
+        </Box>
+        <Box>
+          <FormControl>
+            <FormLabel>
+              <ContractTypeFilterModal
+                selectedContractTypes={selectedContractTypes}
+                setSelectedContractTypes={setSelectedContractTypes}
+                contractTypeHierarchy={contractTypeHierarchy}
+                contractTypeNames={contractTypeNames}
+                searchContractTypes={searchContractTypes}
+                isLoading={isLoading}
+              />
+            </FormLabel>
+            {/* <CheckboxGroup>
+              <Checkbox>yeah ok</Checkbox>
+            </CheckboxGroup>
+            <FormHelperText>More...</FormHelperText> */}
           </FormControl>
         </Box>
       </Stack>

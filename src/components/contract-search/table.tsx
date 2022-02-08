@@ -24,18 +24,25 @@ interface ContractTableProps {
   contracts: SearchResultFragment[];
   compSet: Set<string>;
   addContract: (contract: SearchResultFragment) => void;
+  contractTypes: {
+    [key: number]: string;
+  };
 }
 
 interface ContractRowProps {
   contract: SearchResultFragment;
   addContract: (contract: SearchResultFragment) => void;
   isAdded: boolean;
+  contractTypes: {
+    [key: number]: string;
+  };
 }
 
 const ContractRow: FC<ContractRowProps> = ({
   contract,
   addContract,
   isAdded,
+  contractTypes,
 }) => {
   const {
     accession_number,
@@ -45,8 +52,11 @@ const ContractRow: FC<ContractRowProps> = ({
     attachment_type,
     filing_date,
     description,
-    contract_type,
+    contract_type_id,
   } = contract;
+  const contract_type = contract_type_id
+    ? contractTypes[contract_type_id]
+    : undefined;
   return (
     <Tr key={`row-${accession_number}-${sequence}`}>
       <Td isNumeric>
@@ -92,6 +102,7 @@ export const TableContent: FC<ContractTableProps> = ({
   isLoading,
   addContract,
   compSet,
+  contractTypes,
 }) => (
   <Table variant="simple" borderWidth="1px" fontSize="0.9rem">
     <Thead bg={mode('gray.50', 'gray.800')}>
@@ -117,6 +128,7 @@ export const TableContent: FC<ContractTableProps> = ({
             <ContractRow
               key={contract.uid}
               isAdded={!!(contract.uid && compSet.has(contract.uid))}
+              contractTypes={contractTypes}
               {...{ contract, addContract }}
             />
           ))}

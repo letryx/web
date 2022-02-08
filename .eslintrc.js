@@ -14,15 +14,17 @@ module.exports = {
     'auth0/*',
     'cloud-functions/**/*',
   ],
-  plugins: ['@typescript-eslint', 'eslint-comments', 'promise', 'prettier'],
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
+  plugins: ['@typescript-eslint', 'react', 'destructuring', 'eslint-comments', 'eslint-plugin-import', 'promise'],
   extends: [
-    'airbnb',
-    'airbnb-typescript',
-    'airbnb/hooks',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:prettier/recommended',
-    'plugin:@next/next/recommended',
   ],
   parserOptions: {
     ecmaVersion: 12,
@@ -32,7 +34,6 @@ module.exports = {
     extraFileExtensions: ['.cjs'],
   },
   rules: {
-    'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 'off',
     'react/prop-types': 'off',

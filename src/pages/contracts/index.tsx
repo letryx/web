@@ -3,6 +3,7 @@ import { useApolloClient } from '@apollo/client';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { Box, Stack, VStack } from '@chakra-ui/react';
 import { ContractFilters } from 'components/contract-search/filters';
+import { useContractTypes } from 'components/contract-search/hooks';
 import { SearchBar } from 'components/contract-search/search-bar';
 import { PAGE_SIZE, TableContent } from 'components/contract-search/table';
 import { Layout } from 'components/layout';
@@ -46,16 +47,16 @@ const ContractsPage: NextPage = () => {
     undefined | string[]
   >();
 
-  const [selectedContractType, setSelectedContractType] = useState<
-    undefined | string
+  const [selectedContractTypes, setSelectedContractTypes] = useState<
+    undefined | number[]
   >();
   const { data, loading: isLoading } = useSearchSecContractsQuery({
     variables: {
       minDate,
       maxDate,
       search,
-      contractType: selectedContractType,
-      companyCiks: selectedCompanies ? selectedCompanies.join(',') : undefined,
+      contractTypes: selectedContractTypes ? `{${selectedContractTypes.join(',')}}` : undefined,
+      companyCiks: selectedCompanies ? `{${selectedCompanies.join(',')}}` : undefined,
       limit: PAGE_SIZE,
       offset,
     },
@@ -70,14 +71,16 @@ const ContractsPage: NextPage = () => {
   const searchContractTypes = useMemo(
     () =>
       data?.contract_types &&
-      flatMap(data.contract_types, (x) => x.contract_type || []),
+      flatMap(data.contract_types, (x) =>
+        x.contract_type_id ? [x.contract_type_id] : []
+      ),
     [data?.contract_types]
   );
 
   useEffect(() => setTotalContracts(contractCount), [contractCount]);
 
   const contracts = data?.sec_search || [];
-
+  const [contractTypeNames, contractTypeHierarchy] = useContractTypes();
   const [compSet, setCompSet] = useState(new Set<string>([]));
   const [compSetSize, setCompSetSize] = useState(0);
   const [addIsLoading, setAddIsLoading] = useState(false);
@@ -94,9 +97,9 @@ const ContractsPage: NextPage = () => {
         search,
         minDate,
         maxDate,
-        contractType: selectedContractType,
+        contractTypes: selectedContractTypes ? `{${selectedContractTypes.join(',')}}` : undefined,
         companyCiks: selectedCompanies
-          ? selectedCompanies.join(',')
+          ? `{${selectedCompanies.join(',')}}`
           : undefined,
       },
     });
@@ -134,12 +137,14 @@ const ContractsPage: NextPage = () => {
             setMinDate,
             maxDate,
             setMaxDate,
-            selectedContractType,
-            setSelectedContractType,
+            selectedContractTypes,
+            setSelectedContractTypes,
             selectedCompanies,
             setSelectedCompanies,
             searchCompanies,
             searchContractTypes,
+            contractTypeHierarchy,
+            contractTypeNames,
           }}
         />
         <VStack width="100%">
@@ -159,7 +164,7 @@ const ContractsPage: NextPage = () => {
             }}
           />
           <Box minHeight="3rem" width="100%">
-            <TableContent {...{ contracts, compSet, addContract, isLoading }} />
+            <TableContent contractTypes={contractTypeNames} {...{ contracts, compSet, addContract, isLoading }} />
           </Box>
           <Paginator
             pagesCount={pagesCount}

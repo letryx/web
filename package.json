@@ -13,10 +13,11 @@
   "scripts": {
     "build": "next build",
     "codegen": "eval $(egrep '^GRAPHQL_API_URL=' .env | xargs) graphql-codegen --config codegen.yml --target typescript --tagName gql --customScalarsPrefix=GraphQL_",
-    "console": "hasura console --no-browser",
+    "console": "NODE_OPTIONS='' hasura console --no-browser",
     "dev": "next",
     "lint": "eslint src",
     "lint-fix": "eslint src --fix",
+    "local-codegen": "HASURA_GRAPHQL_ADMIN_SECRET='secret' eval $(egrep '^GRAPHQL_API_URL=' .env | xargs) graphql-codegen --config codegen.yml --target typescript --tagName gql --customScalarsPrefix=GraphQL_",
     "schema": "eval $(egrep '^HASURA_GRAPHQL_ADMIN_SECRET=' .env | xargs) gq http://localhost:6060/v1/graphql -H \\'X-Hasura-Admin-Secret: $HASURA_GRAPHQL_ADMIN_SECRET\\' --introspect > src/lib/generated/graphql/schema.graphql",
     "start": "next start",
     "test": "jest",
@@ -60,7 +61,6 @@
     "next-usequerystate": "1.4.0-beta.5",
     "next-with-apollo": "^5.2.1",
     "node-fetch": "^3.2.0",
-    "prettier": "^2.5.1",
     "prop-types": "^15.8.1",
     "query-string": "^7.1.0",
     "react": "^17.0.2",
@@ -98,16 +98,14 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-next": "^12.0.8",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-destructuring": "^2.2.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.4.7",
-    "prettier-plugin-organize-imports": "^2.3.4",
     "ts-jest": "^27.1.3"
   }
 }
