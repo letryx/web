@@ -13,6 +13,11 @@ module.exports = {
     'schema-loader.js',
     'auth0/*',
   ],
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
   plugins: ['@typescript-eslint', 'react', 'destructuring', 'eslint-comments', 'eslint-plugin-import', 'promise'],
   extends: [
     'plugin:react/recommended',

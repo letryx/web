@@ -1,7 +1,11 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "eslint.alwaysShowStatus": true,
   "editor.tabSize": 2,
   "typescript.suggest.autoImports": true,
   "typescript.tsdk": "node_modules/typescript/lib",
@@ -12,5 +16,6 @@
     "db/": true,
     "coverage/": true,
     "node_modules/": true,
-  }
+  },
+  "scm.diffDecorationsGutterVisibility": "always"
 }

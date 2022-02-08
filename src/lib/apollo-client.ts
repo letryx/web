@@ -10,7 +10,7 @@ import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { isEmpty } from '@chakra-ui/utils';
+import isEmpty from 'lodash/isEmpty';
 import fetch from 'isomorphic-unfetch';
 import { isExpired } from 'lib/auth0';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
