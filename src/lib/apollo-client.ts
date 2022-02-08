@@ -13,6 +13,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import isEmpty from 'lodash/isEmpty';
 import fetch from 'isomorphic-unfetch';
 import { isExpired } from 'lib/auth0';
+import isEmpty from 'lodash/isEmpty';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 let accessToken: string | null = null;
@@ -52,9 +53,21 @@ async function requestNewAccessToken(): Promise<void> {
   }
 }
 
-const requestAccessToken = async () => {
+export const createApiApolloClient = (
+  apiAccessToken: string
+): ApolloClient<NormalizedCacheObject> => {
+  return new ApolloClient({
+    uri: process.env.GRAPHQL_API_SSR_URL,
+    headers: {
+      Authorization: `Bearer ${apiAccessToken}`,
+    },
+    cache: new InMemoryCache(),
+  });
+};
+
+export const requestAccessToken = async (): Promise<string | null> => {
   if (accessToken && !isExpired(accessToken)) {
-    return;
+    return accessToken;
   }
   if (accessTokenP) {
     // request is already in flight, so just wait for it to finish
@@ -68,6 +81,7 @@ const requestAccessToken = async () => {
       accessTokenP = null;
     }
   }
+  return accessToken;
 };
 
 // remove cached token on 401 from the server
@@ -116,14 +130,6 @@ if (!ssrMode) {
       new SubscriptionClient(WS_URL, {
         lazy: true,
         reconnect: true,
-        // connectionParams: async () => {
-        //   await requestAccessToken();
-        //   return {
-        //     headers: {
-        //       authorization: accessToken ? `Bearer ${accessToken}` : '',
-        //     },
-        //   };
-        // },
       })
     ),
     httpLink

@@ -12,6 +12,7 @@ module.exports = {
     'src/lib/generated/**/*',
     'schema-loader.js',
     'auth0/*',
+    'cloud-functions/**/*',
   ],
   settings: {
     react: {
